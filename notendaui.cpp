@@ -178,7 +178,7 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     cout << "*||Please enter one the following command*                   ||*" << endl;
     cout << "*==============================================================*" << endl;
     cout << "*||name - update name                                        ||*" << endl;
-    cout << "*||age - update age                                          ||*" << endl;
+    cout << "*||gender - update gender                                    ||*" << endl;
     cout << "*||birth - update year of birth                              ||*" << endl;
     cout << "*||death - update year of death                              ||*" << endl;
     cout << "*==============================================================*" << endl;
@@ -191,6 +191,27 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
         cin.ignore();
         getline(cin,nafn);
         data[persNR].updNafn(nafn);
+    }
+
+    else if (skipunin == "gender" || skipunin == "g")
+    {
+        string newgend;
+        cout << "Enter updated gender for " << data[persNR].getNafn() << ": ";
+        cin >> newgend;
+        while (newgend != "kk" && newgend != "kvk")
+        {
+            cerr << "Input not valid, try again: ";
+            cin >> newgend;
+        }
+        data[persNR].updGender(newgend);
+    }
+
+    else if (skipunin == "birth" || skipunin == "b")
+    {
+        int nytt;
+        cout << "Enter updated year of birth for " << data[persNR].getNafn() << ": ";
+        cin >> nytt;
+        data[persNR].updFaedingarar(nytt);
     }
 
     else if (skipunin == "death" || skipunin == "d")

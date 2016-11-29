@@ -33,6 +33,11 @@ string tolvufolk::getKyn() const
 {
     return _kyn;
 }
+void tolvufolk::updFaedingarar(int newyear)
+{
+    _faedingarar = newyear;
+}
+
 void tolvufolk::updDanarar(int newyear)
 {
     _danarar = newyear;
@@ -41,6 +46,10 @@ void tolvufolk::updDanarar(int newyear)
 void tolvufolk::updNafn(string newnafn)
 {
     _nafn = newnafn;
+}
+void tolvufolk::updGender(string newgend)
+{
+    _kyn = newgend;
 }
 
 ostream& operator <<(ostream& out, const tolvufolk& data)
