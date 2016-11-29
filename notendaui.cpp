@@ -182,14 +182,14 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     cin >> persNR;
     persNR --;
 
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command*                       ||*" << endl;
     cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following command*                   ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||name - update name                                        ||*" << endl;
-    cout << "*||gender - update gender                                    ||*" << endl;
-    cout << "*||birth - update year of birth                              ||*" << endl;
-    cout << "*||death - update year of death                              ||*" << endl;
-    cout << "*==============================================================*" << endl;
+    cout << "*||name - update name, please write 'name'                       ||*" << endl;
+    cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
+    cout << "*||birth - update year of birth, please write 'birth'            ||*" << endl;
+    cout << "*||death - update year of death, please write 'deat'             ||*" << endl;
+    cout << "*==================================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
@@ -332,14 +332,14 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 void NotendaUI::sortOptions(vector<tolvufolk>& data)
 {
     system("cls");
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following command                    ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||name - Sort by name                                     ||*" << endl;
-    cout << "*||age - Sort by age                                       ||*" << endl;
-    cout << "*||birth - Sort by year of birth                           ||*" << endl;
-    cout << "*||death - Sort by year of death                           ||*" << endl;
-    cout << "*==============================================================*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||name - Sort by name, please write 'name'                      ||*" << endl;
+    cout << "*||age - Sort by age, please write 'age'                         ||*" << endl;
+    cout << "*||birth - Sort by year of birth, please write 'birth'           ||*" << endl;
+    cout << "*||death - Sort by year of death, please write 'death'           ||*" << endl;
+    cout << "*==================================================================*" << endl;
 
     string skipunin;
     cin >> skipunin;
@@ -347,11 +347,12 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
     if (skipunin == "name" || skipunin == "n")
     {
     system("cls");
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following command                    ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||ascending - Sort names by ascending order                 ||*" << endl;
-    cout << "*||descending - Sort names by descending order               ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||ascending - Sort names by ascending order                     ||*" << endl;
+    cout << "*||descending - Sort names by descending order                   ||*" << endl;
+    cout << "*==================================================================*" << endl;
 
         string skipunin;
         cin >> skipunin;
