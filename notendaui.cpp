@@ -69,9 +69,21 @@ void NotendaUI::keyra()
             cout << "Enter year of birth: ";
             cin >> bYear;
 
-            cout << "Enter year of death(if any): ";
+            while (0 > bYear)
+            {
+                cerr << "Input not valid, try again: ";
+                cin >> bYear;
+            }
+
+            cout << "Enter year of death(-1 if still alive): ";
             cin >> dYear;
-            cout << endl;
+
+            while (-1 > dYear)
+            {
+                cerr << "Input not valid, try again: ";
+                cin >> dYear;
+                cout << endl;
+            }
 
             data.push_back(tolvufolk(nName, gGender, bYear, dYear));
             printList(data);
