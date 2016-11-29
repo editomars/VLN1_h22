@@ -1,5 +1,8 @@
 #include "notendaui.h"
 #include <iostream>
+#include <string>
+#include <utility>
+#include <algorithm>
 
 
 using namespace std;
@@ -31,10 +34,17 @@ void NotendaUI::keyra()
     data.push_back(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
     data.push_back(tolvufolk("Charles Babbage", "kk", 1900, 1920));
 
+    string nName;
+    string gGender;
+    int bYear;
+    int dYear;
+    int iD;
+
     Skrifaut();
 
     do
         {
+        check = true;
         string skipun;
         cin >> skipun;
 
@@ -44,14 +54,34 @@ void NotendaUI::keyra()
         }
         else if (skipun == "add" || skipun == "a")
         {
-            cout << "Enter name:";
-            cout << "Enter gender:";
-            cout << "Enter year of birth:";
-            cout << "Enter year of death(if any):";
+            cout << "Enter name: ";
+            cin >> nName;
+
+            cout << "Enter gender(kk/kvk) [lowercase]: ";
+            cin >> gGender;
+
+            while (gGender != "kk" && gGender != "kvk")
+            {
+                cerr << "Input not valid, try again: ";
+                cin >> gGender;
+            }
+
+            cout << "Enter year of birth: ";
+            cin >> bYear;
+
+            cout << "Enter year of death(if any): ";
+            cin >> dYear;
+            cout << endl;
+
+            data.push_back(tolvufolk(nName, gGender, bYear, dYear));
+            printList(data);
 
         }
         else if (skipun == "delete" || skipun == "d")
         {
+            printList(data);
+            cout << "Select the ID of the person you wish to delete: ";
+            cin >> iD;
 
         }
 
@@ -102,7 +132,7 @@ void NotendaUI::keyra()
 
 void NotendaUI::printList(const vector<tolvufolk>& data)
 {
-    for (int i = 0; i < data.size(); i++)
+    for (size_t i = 0; i < data.size(); i++)
     {
         cout << data[i] << endl;
     }
