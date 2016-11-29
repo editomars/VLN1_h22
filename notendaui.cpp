@@ -37,11 +37,13 @@ void NotendaUI::keyra()
 
         if (skipun == "list" || skipun == "l")
         {
+            skrifaUt();
             printList(data);
             continueUI();
         }
         else if (skipun == "add" || skipun == "a")
         {
+            skrifaUt();
             cout << "Enter name: ";
             cin >> nName;
 
@@ -80,6 +82,7 @@ void NotendaUI::keyra()
         }
         else if (skipun == "delete" || skipun == "d")
         {
+            skrifaUt();
             printList(data);
             continueUI();
 
@@ -87,18 +90,21 @@ void NotendaUI::keyra()
 
         else if (skipun == "update" || skipun == "u")
         {
+            skrifaUt();
 
             continueUI();
         }
 
         else if (skipun == "search" || skipun == "s")
         {
+            skrifaUt();
             searchName(data);
             continueUI();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
+            skrifaUt();
             cout << "By the Emperor, are you sure? (Y/N): ";
             cin >> skipun;
 
