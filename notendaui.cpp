@@ -17,8 +17,8 @@ void NotendaUI::keyra()
 =======
     //TEMP
     vector<tolvufolk> data;
-    data.push_back(tolvufolk("Ada Lovelace", "kvk", "1880", "1890"));
-    data.push_back(tolvufolk("Charles Babbage", "kk", "1900", "1920"));
+    data.push_back(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
+    data.push_back(tolvufolk("Charles Babbage", "kk", 1900, 1920));
 
     cout << "*==============================================================*" << endl;
     cout << "*||Please enter one the following commands*                  ||*" << endl;
