@@ -32,7 +32,8 @@ void NotendaUI::keyra()
 
         if (skipun == "list" || skipun == "l")
         {
-            skrifaUt();
+            system("cls");
+            cout << "List of computer scientists: " << endl << endl;
             printList(data);
             continueUI();
         }
@@ -44,7 +45,8 @@ void NotendaUI::keyra()
         }
         else if (skipun == "add" || skipun == "a")
         {
-            skrifaUt();
+            system("cls");
+            cout << "Adding computer scientist: " << endl << endl;
             addPerson(data);
             printList(data);
             continueUI();
@@ -195,11 +197,7 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
         data[persNR].updDanarar(nytt);
     }
 
-    _service.deleteTolvufolk();
-    for(size_t i = 0; i < data.size(); i++)
-    {
-         _service.addTolvufolk(data[i]);
-    }
+    refreshTxtFile(data);
 
 }
 void NotendaUI::searchOptions()
@@ -380,6 +378,15 @@ void NotendaUI::addPerson(vector<tolvufolk>& data)
     data.push_back(Tempr);
     _service.addTolvufolk(Tempr);
 
+}
+
+void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)
+{
+    _service.deleteTolvufolk();
+    for(size_t i = 0; i < data.size(); i++)
+    {
+         _service.addTolvufolk(data[i]);
+    }
 }
 
 void NotendaUI::continueUI()
