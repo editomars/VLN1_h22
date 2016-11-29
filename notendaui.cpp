@@ -76,33 +76,7 @@ void NotendaUI::keyra()
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUt();
-            cout << "By the Emperor, are you sure? (Y/N): ";
-            cin >> skipun;
-
-            if (skipun == "Y" || skipun == "y")
-            {
-                cout << "Are you really sure? This will EXTERMINATE ALL ENTRIES. (Y/N): ";
-                cin >> skipun;
-
-                if (skipun == "Y" || skipun == "y")
-                {
-                    cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED.";
-                    // TODO; Erase everything
-                    continueUI();
-
-                }
-                else
-                {
-                    cout << "Purge canceled." << endl;
-                    continueUI();
-                }
-
-            }
-            else
-            {
-                cout << "Purge canceled." << endl;
-                continueUI();
-            }
+            purgeList(data);
 
 
         }
@@ -198,6 +172,7 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     refreshTxtFile(data);
 
 }
+
 void NotendaUI::searchOptions()
 {
     system("cls");
@@ -388,6 +363,39 @@ void NotendaUI::deletePerson(vector<tolvufolk> &data)
     persNR--;
     data.erase(data.begin() + persNR);
     refreshTxtFile(data);
+}
+
+void NotendaUI::purgeList(vector<tolvufolk> &data)
+{
+    string skipun;
+    cout << "By the Emperor, are you sure? (Y/N): ";
+    cin >> skipun;
+
+    if (skipun == "Y" || skipun == "y")
+    {
+        cout << "Are you really sure? This will EXTERMINATE ALL ENTRIES. (Y/N): ";
+        cin >> skipun;
+
+        if (skipun == "Y" || skipun == "y")
+        {
+            cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
+            data.clear();
+            refreshTxtFile(data);
+            continueUI();
+
+        }
+        else
+        {
+            cout << "Purge canceled." << endl;
+            continueUI();
+        }
+
+    }
+    else
+    {
+        cout << "Purge canceled." << endl;
+        continueUI();
+    }
 }
 
 void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)

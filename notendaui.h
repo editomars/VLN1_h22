@@ -19,6 +19,7 @@ public:
     void searchName(const vector<tolvufolk>& data);
     void updatePerson(vector<tolvufolk>& data);
     void refreshTxtFile(const vector<tolvufolk>& data);
+    void purgeList(vector<tolvufolk>& data);
 private:
     tolvufolkService _service;
     void skrifaUt();
