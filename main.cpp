@@ -1,8 +1,10 @@
-#include <iostream>
+#include "notendaui.h"
 
 int main()
 {
-    std::cout << "Hello Qt!" << std::endl;
+    NotendaUI ui;
+
+    ui.keyra();
 
     return 0;
 }
