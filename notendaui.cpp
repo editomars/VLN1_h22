@@ -1,5 +1,6 @@
 #include "notendaui.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -19,4 +20,32 @@ void NotendaUI::keyra()
     cout << "*||update - Updates an entry from the database.              ||*" << endl;
     cout << "*||purge - Removes every entry from the database.            ||*" << endl;
     cout << "*==============================================================*" << endl;
+
+    string skipun;
+    cin >> skipun;
+
+    if (skipun == "list" || skipun == "l")
+    {
+
+    }
+
+    else if (skipun == "add" || skipun == "a")
+    {
+
+    }
+
+    else if (skipun == "delete" || skipun == "d")
+    {
+
+    }
+
+    else if (skipun == "update" || skipun == "u")
+    {
+
+    }
+
+    else if (skipun == "purge" || skipun == "p")
+    {
+
+    }
 }
