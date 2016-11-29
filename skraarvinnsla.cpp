@@ -14,7 +14,7 @@ void skraarvinnsla::writeToFile(tolvufolk folk)
     file.close();
 }
 
-vector<tolvufolk> skraarvinnsla::readToFile()
+vector<tolvufolk> skraarvinnsla::readToFile() const
 {
     string nafn;
     string kyn;

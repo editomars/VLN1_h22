@@ -9,7 +9,7 @@ class skraarvinnsla
 public:
     skraarvinnsla();
     void writeToFile(tolvufolk folk);
-    vector<tolvufolk> readToFile();
+    vector<tolvufolk> readToFile() const;
 };
 
 #endif // SKRAARVINNSLA_H

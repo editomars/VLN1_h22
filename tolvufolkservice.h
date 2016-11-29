@@ -10,6 +10,8 @@ class tolvufolkService
 public:
     tolvufolkService();
     vector<tolvufolk> getTolvufolk() const;
+    void addTolvufolk(const tolvufolk& t);
+    void addTolvufolk(const vector<tolvufolk>& folk);
 private:
     skraarvinnsla _dataaccess;
 };
