@@ -9,13 +9,8 @@ NotendaUI::NotendaUI()
 
 }
 
-void NotendaUI::keyra()
+void Skrifaut()
 {
-    //TEMP
-    vector<tolvufolk> data;
-    data.push_back(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
-    data.push_back(tolvufolk("Charles Babbage", "kk", 1900, 1920));
-
     cout << "*==============================================================*" << endl;
     cout << "*||Please enter one the following commands*                  ||*" << endl;
     cout << "*==============================================================*" << endl;
@@ -25,32 +20,56 @@ void NotendaUI::keyra()
     cout << "*||update - Updates an entry from the database.              ||*" << endl;
     cout << "*||purge - Removes every entry from the database.            ||*" << endl;
     cout << "*==============================================================*" << endl;
+}
 
-    string skipun;
-    cin >> skipun;
+bool check = true;
 
-    if (skipun == "list" || skipun == "l")
-    {
+void NotendaUI::keyra()
+{
+    //TEMP
+    vector<tolvufolk> data;
+    data.push_back(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
+    data.push_back(tolvufolk("Charles Babbage", "kk", 1900, 1920));
 
-    }
+    Skrifaut();
 
-    else if (skipun == "add" || skipun == "a")
-    {
+    do
+        {
+        string skipun;
+        cin >> skipun;
+        system("cls");
 
-    }
+        if (skipun == "list" || skipun == "l")
+        {
 
-    else if (skipun == "delete" || skipun == "d")
-    {
+        }
 
-    }
+        else if (skipun == "add" || skipun == "a")
+        {
 
-    else if (skipun == "update" || skipun == "u")
-    {
+        }
 
-    }
+        else if (skipun == "delete" || skipun == "d")
+        {
 
-    else if (skipun == "purge" || skipun == "p")
-    {
+        }
 
-    }
+        else if (skipun == "update" || skipun == "u")
+        {
+
+        }
+
+        else if (skipun == "purge" || skipun == "p")
+        {
+
+        }
+
+        else
+        {
+            system("cls");
+            Skrifaut();
+            cerr << "Input not valid, try again: ";
+            check = false;
+        }
+    } while (check == false);
 }
