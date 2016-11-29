@@ -38,5 +38,4 @@ void tolvufolkService::sortByName()
 {
     samanburdur temp;
     sort(_folk.begin(), _folk.end(), temp);
-
 }
