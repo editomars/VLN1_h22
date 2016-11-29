@@ -15,6 +15,7 @@ public:
     vector<tolvufolk> getTolvufolk();
     void addTolvufolk(const tolvufolk& t);
     void addTolvufolk(const vector<tolvufolk>& folk);
+    void deleteTolvufolk();
     //void sortByName(const vector<tolvufolk>& folk);
 private:
     skraarvinnsla _dataaccess;

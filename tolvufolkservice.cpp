@@ -20,6 +20,10 @@ vector<tolvufolk> tolvufolkService::getTolvufolk()
     return _folk;
 }
 
+void tolvufolkService::deleteTolvufolk()
+{
+    _dataaccess.deleteFile();
+}
 
 void tolvufolkService::addTolvufolk(const tolvufolk& t)
 {

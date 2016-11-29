@@ -229,6 +229,13 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
         cin >> nytt;
         data[persNR].updDanarar(nytt);
     }
+
+    _service.deleteTolvufolk();
+    for(size_t i = 0; i < data.size(); i++)
+    {
+         _service.addTolvufolk(data[i]);
+    }
+
 }
 void NotendaUI::searchOptions()
 {

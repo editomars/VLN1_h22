@@ -12,6 +12,10 @@ void skraarvinnsla::writeToFile(const tolvufolk& folk)
     file << folk.getNafn() << " " << folk.getKyn() << " " << folk.getFaedingarar() << " " << folk.getDanarar() << endl;
     file.close();
 }
+void skraarvinnsla::deleteFile()
+{
+    remove("tolvufolk.txt");
+}
 
 vector<tolvufolk> skraarvinnsla::readToFile() const
 {
