@@ -54,10 +54,8 @@ void NotendaUI::keyra()
         }
         else if (skipun == "delete" || skipun == "d")
         {
-            skrifaUt();
-            printList(data);
+            deletePerson(data);
             continueUI();
-
         }
 
         else if (skipun == "update" || skipun == "u")
@@ -378,6 +376,18 @@ void NotendaUI::addPerson(vector<tolvufolk>& data)
     data.push_back(Tempr);
     _service.addTolvufolk(Tempr);
 
+}
+
+void NotendaUI::deletePerson(vector<tolvufolk> &data)
+{
+    system("cls");
+    printList(data);
+    int persNR;
+    cout << "Delete scientist number: ";
+    cin >> persNR;
+    persNR--;
+    data.erase(data.begin() + persNR);
+    refreshTxtFile(data);
 }
 
 void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)

@@ -14,6 +14,7 @@ public:
     void keyra();
 
     void addPerson(vector<tolvufolk>& data);
+    void deletePerson(vector<tolvufolk>& data);
     void printList(const vector<tolvufolk>& data);
     void searchName(const vector<tolvufolk>& data);
     void updatePerson(vector<tolvufolk>& data);
