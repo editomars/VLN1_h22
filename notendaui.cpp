@@ -22,6 +22,7 @@ void Skrifaut()
     cout << "*||update - Updates an entry from the database.              ||*" << endl;
     cout << "*||search - Search for an entry from the database.           ||*" << endl;
     cout << "*||purge - Removes every entry from the database.            ||*" << endl;
+    cout << "*||quit - Exits/quits the program                            ||*" << endl;
     cout << "*==============================================================*" << endl;
 }
 
@@ -137,6 +138,11 @@ void NotendaUI::keyra()
 
         }
 
+        else if (skipun == "quit" || skipun == "q")
+        {
+            check = false;
+        }
+
         else
         {
             system("cls");
@@ -144,7 +150,7 @@ void NotendaUI::keyra()
             cerr << "Input not valid, try again: ";
             check = false;
         }
-    } while (check == false);
+    } while (check != false);
 }
 
 void NotendaUI::printList(const vector<tolvufolk>& data)
@@ -158,13 +164,14 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 {
 
     string skipunin;
-    cout << "*==============================================*" << endl;
-    cout << "*||Please enter one the following command*   ||*" << endl;
-    cout << "*==============================================*" << endl;
-    cout << "*||name - Search by name                     ||*" << endl;
-    cout << "*||age - Search by age                      ||*" << endl;
-    cout << "*||birth - Search by year of birth            ||*" << endl;
-    cout << "*||death - Search by year of death            ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||Please enter one the following command*                   ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||name - Search by name                                     ||*" << endl;
+    cout << "*||age - Search by age                                       ||*" << endl;
+    cout << "*||birth - Search by year of birth                           ||*" << endl;
+    cout << "*||death - Search by year of death                           ||*" << endl;
+    cout << "*==============================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
@@ -175,10 +182,41 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
         getline(cin,nafn);
         for(size_t i = 0; i < data.size(); i++)
         {
-            if (nafn == data[i].getNafn())
+            if (nafn == data[i].getNafn() )
             {
                 cout << data[i];
             }
+            cout << endl;
+        }
+    }
+    else if (skipunin == "birth" || skipunin == "b")
+    {
+        int birth;
+        cout << "Year of birth to search: ";
+        cin.ignore();
+        cin >> birth;
+        for(size_t i = 0; i < data.size(); i++)
+        {
+            if (birth == data[i].getFaedingarar() )
+            {
+                cout << data[i];
+            }
+            cout << endl;
+        }
+    }
+    else if (skipunin == "death" || skipunin == "d")
+    {
+        int death;
+        cout << "Year of birth to search: ";
+        cin.ignore();
+        cin >> death;
+        for(size_t i = 0; i < data.size(); i++)
+        {
+            if (death == data[i].getDanarar() )
+            {
+                cout << data[i];
+            }
+            cout << endl;
         }
     }
 }
