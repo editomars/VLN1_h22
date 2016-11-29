@@ -74,7 +74,9 @@ void NotendaUI::keyra()
                 cout << endl;
             }
 
-            data.push_back(tolvufolk(nName, gGender, bYear, dYear));
+            tolvufolk Tempr(nName, gGender, bYear, dYear);
+            data.push_back(Tempr);
+            _service.addTolvufolk(Tempr);
             printList(data);
             continueUI();
 
