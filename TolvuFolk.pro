@@ -11,8 +11,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     notendaui.cpp \
-    tolvufolk.cpp
+    tolvufolk.cpp \
+    tolvufolkservice.cpp
 
 HEADERS += \
     notendaui.h \
-    tolvufolk.h
+    tolvufolk.h \
+    tolvufolkservice.h
