@@ -14,9 +14,11 @@ public:
     void keyra();
 
     void printList(const vector<tolvufolk>& data);
+    void searchName(const vector<tolvufolk>& data);
+    void updatePerson(vector<tolvufolk>& data);
 private:
     tolvufolkService _service;
-    void searchName(const vector<tolvufolk>& data);
+
 };
 
 #endif // NOTENDAUI_H

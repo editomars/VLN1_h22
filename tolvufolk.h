@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,6 +16,8 @@ public:
     int getDanarar() const;
     string getNafn() const;
     string getKyn() const;
+    void updFaedingarar(int newyear);
+    void updNafn(string newnafn);
     friend ostream& operator <<(ostream& out, const tolvufolk& data);
 private:
     string _nafn;

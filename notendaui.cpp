@@ -56,7 +56,8 @@ void NotendaUI::keyra()
         else if (skipun == "add" || skipun == "a")
         {
             cout << "Enter name: ";
-            cin >> nName;
+            cin.ignore();
+            getline(cin,nName);
 
             cout << "Enter gender(kk/kvk) [lowercase]: ";
             cin >> gGender;
@@ -100,7 +101,8 @@ void NotendaUI::keyra()
 
         else if (skipun == "update" || skipun == "u")
         {
-
+            system("cls");
+            updatePerson(data);
         }
 
         else if (skipun == "search" || skipun == "s")
@@ -160,6 +162,44 @@ void NotendaUI::printList(const vector<tolvufolk>& data)
         cout << data[i] << endl;
     }
 }
+void NotendaUI::updatePerson(vector<tolvufolk>& data)
+{
+    int persNR;
+    string skipunin;
+    cout << "Number of Scientist: ";
+    cin >> persNR;
+    persNR --;
+    cout << "*==============================================================*" << endl;
+    cout << "*||Please enter one the following command*                   ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||name - update name                                        ||*" << endl;
+    cout << "*||age - update age                                          ||*" << endl;
+    cout << "*||birth - update year of birth                              ||*" << endl;
+    cout << "*||death - update year of death                              ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cin >> skipunin;
+
+    if (skipunin == "name" || skipunin == "n")
+    {
+        string nafn;
+        cout << "Enter updated name for " << data[persNR] << ": ";
+        cin.ignore();
+        getline(cin,nafn);
+        data[persNR].updNafn(nafn);
+    }
+    else if(skipunin == "age" || skipunin == "a")
+    {
+
+    }
+    else if (skipunin == "birth" || skipunin == "b")
+    {
+        int nytt;
+        cout << "Enter updated year of birth: ";
+        cin >> nytt;
+        data[persNR].updFaedingarar(nytt);
+    }
+}
+
 void NotendaUI::searchName(const vector<tolvufolk>& data)
 {
 
