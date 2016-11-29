@@ -37,7 +37,6 @@ void NotendaUI::keyra()
         {
         string skipun;
         cin >> skipun;
-        system("cls");
 
         if (skipun == "list" || skipun == "l")
         {
@@ -46,6 +45,10 @@ void NotendaUI::keyra()
 
         else if (skipun == "add" || skipun == "a")
         {
+            cout << "Enter name:";
+            cout << "Enter gender:";
+            cout << "Enter year of birth:";
+            cout << "Enter year of death(if any):";
 
         }
 
@@ -61,6 +64,31 @@ void NotendaUI::keyra()
 
         else if (skipun == "purge" || skipun == "p")
         {
+            cout << "By the Emperor, are you sure? (Y/N): ";
+            cin >> skipun;
+
+            if (skipun == "Y" || skipun == "y")
+            {
+                cout << "Are you really sure? This will EXTERMINATE ALL ENTRIES. (Y/N): ";
+                cin >> skipun;
+
+                if (skipun == "Y" || skipun == "y")
+                {
+                    cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED.";
+                    // TODO; Erase everything
+
+                }
+                else
+                {
+                    cout << "Purge canceled." << endl;
+                }
+
+            }
+            else
+            {
+                cout << "Purge canceled." << endl;
+            }
+
 
         }
 
