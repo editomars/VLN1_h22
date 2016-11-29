@@ -33,3 +33,11 @@ string tolvufolk::getKyn() const
 {
     return _kyn;
 }
+ostream& operator <<(ostream& out, const tolvufolk& data)
+{
+    out << "Nafn: " << data.getNafn() << endl;
+    out << "Kyn: " << data.getKyn() << endl;
+    out << "Faedingarar: " << data.getFaedingarar() << endl;
+    out << "Danarar: " << data.getDanarar() << endl;
+    return out;
+}

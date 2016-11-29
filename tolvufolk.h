@@ -2,6 +2,7 @@
 #define TOLVUFOLK_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
     int getDanarar() const;
     string getNafn() const;
     string getKyn() const;
+    friend ostream& operator <<(ostream& out, const tolvufolk& data);
 private:
     string _nafn;
     string _kyn;

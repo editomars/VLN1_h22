@@ -11,6 +11,8 @@ public:
     NotendaUI();
 
     void keyra();
+
+    void printList(const vector<tolvufolk>& data);
 };
 
 #endif // NOTENDAUI_H
