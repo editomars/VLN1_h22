@@ -10,7 +10,9 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    notendaui.cpp
+    notendaui.cpp \
+    tolvufolk.cpp
 
 HEADERS += \
-    notendaui.h
+    notendaui.h \
+    tolvufolk.h
