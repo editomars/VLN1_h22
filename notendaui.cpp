@@ -11,20 +11,7 @@ NotendaUI::NotendaUI()
 
 }
 
-void Skrifaut()
-{
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following commands*                  ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||list - Shows a list of all known entries in the database. ||*" << endl;
-    cout << "*||add - Add a new entry into the database.                  ||*" << endl;
-    cout << "*||delete - Removes an entry from the database.              ||*" << endl;
-    cout << "*||update - Updates an entry from the database.              ||*" << endl;
-    cout << "*||search - Search for an entry from the database.           ||*" << endl;
-    cout << "*||purge - Removes every entry from the database.            ||*" << endl;
-    cout << "*||quit - Exits/quits the program                            ||*" << endl;
-    cout << "*==============================================================*" << endl;
-}
+
 
 bool check = true;
 
@@ -39,9 +26,8 @@ void NotendaUI::keyra()
     string gGender;
     int bYear;
     int dYear;
-    int iD;
 
-    Skrifaut();
+    skrifaUt();
 
     do
         {
@@ -52,6 +38,7 @@ void NotendaUI::keyra()
         if (skipun == "list" || skipun == "l")
         {
             printList(data);
+            continueUI();
         }
         else if (skipun == "add" || skipun == "a")
         {
@@ -88,24 +75,26 @@ void NotendaUI::keyra()
 
             data.push_back(tolvufolk(nName, gGender, bYear, dYear));
             printList(data);
+            continueUI();
 
         }
         else if (skipun == "delete" || skipun == "d")
         {
             printList(data);
-            cout << "Select the ID of the person you wish to delete: ";
-            cin >> iD;
+            continueUI();
 
         }
 
         else if (skipun == "update" || skipun == "u")
         {
 
+            continueUI();
         }
 
         else if (skipun == "search" || skipun == "s")
         {
             searchName(data);
+            continueUI();
         }
 
         else if (skipun == "purge" || skipun == "p")
@@ -122,17 +111,20 @@ void NotendaUI::keyra()
                 {
                     cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED.";
                     // TODO; Erase everything
+                    continueUI();
 
                 }
                 else
                 {
                     cout << "Purge canceled." << endl;
+                    continueUI();
                 }
 
             }
             else
             {
                 cout << "Purge canceled." << endl;
+                continueUI();
             }
 
 
@@ -140,17 +132,44 @@ void NotendaUI::keyra()
 
         else if (skipun == "quit" || skipun == "q")
         {
-            check = false;
+            check = true;
         }
 
         else
         {
-            system("cls");
-            Skrifaut();
+            skrifaUt();
             cerr << "Input not valid, try again: ";
             check = false;
         }
-    } while (check != false);
+    } while (check == false);
+}
+
+void NotendaUI::skrifaUt()
+{
+    system("cls");
+    cout << "*==============================================================*" << endl;
+    cout << "*||Please enter one the following commands                   ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||list - Shows a list of all known entries in the database. ||*" << endl;
+    cout << "*||add - Add a new entry into the database.                  ||*" << endl;
+    cout << "*||delete - Removes an entry from the database.              ||*" << endl;
+    cout << "*||update - Updates an entry from the database.              ||*" << endl;
+    cout << "*||search - Search for an entry from the database.           ||*" << endl;
+    cout << "*||purge - Removes every entry from the database.            ||*" << endl;
+    cout << "*||quit - Exits/quits the program                            ||*" << endl;
+    cout << "*==============================================================*" << endl;
+}
+void NotendaUI::searchOptions()
+{
+    system("cls");
+    cout << "*==============================================================*" << endl;
+    cout << "*||Please enter one the following command                    ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||name - Search by name                                     ||*" << endl;
+    cout << "*||age - Search by age                                       ||*" << endl;
+    cout << "*||birth - Search by year of birth                           ||*" << endl;
+    cout << "*||death - Search by year of death                           ||*" << endl;
+    cout << "*==============================================================*" << endl;
 }
 
 void NotendaUI::printList(const vector<tolvufolk>& data)
@@ -160,63 +179,97 @@ void NotendaUI::printList(const vector<tolvufolk>& data)
         cout << data[i] << endl;
     }
 }
+
 void NotendaUI::searchName(const vector<tolvufolk>& data)
 {
-
+    searchOptions();
     string skipunin;
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following command*                   ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||name - Search by name                                     ||*" << endl;
-    cout << "*||age - Search by age                                       ||*" << endl;
-    cout << "*||birth - Search by year of birth                           ||*" << endl;
-    cout << "*||death - Search by year of death                           ||*" << endl;
-    cout << "*==============================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
+        searchOptions();
         string nafn;
         cout << "Name to search: ";
         cin.ignore();
         getline(cin,nafn);
+        cout << endl;
         for(size_t i = 0; i < data.size(); i++)
         {
             if (nafn == data[i].getNafn() )
             {
                 cout << data[i];
             }
-            cout << endl;
         }
+        cout << endl;
     }
+
+    else if (skipunin == "age" || skipunin == "a")
+    {
+        searchOptions();
+        int age;
+        cout << "Age to search: ";
+        cin >> age;
+        cout << endl;
+        for(size_t i = 0; i < data.size(); i++)
+        {
+            if (age == (data[i].getDanarar() - data[i].getFaedingarar() ) )
+            {
+                cout << data[i];
+            }
+        }
+        cout << endl;
+    }
+
     else if (skipunin == "birth" || skipunin == "b")
     {
+        searchOptions();
         int birth;
         cout << "Year of birth to search: ";
-        cin.ignore();
         cin >> birth;
+        cout << endl;
         for(size_t i = 0; i < data.size(); i++)
         {
             if (birth == data[i].getFaedingarar() )
             {
                 cout << data[i];
             }
-            cout << endl;
         }
+        cout << endl;
     }
+
     else if (skipunin == "death" || skipunin == "d")
     {
+        searchOptions();
         int death;
         cout << "Year of birth to search: ";
-        cin.ignore();
         cin >> death;
+        cout << endl;
         for(size_t i = 0; i < data.size(); i++)
         {
             if (death == data[i].getDanarar() )
             {
                 cout << data[i];
             }
-            cout << endl;
         }
+        cout << endl;
     }
+
+}
+
+void NotendaUI::continueUI()
+{
+    string answer;
+    cout << "Continue? (Y/N): ";
+    cin >> answer;
+    if (answer == "Y" || answer == "y")
+    {
+        skrifaUt();
+        check = false;
+    }
+    else
+    {
+        check = true;
+    }
+
 }
