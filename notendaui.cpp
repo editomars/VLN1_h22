@@ -31,7 +31,7 @@ void NotendaUI::keyra()
 
     if (skipun == "list" || skipun == "l")
     {
-
+        printList(data);
     }
 
     else if (skipun == "add" || skipun == "a")
@@ -52,5 +52,13 @@ void NotendaUI::keyra()
     else if (skipun == "purge" || skipun == "p")
     {
 
+    }
+}
+
+void NotendaUI::printList(const vector<tolvufolk>& data)
+{
+    for (int i = 0; i < data.size(); i++)
+    {
+        cout << data[i] << endl;
     }
 }
