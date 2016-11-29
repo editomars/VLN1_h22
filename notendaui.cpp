@@ -80,7 +80,9 @@ void NotendaUI::keyra()
                 cout << endl;
             }
 
-            data.push_back(tolvufolk(nName, gGender, bYear, dYear));
+            tolvufolk Tempr(nName, gGender, bYear, dYear);
+            data.push_back(Tempr);
+            _service.addTolvufolk(Tempr);
             printList(data);
             continueUI();
 
@@ -159,18 +161,18 @@ void NotendaUI::keyra()
 void NotendaUI::skrifaUt()
 {
     system("cls");
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following commands                   ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||list - Shows a list of all known entries in the database. ||*" << endl;
-    cout << "*||add - Add a new entry into the database.                  ||*" << endl;
-    cout << "*||delete - Removes an entry from the database.              ||*" << endl;
-    cout << "*||update - Updates an entry from the database.              ||*" << endl;
-    cout << "*||search - Search for an entry from the database.           ||*" << endl;
-    cout << "*||sort - Choose how to sort and display from the database.  ||*" << endl;
-    cout << "*||purge - Removes every entry from the database.            ||*" << endl;
-    cout << "*||quit - Exits/quits the program                            ||*" << endl;
-    cout << "*==============================================================*" << endl;
+
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following commands                       ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||list - Shows a list of all known entries in the database.     ||*" << endl;
+    cout << "*||add - Add a new entry into the database.                      ||*" << endl;
+    cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
+    cout << "*||update - Updates an entry from the database.                  ||*" << endl;
+    cout << "*||search - Search for an entry from the database.               ||*" << endl;
+    cout << "*||purge - Removes every entry from the database.                ||*" << endl;
+    cout << "*||quit - Exits/quits the program                                ||*" << endl;
+    cout << "*==================================================================*" << endl;
 }
 void NotendaUI::updatePerson(vector<tolvufolk>& data)
 {
@@ -179,11 +181,12 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     cout << "Number of Scientist: ";
     cin >> persNR;
     persNR --;
+
     cout << "*==============================================================*" << endl;
     cout << "*||Please enter one the following command*                   ||*" << endl;
     cout << "*==============================================================*" << endl;
     cout << "*||name - update name                                        ||*" << endl;
-    cout << "*||age - update age                                          ||*" << endl;
+    cout << "*||gender - update gender                                    ||*" << endl;
     cout << "*||birth - update year of birth                              ||*" << endl;
     cout << "*||death - update year of death                              ||*" << endl;
     cout << "*==============================================================*" << endl;
@@ -198,6 +201,27 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
         data[persNR].updNafn(nafn);
     }
 
+    else if (skipunin == "gender" || skipunin == "g")
+    {
+        string newgend;
+        cout << "Enter updated gender for " << data[persNR].getNafn() << ": ";
+        cin >> newgend;
+        while (newgend != "kk" && newgend != "kvk")
+        {
+            cerr << "Input not valid, try again: ";
+            cin >> newgend;
+        }
+        data[persNR].updGender(newgend);
+    }
+
+    else if (skipunin == "birth" || skipunin == "b")
+    {
+        int nytt;
+        cout << "Enter updated year of birth for " << data[persNR].getNafn() << ": ";
+        cin >> nytt;
+        data[persNR].updFaedingarar(nytt);
+    }
+
     else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
@@ -209,14 +233,14 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
 void NotendaUI::searchOptions()
 {
     system("cls");
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following command                    ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||name - Search by name                                     ||*" << endl;
-    cout << "*||age - Search by age                                       ||*" << endl;
-    cout << "*||birth - Search by year of birth                           ||*" << endl;
-    cout << "*||death - Search by year of death                           ||*" << endl;
-    cout << "*==============================================================*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||name  - Search by name, please write 'name'                   ||*" << endl;
+    cout << "*||age   - Search by age, please write 'age'                     ||*" << endl;
+    cout << "*||birth - Search by year of birth, please write 'birth'         ||*" << endl;
+    cout << "*||death - Search by year of death, please write 'death'         ||*" << endl;
+    cout << "*==================================================================*" << endl;
 }
 
 void NotendaUI::printList(const vector<tolvufolk>& data)
