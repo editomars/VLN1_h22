@@ -22,6 +22,7 @@ void NotendaUI::keyra()
     cout << "*==============================================================*" << endl;
 
     string skipun;
+    cin >> skipun;
 
     if (skipun == "list" || skipun == "l")
     {
