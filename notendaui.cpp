@@ -39,6 +39,12 @@ void NotendaUI::keyra()
             printList(data);
             continueUI();
         }
+        else if (skipun == "sort"|| skipun == "so")
+        {
+            skrifaUt();
+            sortOptions(data);
+            continueUI();
+        }
         else if (skipun == "add" || skipun == "a")
         {
             skrifaUt();
@@ -161,6 +167,7 @@ void NotendaUI::skrifaUt()
     cout << "*||delete - Removes an entry from the database.              ||*" << endl;
     cout << "*||update - Updates an entry from the database.              ||*" << endl;
     cout << "*||search - Search for an entry from the database.           ||*" << endl;
+    cout << "*||sort - Choose how to sort and display from the database.  ||*" << endl;
     cout << "*||purge - Removes every entry from the database.            ||*" << endl;
     cout << "*||quit - Exits/quits the program                            ||*" << endl;
     cout << "*==============================================================*" << endl;
@@ -296,6 +303,41 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
         cout << endl;
     }
 
+}
+
+void NotendaUI::sortOptions(vector<tolvufolk>& data)
+{
+    system("cls");
+    cout << "*==============================================================*" << endl;
+    cout << "*||Please enter one the following command                    ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||name - Sort by name                                     ||*" << endl;
+    cout << "*||age - Sort by age                                       ||*" << endl;
+    cout << "*||birth - Sort by year of birth                           ||*" << endl;
+    cout << "*||death - Sort by year of death                           ||*" << endl;
+    cout << "*==============================================================*" << endl;
+
+    string skipunin;
+    cin >> skipunin;
+
+    if (skipunin == "name" || skipunin == "n")
+    {
+    system("cls");
+    cout << "*==============================================================*" << endl;
+    cout << "*||Please enter one the following command                    ||*" << endl;
+    cout << "*==============================================================*" << endl;
+    cout << "*||ascending - Sort names by ascending order                 ||*" << endl;
+    cout << "*||descending - Sort names by descending order               ||*" << endl;
+
+        string skipunin;
+        cin >> skipunin;
+
+        if(skipunin == "ascending" || skipunin == "a")
+        {
+            //vector<tolvufolk> result;
+            //result = _service.sortByName(data);
+        }
+    }
 }
 
 void NotendaUI::continueUI()

@@ -21,6 +21,7 @@ private:
     void skrifaUt();
     void continueUI();
     void searchOptions();
+    void sortOptions(vector<tolvufolk>& data);
 };
 
 #endif // NOTENDAUI_H
