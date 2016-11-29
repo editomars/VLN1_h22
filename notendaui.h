@@ -18,7 +18,9 @@ public:
     void updatePerson(vector<tolvufolk>& data);
 private:
     tolvufolkService _service;
-
+    void skrifaUt();
+    void continueUI();
+    void searchOptions();
 };
 
 #endif // NOTENDAUI_H
