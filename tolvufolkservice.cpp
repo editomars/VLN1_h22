@@ -4,3 +4,8 @@ tolvufolkService::tolvufolkService()
 {
 
 }
+
+vector<tolvufolk> tolvufolkService::getTolvufolk() const
+{
+
+}
