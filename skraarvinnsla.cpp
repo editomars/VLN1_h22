@@ -10,7 +10,7 @@ void skraarvinnsla::writeToFile(tolvufolk folk)
 {
     ofstream file;
     file.open("tolvufolk.txt");
-    file << folk \n;
+    file << folk\n;
     file.close();
 }
 
