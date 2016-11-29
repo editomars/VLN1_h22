@@ -5,7 +5,7 @@ tolvufolkService::tolvufolkService()
 
 }
 
-vector<tolvufolk> tolvufolkservice::getTolvufolk() const
+vector<tolvufolk> tolvufolkService::getTolvufolk() const
 {
 
 }

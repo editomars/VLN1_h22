@@ -10,11 +10,11 @@ void skraarvinnsla::writeToFile(tolvufolk folk)
 {
     ofstream file;
     file.open("tolvufolk.txt");
-    file << folk \n;
+    file << folk << endl;
     file.close();
 }
 
-vector<tolvufolk> skraarvinnsla::folk readToFile()
+vector<tolvufolk> skraarvinnsla::readToFile()
 {
     string nafn;
     string kyn;
