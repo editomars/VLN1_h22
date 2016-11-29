@@ -33,9 +33,9 @@ string tolvufolk::getKyn() const
 {
     return _kyn;
 }
-void tolvufolk::updFaedingarar(int newyear)
+void tolvufolk::updDanarar(int newyear)
 {
-    _faedingarar = newyear;
+    _danarar = newyear;
 }
 
 void tolvufolk::updNafn(string newnafn)

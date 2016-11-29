@@ -18,8 +18,6 @@ bool check = true;
 void NotendaUI::keyra()
 {
     //TEMP
-    _service.addTolvufolk(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
-    _service.addTolvufolk(tolvufolk("Charles Babbage", "kk", 1900, 1920));
     vector<tolvufolk> data = _service.getTolvufolk();
 
     string nName;
@@ -187,21 +185,18 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     if (skipunin == "name" || skipunin == "n")
     {
         string nafn;
-        cout << "Enter updated name for " << data[persNR] << ": ";
+        cout << "Enter updated name for " << data[persNR].getNafn() << ": ";
         cin.ignore();
         getline(cin,nafn);
         data[persNR].updNafn(nafn);
     }
-    else if(skipunin == "age" || skipunin == "a")
-    {
 
-    }
-    else if (skipunin == "birth" || skipunin == "b")
+    else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
-        cout << "Enter updated year of birth: ";
+        cout << "Enter updated year of death for " << data[persNR].getNafn() << ": ";
         cin >> nytt;
-        data[persNR].updFaedingarar(nytt);
+        data[persNR].updDanarar(nytt);
     }
 }
 void NotendaUI::searchOptions()
@@ -221,6 +216,7 @@ void NotendaUI::printList(const vector<tolvufolk>& data)
 {
     for (size_t i = 0; i < data.size(); i++)
     {
+        cout << "Scientist number: " << i + 1 << endl;
         cout << data[i] << endl;
     }
 }
