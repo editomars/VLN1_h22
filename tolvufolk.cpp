@@ -45,9 +45,18 @@ void tolvufolk::updNafn(string newnafn)
 
 ostream& operator <<(ostream& out, const tolvufolk& data)
 {
-    out << "Nafn: " << data.getNafn() << endl;
-    out << "Kyn: " << data.getKyn() << endl;
-    out << "Faedingarar: " << data.getFaedingarar() << endl;
-    out << "Danarar: " << data.getDanarar() << endl;
+    out << "Name: " << data.getNafn() << endl;
+    out << "Gender: " << data.getKyn() << endl;
+    out << "Year of birth: " << data.getFaedingarar() << endl;
+    if (data.getDanarar() == -1)
+    {
+        out << "Year of death: still alive" << endl;
+        out << "Age: " << 2016 - data.getFaedingarar() << endl;
+    }
+    else
+    {
+        out << "Year of death: " << data.getDanarar() << endl;
+        out << "Died at age: " << data.getDanarar() - data.getFaedingarar() << endl;
+    }
     return out;
 }
