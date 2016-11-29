@@ -5,9 +5,19 @@ tolvufolkService::tolvufolkService()
 
 }
 
-vector<tolvufolk> tolvufolkService::getTolvufolk() const
+struct samanburdur
 {
-    return _dataaccess.readToFile();
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        return (i.getNafn() < j.getNafn());
+    }
+};
+
+
+vector<tolvufolk> tolvufolkService::getTolvufolk()
+{
+    _folk = _dataaccess.readToFile();
+    return _folk;
 }
 
 
@@ -22,4 +32,11 @@ void tolvufolkService::addTolvufolk(const vector<tolvufolk>& folk)
     {
         _dataaccess.writeToFile(folk[i]);
     }
+}
+
+void tolvufolkService::sortByName()
+{
+    samanburdur temp;
+    sort(_folk.begin(), _folk.end(), temp);
+
 }

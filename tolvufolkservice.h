@@ -4,16 +4,21 @@
 #include "skraarvinnsla.h"
 #include "tolvufolk.h"
 #include <vector>
+#include <algorithm>
+
+using namespace std;
 
 class tolvufolkService
 {
 public:
     tolvufolkService();
-    vector<tolvufolk> getTolvufolk() const;
+    vector<tolvufolk> getTolvufolk();
     void addTolvufolk(const tolvufolk& t);
     void addTolvufolk(const vector<tolvufolk>& folk);
+    void sortByName();
 private:
     skraarvinnsla _dataaccess;
+    vector<tolvufolk> _folk;
 };
 
 #endif // TOLVUFOLKSERVICE_H
