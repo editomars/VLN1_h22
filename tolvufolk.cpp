@@ -2,10 +2,11 @@
 
 tolvufolk::tolvufolk()
 {
-    _nafn = _kyn = _faedingarar = _danarar = "None";
+    _nafn = _kyn = "None";
+    _faedingarar = _danarar = 0;
 }
 
-tolvufolk::tolvufolk(string nafn, string kyn, string fAr, string dAr)
+tolvufolk::tolvufolk(string nafn, string kyn, int fAr, int dAr)
 {
     _nafn = nafn;
     _kyn = kyn;
@@ -13,12 +14,12 @@ tolvufolk::tolvufolk(string nafn, string kyn, string fAr, string dAr)
     _danarar = dAr;
 }
 
-string tolvufolk::getFaedingarar() const
+int tolvufolk::getFaedingarar() const
 {
     return _faedingarar;
 }
 
-string tolvufolk::getDanarar() const
+int tolvufolk::getDanarar() const
 {
     return _danarar;
 }

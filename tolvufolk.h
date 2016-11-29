@@ -9,16 +9,16 @@ class tolvufolk
 {
 public:
     tolvufolk();
-    tolvufolk(string nafn, string kyn, string fAr, string dAr);
-    string getFaedingarar() const;
-    string getDanarar() const;
+    tolvufolk(string nafn, string kyn, int fAr, int dAr);
+    int getFaedingarar() const;
+    int getDanarar() const;
     string getNafn() const;
     string getKyn() const;
 private:
     string _nafn;
     string _kyn;
-    string _danarar;
-    string _faedingarar;
+    int _danarar;
+    int _faedingarar;
 };
 
 #endif // TOLVUFOLK_H
