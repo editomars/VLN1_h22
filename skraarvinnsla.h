@@ -2,13 +2,14 @@
 #define SKRAARVINNSLA_H
 
 #include <vector>
+#include <fstream>
 #include "tolvufolk.h"
 
 class skraarvinnsla
 {
 public:
     skraarvinnsla();
-    void writeToFile(tolvufolk folk);
+    void writeToFile(const tolvufolk& folk);
     vector<tolvufolk> readToFile() const;
 };
 

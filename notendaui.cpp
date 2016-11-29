@@ -18,9 +18,9 @@ bool check = true;
 void NotendaUI::keyra()
 {
     //TEMP
-    vector<tolvufolk> data;
-    data.push_back(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
-    data.push_back(tolvufolk("Charles Babbage", "kk", 1900, 1920));
+    _service.addTolvufolk(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
+    _service.addTolvufolk(tolvufolk("Charles Babbage", "kk", 1900, 1920));
+    vector<tolvufolk> data = _service.getTolvufolk();
 
     string nName;
     string gGender;
