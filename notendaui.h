@@ -17,6 +17,9 @@ public:
 private:
     tolvufolkService _service;
     void searchName(const vector<tolvufolk>& data);
+    void skrifaUt();
+    void continueUI();
+    void searchOptions();
 };
 
 #endif // NOTENDAUI_H
