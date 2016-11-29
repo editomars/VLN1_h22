@@ -16,6 +16,7 @@ public:
     void printList(const vector<tolvufolk>& data);
 private:
     tolvufolkService _service;
+    void searchName(const vector<tolvufolk>& data);
 };
 
 #endif // NOTENDAUI_H

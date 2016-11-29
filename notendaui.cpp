@@ -4,7 +4,6 @@
 #include <utility>
 #include <algorithm>
 
-
 using namespace std;
 
 NotendaUI::NotendaUI()
@@ -21,6 +20,7 @@ void Skrifaut()
     cout << "*||add - Add a new entry into the database.                  ||*" << endl;
     cout << "*||delete - Removes an entry from the database.              ||*" << endl;
     cout << "*||update - Updates an entry from the database.              ||*" << endl;
+    cout << "*||search - Search for an entry from the database.           ||*" << endl;
     cout << "*||purge - Removes every entry from the database.            ||*" << endl;
     cout << "*==============================================================*" << endl;
 }
@@ -102,6 +102,11 @@ void NotendaUI::keyra()
 
         }
 
+        else if (skipun == "search" || skipun == "s")
+        {
+            searchName(data);
+        }
+
         else if (skipun == "purge" || skipun == "p")
         {
             cout << "By the Emperor, are you sure? (Y/N): ";
@@ -147,5 +152,33 @@ void NotendaUI::printList(const vector<tolvufolk>& data)
     for (size_t i = 0; i < data.size(); i++)
     {
         cout << data[i] << endl;
+    }
+}
+void NotendaUI::searchName(const vector<tolvufolk>& data)
+{
+
+    string skipunin;
+    cout << "*==============================================*" << endl;
+    cout << "*||Please enter one the following command*   ||*" << endl;
+    cout << "*==============================================*" << endl;
+    cout << "*||name - Search by name                     ||*" << endl;
+    cout << "*||age - Search by age                      ||*" << endl;
+    cout << "*||birth - Search by year of birth            ||*" << endl;
+    cout << "*||death - Search by year of death            ||*" << endl;
+    cin >> skipunin;
+
+    if (skipunin == "name" || skipunin == "n")
+    {
+        string nafn;
+        cout << "Name to search: ";
+        cin.ignore();
+        getline(cin,nafn);
+        for(size_t i = 0; i < data.size(); i++)
+        {
+            if (nafn == data[i].getNafn())
+            {
+                cout << data[i];
+            }
+        }
     }
 }
