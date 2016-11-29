@@ -17,13 +17,10 @@ bool check = true;
 
 void NotendaUI::keyra()
 {
-    //TEMP
+
     vector<tolvufolk> data = _service.getTolvufolk();
 
-    string nName;
-    string gGender;
-    int bYear;
-    int dYear;
+
 
     skrifaUt();
 
@@ -48,41 +45,7 @@ void NotendaUI::keyra()
         else if (skipun == "add" || skipun == "a")
         {
             skrifaUt();
-            cout << "Enter name: ";
-            cin.ignore();
-            getline(cin,nName);
-
-            cout << "Enter gender(kk/kvk) [lowercase]: ";
-            cin >> gGender;
-
-            while (gGender != "kk" && gGender != "kvk")
-            {
-                cerr << "Input not valid, try again: ";
-                cin >> gGender;
-            }
-
-            cout << "Enter year of birth: ";
-            cin >> bYear;
-
-            while (0 > bYear)
-            {
-                cerr << "Input not valid, try again: ";
-                cin >> bYear;
-            }
-
-            cout << "Enter year of death(-1 if still alive): ";
-            cin >> dYear;
-
-            while (-1 > dYear)
-            {
-                cerr << "Input not valid, try again: ";
-                cin >> dYear;
-                cout << endl;
-            }
-
-            tolvufolk Tempr(nName, gGender, bYear, dYear);
-            data.push_back(Tempr);
-            _service.addTolvufolk(Tempr);
+            addPerson(data);
             printList(data);
             continueUI();
 
@@ -372,6 +335,51 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
             //result = _service.sortByName(data);
         }
     }
+}
+
+void NotendaUI::addPerson(vector<tolvufolk>& data)
+{
+    string nName;
+    string gGender;
+    int bYear;
+    int dYear;
+
+    cout << "Enter name: ";
+    cin.ignore();
+    getline(cin,nName);
+
+    cout << "Enter gender(kk/kvk) [lowercase]: ";
+    cin >> gGender;
+
+    while (gGender != "kk" && gGender != "kvk")
+    {
+        cerr << "Input not valid, try again: ";
+        cin >> gGender;
+    }
+
+    cout << "Enter year of birth: ";
+    cin >> bYear;
+
+    while (0 > bYear)
+    {
+        cerr << "Input not valid, try again: ";
+        cin >> bYear;
+    }
+
+    cout << "Enter year of death(-1 if still alive): ";
+    cin >> dYear;
+
+    while (-1 > dYear)
+    {
+        cerr << "Input not valid, try again: ";
+        cin >> dYear;
+        cout << endl;
+    }
+
+    tolvufolk Tempr(nName, gGender, bYear, dYear);
+    data.push_back(Tempr);
+    _service.addTolvufolk(Tempr);
+
 }
 
 void NotendaUI::continueUI()
