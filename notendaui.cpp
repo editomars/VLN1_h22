@@ -23,5 +23,28 @@ void NotendaUI::keyra()
 
     string skipun;
 
+    if (skipun == "list" || skipun == "l")
+    {
 
+    }
+
+    else if (skipun == "add" || skipun == "a")
+    {
+
+    }
+
+    else if (skipun == "delete" || skipun == "d")
+    {
+
+    }
+
+    else if (skipun == "update" || skipun == "u")
+    {
+
+    }
+
+    else if (skipun == "purge" || skipun == "p")
+    {
+
+    }
 }
