@@ -176,15 +176,17 @@ void NotendaUI::skrifaUt()
 }
 void NotendaUI::updatePerson(vector<tolvufolk>& data)
 {
+    system("cls");
+    printList(data);
     int persNR;
     string skipunin;
-    cout << "Number of Scientist: ";
+    cout << "Update scientist number: ";
     cin >> persNR;
     persNR --;
 
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one the following command*                       ||*" << endl;
-    cout << "*==============================================================*" << endl;
+    cout << "*=================================================================*" << endl;
     cout << "*||name - update name, please write 'name'                       ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
     cout << "*||birth - update year of birth, please write 'birth'            ||*" << endl;
