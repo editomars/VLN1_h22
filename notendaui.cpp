@@ -155,17 +155,17 @@ void NotendaUI::keyra()
 void NotendaUI::skrifaUt()
 {
     system("cls");
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following commands                   ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||list - Shows a list of all known entries in the database. ||*" << endl;
-    cout << "*||add - Add a new entry into the database.                  ||*" << endl;
-    cout << "*||delete - Removes an entry from the database.              ||*" << endl;
-    cout << "*||update - Updates an entry from the database.              ||*" << endl;
-    cout << "*||search - Search for an entry from the database.           ||*" << endl;
-    cout << "*||purge - Removes every entry from the database.            ||*" << endl;
-    cout << "*||quit - Exits/quits the program                            ||*" << endl;
-    cout << "*==============================================================*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following commands                       ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||list - Shows a list of all known entries in the database.     ||*" << endl;
+    cout << "*||add - Add a new entry into the database.                      ||*" << endl;
+    cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
+    cout << "*||update - Updates an entry from the database.                  ||*" << endl;
+    cout << "*||search - Search for an entry from the database.               ||*" << endl;
+    cout << "*||purge - Removes every entry from the database.                ||*" << endl;
+    cout << "*||quit - Exits/quits the program                                ||*" << endl;
+    cout << "*==================================================================*" << endl;
 }
 void NotendaUI::updatePerson(vector<tolvufolk>& data)
 {
@@ -174,6 +174,7 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     cout << "Number of Scientist: ";
     cin >> persNR;
     persNR --;
+
     cout << "*==============================================================*" << endl;
     cout << "*||Please enter one the following command*                   ||*" << endl;
     cout << "*==============================================================*" << endl;
@@ -225,14 +226,14 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
 void NotendaUI::searchOptions()
 {
     system("cls");
-    cout << "*==============================================================*" << endl;
-    cout << "*||Please enter one the following command                    ||*" << endl;
-    cout << "*==============================================================*" << endl;
-    cout << "*||name - Search by name                                     ||*" << endl;
-    cout << "*||age - Search by age                                       ||*" << endl;
-    cout << "*||birth - Search by year of birth                           ||*" << endl;
-    cout << "*||death - Search by year of death                           ||*" << endl;
-    cout << "*==============================================================*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||name  - Search by name, please write 'name'                   ||*" << endl;
+    cout << "*||age   - Search by age, please write 'age'                     ||*" << endl;
+    cout << "*||birth - Search by year of birth, please write 'birth'         ||*" << endl;
+    cout << "*||death - Search by year of death, please write 'death'         ||*" << endl;
+    cout << "*==================================================================*" << endl;
 }
 
 void NotendaUI::printList(const vector<tolvufolk>& data)
