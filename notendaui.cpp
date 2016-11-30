@@ -487,20 +487,26 @@ void NotendaUI::purgeList()
 
 void NotendaUI::continueUI()
 {
-    string answer;
-    cout << "Continue? (Y/N): ";
-    cin >> answer;
 
-    if (answer == "Y" || answer == "y")
-    {
-        skrifaUt();
-        check = false;
-    }
-    else if(answer == "N" || answer == "n")
-    {
-        check = true;
-    }
+    string answer = "o";
 
+    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
+    {
+        cout << "Continue? (Y/N): ";
+        cin >> answer;
+
+        if (answer == "Y" || answer == "y")
+        {
+            skrifaUt();
+            check = false;
+            break;
+        }
+        else if(answer == "N" || answer == "n")
+        {
+            check = true;
+            break;
+        }
+    }
 }
 
 void NotendaUI::hausUI()
