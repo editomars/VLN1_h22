@@ -52,6 +52,7 @@ void tolvufolk::uppfGender(string nyttKyn)
     _kyn = nyttKyn;
 }
 
+
 ostream& operator <<(ostream& out, const tolvufolk& data)
 {
     /*

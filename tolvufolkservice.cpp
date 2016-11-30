@@ -4,6 +4,7 @@ tolvufolkService::tolvufolkService()
 {
 
 }
+
 //Sort name by ascending order
 struct nafnHaekkandi
 {
@@ -25,20 +26,25 @@ struct aldurHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
-        return ((i.getDanarar()-i.getFaedingarar()) < (j.getDanarar()-j.getFaedingarar()));
+        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
+        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
+        return ((sidastaAri-i.getFaedingarar()) < (sidastaArj-j.getFaedingarar()));
     }
 };
 struct aldurLaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
-        return ((i.getDanarar()-i.getFaedingarar()) > (j.getDanarar()-j.getFaedingarar()));
+        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
+        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
+        return ((sidastaAri-i.getFaedingarar()) > (sidastaArj-j.getFaedingarar()));
     }
 };
 struct faedingHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
+
         return (i.getFaedingarar() < j.getFaedingarar());
     }
 };
@@ -48,6 +54,26 @@ struct faedingLaekkandi
     bool operator () (tolvufolk i, tolvufolk j)
     {
         return (i.getFaedingarar() > j.getFaedingarar());
+    }
+};
+
+struct daudiHaekkandi
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
+        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
+        return (sidastaAri < sidastaArj);
+    }
+};
+
+struct daudiLaekkandi
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
+        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
+        return (sidastaAri > sidastaArj);
     }
 };
 
@@ -144,7 +170,16 @@ void tolvufolkService::radaFaedinguLaekkandi()
     faedingLaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
-
+void tolvufolkService::radaDaudaHaekkandi()
+{
+    daudiHaekkandi temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
+void tolvufolkService::radaDaudaLaekkandi()
+{
+    daudiLaekkandi temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
 
 void tolvufolkService::eydaStakiTolvufolk(int nr)
 {

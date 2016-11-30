@@ -25,13 +25,16 @@ public:
     void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk í vector
     void updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear); //Uppfærir eitt stak í vector
     void clearTolvufolk(); //Hreinsar öll gögn úr vector
-    void flokkaEftirNafni();
     void radaNafniHaekkandi();
     void radaNafniLaekkandi();
     void radaAldriHaekkandi();
     void radaAldriLaekkandi();
     void radaFaedinguHaekkandi();
     void radaFaedinguLaekkandi();
+    void radaDaudaHaekkandi();
+    void radaDaudaLaekkandi();
+
+
 private:
     skraarvinnsla _dataaccess;
     vector<tolvufolk> _folk;
