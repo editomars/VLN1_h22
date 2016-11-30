@@ -13,8 +13,8 @@ public:
 
     void keyra();
 
-    void addPerson(vector<tolvufolk>& data);
-    void deletePerson(vector<tolvufolk>& data);
+    void addPerson(); //Add person UI grein
+    void deletePerson(); //delete person UI grein
     void printList(); //Skrifar út gögn á console
     void searchName(const vector<tolvufolk>& data);
     void updatePerson(vector<tolvufolk>& data);
@@ -25,7 +25,7 @@ private:
     void skrifaUt(); //Skrifa út aðalvalmynd
     void continueUI();
     void searchOptions();
-    void sortOptions(vector<tolvufolk>& data);
+    void sortOptions(); //Skrifar út sort valmöguleika notanda
 };
 
 #endif // NOTENDAUI_H

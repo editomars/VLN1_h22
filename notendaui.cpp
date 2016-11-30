@@ -36,27 +36,31 @@ void NotendaUI::keyra()
         {
             system("cls");
             cout << "List of computer scientists: " << endl;
+<<<<<<< HEAD
             printList(data);
+=======
+            printList();
+>>>>>>> 062bdc8c22061903821d8125fc37f9013ed0ca21
             continueUI();
         }
         else if (skipun == "sort"|| skipun == "so")
         {
             skrifaUt();
-            sortOptions(data);
+            sortOptions();
             continueUI();
         }
         else if (skipun == "add" || skipun == "a")
         {
             system("cls");
             cout << "Adding computer scientist: " << endl;
-            addPerson(data);
+            addPerson();
             printList();
             continueUI();
 
         }
         else if (skipun == "delete" || skipun == "d")
         {
-            deletePerson(data);
+            deletePerson();
             continueUI();
         }
 
@@ -194,6 +198,10 @@ void NotendaUI::printList()
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     vector<tolvufolk> data = _service.getTolvufolk(false);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 062bdc8c22061903821d8125fc37f9013ed0ca21
     for (size_t i = 0; i < data.size(); i++)
     {
         cout << "|" << i + 1 << " \t\t ";
@@ -284,8 +292,10 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 
 }
 
-void NotendaUI::sortOptions(vector<tolvufolk>& data)
+void NotendaUI::sortOptions()
 {
+    string skipunin;
+
     system("cls");
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one the following command                        ||*" << endl;
@@ -296,7 +306,6 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
     cout << "*||death - Sort by year of death, please write 'death'           ||*" << endl;
     cout << "*==================================================================*" << endl;
 
-    string skipunin;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
@@ -309,8 +318,7 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
     cout << "*||descending - Sort names by descending order                   ||*" << endl;
     cout << "*==================================================================*" << endl;
 
-        string skipunin;
-        cin >> skipunin;
+    cin >> skipunin;
 
         if(skipunin == "ascending" || skipunin == "a")
         {
@@ -325,16 +333,19 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
     }
 }
 
-void NotendaUI::addPerson(vector<tolvufolk>& data)
+void NotendaUI::addPerson()
 {
-    string nName;
+    string firstName;
+    string lastName;
     string gGender;
     int bYear;
     int dYear;
 
-    cout << "Enter name: ";
-    cin.ignore();
-    getline(cin,nName);
+    cout << "Enter firstname: ";
+    cin >> firstName;
+
+    cout << "Enter lastname: ";
+    cin >> lastName;
 
     cout << "Enter gender(kk/kvk) [lowercase]: ";
     cin >> gGender;
@@ -365,13 +376,11 @@ void NotendaUI::addPerson(vector<tolvufolk>& data)
     }
     cout << endl;
 
-    tolvufolk Tempr(nName, gGender, bYear, dYear);
-    data.push_back(Tempr);
-    _service.appendTolvufolk(Tempr);
+    _service.addTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
 
 }
 
-void NotendaUI::deletePerson(vector<tolvufolk> &data)
+void NotendaUI::deletePerson()
 {
     system("cls");
     printList();
@@ -379,8 +388,7 @@ void NotendaUI::deletePerson(vector<tolvufolk> &data)
     cout << "Delete scientist number: ";
     cin >> persNR;
     persNR--;
-    data.erase(data.begin() + persNR);
-    refreshTxtFile(data);
+    _service.deleteSingleTolvufolk(persNR);
 }
 
 void NotendaUI::purgeList(vector<tolvufolk> &data)
