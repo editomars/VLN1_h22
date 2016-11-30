@@ -35,13 +35,8 @@ void NotendaUI::keyra()
         if (skipun == "list" || skipun == "l")
         {
             system("cls");
-<<<<<<< HEAD
             cout << "List of computer scientists: " << endl;
             printList(data);
-=======
-            cout << "List of computer scientists: " << endl << endl;
-            printList();
->>>>>>> 8aca8be6d83dc9b3e3f133ba86fcde4acb8f847c
             continueUI();
         }
         else if (skipun == "sort"|| skipun == "so")
@@ -195,13 +190,10 @@ void NotendaUI::searchOptions()
 
 void NotendaUI::printList()
 {
-<<<<<<< HEAD
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-=======
     vector<tolvufolk> data = _service.getTolvufolk(false);
->>>>>>> 8aca8be6d83dc9b3e3f133ba86fcde4acb8f847c
     for (size_t i = 0; i < data.size(); i++)
     {
         cout << "|" << i + 1 << " \t\t ";
