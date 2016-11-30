@@ -20,6 +20,7 @@ void NotendaUI::keyra()
     _service.yfirskrifaTolvufolk(tolvufolk("Charles Babbage", "m", 1990, 1991));
     _service.vidbotarTolvufolk(tolvufolk("Ada Lovelace", "f", 1880, 1890));
     _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
+    _service.vidbotarTolvufolk(tolvufolk("Edit Ómarsdóttir", "f", 1988, -1));
 
     adalvalmyndUI();
 }
@@ -346,6 +347,31 @@ void NotendaUI::flokkunarMoguleikar()
             adalvalmyndUI();
         }
     }
+    else if(skipunin == "death" || skipunin == "d")
+    {
+        system("cls");
+        cout << "*==================================================================*" << endl;
+        cout << "*||Please enter one the following command                        ||*" << endl;
+        cout << "*==================================================================*" << endl;
+        cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
+        cout << "*||descending - Sort age by descending order                     ||*" << endl;
+        cout << "*==================================================================*" << endl;
+
+        cin >> skipunin;
+
+        if(skipunin == "ascending" || skipunin == "a")
+        {
+            _service.radaDaudaHaekkandi();
+            prentaLista();
+        }
+        else if(skipunin == "descending" || skipunin == "d")
+        {
+            _service.radaDaudaLaekkandi();
+            prentaLista();
+
+        }
+    }
+
 }
 
 void NotendaUI::baetaVidPersonu()

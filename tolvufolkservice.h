@@ -28,13 +28,16 @@ public:
     vector<tolvufolk> leitaTolvufolkEftirNafni(string nafn);
     vector<tolvufolk> leitaTolvufolkEftirAldri(int aldur);
     vector<tolvufolk> leitaTolvufolkEftirArtali(int ar, bool f); //bool = true til að leita að fæðingarári, false fyrir dánarár
-    void flokkaEftirNafni();
     void radaNafniHaekkandi();
     void radaNafniLaekkandi();
     void radaAldriHaekkandi();
     void radaAldriLaekkandi();
     void radaFaedinguHaekkandi();
     void radaFaedinguLaekkandi();
+    void radaDaudaHaekkandi();
+    void radaDaudaLaekkandi();
+
+
 private:
     skraarvinnsla _dataaccess;
     vector<tolvufolk> _folk;
