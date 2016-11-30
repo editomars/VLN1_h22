@@ -64,7 +64,7 @@ void NotendaUI::keyra()
         {
 
             skrifaUt();
-            updatePerson(data);
+            updatePerson();
             continueUI();
         }
 
@@ -78,7 +78,7 @@ void NotendaUI::keyra()
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUt();
-            purgeList(data);
+            purgeList();
 
 
         }
@@ -113,19 +113,20 @@ void NotendaUI::skrifaUt()
     cout << "*||quit - Exits/quits the program.                               ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
-void NotendaUI::updatePerson(vector<tolvufolk>& data)
+void NotendaUI::updatePerson()
 {
+    string skipunin;
+    int persNR;
+    tolvufolk target;
     system("cls");
     printList();
-    int persNR;
-    string skipunin;
     cout << "Update scientist number: ";
     cin >> persNR;
     persNR --;
-
+    target = _service.getSingleTolvufolk(persNR);
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one the following command*                       ||*" << endl;
-    cout << "*=================================================================*" << endl;
+    cout << "*==================================================================*" << endl;
     cout << "*||name - update name, please write 'name'                       ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
     cout << "*||birth - update year of birth, please write 'birth'            ||*" << endl;
@@ -135,44 +136,41 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
 
     if (skipunin == "name" || skipunin == "n")
     {
-        string nafn;
-        cout << "Enter updated name for " << data[persNR].getNafn() << ": ";
-        cin.ignore();
-        getline(cin,nafn);
-        data[persNR].updNafn(nafn);
+        string fornafn, eftirnafn;
+        cout << "Enter updated name for " << target.getNafn() << ": ";
+        cin >> fornafn >> eftirnafn;
+
+        _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
 
     else if (skipunin == "gender" || skipunin == "g")
     {
         string newgend;
-        cout << "Enter updated gender for " << data[persNR].getNafn() << ": ";
+        cout << "Enter updated gender for " << target.getNafn() << ": ";
         cin >> newgend;
         while (newgend != "kk" && newgend != "kvk")
         {
             cerr << "Input not valid, try again: ";
             cin >> newgend;
         }
-        data[persNR].updGender(newgend);
+        _service.updateTolvufolkSingle(persNR, target.getNafn(), newgend, target.getFaedingarar(), target.getDanarar());
     }
 
     else if (skipunin == "birth" || skipunin == "b")
     {
         int nytt;
-        cout << "Enter updated year of birth for " << data[persNR].getNafn() << ": ";
+        cout << "Enter updated year of birth for " << target.getNafn() << ": ";
         cin >> nytt;
-        data[persNR].updFaedingarar(nytt);
+        _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
 
     else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
-        cout << "Enter updated year of death for " << data[persNR].getNafn() << ": ";
+        cout << "Enter updated year of death for " << target.getNafn() << ": ";
         cin >> nytt;
-        data[persNR].updDanarar(nytt);
+        _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
-
-    refreshTxtFile(data);
-
 }
 
 void NotendaUI::searchOptions()
@@ -433,7 +431,7 @@ void NotendaUI::deletePerson()
     _service.deleteSingleTolvufolk(persNR);
 }
 
-void NotendaUI::purgeList(vector<tolvufolk> &data)
+void NotendaUI::purgeList()
 {
     string skipun;
     cout << "By the Emperor, are you sure? (Y/N): ";
@@ -447,8 +445,7 @@ void NotendaUI::purgeList(vector<tolvufolk> &data)
         if (skipun == "Y" || skipun == "y")
         {
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
-            data.clear();
-            refreshTxtFile(data);
+            _service.clearTolvufolk();
             continueUI();
 
         }
@@ -463,15 +460,6 @@ void NotendaUI::purgeList(vector<tolvufolk> &data)
     {
         cout << "Purge canceled." << endl;
         continueUI();
-    }
-}
-
-void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)
-{
-    _service.deleteTolvufolk();
-    for(size_t i = 0; i < data.size(); i++)
-    {
-         _service.appendTolvufolk(data[i]);
     }
 }
 
