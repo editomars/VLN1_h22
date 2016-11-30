@@ -5,13 +5,22 @@ skraarvinnsla::skraarvinnsla()
 
 }
 
-void skraarvinnsla::writeToFile(const tolvufolk& folk)
+void skraarvinnsla::appendToFile(const tolvufolk& folk)
 {
     ofstream file;
     file.open("tolvufolk.txt", ios::app);
     file << folk.getNafn() << " " << folk.getKyn() << " " << folk.getFaedingarar() << " " << folk.getDanarar() << endl;
     file.close();
 }
+
+void skraarvinnsla::writeToFile(const tolvufolk& folk)
+{
+    ofstream file;
+    file.open("tolvufolk.txt");
+    file << folk.getNafn() << " " << folk.getKyn() << " " << folk.getFaedingarar() << " " << folk.getDanarar() << endl;
+    file.close();
+}
+
 void skraarvinnsla::deleteFile()
 {
     remove("tolvufolk.txt");

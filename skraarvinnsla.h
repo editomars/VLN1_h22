@@ -10,6 +10,7 @@ class skraarvinnsla
 {
 public:
     skraarvinnsla();
+    void appendToFile(const tolvufolk& folk);
     void writeToFile(const tolvufolk& folk);
     vector<tolvufolk> readToFile() const;
     void deleteFile();
