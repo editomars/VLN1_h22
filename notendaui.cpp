@@ -11,12 +11,7 @@ NotendaUI::NotendaUI()
 
 }
 
-<<<<<<< HEAD
-bool ath = true;
 bool haf = false;
-=======
-
->>>>>>> 693bebd428e1801f33299f679a2bec9a8ffcdfb3
 
 void NotendaUI::keyra()
 {
@@ -58,12 +53,7 @@ void NotendaUI::keyra()
 
         else if (skipun == "delete" || skipun == "d")
         {
-<<<<<<< HEAD
             eydaPersonu(gogn);
-            aframhaldandiUI();
-=======
-            eydaPersonu();
->>>>>>> 693bebd428e1801f33299f679a2bec9a8ffcdfb3
         }
 
         else if (skipun == "update" || skipun == "u")
@@ -100,6 +90,7 @@ void NotendaUI::keyra()
             }
             else
             {
+                cin.clear();
                 cout << "Saving has been cancelled" << endl;
             }
         }
@@ -107,6 +98,7 @@ void NotendaUI::keyra()
         else
         {
             skrifaUt();
+            cin.clear();
             cerr << "Input not valid, try again: ";
         }
 
@@ -449,6 +441,7 @@ void NotendaUI::baetaVidPersonu()
 
     while (gGender != "m" && gGender != "f")
     {
+        cin.clear();
         cerr << "Input not valid, try again: ";
         cin >> gGender;
     }
@@ -456,8 +449,10 @@ void NotendaUI::baetaVidPersonu()
     cout << "Enter year of birth: ";
     cin >> bYear;
 
-    while (0 > bYear)
+    while (0 > bYear || cin.fail())
     {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cerr << "Input not valid, try again: ";
         cin >> bYear;
     }
@@ -465,12 +460,13 @@ void NotendaUI::baetaVidPersonu()
     cout << "Enter year of death(-1 if still alive): ";
     cin >> dYear;
 
-    while (-1 > dYear)
+    while (-1 > dYear || !cin)
     {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cerr << "Input not valid, try again: ";
         cin >> dYear;
     }
-    cout << endl;
 
     _service.baetaVidTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
 
@@ -536,12 +532,7 @@ void NotendaUI::tortimaLista()
         aframhaldandiUI();
     }
 }
-<<<<<<< HEAD
-
-void NotendaUI::aframhaldandiUI()
-=======
 bool NotendaUI::aframhaldandiUI()
->>>>>>> 693bebd428e1801f33299f679a2bec9a8ffcdfb3
 {
 
     string answer = "o";
