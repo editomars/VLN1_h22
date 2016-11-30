@@ -18,6 +18,10 @@ void NotendaUI::keyra()
 
     _service.writeTolvufolk(tolvufolk("Charles Babbage", "kk", 1990, 1991));
     _service.appendTolvufolk(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
+    _service.appendTolvufolk(tolvufolk("zllan Turing", "kk", 1918, 1948));
+
+
+
     vector<tolvufolk> data = _service.getTolvufolk(true);
 
     skrifaUt();
@@ -301,10 +305,13 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            //data = _service.sortByName();
-            //_service.displayVector(data);
-
-
+            _service.sortByAscending();
+            printList();
+        }
+        else if(skipunin == "descending" || skipunin == "d")
+        {
+            _service.sortByDescending();
+            printList();
         }
     }
 }

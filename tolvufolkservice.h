@@ -20,7 +20,8 @@ public:
     void writeTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk
     void writeTolvufolk(const vector<tolvufolk>& folk); //Yfiskrifar gögnin á undan með nýjum gögnum, vector af fólki
     void deleteTolvufolk(); //Eyðir gögnum
-    void sortByName();
+    void sortByAscending();
+    void sortByDescending();
 private:
     skraarvinnsla _dataaccess;
     vector<tolvufolk> _folk;

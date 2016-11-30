@@ -5,14 +5,20 @@ tolvufolkService::tolvufolkService()
 
 }
 
-struct samanburdur
+struct ascending
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
         return (i.getNafn() < j.getNafn());
     }
 };
-
+struct descending
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        return (i.getNafn() > j.getNafn());
+    }
+};
 
 vector<tolvufolk> tolvufolkService::getTolvufolk(bool readFromDatabase)
 {
@@ -55,8 +61,14 @@ void tolvufolkService::addTolvufolk(const tolvufolk &t)
     _folk.push_back(t);
 }
 
-void tolvufolkService::sortByName()
+void tolvufolkService::sortByAscending()
 {
-    samanburdur temp;
+    ascending temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
+
+void tolvufolkService::sortByDescending()
+{
+    descending temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
