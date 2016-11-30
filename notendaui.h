@@ -15,14 +15,14 @@ public:
 
     void addPerson(vector<tolvufolk>& data);
     void deletePerson(vector<tolvufolk>& data);
-    void printList(const vector<tolvufolk>& data);
+    void printList(); //Skrifar út gögn á console
     void searchName(const vector<tolvufolk>& data);
     void updatePerson(vector<tolvufolk>& data);
     void refreshTxtFile(const vector<tolvufolk>& data);
     void purgeList(vector<tolvufolk>& data);
 private:
     tolvufolkService _service;
-    void skrifaUt();
+    void skrifaUt(); //Skrifa út aðalvalmynd
     void continueUI();
     void searchOptions();
     void sortOptions(vector<tolvufolk>& data);
