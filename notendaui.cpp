@@ -428,19 +428,24 @@ void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)
 
 void NotendaUI::continueUI()
 {
-    string answer;
-    cout << "Continue? (Y/N): ";
-    cin >> answer;
+
+    string answer = "o";
 
     while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
-    if (answer == "Y" || answer == "y")
     {
-        skrifaUt();
-        check = false;
-    }
-    else if(answer == "N" || answer == "n")
-    {
-        check = true;
-    }
+        cout << "Continue? (Y/N): ";
+        cin >> answer;
 
+        if (answer == "Y" || answer == "y")
+        {
+            skrifaUt();
+            check = false;
+            break;
+        }
+        else if(answer == "N" || answer == "n")
+        {
+            check = true;
+            break;
+        }
+    }
 }
