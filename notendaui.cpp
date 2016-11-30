@@ -33,7 +33,7 @@ void NotendaUI::keyra()
         if (skipun == "list" || skipun == "l")
         {
             system("cls");
-            cout << "List of computer scientists: " << endl << endl;
+            cout << "List of computer scientists: " << endl;
             printList(data);
             continueUI();
         }
@@ -46,7 +46,7 @@ void NotendaUI::keyra()
         else if (skipun == "add" || skipun == "a")
         {
             system("cls");
-            cout << "Adding computer scientist: " << endl << endl;
+            cout << "Adding computer scientist: " << endl;
             addPerson(data);
             printList(data);
             continueUI();
@@ -108,7 +108,7 @@ void NotendaUI::skrifaUt()
     cout << "*||update - Updates an entry from the database.                  ||*" << endl;
     cout << "*||search - Search for an entry from the database.               ||*" << endl;
     cout << "*||purge - Removes every entry from the database.                ||*" << endl;
-    cout << "*||quit - Exits/quits the program                                ||*" << endl;
+    cout << "*||quit - Exits/quits the program.                               ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
 void NotendaUI::updatePerson(vector<tolvufolk>& data)
@@ -188,11 +188,20 @@ void NotendaUI::searchOptions()
 
 void NotendaUI::printList(const vector<tolvufolk>& data)
 {
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
     for (size_t i = 0; i < data.size(); i++)
     {
+        cout << "|" << i + 1 << " \t\t ";
+        cout << data[i];
+        /*
         cout << "Scientist number: " << i + 1 << endl;
         cout << data[i] << endl;
+        */
+
     }
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
 void NotendaUI::searchName(const vector<tolvufolk>& data)
@@ -346,6 +355,7 @@ void NotendaUI::addPerson(vector<tolvufolk>& data)
         cin >> dYear;
         cout << endl;
     }
+    cout << endl;
 
     tolvufolk Tempr(nName, gGender, bYear, dYear);
     data.push_back(Tempr);

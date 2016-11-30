@@ -54,6 +54,7 @@ void tolvufolk::updGender(string newgend)
 
 ostream& operator <<(ostream& out, const tolvufolk& data)
 {
+    /*
     out << "Name: " << data.getNafn() << endl;
     out << "Gender: " << data.getKyn() << endl;
     out << "Year of birth: " << data.getFaedingarar() << endl;
@@ -67,5 +68,49 @@ ostream& operator <<(ostream& out, const tolvufolk& data)
         out << "Year of death: " << data.getDanarar() << endl;
         out << "Died at age: " << data.getDanarar() - data.getFaedingarar() << endl;
     }
+    */
+
+    if (data.getNafn().length() < 13)
+    {
+        if (data.getDanarar() == -1)
+        {
+            out << "|" << data.getNafn() << " \t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |Still alive \t |";
+            out << 2016- data.getFaedingarar() << " \t |" << endl;
+        }
+        else
+        {
+            out << "|" << data.getNafn() << " \t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |";
+            out << data.getDanarar() <<  " \t\t |" << data.getDanarar() - data.getFaedingarar() << " \t |" << endl;
+        }
+    }
+    else if (data.getNafn().length() < 21 && data.getNafn().length() >= 12)
+    {
+        if (data.getDanarar() == -1)
+        {
+            out << "|" << data.getNafn() << " \t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |Still alive \t |";
+            out << 2016- data.getFaedingarar() << " \t |" << endl;
+        }
+        else
+        {
+            out << "|" << data.getNafn() << " \t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |";
+            out << data.getDanarar() <<  " \t\t |" << data.getDanarar() - data.getFaedingarar() << " \t |" << endl;
+        }
+    }
+
+    else
+    {
+        if (data.getDanarar() == -1)
+        {
+            out << "|" << data.getNafn() << " \t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |Still alive \t |";
+            out << 2016- data.getFaedingarar() << " \t |" << endl;
+        }
+        else
+        {
+            out << "|" << data.getNafn() << " \t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |";
+            out << data.getDanarar() <<  " \t\t |" << data.getDanarar() - data.getFaedingarar() << " \t |" << endl;
+        }
+
+    }
+
     return out;
 }
