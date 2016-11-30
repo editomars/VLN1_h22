@@ -13,6 +13,7 @@ struct nafnHaekkandi
         return (i.getNafn() < j.getNafn());
     }
 };
+
 //rada eftir stafrosrod cba..
 struct nafnLaekkandi
 {
@@ -21,6 +22,7 @@ struct nafnLaekkandi
         return (i.getNafn() > j.getNafn());
     }
 };
+
 //rada aldri haekkandi
 struct aldurHaekkandi
 {
@@ -31,6 +33,7 @@ struct aldurHaekkandi
         return ((sidastaAri-i.getFaedingarar()) < (sidastaArj-j.getFaedingarar()));
     }
 };
+
 struct aldurLaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
@@ -40,11 +43,11 @@ struct aldurLaekkandi
         return ((sidastaAri-i.getFaedingarar()) > (sidastaArj-j.getFaedingarar()));
     }
 };
+
 struct faedingHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
-
         return (i.getFaedingarar() < j.getFaedingarar());
     }
 };
@@ -76,7 +79,6 @@ struct daudiLaekkandi
         return (sidastaAri > sidastaArj);
     }
 };
-
 
 vector<tolvufolk> tolvufolkService::getTolvufolk(bool lesaUrGagnagrunni)
 {
@@ -138,7 +140,8 @@ vector<tolvufolk> tolvufolkService::leitaEftirAldriTolvufolk(int aldur)
     for (size_t i = 0; i < _folk.size(); ++i)
     {
         int samanburdur = (_folk[i].getDanarar() == -1 ? 2016 : _folk[i].getDanarar());
-        if (samanburdur - _folk[i].getFaedingarar() == aldur){
+        if (samanburdur - _folk[i].getFaedingarar() == aldur)
+        {
             t.push_back(_folk[i]);
         }
     }
@@ -151,11 +154,16 @@ vector<tolvufolk> tolvufolkService::leitaEftirArtaliTolvufolk(int ar, bool f)
     for (size_t i = 0; i < _folk.size(); ++i)
     {
         if (f){
-            if (_folk[i].getFaedingarar() == ar){
+            if (_folk[i].getFaedingarar() == ar)
+            {
                 t.push_back(_folk[i]);
             }
-        }else{
-            if (_folk[i].getDanarar() == ar){
+        }
+
+        else
+        {
+            if (_folk[i].getDanarar() == ar)
+            {
                 t.push_back(_folk[i]);
             }
         }
@@ -168,7 +176,8 @@ vector<tolvufolk> tolvufolkService::leitaEftirNafniTolvufolk(string nafn)
     vector<tolvufolk> t;
     for (size_t i = 0; i < _folk.size(); ++i)
     {
-        if (_folk[i].getNafn() == nafn){
+        if (_folk[i].getNafn() == nafn)
+        {
             t.push_back(_folk[i]);
         }
     }
@@ -198,16 +207,19 @@ void tolvufolkService::radaAldriHaekkandi()
     aldurHaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
+
 void tolvufolkService::radaAldriLaekkandi()
 {
     aldurLaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
+
 void tolvufolkService::radaFaedinguHaekkandi()
 {
     faedingHaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
+
 void tolvufolkService::radaFaedinguLaekkandi()
 {
     faedingLaekkandi temp;
@@ -218,6 +230,7 @@ void tolvufolkService::radaDaudaHaekkandi()
     daudiHaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
+
 void tolvufolkService::radaDaudaLaekkandi()
 {
     daudiLaekkandi temp;

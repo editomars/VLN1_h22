@@ -11,6 +11,7 @@ class tolvufolk
 {
 public:
     tolvufolk();
+
     tolvufolk(string nafn, string kyn, int fAr, int dAr);
     int getFaedingarar() const;
     int getDanarar() const;

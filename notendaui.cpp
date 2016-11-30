@@ -172,6 +172,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                     cout << gogn[i];
                     ekkiFundid = false;
                 }
+
                 else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
@@ -196,6 +197,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                     cout << gogn[i];
                     ekkiFundid = false;
                 }
+
                 else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
@@ -220,6 +222,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                     cout << gogn[i];
                     ekkiFundid = false;
                 }
+
                 else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
@@ -244,6 +247,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                     cout << gogn[i];
                     ekkiFundid = false;
                 }
+
                 else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
@@ -251,14 +255,13 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
             }
             cout << "----------------------------------------------------------------------------------------------------------" << endl;
         }
+
         else if (skipunin == "return" || skipunin == "r")
         {
             adalvalmyndUI();
         }
 
-
     }while(skipunaAframhald());
-
 }
 
 void NotendaUI::flokkunarMoguleikar()
@@ -281,70 +284,78 @@ void NotendaUI::flokkunarMoguleikar()
 
     if (skipunin == "name" || skipunin == "n")
     {
-    upphafsUI();
+        upphafsUI();
 
-    cin >> skipunin;
+        cin >> skipunin;
 
-        if(skipunin == "ascending" || skipunin == "a")
-        {
-            _service.radaNafniHaekkandi();
-            prentaLista();
-        }
-        else if(skipunin == "descending" || skipunin == "d")
-        {
-            _service.radaNafniLaekkandi();
-            prentaLista();
-        }
-        else if (skipunin == "return" || skipunin == "r")
-        {
-            adalvalmyndUI();
-        }
+            if(skipunin == "ascending" || skipunin == "a")
+            {
+                _service.radaNafniHaekkandi();
+                prentaLista();
+            }
+
+            else if(skipunin == "descending" || skipunin == "d")
+            {
+                _service.radaNafniLaekkandi();
+                prentaLista();
+            }
+
+            else if (skipunin == "return" || skipunin == "r")
+            {
+                adalvalmyndUI();
+            }
     }
 
     else if(skipunin == "age" || skipunin == "a")
     {
-    upphafsUI();
+        upphafsUI();
 
-    cin >> skipunin;
+        cin >> skipunin;
 
-        if(skipunin == "ascending" || skipunin == "a")
-        {
-            _service.radaAldriHaekkandi();
-            prentaLista();
-        }
-        else if(skipunin == "descending" || skipunin == "d")
-        {
-            _service.radaAldriLaekkandi();
-            prentaLista();
+            if(skipunin == "ascending" || skipunin == "a")
+            {
+                _service.radaAldriHaekkandi();
+                prentaLista();
+            }
 
-        }
-        else if (skipunin == "return" || skipunin == "r")
-        {
-            adalvalmyndUI();
-        }
+            else if(skipunin == "descending" || skipunin == "d")
+            {
+                _service.radaAldriLaekkandi();
+                prentaLista();
+
+            }
+
+            else if (skipunin == "return" || skipunin == "r")
+            {
+                adalvalmyndUI();
+            }
     }
+
     else if(skipunin == "birth" || skipunin == "b")
     {
         upphafsUI();
 
         cin >> skipunin;
 
-        if(skipunin == "ascending" || skipunin == "a")
-        {
-            _service.radaFaedinguHaekkandi();
-            prentaLista();
-        }
-        else if(skipunin == "descending" || skipunin == "d")
-        {
-            _service.radaFaedinguLaekkandi();
-            prentaLista();
+            if(skipunin == "ascending" || skipunin == "a")
+            {
+                _service.radaFaedinguHaekkandi();
+                prentaLista();
+            }
 
-        }
-        else if (skipunin == "return" || skipunin == "r")
-        {
-            adalvalmyndUI();
-        }
+            else if(skipunin == "descending" || skipunin == "d")
+            {
+                _service.radaFaedinguLaekkandi();
+                prentaLista();
+
+            }
+
+            else if (skipunin == "return" || skipunin == "r")
+            {
+                adalvalmyndUI();
+            }
     }
+
     else if(skipunin == "death" || skipunin == "d")
     {
         system("cls");
@@ -362,6 +373,7 @@ void NotendaUI::flokkunarMoguleikar()
             _service.radaDaudaHaekkandi();
             prentaLista();
         }
+
         else if(skipunin == "descending" || skipunin == "d")
         {
             _service.radaDaudaLaekkandi();
@@ -369,7 +381,6 @@ void NotendaUI::flokkunarMoguleikar()
 
         }
     }
-
 }
 
 void NotendaUI::baetaVidPersonu()
@@ -464,12 +475,14 @@ void NotendaUI::tortimaLista()
 
             _service.hreinsaTolvufolk();
         }
+
         else
         {
             cout << "Purge canceled." << endl;
         }
 
     }
+
     else
     {
         cout << "Purge canceled." << endl;
@@ -491,10 +504,12 @@ bool NotendaUI::aframhaldandiUI()
             skrifaUt();
             return true;
         }
+
         else if(svar == "N" || svar == "n")
         {
             return false;
         }
+
         else
         {
             cout << "Invalid input, try again!" << endl;
@@ -517,12 +532,13 @@ bool NotendaUI::skipunaAframhald()
         {
             return true;
         }
+
         else if(svar == "N" || svar == "n")
         {
             return false;
         }
     }
-     return false;
+    return false;
 }
 
 void NotendaUI::upphafsUI()
@@ -552,7 +568,7 @@ void NotendaUI::adalvalmyndUI()
     skrifaUt();
 
     do
-        {
+    {
         string skipun;
         cin >> skipun;
 
@@ -560,6 +576,7 @@ void NotendaUI::adalvalmyndUI()
         {
             prentaLista();
         }
+
         else if (skipun == "sort"|| skipun == "so")
         {
             skrifaUt();

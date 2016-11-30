@@ -12,7 +12,6 @@ public:
     NotendaUI();
 
     void keyra();
-
     void baetaVidPersonu(); //Baeta vid personu UI grein
     void eydaPersonu(const vector<tolvufolk>& gogn); //Eyda personu UI grein
     void prentaLista(); //Skrifar út gögn á console
@@ -22,6 +21,7 @@ public:
 
 private:
     tolvufolkService _service;
+
     void skrifaUt(); //Skrifa út aðalvalmynd
     bool aframhaldandiUI();
     void leitarMoguleikar();
