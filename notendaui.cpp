@@ -20,7 +20,7 @@ void NotendaUI::keyra()
     _service.yfirskrifaTolvufolk(tolvufolk("Charles Babbage", "m", 1990, 1991));
     _service.vidbotarTolvufolk(tolvufolk("Ada Lovelace", "f", 1880, 1890));
     _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
-    _service.vidbotarTolvufolk(tolvufolk("Edit Ómarsdóttir", "f", 1988, -1));
+    _service.vidbotarTolvufolk(tolvufolk("Edit Omarsdottir", "f", 1988, -1));
 
     adalvalmyndUI();
 }
@@ -136,6 +136,7 @@ void NotendaUI::leitarMoguleikar()
 
 void NotendaUI::prentaLista()
 {
+    system("cls");
     hausUI();
     vector<tolvufolk> gogn = _service.getTolvufolk(false);
     for (size_t i = 0; i < gogn.size(); i++)
@@ -457,7 +458,7 @@ void NotendaUI::eydaPersonu(const vector<tolvufolk>& gogn)
 void NotendaUI::tortimaLista()
 {
     string skipun;
-    cout << "By the Emperor, are you sure? (Y/N): ";
+    cout << "By the Emperor, are you sure you want to purify this database? (Y/N): ";
     cin >> skipun;
 
     if (skipun == "Y" || skipun == "y")
@@ -470,19 +471,16 @@ void NotendaUI::tortimaLista()
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
 
             _service.clearTolvufolk();
-            aframhaldandiUI();
         }
         else
         {
             cout << "Purge canceled." << endl;
-            aframhaldandiUI();
         }
 
     }
     else
     {
         cout << "Purge canceled." << endl;
-        aframhaldandiUI();
     }
 }
 
@@ -569,8 +567,6 @@ void NotendaUI::adalvalmyndUI()
 
         if (skipun == "list" || skipun == "l")
         {
-            system("cls");
-            cout << "List of computer scientists: " << endl;
             prentaLista();
         }
         else if (skipun == "sort"|| skipun == "so")
@@ -582,7 +578,7 @@ void NotendaUI::adalvalmyndUI()
         else if (skipun == "add" || skipun == "a")
         {
             system("cls");
-            cout << "Adding computer scientist: " << endl;
+            cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
             prentaLista();
         }
