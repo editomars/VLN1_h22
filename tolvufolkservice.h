@@ -25,8 +25,12 @@ public:
     void updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear); //Uppfærir eitt stak í vector
     void clearTolvufolk(); //Hreinsar öll gögn úr vector
     void sortByName();
-    void sortByAscending();
-    void sortByDescending();
+    void radaNafniHaekkandi();
+    void radaNafniLaekkandi();
+    void radaAldriHaekkandi();
+    void radaAldriLaekkandi();
+    void radaFaedinguHaekkandi();
+    void radaFaedinguLaekkandi();
 private:
     skraarvinnsla _dataaccess;
     vector<tolvufolk> _folk;
