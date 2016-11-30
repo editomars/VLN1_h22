@@ -5,6 +5,7 @@
 #include "tolvufolk.h"
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 

@@ -32,7 +32,7 @@ void NotendaUI::keyra()
         {
             system("cls");
             cout << "List of computer scientists: " << endl << endl;
-            printList(data);
+            printList();
             continueUI();
         }
         else if (skipun == "sort"|| skipun == "so")
@@ -46,7 +46,7 @@ void NotendaUI::keyra()
             system("cls");
             cout << "Adding computer scientist: " << endl << endl;
             addPerson(data);
-            printList(data);
+            printList();
             continueUI();
 
         }
@@ -112,7 +112,7 @@ void NotendaUI::skrifaUt()
 void NotendaUI::updatePerson(vector<tolvufolk>& data)
 {
     system("cls");
-    printList(data);
+    printList();
     int persNR;
     string skipunin;
     cout << "Update scientist number: ";
@@ -184,8 +184,9 @@ void NotendaUI::searchOptions()
     cout << "*==================================================================*" << endl;
 }
 
-void NotendaUI::printList(const vector<tolvufolk>& data)
+void NotendaUI::printList()
 {
+    vector<tolvufolk> data = _service.getTolvufolk(false);
     for (size_t i = 0; i < data.size(); i++)
     {
         cout << "Scientist number: " << i + 1 << endl;
@@ -300,8 +301,10 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            //vector<tolvufolk> result;
-            //result = _service.sortByName(data);
+            //data = _service.sortByName();
+            //_service.displayVector(data);
+
+
         }
     }
 }
@@ -354,7 +357,7 @@ void NotendaUI::addPerson(vector<tolvufolk>& data)
 void NotendaUI::deletePerson(vector<tolvufolk> &data)
 {
     system("cls");
-    printList(data);
+    printList();
     int persNR;
     cout << "Delete scientist number: ";
     cin >> persNR;
