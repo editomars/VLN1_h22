@@ -12,7 +12,7 @@ class tolvufolkService
 {
 public:
     tolvufolkService();
-    vector<tolvufolk> getTolvufolk(); //Skilar vectornum af gögnum sem notandi er að nota, vantar params
+    vector<tolvufolk> getTolvufolk(bool readFromDatabase); //Skilar vectornum af gögnum sem notandi er að nota, vantar params
     void addTolvufolk(const tolvufolk& t); //Bætir við einu tilviki af tolvufolk í vectorinn (ekki í gagnagrunn)
     void appendTolvufolk(const tolvufolk& t); //Bætir við einu tilvik af tolvufolk (append í gagnagrunn)
     void appendTolvufolk(const vector<tolvufolk>& folk); //Bætir við vector af tolvufolk (append í gagnagrunn)

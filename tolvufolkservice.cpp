@@ -14,9 +14,10 @@ struct samanburdur
 };
 
 
-vector<tolvufolk> tolvufolkService::getTolvufolk()
+vector<tolvufolk> tolvufolkService::getTolvufolk(bool readFromDatabase)
 {
-    _folk = _dataaccess.readToFile();
+    if (readFromDatabase)
+        _folk = _dataaccess.readToFile();
     return _folk;
 }
 

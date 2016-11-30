@@ -20,7 +20,7 @@ void NotendaUI::keyra()
 
     _service.writeTolvufolk(tolvufolk("Charles Babbage", "kk", 1990, 1991));
     _service.appendTolvufolk(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
-    vector<tolvufolk> data = _service.getTolvufolk();
+    vector<tolvufolk> data = _service.getTolvufolk(true);
 
     skrifaUt();
 
