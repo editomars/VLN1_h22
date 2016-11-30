@@ -15,7 +15,7 @@ public:
     tolvufolkService();
 
     vector<tolvufolk> getTolvufolk(bool lesaUrGagnagrunni); //Skilar vectornum af gögnum sem notandi er að nota, vantar params
-    tolvufolk getSingleTolvufolk(int ndx); //Sækir eitt stak af tolvufolki
+    tolvufolk getStaktTolvufolk(int ndx); //Sækir eitt stak af tolvufolki
     void baetaVidTolvufolk(const tolvufolk& t); //Bætir við einu tilviki af tolvufolk í vectorinn (ekki í gagnagrunn)
     void vidbotarTolvufolk(const tolvufolk& t); //Bætir við einu tilvik af tolvufolk (append í gagnagrunn)
     void vidbotarTolvufolk(); //Bætir við vector af tolvufolk (append í gagnagrunn)
@@ -23,11 +23,11 @@ public:
     void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, vector af fólki
     void eydaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk í vector
-    void updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear); //Uppfærir eitt stak í vector
-    void clearTolvufolk(); //Hreinsar öll gögn úr vector
-    vector<tolvufolk> leitaTolvufolkEftirNafni(string nafn);
-    vector<tolvufolk> leitaTolvufolkEftirAldri(int aldur);
-    vector<tolvufolk> leitaTolvufolkEftirArtali(int ar, bool f); //bool = true til að leita að fæðingarári, false fyrir dánarár
+    void uppfaeraStakTolvufolk(int nr, string nafn, string kyn, int fAr, int dAr); //Uppfærir eitt stak í vector
+    void hreinsaTolvufolk(); //Hreinsar öll gögn úr vector
+    vector<tolvufolk> leitaEftirNafniTolvufolk(string nafn);
+    vector<tolvufolk> leitaEftirAldriTolvufolk(int aldur);
+    vector<tolvufolk> leitaEftirArtaliTolvufolk(int ar, bool f); //bool = true til að leita að fæðingarári, false fyrir dánarár
     void radaNafniHaekkandi();
     void radaNafniLaekkandi();
     void radaAldriHaekkandi();

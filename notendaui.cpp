@@ -11,7 +11,6 @@ NotendaUI::NotendaUI()
 
 }
 
-
 void NotendaUI::keyra()
 {
 
@@ -54,22 +53,22 @@ void NotendaUI::uppfaeraPersonu()
     cout << "Update scientist number: ";
     cin >> persNR;
     persNR --;
-    target = _service.getSingleTolvufolk(persNR);
+    target = _service.getStaktTolvufolk(persNR);
 
     system("cls");
     cout << "Update information for: " << endl << endl;
-    cout << "Name: " << target.getNafn() << ",\tGender: " << target.getKyn() << ",\tBorn: "
-         << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
+    cout << "Name: " << target.getNafn() << ",\tGender: "
+         << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
 
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command.                       ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||name   - update name, please write 'name'                     ||*" << endl;
-    cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
-    cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
-    cout << "*||death  - update year of death, please write 'death'           ||*" << endl;
-    cout << "*||return - Returns to the main menu                             ||*" << endl;
-    cout << "*==================================================================*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command.                           ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - update name, please write 'name'                            ||*" << endl;
+    cout << "*||gender - update gender, please write 'gender'                        ||*" << endl;
+    cout << "*||birth  - update year of birth, please write 'birth'                  ||*" << endl;
+    cout << "*||death  - update year of death, please write 'death'                  ||*" << endl;
+    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*=========================================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
@@ -79,7 +78,7 @@ void NotendaUI::uppfaeraPersonu()
         cin >> fornafn;
         cout << "Enter updated last name: ";
         cin >> eftirnafn;
-        _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
+        _service.uppfaeraStakTolvufolk(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
 
     else if (skipunin == "gender" || skipunin == "g")
@@ -87,12 +86,12 @@ void NotendaUI::uppfaeraPersonu()
         string nyttKyn;
         cout << "Enter updated gender: ";
         cin >> nyttKyn;
-        while (nyttKyn != "kk" && nyttKyn != "kvk")
+        while (nyttKyn != "m" && nyttKyn != "f")
         {
             cerr << "Input not valid, try again: ";
             cin >> nyttKyn;
         }
-        _service.updateTolvufolkSingle(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
+        _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
 
     }
 
@@ -101,7 +100,7 @@ void NotendaUI::uppfaeraPersonu()
         int nytt;
         cout << "Enter updated year of birth: ";
         cin >> nytt;
-        _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
+        _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
 
     else if (skipunin == "death" || skipunin == "d")
@@ -109,7 +108,7 @@ void NotendaUI::uppfaeraPersonu()
         int nytt;
         cout << "Enter updated year of death: ";
         cin >> nytt;
-        _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
+        _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
 
     else if (skipunin == "return" || skipunin == "r")
@@ -121,15 +120,16 @@ void NotendaUI::uppfaeraPersonu()
 void NotendaUI::leitarMoguleikar()
 {
     system("cls");
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one of the following command                     ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||name   - Search by name, please write 'name'                  ||*" << endl;
-    cout << "*||age    - Search by age, please write 'age'                    ||*" << endl;
-    cout << "*||birth  - Search by year of birth, please write 'birth'        ||*" << endl;
-    cout << "*||death  - Search by year of death, please write 'death'        ||*" << endl;
-    cout << "*||return - Returns to the main menu                             ||*" << endl;
-    cout << "*==================================================================*" << endl;
+
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command                            ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Search by name, please write 'name'                         ||*" << endl;
+    cout << "*||age    - Search by age, please write 'age'                           ||*" << endl;
+    cout << "*||birth  - Search by year of birth, please write 'birth'               ||*" << endl;
+    cout << "*||death  - Search by year of death, please write 'death'               ||*" << endl;
+    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*=========================================================================*" << endl;
 }
 
 void NotendaUI::prentaLista()
@@ -153,7 +153,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         leitarMoguleikar();
         string skipunin;
         cin >> skipunin;
-        bool notFound = true;
+        bool ekkiFundid = true;
 
         if (skipunin == "name" || skipunin == "n")
         {
@@ -170,9 +170,9 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                 {
                     cout << "|" << i + 1 << " \t\t ";
                     cout << gogn[i];
-                    notFound = false;
+                    ekkiFundid = false;
                 }
-                else if (gogn.size() == (i + 1) && notFound == true )
+                else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 }
@@ -194,9 +194,9 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                 {
                     cout << "|" << i + 1 << " \t\t ";
                     cout << gogn[i];
-                    notFound = false;
+                    ekkiFundid = false;
                 }
-                else if (gogn.size() == (i + 1) && notFound == true )
+                else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 }
@@ -218,9 +218,9 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                 {
                     cout << "|" << i + 1 << " \t\t ";
                     cout << gogn[i];
-                    notFound = false;
+                    ekkiFundid = false;
                 }
-                else if (gogn.size() == (i + 1) && notFound == true )
+                else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 }
@@ -242,9 +242,9 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
                 {
                     cout << "|" << i + 1 << " \t\t ";
                     cout << gogn[i];
-                    notFound = false;
+                    ekkiFundid = false;
                 }
-                else if (gogn.size() == (i + 1) && notFound == true )
+                else if (gogn.size() == (i + 1) && ekkiFundid == true )
                 {
                     cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 }
@@ -266,15 +266,16 @@ void NotendaUI::flokkunarMoguleikar()
     string skipunin;
 
     system("cls");
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one of the following command                     ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||name   - Sort by name, please write 'name'                    ||*" << endl;
-    cout << "*||age    - Sort by age, please write 'age'                      ||*" << endl;
-    cout << "*||birth  - Sort by year of birth, please write 'birth'          ||*" << endl;
-    cout << "*||death  - Sort by year of death, please write 'death'          ||*" << endl;
-    cout << "*||return - Returns to the main menu                             ||*" << endl;
-    cout << "*==================================================================*" << endl;
+
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command                            ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
+    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
+    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
+    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
+    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*=========================================================================*" << endl;
 
     cin >> skipunin;
 
@@ -347,12 +348,12 @@ void NotendaUI::flokkunarMoguleikar()
     else if(skipunin == "death" || skipunin == "d")
     {
         system("cls");
-        cout << "*==================================================================*" << endl;
-        cout << "*||Please enter one the following command                        ||*" << endl;
-        cout << "*==================================================================*" << endl;
-        cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
-        cout << "*||descending - Sort age by descending order                     ||*" << endl;
-        cout << "*==================================================================*" << endl;
+        cout << "*=========================================================================*" << endl;
+        cout << "*||Please enter one of the following command                            ||*" << endl;
+        cout << "*=========================================================================*" << endl;
+        cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
+        cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
+        cout << "*=========================================================================*" << endl;
 
         cin >> skipunin;
 
@@ -375,51 +376,51 @@ void NotendaUI::baetaVidPersonu()
 {
     do
     {
-        string firstName;
-        string lastName;
-        string gGender;
-        int bYear;
-        int dYear;
+        string fornafn;
+        string eftirnafn;
+        string kKyn;
+        int fAr;
+        int dAr;
 
         cout << "Enter firstname: ";
-        cin >> firstName;
+        cin >> fornafn;
 
         cout << "Enter lastname: ";
-        cin >> lastName;
+        cin >> eftirnafn;
 
         cout << "Enter gender(f/m) [lowercase]: ";
-        cin >> gGender;
+        cin >> kKyn;
 
-        while (gGender != "m" && gGender != "f")
+        while (kKyn != "m" && kKyn != "f")
         {
             cin.clear();
             cerr << "Input not valid, try again: ";
-            cin >> gGender;
+            cin >> kKyn;
         }
 
         cout << "Enter year of birth: ";
-        cin >> bYear;
+        cin >> fAr;
 
-        while (0 > bYear || cin.fail())
+        while (0 > fAr || cin.fail())
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cerr << "Input not valid, try again: ";
-            cin >> bYear;
+            cin >> fAr;
         }
 
         cout << "Enter year of death(-1 if still alive): ";
-        cin >> dYear;
+        cin >> dAr;
 
-        while (-1 > dYear || !cin)
+        while (-1 > dAr || !cin)
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cerr << "Input not valid, try again: ";
-            cin >> dYear;
+            cin >> dAr;
         }
 
-        _service.baetaVidTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
+        _service.baetaVidTolvufolk(tolvufolk(fornafn + " " + eftirnafn, kKyn, fAr, dAr));
 
 
     }while(skipunaAframhald());
@@ -461,7 +462,7 @@ void NotendaUI::tortimaLista()
         {
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
 
-            _service.clearTolvufolk();
+            _service.hreinsaTolvufolk();
         }
         else
         {
@@ -478,19 +479,19 @@ void NotendaUI::tortimaLista()
 bool NotendaUI::aframhaldandiUI()
 {
 
-    string answer = "o";
+    string svar = "o";
 
-    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
+    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
     {
         cout << "Continue? (Y/N): ";
-        cin >> answer;
+        cin >> svar;
 
-        if (answer == "Y" || answer == "y")
+        if (svar == "Y" || svar == "y")
         {
             skrifaUt();
             return true;
         }
-        else if(answer == "N" || answer == "n")
+        else if(svar == "N" || svar == "n")
         {
             return false;
         }
@@ -505,18 +506,18 @@ bool NotendaUI::aframhaldandiUI()
 bool NotendaUI::skipunaAframhald()
 {
 
-    string answer = "o";
+    string svar = "o";
 
-    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
+    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
     {
         cout << "Another entry? (Y/N): ";
-        cin >> answer;
+        cin >> svar;
 
-        if (answer == "Y" || answer == "y")
+        if (svar == "Y" || svar == "y")
         {
             return true;
         }
-        else if(answer == "N" || answer == "n")
+        else if(svar == "N" || svar == "n")
         {
             return false;
         }
@@ -527,13 +528,13 @@ bool NotendaUI::skipunaAframhald()
 void NotendaUI::upphafsUI()
 {
     system("cls");
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command                        ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||ascending  - Sort age by ascending order                      ||*" << endl;
-    cout << "*||descending - Sort age by descending order                     ||*" << endl;
-    cout << "*||return     - Returns to the main menu                         ||*" << endl;
-    cout << "*==================================================================*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command                            ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||ascending  - Sort age by ascending order                             ||*" << endl;
+    cout << "*||descending - Sort age by descending order                            ||*" << endl;
+    cout << "*||return     - Returns to the main menu                                ||*" << endl;
+    cout << "*=========================================================================*" << endl;
 }
 
 void NotendaUI::hausUI()

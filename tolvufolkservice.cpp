@@ -5,7 +5,7 @@ tolvufolkService::tolvufolkService()
 
 }
 
-//Sort name by ascending order
+//rada eftir stafrosrod abc..
 struct nafnHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
@@ -13,7 +13,7 @@ struct nafnHaekkandi
         return (i.getNafn() < j.getNafn());
     }
 };
-//Sort name by descending order
+//rada eftir stafrosrod cba..
 struct nafnLaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
@@ -21,7 +21,7 @@ struct nafnLaekkandi
         return (i.getNafn() > j.getNafn());
     }
 };
-//Sort age by ascending order
+//rada aldri haekkandi
 struct aldurHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
@@ -85,7 +85,7 @@ vector<tolvufolk> tolvufolkService::getTolvufolk(bool lesaUrGagnagrunni)
     return _folk;
 }
 
-tolvufolk tolvufolkService::getSingleTolvufolk(int ndx)
+tolvufolk tolvufolkService::getStaktTolvufolk(int ndx)
 {
     return _folk[ndx];
 }
@@ -124,7 +124,7 @@ void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
     _folk.push_back(t);
 }
 
-void tolvufolkService::updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear)
+void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)
 {
     _folk[nr].uppfNafn(name);
     _folk[nr].uppfGender(kyn);
@@ -132,7 +132,7 @@ void tolvufolkService::updateTolvufolkSingle(int nr, string name, string kyn, in
     _folk[nr].uppfDanarar(dYear);
 }
 
-vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirAldri(int aldur)
+vector<tolvufolk> tolvufolkService::leitaEftirAldriTolvufolk(int aldur)
 {
     vector<tolvufolk> t;
     for (size_t i = 0; i < _folk.size(); ++i)
@@ -145,7 +145,7 @@ vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirAldri(int aldur)
     return t;
 }
 
-vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirArtali(int ar, bool f)
+vector<tolvufolk> tolvufolkService::leitaEftirArtaliTolvufolk(int ar, bool f)
 {
     vector<tolvufolk> t;
     for (size_t i = 0; i < _folk.size(); ++i)
@@ -163,7 +163,7 @@ vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirArtali(int ar, bool f)
     return t;
 }
 
-vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirNafni(string nafn)
+vector<tolvufolk> tolvufolkService::leitaEftirNafniTolvufolk(string nafn)
 {
     vector<tolvufolk> t;
     for (size_t i = 0; i < _folk.size(); ++i)
@@ -175,7 +175,7 @@ vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirNafni(string nafn)
     return t;
 }
 
-void tolvufolkService::clearTolvufolk()
+void tolvufolkService::hreinsaTolvufolk()
 
 {
     _folk.clear();
