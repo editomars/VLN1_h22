@@ -23,10 +23,13 @@ public:
 private:
     tolvufolkService _service;
     void skrifaUt(); //Skrifa út aðalvalmynd
-    void aframhaldandiUI();
+    bool aframhaldandiUI();
     void leitarMoguleikar();
     void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
     void hausUI();
+    void upphafsUI();
+    void adalvalmyndUI();
+    void skipunaAframhald();
 };
 
 #endif // NOTENDAUI_H
