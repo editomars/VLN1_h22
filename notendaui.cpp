@@ -22,90 +22,6 @@ void NotendaUI::keyra()
     _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
 
     adalvalmyndUI();
-
-    vector<tolvufolk> gogn = _service.getTolvufolk(true);
-
-    skrifaUt();
-
-    do
-        {
-        string skipun;
-        cin >> skipun;
-
-        if (skipun == "list" || skipun == "l")
-        {
-            system("cls");
-            cout << "List of computer scientists: " << endl;
-            prentaLista();
-        }
-        else if (skipun == "sort"|| skipun == "so")
-        {
-            skrifaUt();
-            flokkunarMoguleikar();
-        }
-
-        else if (skipun == "add" || skipun == "a")
-        {
-            system("cls");
-            cout << "Adding computer scientist: " << endl;
-            baetaVidPersonu();
-            prentaLista();
-        }
-
-        else if (skipun == "delete" || skipun == "d")
-        {
-            eydaPersonu(gogn);
-        }
-
-        else if (skipun == "update" || skipun == "u")
-        {
-            skrifaUt();
-            uppfaeraPersonu();
-        }
-
-        else if (skipun == "search" || skipun == "s")
-        {
-            skrifaUt();
-            leitaAdNafni(gogn);
-        }
-
-        else if (skipun == "purge" || skipun == "p")
-        {
-            skrifaUt();
-            tortimaLista();
-        }
-
-        else if (skipun == "quit" || skipun == "q")
-        {
-            break;
-        }
-
-        else if (skipun == "save" || skipun == "sa")
-        {
-            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
-            cin >> skipun;
-            if (skipun == "Y" || skipun == "y")
-            {
-                _service.yfirskrifaTolvufolk();
-                cout << "Data has been saved" << endl;
-            }
-            else
-            {
-                cin.clear();
-                cout << "Saving has been cancelled" << endl;
-            }
-        }
-
-        else
-        {
-            skrifaUt();
-            cin.clear();
-            cerr << "Input not valid, try again: ";
-        }
-
-
-
-    } while (aframhaldandiUI());
 }
 
 void NotendaUI::skrifaUt()
@@ -140,24 +56,29 @@ void NotendaUI::uppfaeraPersonu()
     cin >> persNR;
     persNR --;
     target = _service.getSingleTolvufolk(persNR);
+
+    system("cls");
+    cout << "Update information for: " << endl << endl;
+    cout << "Name: " << target.getNafn() << ",\tGender: " << target.getKyn() << ",\tBorn: "
+         << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
+
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one the following command.                       ||*" << endl;
     cout << "*==================================================================*" << endl;
     cout << "*||name   - update name, please write 'name'                     ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
     cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
-    cout << "*||death  - update year of death, please write 'deat'            ||*" << endl;
-    cout << "*||return - Returns to the main menu                             ||*" << endl;
     cout << "*||death  - update year of death, please write 'death'           ||*" << endl;
+    cout << "*||return - Returns to the main menu                             ||*" << endl;
     cout << "*==================================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
         string fornafn, eftirnafn;
-        cout << "Enter updated first name for " << target.getNafn() << ": ";
+        cout << "Enter updated first name: ";
         cin >> fornafn;
-        cout << "Enter updated last name for " << target.getNafn() << ": ";
+        cout << "Enter updated last name: ";
         cin >> eftirnafn;
         _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
@@ -165,7 +86,7 @@ void NotendaUI::uppfaeraPersonu()
     else if (skipunin == "gender" || skipunin == "g")
     {
         string nyttKyn;
-        cout << "Enter updated gender for " << target.getNafn() << ": ";
+        cout << "Enter updated gender: ";
         cin >> nyttKyn;
         while (nyttKyn != "kk" && nyttKyn != "kvk")
         {
@@ -179,7 +100,7 @@ void NotendaUI::uppfaeraPersonu()
     else if (skipunin == "birth" || skipunin == "b")
     {
         int nytt;
-        cout << "Enter updated year of birth for " << target.getNafn() << ": ";
+        cout << "Enter updated year of birth: ";
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
@@ -187,7 +108,7 @@ void NotendaUI::uppfaeraPersonu()
     else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
-        cout << "Enter updated year of death for " << target.getNafn() << ": ";
+        cout << "Enter updated year of death: ";
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
@@ -546,7 +467,7 @@ bool NotendaUI::aframhaldandiUI()
 
     while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
     {
-        cout << "Another entry? (Y/N): ";
+        cout << "Continue? (Y/N): ";
         cin >> answer;
 
         if (answer == "Y" || answer == "y")
@@ -573,7 +494,7 @@ string answer = "o";
 
 while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
     {
-        cout << "Continue? (Y/N): ";
+        cout << "Another entry? (Y/N): ";
         cin >> answer;
 
         if (answer == "Y" || answer == "y")
@@ -625,13 +546,11 @@ void NotendaUI::adalvalmyndUI()
             system("cls");
             cout << "List of computer scientists: " << endl;
             prentaLista();
-            aframhaldandiUI();
         }
         else if (skipun == "sort"|| skipun == "so")
         {
             skrifaUt();
             flokkunarMoguleikar();
-            aframhaldandiUI();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -640,28 +559,23 @@ void NotendaUI::adalvalmyndUI()
             cout << "Adding computer scientist: " << endl;
             baetaVidPersonu();
             prentaLista();
-            aframhaldandiUI();
         }
 
         else if (skipun == "delete" || skipun == "d")
         {
             eydaPersonu(gogn);
-            aframhaldandiUI();
         }
 
         else if (skipun == "update" || skipun == "u")
         {
             skrifaUt();
-
             uppfaeraPersonu();
-            aframhaldandiUI();
         }
 
-        else if (skipun == "search" || skipun == "s")
+        else if (skipun == "search" || skipun == "se")
         {
             skrifaUt();
             leitaAdNafni(gogn);
-            aframhaldandiUI();
         }
 
         else if (skipun == "purge" || skipun == "p")
@@ -673,6 +587,21 @@ void NotendaUI::adalvalmyndUI()
         else if (skipun == "quit" || skipun == "q")
         {
             break;
+        }
+
+        else if (skipun == "save" || skipun == "s")
+        {
+            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
+            cin >> skipun;
+            if (skipun == "Y" || skipun == "y")
+            {
+                _service.yfirskrifaTolvufolk();
+                cout << "Data has been saved" << endl;
+            }
+            else
+            {
+                cout << "Saving has been cancelled" << endl;
+            }
         }
 
         else
