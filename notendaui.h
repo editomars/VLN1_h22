@@ -26,6 +26,7 @@ private:
     void aframhaldandiUI();
     void leitarMoguleikar();
     void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
+    void hausUI();
 };
 
 #endif // NOTENDAUI_H

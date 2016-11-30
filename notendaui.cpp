@@ -127,7 +127,7 @@ void NotendaUI::uppfaeraPersonu()
     persNR --;
     target = _service.getSingleTolvufolk(persNR);
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command*                       ||*" << endl;
+    cout << "*||Please enter one the following command.                       ||*" << endl;
     cout << "*==================================================================*" << endl;
     cout << "*||name - update name, please write 'name'                       ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
@@ -193,8 +193,8 @@ void NotendaUI::prentaLista()
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    hausUI();
     vector<tolvufolk> gogn = _service.getTolvufolk(false);
-
     for (size_t i = 0; i < gogn.size(); i++)
     {
         cout << "|" << i + 1 << " \t\t ";
@@ -213,6 +213,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
     leitarMoguleikar();
     string skipunin;
     cin >> skipunin;
+    bool notFound = true;
 
     if (skipunin == "name" || skipunin == "n")
     {
@@ -222,14 +223,21 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         cin.ignore();
         getline(cin,nafn);
         cout << endl;
+        hausUI();
         for(size_t i = 0; i < gogn.size(); i++)
         {
             if (nafn == gogn[i].getNafn() )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << gogn[i];
+                notFound = false;
+            }
+            else if (gogn.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
     else if (skipunin == "age" || skipunin == "a")
@@ -239,14 +247,21 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         cout << "Age to search: ";
         cin >> age;
         cout << endl;
+        hausUI();
         for(size_t i = 0; i < gogn.size(); i++)
         {
             if (age == (gogn[i].getDanarar() - gogn[i].getFaedingarar() ) )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << gogn[i];
+                notFound = false;
+            }
+            else if (gogn.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
     else if (skipunin == "birth" || skipunin == "b")
@@ -256,14 +271,21 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         cout << "Year of birth to search: ";
         cin >> birth;
         cout << endl;
+        hausUI();
         for(size_t i = 0; i < gogn.size(); i++)
         {
             if (birth == gogn[i].getFaedingarar() )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << gogn[i];
+                notFound = false;
+            }
+            else if (gogn.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
     else if (skipunin == "death" || skipunin == "d")
@@ -273,14 +295,21 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         cout << "Year of birth to search: ";
         cin >> death;
         cout << endl;
+        hausUI();
         for(size_t i = 0; i < gogn.size(); i++)
         {
             if (death == gogn[i].getDanarar() )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << gogn[i];
+                notFound = false;
+            }
+            else if (gogn.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
 }
@@ -486,4 +515,11 @@ void NotendaUI::aframhaldandiUI()
             break;
         }
     }
+}
+
+void NotendaUI::hausUI()
+{
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
