@@ -19,7 +19,8 @@ public:
     void appendTolvufolk(const vector<tolvufolk>& folk); //Bætir við vector af tolvufolk (append í gagnagrunn)
     void writeTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk
     void writeTolvufolk(const vector<tolvufolk>& folk); //Yfiskrifar gögnin á undan með nýjum gögnum, vector af fólki
-    void deleteTolvufolk(); //Eyðir gögnum
+    void deleteTolvufolk(); //Eyðir öllum gögnum
+    void deleteSingleTolvufolk(int nr); //Eyðir stykki af tölvufólk í vector
     void sortByName();
 private:
     skraarvinnsla _dataaccess;

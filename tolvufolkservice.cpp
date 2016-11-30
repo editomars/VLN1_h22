@@ -60,3 +60,8 @@ void tolvufolkService::sortByName()
     samanburdur temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
+
+void tolvufolkService::deleteSingleTolvufolk(int nr)
+{
+    _folk.erase(_folk.begin() + nr);
+}
