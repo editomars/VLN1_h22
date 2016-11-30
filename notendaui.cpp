@@ -11,8 +11,6 @@ NotendaUI::NotendaUI()
 
 }
 
-
-
 bool check = true;
 
 void NotendaUI::keyra()

@@ -10,10 +10,10 @@ class skraarvinnsla
 {
 public:
     skraarvinnsla();
-    void appendToFile(const tolvufolk& folk);
-    void writeToFile(const tolvufolk& folk);
-    vector<tolvufolk> readToFile() const;
-    void deleteFile();
+    void appendToFile(const tolvufolk& folk); //Bætir tilviki af tölvufólki aftast í textaskrá
+    void writeToFile(const tolvufolk& folk); //Yfirskrifar textaskrá með tilviki af tolvufólki
+    vector<tolvufolk> readToFile() const; //Les textaksrá og skilar sem vector
+    void deleteFile(); //Eyðir textaskrá
 };
 
 #endif // SKRAARVINNSLA_H
