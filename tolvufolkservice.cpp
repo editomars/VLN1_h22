@@ -74,11 +74,11 @@ void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
     _dataaccess.baetaVidIskra(t);
 }
 
-void tolvufolkService::vidbotarTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::vidbotarTolvufolk()
 {
-    for (size_t i = 0; i < folk.size(); ++i)
+    for (size_t i = 0; i < _folk.size(); ++i)
     {
-        _dataaccess.baetaVidIskra(folk[i]);
+        _dataaccess.baetaVidIskra(_folk[i]);
     }
 }
 
@@ -87,10 +87,10 @@ void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
     _dataaccess.skrifaIskra(t);
 }
 
-void tolvufolkService::yfirskrifaTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::yfirskrifaTolvufolk()
 {
     eydaTolvufolk();
-    vidbotarTolvufolk(folk);
+    vidbotarTolvufolk();
 }
 
 void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
@@ -104,6 +104,49 @@ void tolvufolkService::updateTolvufolkSingle(int nr, string name, string kyn, in
     _folk[nr].uppfGender(kyn);
     _folk[nr].uppfFaedingarar(fYear);
     _folk[nr].uppfDanarar(dYear);
+}
+
+vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirAldri(int aldur)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        int samanburdur = (_folk[i].getDanarar() == -1 ? 2016 : _folk[i].getDanarar());
+        if (samanburdur - _folk[i].getFaedingarar() == aldur){
+            t.push_back(_folk[i]);
+        }
+    }
+    return t;
+}
+
+vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirArtali(int ar, bool f)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        if (f){
+            if (_folk[i].getFaedingarar() == ar){
+                t.push_back(_folk[i]);
+            }
+        }else{
+            if (_folk[i].getDanarar() == ar){
+                t.push_back(_folk[i]);
+            }
+        }
+    }
+    return t;
+}
+
+vector<tolvufolk> tolvufolkService::leitaTolvufolkEftirNafni(string nafn)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        if (_folk[i].getNafn() == nafn){
+            t.push_back(_folk[i]);
+        }
+    }
+    return t;
 }
 
 void tolvufolkService::clearTolvufolk()

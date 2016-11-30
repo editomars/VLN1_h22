@@ -12,6 +12,8 @@ NotendaUI::NotendaUI()
 }
 
 bool ath = true;
+bool haf = false;
+
 
 void NotendaUI::keyra()
 {
@@ -20,9 +22,91 @@ void NotendaUI::keyra()
     _service.vidbotarTolvufolk(tolvufolk("Ada Lovelace", "f", 1880, 1890));
     _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
 
-
     adalvalmyndUI();
 
+    vector<tolvufolk> gogn = _service.getTolvufolk(true);
+
+    skrifaUt();
+
+    do
+        {
+        string skipun;
+        cin >> skipun;
+
+        if (skipun == "list" || skipun == "l")
+        {
+            system("cls");
+            cout << "List of computer scientists: " << endl;
+            prentaLista();
+        }
+        else if (skipun == "sort"|| skipun == "so")
+        {
+            skrifaUt();
+            flokkunarMoguleikar();
+        }
+
+        else if (skipun == "add" || skipun == "a")
+        {
+            system("cls");
+            cout << "Adding computer scientist: " << endl;
+            baetaVidPersonu();
+            prentaLista();
+        }
+
+        else if (skipun == "delete" || skipun == "d")
+        {
+            eydaPersonu();
+            aframhaldandiUI();
+            eydaPersonu();
+        }
+
+        else if (skipun == "update" || skipun == "u")
+        {
+            skrifaUt();
+            uppfaeraPersonu();
+        }
+
+        else if (skipun == "search" || skipun == "s")
+        {
+            skrifaUt();
+            leitaAdNafni(gogn);
+        }
+
+        else if (skipun == "purge" || skipun == "p")
+        {
+            skrifaUt();
+            tortimaLista();
+        }
+
+        else if (skipun == "quit" || skipun == "q")
+        {
+            break;
+        }
+
+        else if (skipun == "save" || skipun == "sa")
+        {
+            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
+            cin >> skipun;
+            if (skipun == "Y" || skipun == "y")
+            {
+                _service.yfirskrifaTolvufolk();
+                cout << "Data has been saved" << endl;
+            }
+            else
+            {
+                cout << "Saving has been cancelled" << endl;
+            }
+        }
+
+        else
+        {
+            skrifaUt();
+            cerr << "Input not valid, try again: ";
+        }
+
+
+
+    } while (aframhaldandiUI());
 }
 
 void NotendaUI::skrifaUt()
@@ -37,7 +121,9 @@ void NotendaUI::skrifaUt()
     cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
     cout << "*||update - Updates an entry from the database.                  ||*" << endl;
     cout << "*||search - Search for an entry from the database.               ||*" << endl;
+    cout << "*||sort   - Sort the entries in the database.                    ||*" << endl;
     cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
+    cout << "*||save   - Saves data to database.                              ||*" << endl;
     cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
@@ -63,14 +149,17 @@ void NotendaUI::uppfaeraPersonu()
     cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
     cout << "*||death  - update year of death, please write 'deat'            ||*" << endl;
     cout << "*||return - Returns to the main menu                             ||*" << endl;
+    cout << "*||death  - update year of death, please write 'death'           ||*" << endl;
     cout << "*==================================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
         string fornafn, eftirnafn;
-        cout << "Enter updated name for " << target.getNafn() << ": ";
-        cin >> fornafn >> eftirnafn;
+        cout << "Enter updated first name for " << target.getNafn() << ": ";
+        cin >> fornafn;
+        cout << "Enter updated last name for " << target.getNafn() << ": ";
+        cin >> eftirnafn;
         _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
 
@@ -103,6 +192,7 @@ void NotendaUI::uppfaeraPersonu()
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
+
     else if (skipunin == "return" || skipunin == "r")
     {
         adalvalmyndUI();
@@ -125,19 +215,12 @@ void NotendaUI::leitarMoguleikar()
 
 void NotendaUI::prentaLista()
 {
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
     hausUI();
     vector<tolvufolk> gogn = _service.getTolvufolk(false);
     for (size_t i = 0; i < gogn.size(); i++)
     {
         cout << "|" << i + 1 << " \t\t ";
         cout << gogn[i];
-        /*
-        cout << "Scientist number: " << i + 1 << endl;
-        cout << data[i] << endl;
-        */
 
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
@@ -145,6 +228,7 @@ void NotendaUI::prentaLista()
 
 void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
 {
+    hefjauppfaera:
     leitarMoguleikar();
     string skipunin;
     cin >> skipunin;
@@ -251,6 +335,12 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         adalvalmyndUI();
     }
 
+    skipunaAframhald();
+    if (haf == true)
+    {
+        goto hefjauppfaera;
+    }
+
 }
 
 void NotendaUI::flokkunarMoguleikar()
@@ -340,6 +430,7 @@ void NotendaUI::flokkunarMoguleikar()
 
 void NotendaUI::baetaVidPersonu()
 {
+    hefjabaeta:
     string firstName;
     string lastName;
     string gGender;
@@ -377,23 +468,41 @@ void NotendaUI::baetaVidPersonu()
     {
         cerr << "Input not valid, try again: ";
         cin >> dYear;
-        cout << endl;
     }
     cout << endl;
 
     _service.baetaVidTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
 
+    skipunaAframhald();
+    if (haf == true)
+    {
+        goto hefjabaeta;
+    }
 }
 
 void NotendaUI::eydaPersonu()
 {
+    hefjaeyda:
+    vector<tolvufolk> gogn;
     system("cls");
     prentaLista();
     int persNR;
     cout << "Delete scientist number: ";
     cin >> persNR;
     persNR--;
+    while (persNR > gogn.size() || persNR < 0)
+    {
+        cerr << "Input not valid, try again: ";
+        cin >> persNR;
+        persNR--;
+    }
     _service.eydaStakiTolvufolk(persNR);
+
+    skipunaAframhald();
+    if (haf == true)
+    {
+        goto hefjaeyda;
+    }
 }
 
 void NotendaUI::tortimaLista()
@@ -427,25 +536,52 @@ void NotendaUI::tortimaLista()
         aframhaldandiUI();
     }
 }
-void NotendaUI::aframhaldandiUI()
+
+bool NotendaUI::aframhaldandiUI()
 {
 
     string answer = "o";
 
     while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
     {
-        cout << "Continue? (Y/N): ";
+        cout << "Another entry? (Y/N): ";
         cin >> answer;
 
         if (answer == "Y" || answer == "y")
         {
             skrifaUt();
-            ath = false;
+            return true;
+        }
+        else if(answer == "N" || answer == "n")
+        {
+            return false;
+        }
+        else
+        {
+            cout << "Invalid input, try again!" << endl;
+        }
+    }
+    return false;
+}
+
+void NotendaUI::skipunaAframhald()
+{
+
+string answer = "o";
+
+while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
+    {
+        cout << "Continue? (Y/N): ";
+        cin >> answer;
+
+        if (answer == "Y" || answer == "y")
+        {
+            haf = true;
             break;
         }
         else if(answer == "N" || answer == "n")
         {
-            ath = true;
+            haf = false;
             break;
         }
     }
