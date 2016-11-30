@@ -37,13 +37,11 @@ void NotendaUI::keyra()
             system("cls");
             cout << "List of computer scientists: " << endl;
             prentaLista();
-            aframhaldandiUI();
         }
         else if (skipun == "sort"|| skipun == "so")
         {
             skrifaUt();
             flokkunarMoguleikar();
-            aframhaldandiUI();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -52,28 +50,23 @@ void NotendaUI::keyra()
             cout << "Adding computer scientist: " << endl;
             baetaVidPersonu();
             prentaLista();
-            aframhaldandiUI();
         }
 
         else if (skipun == "delete" || skipun == "d")
         {
             eydaPersonu();
-            aframhaldandiUI();
         }
 
         else if (skipun == "update" || skipun == "u")
         {
             skrifaUt();
-
             uppfaeraPersonu();
-            aframhaldandiUI();
         }
 
         else if (skipun == "search" || skipun == "s")
         {
             skrifaUt();
             leitaAdNafni(gogn);
-            aframhaldandiUI();
         }
 
         else if (skipun == "purge" || skipun == "p")
@@ -84,12 +77,22 @@ void NotendaUI::keyra()
 
         else if (skipun == "quit" || skipun == "q")
         {
-            ath = true;
+            break;
         }
 
         else if (skipun == "save" || skipun == "sa")
         {
-            _service.yfirskrifaTolvufolk();
+            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
+            cin >> skipun;
+            if (skipun == "Y" || skipun == "y")
+            {
+                _service.yfirskrifaTolvufolk();
+                cout << "Data has been saved" << endl;
+            }
+            else
+            {
+                cout << "Saving has been cancelled" << endl;
+            }
         }
 
         else
@@ -98,6 +101,9 @@ void NotendaUI::keyra()
             cerr << "Input not valid, try again: ";
             ath = false;
         }
+
+        aframhaldandiUI();
+
     } while (ath == false);
 }
 
