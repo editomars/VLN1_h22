@@ -14,6 +14,7 @@ class tolvufolkService
 public:
     tolvufolkService();
     vector<tolvufolk> getTolvufolk(bool readFromDatabase); //Skilar vectornum af gögnum sem notandi er að nota, vantar params
+    tolvufolk getSingleTolvufolk(int ndx); //Sækir eitt stak af tolvufolki
     void addTolvufolk(const tolvufolk& t); //Bætir við einu tilviki af tolvufolk í vectorinn (ekki í gagnagrunn)
     void appendTolvufolk(const tolvufolk& t); //Bætir við einu tilvik af tolvufolk (append í gagnagrunn)
     void appendTolvufolk(const vector<tolvufolk>& folk); //Bætir við vector af tolvufolk (append í gagnagrunn)
@@ -21,6 +22,8 @@ public:
     void writeTolvufolk(const vector<tolvufolk>& folk); //Yfiskrifar gögnin á undan með nýjum gögnum, vector af fólki
     void deleteTolvufolk(); //Eyðir öllum gögnum
     void deleteSingleTolvufolk(int nr); //Eyðir stykki af tölvufólk í vector
+    void updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear); //Uppfærir eitt stak í vector
+    void clearTolvufolk(); //Hreinsar öll gögn úr vector
     void sortByName();
     void sortByAscending();
     void sortByDescending();

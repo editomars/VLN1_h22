@@ -27,6 +27,11 @@ vector<tolvufolk> tolvufolkService::getTolvufolk(bool readFromDatabase)
     return _folk;
 }
 
+tolvufolk tolvufolkService::getSingleTolvufolk(int ndx)
+{
+    return _folk[ndx];
+}
+
 void tolvufolkService::deleteTolvufolk()
 {
     _dataaccess.deleteFile();
@@ -59,6 +64,19 @@ void tolvufolkService::writeTolvufolk(const vector<tolvufolk>& folk)
 void tolvufolkService::addTolvufolk(const tolvufolk &t)
 {
     _folk.push_back(t);
+}
+
+void tolvufolkService::updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear)
+{
+    _folk[nr].updNafn(name);
+    _folk[nr].updGender(kyn);
+    _folk[nr].updFaedingarar(fYear);
+    _folk[nr].updDanarar(dYear);
+}
+
+void tolvufolkService::clearTolvufolk()
+{
+    _folk.clear();
 }
 
 void tolvufolkService::sortByAscending()
