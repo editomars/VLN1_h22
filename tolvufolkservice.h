@@ -22,6 +22,8 @@ public:
     void deleteTolvufolk(); //Eyðir öllum gögnum
     void deleteSingleTolvufolk(int nr); //Eyðir stykki af tölvufólk í vector
     void sortByName();
+    void sortByAscending();
+    void sortByDescending();
 private:
     skraarvinnsla _dataaccess;
     vector<tolvufolk> _folk;
