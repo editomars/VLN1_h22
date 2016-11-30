@@ -37,12 +37,20 @@ void tolvufolkService::addTolvufolk(const vector<tolvufolk>& folk)
         _dataaccess.writeToFile(folk[i]);
     }
 }
-/*
-vector<tolvufolk> tolvufolkService::sortByName(const vector<tolvufolk>& folk)
+
+vector<tolvufolk> tolvufolkService::sortByName()
 {
     samanburdur temp;
-    sort(folk.begin(), folk.end(), temp);
-    return folk;
+    sort(_folk.begin(), _folk.end(), temp);
+    return _folk;
 
 }
-*/
+
+void tolvufolkService::displayVector(vector<tolvufolk> folk)
+{
+    for (vector<tolvufolk>::iterator it = folk.begin(); it!=folk.end(); ++it)
+    {
+        cout << ' ' << *it;
+        cout << '\n';
+    }
+}

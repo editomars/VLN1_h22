@@ -5,6 +5,7 @@
 #include "tolvufolk.h"
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -16,7 +17,8 @@ public:
     void addTolvufolk(const tolvufolk& t);
     void addTolvufolk(const vector<tolvufolk>& folk);
     void deleteTolvufolk();
-    //void sortByName(const vector<tolvufolk>& folk);
+    vector<tolvufolk> sortByName();
+    void displayVector(vector<tolvufolk> folk);
 private:
     skraarvinnsla _dataaccess;
     vector<tolvufolk> _folk;

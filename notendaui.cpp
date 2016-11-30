@@ -12,14 +12,12 @@ NotendaUI::NotendaUI()
 }
 
 
-
 bool check = true;
 
 void NotendaUI::keyra()
 {
 
     vector<tolvufolk> data = _service.getTolvufolk();
-
 
 
     skrifaUt();
@@ -302,8 +300,10 @@ void NotendaUI::sortOptions(vector<tolvufolk>& data)
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            //vector<tolvufolk> result;
-            //result = _service.sortByName(data);
+            data = _service.sortByName();
+            _service.displayVector(data);
+
+
         }
     }
 }
