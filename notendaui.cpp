@@ -87,6 +87,11 @@ void NotendaUI::keyra()
             ath = true;
         }
 
+        else if (skipun == "save" || skipun == "sa")
+        {
+            _service.yfirskrifaTolvufolk();
+        }
+
         else
         {
             skrifaUt();
@@ -109,6 +114,7 @@ void NotendaUI::skrifaUt()
     cout << "*||update - Updates an entry from the database.                  ||*" << endl;
     cout << "*||search - Search for an entry from the database.               ||*" << endl;
     cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
+    cout << "*||save   - Saves data to database.                              ||*" << endl;
     cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
@@ -173,6 +179,8 @@ void NotendaUI::uppfaeraPersonu()
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
+
+
 }
 
 void NotendaUI::leitarMoguleikar()

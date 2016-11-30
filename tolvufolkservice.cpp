@@ -74,11 +74,11 @@ void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
     _dataaccess.baetaVidIskra(t);
 }
 
-void tolvufolkService::vidbotarTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::vidbotarTolvufolk()
 {
-    for (size_t i = 0; i < folk.size(); ++i)
+    for (size_t i = 0; i < _folk.size(); ++i)
     {
-        _dataaccess.baetaVidIskra(folk[i]);
+        _dataaccess.baetaVidIskra(_folk[i]);
     }
 }
 
@@ -87,10 +87,10 @@ void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
     _dataaccess.skrifaIskra(t);
 }
 
-void tolvufolkService::yfirskrifaTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::yfirskrifaTolvufolk()
 {
     eydaTolvufolk();
-    vidbotarTolvufolk(folk);
+    vidbotarTolvufolk();
 }
 
 void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
