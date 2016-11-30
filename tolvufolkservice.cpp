@@ -4,21 +4,53 @@ tolvufolkService::tolvufolkService()
 {
 
 }
-
-struct ascending
+//Sort name by ascending order
+struct nafnHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
         return (i.getNafn() < j.getNafn());
     }
 };
-struct descending
+//Sort name by descending order
+struct nafnLaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
         return (i.getNafn() > j.getNafn());
     }
 };
+//Sort age by ascending order
+struct aldurHaekkandi
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        return ((i.getDanarar()-i.getFaedingarar()) < (j.getDanarar()-j.getFaedingarar()));
+    }
+};
+struct aldurLaekkandi
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        return ((i.getDanarar()-i.getFaedingarar()) > (j.getDanarar()-j.getFaedingarar()));
+    }
+};
+struct faedingHaekkandi
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        return (i.getFaedingarar() < j.getFaedingarar());
+    }
+};
+
+struct faedingLaekkandi
+{
+    bool operator () (tolvufolk i, tolvufolk j)
+    {
+        return (i.getFaedingarar() > j.getFaedingarar());
+    }
+};
+
 
 vector<tolvufolk> tolvufolkService::getTolvufolk(bool readFromDatabase)
 {
@@ -61,17 +93,39 @@ void tolvufolkService::addTolvufolk(const tolvufolk &t)
     _folk.push_back(t);
 }
 
-void tolvufolkService::sortByAscending()
+void tolvufolkService::radaNafniHaekkandi()
 {
-    ascending temp;
+    nafnHaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
 
-void tolvufolkService::sortByDescending()
+void tolvufolkService::radaNafniLaekkandi()
 {
-    descending temp;
+    nafnLaekkandi temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
+
+void tolvufolkService::radaAldriHaekkandi()
+{
+    aldurHaekkandi temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
+void tolvufolkService::radaAldriLaekkandi()
+{
+    aldurLaekkandi temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
+void tolvufolkService::radaFaedinguHaekkandi()
+{
+    faedingHaekkandi temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
+void tolvufolkService::radaFaedinguLaekkandi()
+{
+    faedingLaekkandi temp;
+    sort(_folk.begin(), _folk.end(), temp);
+}
+
 
 void tolvufolkService::deleteSingleTolvufolk(int nr)
 {
