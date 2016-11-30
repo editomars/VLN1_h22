@@ -16,11 +16,11 @@ public:
     int getDanarar() const;
     string getNafn() const;
     string getKyn() const;
-    void updFaedingarar(int newyear);
-    void updDanarar(int newyear);
-    void updNafn(string newnafn);
-    void updGender(string newgend);
-    friend ostream& operator <<(ostream& out, const tolvufolk& data);
+    void uppfFaedingarar(int nyttAr);
+    void uppfDanarar(int nyttAr);
+    void uppfNafn(string nyttNafn);
+    void uppfGender(string nyttKyn);
+    friend ostream& operator <<(ostream& out, const tolvufolk& gogn);
 private:
     string _nafn;
     string _kyn;

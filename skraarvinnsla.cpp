@@ -5,7 +5,7 @@ skraarvinnsla::skraarvinnsla()
 
 }
 
-void skraarvinnsla::appendToFile(const tolvufolk& folk)
+void skraarvinnsla::baetaVidIskra(const tolvufolk& folk)
 {
     ofstream file;
     file.open("tolvufolk.txt", ios::app);
@@ -13,7 +13,7 @@ void skraarvinnsla::appendToFile(const tolvufolk& folk)
     file.close();
 }
 
-void skraarvinnsla::writeToFile(const tolvufolk& folk)
+void skraarvinnsla::skrifaIskra(const tolvufolk& folk)
 {
     ofstream file;
     file.open("tolvufolk.txt");
@@ -21,12 +21,12 @@ void skraarvinnsla::writeToFile(const tolvufolk& folk)
     file.close();
 }
 
-void skraarvinnsla::deleteFile()
+void skraarvinnsla::eydaSkra()
 {
     remove("tolvufolk.txt");
 }
 
-vector<tolvufolk> skraarvinnsla::readToFile() const
+vector<tolvufolk> skraarvinnsla::lesaSkra() const
 {
     string fornafn;
     string eftirnafn;

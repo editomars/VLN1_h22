@@ -13,19 +13,19 @@ public:
 
     void keyra();
 
-    void addPerson(); //Add person UI grein
-    void deletePerson(); //delete person UI grein
-    void printList(); //Skrifar út gögn á console
-    void searchName(const vector<tolvufolk>& data);
-    void updatePerson(vector<tolvufolk>& data);
-    void refreshTxtFile(const vector<tolvufolk>& data);
-    void purgeList(vector<tolvufolk>& data);
+    void baetaVidPersonu(); //Baeta vid personu UI grein
+    void eydaPersonu(); //Eyda personu UI grein
+    void prentaLista(); //Skrifar út gögn á console
+    void leitaAdNafni(const vector<tolvufolk>& gogn);
+    void uppfaeraPersonu(vector<tolvufolk>& gogn);
+    void refreshTxtFile(const vector<tolvufolk>& gogn);
+    void tortimaLista(vector<tolvufolk>& gogn);
 private:
     tolvufolkService _service;
     void skrifaUt(); //Skrifa út aðalvalmynd
-    void continueUI();
-    void searchOptions();
-    void sortOptions(); //Skrifar út sort valmöguleika notanda
+    void aframhaldandiUI();
+    void leitarMoguleikar();
+    void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
 };
 
 #endif // NOTENDAUI_H

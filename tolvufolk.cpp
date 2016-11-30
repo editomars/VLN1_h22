@@ -33,23 +33,23 @@ string tolvufolk::getKyn() const
 {
     return _kyn;
 }
-void tolvufolk::updFaedingarar(int newyear)
+void tolvufolk::uppfFaedingarar(int nyttAr)
 {
-    _faedingarar = newyear;
+    _faedingarar = nyttAr;
 }
 
-void tolvufolk::updDanarar(int newyear)
+void tolvufolk::uppfDanarar(int nyttAr)
 {
-    _danarar = newyear;
+    _danarar = nyttAr;
 }
 
-void tolvufolk::updNafn(string newnafn)
+void tolvufolk::uppfNafn(string nyttNafn)
 {
-    _nafn = newnafn;
+    _nafn = nyttNafn;
 }
-void tolvufolk::updGender(string newgend)
+void tolvufolk::uppfGender(string nyttKyn)
 {
-    _kyn = newgend;
+    _kyn = nyttKyn;
 }
 
 ostream& operator <<(ostream& out, const tolvufolk& data)

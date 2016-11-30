@@ -11,24 +11,24 @@ NotendaUI::NotendaUI()
 
 }
 
-bool check = true;
+bool ath = true;
 
 void NotendaUI::keyra()
 {
 
-    _service.writeTolvufolk(tolvufolk("Charles Babbage", "kk", 1990, 1991));
-    _service.appendTolvufolk(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
-    _service.appendTolvufolk(tolvufolk("zllan Turing", "kk", 1918, 1948));
+    _service.yfirskrifaTolvufolk(tolvufolk("Charles Babbage", "m", 1990, 1991));
+    _service.vidbotarTolvufolk(tolvufolk("Ada Lovelace", "f", 1880, 1890));
+    _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
 
 
 
-    vector<tolvufolk> data = _service.getTolvufolk(true);
+    vector<tolvufolk> gogn = _service.getTolvufolk(true);
 
     skrifaUt();
 
     do
         {
-        check = true;
+        ath = true;
         string skipun;
         cin >> skipun;
 
@@ -36,65 +36,65 @@ void NotendaUI::keyra()
         {
             system("cls");
             cout << "List of computer scientists: " << endl;
-            printList();
-            continueUI();
+            prentaLista();
+            aframhaldandiUI();
         }
         else if (skipun == "sort"|| skipun == "so")
         {
             skrifaUt();
-            sortOptions();
-            continueUI();
+            flokkunarMoguleikar();
+            aframhaldandiUI();
         }
+
         else if (skipun == "add" || skipun == "a")
         {
             system("cls");
             cout << "Adding computer scientist: " << endl;
-            addPerson();
-            printList();
-            continueUI();
-
+            baetaVidPersonu();
+            prentaLista();
+            aframhaldandiUI();
         }
+
         else if (skipun == "delete" || skipun == "d")
         {
-            deletePerson();
-            continueUI();
+            eydaPersonu();
+            aframhaldandiUI();
         }
 
         else if (skipun == "update" || skipun == "u")
         {
-
             skrifaUt();
-            updatePerson(data);
-            continueUI();
+            uppfaeraPersonu(gogn);
+            aframhaldandiUI();
         }
 
         else if (skipun == "search" || skipun == "s")
         {
             skrifaUt();
-            searchName(data);
-            continueUI();
+            leitaAdNafni(gogn);
+            aframhaldandiUI();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUt();
-            purgeList(data);
+            tortimaLista(gogn);
 
 
         }
 
         else if (skipun == "quit" || skipun == "q")
         {
-            check = true;
+            ath = true;
         }
 
         else
         {
             skrifaUt();
             cerr << "Input not valid, try again: ";
-            check = false;
+            ath = false;
         }
-    } while (check == false);
+    } while (ath == false);
 }
 
 void NotendaUI::skrifaUt()
@@ -102,21 +102,21 @@ void NotendaUI::skrifaUt()
     system("cls");
 
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following commands                       ||*" << endl;
+    cout << "*||Please enter one of the following commands                    ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||list - Shows a list of all known entries in the database.     ||*" << endl;
-    cout << "*||add - Add a new entry into the database.                      ||*" << endl;
+    cout << "*||list   - Shows a list of all known entries in the database.   ||*" << endl;
+    cout << "*||add    - Add a new entry into the database.                   ||*" << endl;
     cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
     cout << "*||update - Updates an entry from the database.                  ||*" << endl;
     cout << "*||search - Search for an entry from the database.               ||*" << endl;
-    cout << "*||purge - Removes every entry from the database.                ||*" << endl;
-    cout << "*||quit - Exits/quits the program.                               ||*" << endl;
+    cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
+    cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
-void NotendaUI::updatePerson(vector<tolvufolk>& data)
+void NotendaUI::uppfaeraPersonu(vector<tolvufolk>& gogn)
 {
     system("cls");
-    printList();
+    prentaLista();
     int persNR;
     string skipunin;
     cout << "Update scientist number: ";
@@ -124,62 +124,62 @@ void NotendaUI::updatePerson(vector<tolvufolk>& data)
     persNR --;
 
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command*                       ||*" << endl;
-    cout << "*=================================================================*" << endl;
-    cout << "*||name - update name, please write 'name'                       ||*" << endl;
+    cout << "*||Please enter one of the following command*                    ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||name   - update name, please write 'name'                     ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
-    cout << "*||birth - update year of birth, please write 'birth'            ||*" << endl;
-    cout << "*||death - update year of death, please write 'deat'             ||*" << endl;
+    cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
+    cout << "*||death  - update year of death, please write 'deat'            ||*" << endl;
     cout << "*==================================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
         string nafn;
-        cout << "Enter updated name for " << data[persNR].getNafn() << ": ";
+        cout << "Enter updated name for " << gogn[persNR].getNafn() << ": ";
         cin.ignore();
         getline(cin,nafn);
-        data[persNR].updNafn(nafn);
+        gogn[persNR].uppfNafn(nafn);
     }
 
     else if (skipunin == "gender" || skipunin == "g")
     {
-        string newgend;
-        cout << "Enter updated gender for " << data[persNR].getNafn() << ": ";
-        cin >> newgend;
-        while (newgend != "kk" && newgend != "kvk")
+        string nyttKyn;
+        cout << "Enter updated gender for " << gogn[persNR].getNafn() << ": ";
+        cin >> nyttKyn;
+        while (nyttKyn != "f" && nyttKyn != "m")
         {
             cerr << "Input not valid, try again: ";
-            cin >> newgend;
+            cin >> nyttKyn;
         }
-        data[persNR].updGender(newgend);
+        gogn[persNR].uppfGender(nyttKyn);
     }
 
     else if (skipunin == "birth" || skipunin == "b")
     {
         int nytt;
-        cout << "Enter updated year of birth for " << data[persNR].getNafn() << ": ";
+        cout << "Enter updated year of birth for " << gogn[persNR].getNafn() << ": ";
         cin >> nytt;
-        data[persNR].updFaedingarar(nytt);
+        gogn[persNR].uppfFaedingarar(nytt);
     }
 
     else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
-        cout << "Enter updated year of death for " << data[persNR].getNafn() << ": ";
+        cout << "Enter updated year of death for " << gogn[persNR].getNafn() << ": ";
         cin >> nytt;
-        data[persNR].updDanarar(nytt);
+        gogn[persNR].uppfDanarar(nytt);
     }
 
-    refreshTxtFile(data);
+    refreshTxtFile(gogn);
 
 }
 
-void NotendaUI::searchOptions()
+void NotendaUI::leitarMoguleikar()
 {
     system("cls");
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*||Please enter one of the following command                     ||*" << endl;
     cout << "*==================================================================*" << endl;
     cout << "*||name  - Search by name, please write 'name'                   ||*" << endl;
     cout << "*||age   - Search by age, please write 'age'                     ||*" << endl;
@@ -188,17 +188,17 @@ void NotendaUI::searchOptions()
     cout << "*==================================================================*" << endl;
 }
 
-void NotendaUI::printList()
+void NotendaUI::prentaLista()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    vector<tolvufolk> data = _service.getTolvufolk(false);
+    vector<tolvufolk> gogn = _service.getTolvufolk(false);
 
-    for (size_t i = 0; i < data.size(); i++)
+    for (size_t i = 0; i < gogn.size(); i++)
     {
         cout << "|" << i + 1 << " \t\t ";
-        cout << data[i];
+        cout << gogn[i];
         /*
         cout << "Scientist number: " << i + 1 << endl;
         cout << data[i] << endl;
@@ -208,25 +208,25 @@ void NotendaUI::printList()
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
-void NotendaUI::searchName(const vector<tolvufolk>& data)
+void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
 {
-    searchOptions();
+    leitarMoguleikar();
     string skipunin;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
-        searchOptions();
+        leitarMoguleikar();
         string nafn;
         cout << "Name to search: ";
         cin.ignore();
         getline(cin,nafn);
         cout << endl;
-        for(size_t i = 0; i < data.size(); i++)
+        for(size_t i = 0; i < gogn.size(); i++)
         {
-            if (nafn == data[i].getNafn() )
+            if (nafn == gogn[i].getNafn() )
             {
-                cout << data[i];
+                cout << gogn[i];
             }
         }
         cout << endl;
@@ -234,16 +234,16 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 
     else if (skipunin == "age" || skipunin == "a")
     {
-        searchOptions();
+        leitarMoguleikar();
         int age;
         cout << "Age to search: ";
         cin >> age;
         cout << endl;
-        for(size_t i = 0; i < data.size(); i++)
+        for(size_t i = 0; i < gogn.size(); i++)
         {
-            if (age == (data[i].getDanarar() - data[i].getFaedingarar() ) )
+            if (age == (gogn[i].getDanarar() - gogn[i].getFaedingarar() ) )
             {
-                cout << data[i];
+                cout << gogn[i];
             }
         }
         cout << endl;
@@ -251,16 +251,16 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 
     else if (skipunin == "birth" || skipunin == "b")
     {
-        searchOptions();
+        leitarMoguleikar();
         int birth;
         cout << "Year of birth to search: ";
         cin >> birth;
         cout << endl;
-        for(size_t i = 0; i < data.size(); i++)
+        for(size_t i = 0; i < gogn.size(); i++)
         {
-            if (birth == data[i].getFaedingarar() )
+            if (birth == gogn[i].getFaedingarar() )
             {
-                cout << data[i];
+                cout << gogn[i];
             }
         }
         cout << endl;
@@ -268,16 +268,16 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 
     else if (skipunin == "death" || skipunin == "d")
     {
-        searchOptions();
+        leitarMoguleikar();
         int death;
         cout << "Year of birth to search: ";
         cin >> death;
         cout << endl;
-        for(size_t i = 0; i < data.size(); i++)
+        for(size_t i = 0; i < gogn.size(); i++)
         {
-            if (death == data[i].getDanarar() )
+            if (death == gogn[i].getDanarar() )
             {
-                cout << data[i];
+                cout << gogn[i];
             }
         }
         cout << endl;
@@ -285,16 +285,16 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
 
 }
 
-void NotendaUI::sortOptions()
+void NotendaUI::flokkunarMoguleikar()
 {
     string skipunin;
 
     system("cls");
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*||Please enter one of the following command                     ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||name - Sort by name, please write 'name'                      ||*" << endl;
-    cout << "*||age - Sort by age, please write 'age'                         ||*" << endl;
+    cout << "*||name  - Sort by name, please write 'name'                     ||*" << endl;
+    cout << "*||age   - Sort by age, please write 'age'                       ||*" << endl;
     cout << "*||birth - Sort by year of birth, please write 'birth'           ||*" << endl;
     cout << "*||death - Sort by year of death, please write 'death'           ||*" << endl;
     cout << "*==================================================================*" << endl;
@@ -305,9 +305,9 @@ void NotendaUI::sortOptions()
     {
     system("cls");
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*||Please enter one of the following command                     ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||ascending - Sort names by ascending order                     ||*" << endl;
+    cout << "*||ascending  - Sort names by ascending order                    ||*" << endl;
     cout << "*||descending - Sort names by descending order                   ||*" << endl;
     cout << "*==================================================================*" << endl;
 
@@ -315,18 +315,18 @@ void NotendaUI::sortOptions()
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            _service.sortByAscending();
-            printList();
+            _service.radaEftirHaekkandi();
+            prentaLista();
         }
         else if(skipunin == "descending" || skipunin == "d")
         {
-            _service.sortByDescending();
-            printList();
+            _service.radaEftirLaekkandi();
+            prentaLista();
         }
     }
 }
 
-void NotendaUI::addPerson()
+void NotendaUI::baetaVidPersonu()
 {
     string firstName;
     string lastName;
@@ -340,10 +340,10 @@ void NotendaUI::addPerson()
     cout << "Enter lastname: ";
     cin >> lastName;
 
-    cout << "Enter gender(kk/kvk) [lowercase]: ";
+    cout << "Enter gender(f/m) [lowercase]: ";
     cin >> gGender;
 
-    while (gGender != "kk" && gGender != "kvk")
+    while (gGender != "m" && gGender != "f")
     {
         cerr << "Input not valid, try again: ";
         cin >> gGender;
@@ -369,22 +369,22 @@ void NotendaUI::addPerson()
     }
     cout << endl;
 
-    _service.addTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
+    _service.baetaVidTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
 
 }
 
-void NotendaUI::deletePerson()
+void NotendaUI::eydaPersonu()
 {
     system("cls");
-    printList();
+    prentaLista();
     int persNR;
     cout << "Delete scientist number: ";
     cin >> persNR;
     persNR--;
-    _service.deleteSingleTolvufolk(persNR);
+    _service.eydaStakiTolvufolk(persNR);
 }
 
-void NotendaUI::purgeList(vector<tolvufolk> &data)
+void NotendaUI::tortimaLista(vector<tolvufolk> &gogn)
 {
     string skipun;
     cout << "By the Emperor, are you sure? (Y/N): ";
@@ -398,35 +398,35 @@ void NotendaUI::purgeList(vector<tolvufolk> &data)
         if (skipun == "Y" || skipun == "y")
         {
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
-            data.clear();
-            refreshTxtFile(data);
-            continueUI();
+            gogn.clear();
+            refreshTxtFile(gogn);
+            aframhaldandiUI();
 
         }
         else
         {
             cout << "Purge canceled." << endl;
-            continueUI();
+            aframhaldandiUI();
         }
 
     }
     else
     {
         cout << "Purge canceled." << endl;
-        continueUI();
+        aframhaldandiUI();
     }
 }
 
-void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)
+void NotendaUI::refreshTxtFile(const vector<tolvufolk>& gogn)
 {
-    _service.deleteTolvufolk();
-    for(size_t i = 0; i < data.size(); i++)
+    _service.eydaTolvufolk();
+    for(size_t i = 0; i < gogn.size(); i++)
     {
-         _service.appendTolvufolk(data[i]);
+         _service.vidbotarTolvufolk(gogn[i]);
     }
 }
 
-void NotendaUI::continueUI()
+void NotendaUI::aframhaldandiUI()
 {
     string answer;
     cout << "Continue? (Y/N): ";
@@ -434,11 +434,11 @@ void NotendaUI::continueUI()
     if (answer == "Y" || answer == "y")
     {
         skrifaUt();
-        check = false;
+        ath = false;
     }
     else
     {
-        check = true;
+        ath = true;
     }
 
 }

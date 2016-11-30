@@ -20,60 +20,60 @@ struct descending
     }
 };
 
-vector<tolvufolk> tolvufolkService::getTolvufolk(bool readFromDatabase)
+vector<tolvufolk> tolvufolkService::getTolvufolk(bool lesaUrGagnagrunni)
 {
-    if (readFromDatabase)
-        _folk = _dataaccess.readToFile();
+    if (lesaUrGagnagrunni)
+        _folk = _dataaccess.lesaSkra();
     return _folk;
 }
 
-void tolvufolkService::deleteTolvufolk()
+void tolvufolkService::eydaTolvufolk()
 {
-    _dataaccess.deleteFile();
+    _dataaccess.eydaSkra();
 }
 
-void tolvufolkService::appendTolvufolk(const tolvufolk& t)
+void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
 {
-    _dataaccess.appendToFile(t);
+    _dataaccess.baetaVidIskra(t);
 }
 
-void tolvufolkService::appendTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::vidbotarTolvufolk(const vector<tolvufolk>& folk)
 {
     for (size_t i = 0; i < folk.size(); ++i)
     {
-        _dataaccess.appendToFile(folk[i]);
+        _dataaccess.baetaVidIskra(folk[i]);
     }
 }
 
-void tolvufolkService::writeTolvufolk(const tolvufolk& t)
+void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
 {
-    _dataaccess.writeToFile(t);
+    _dataaccess.skrifaIskra(t);
 }
 
-void tolvufolkService::writeTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::yfirskrifaTolvufolk(const vector<tolvufolk>& folk)
 {
-    deleteTolvufolk();
-    appendTolvufolk(folk);
+    eydaTolvufolk();
+    vidbotarTolvufolk(folk);
 }
 
-void tolvufolkService::addTolvufolk(const tolvufolk &t)
+void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
 {
     _folk.push_back(t);
 }
 
-void tolvufolkService::sortByAscending()
+void tolvufolkService::radaEftirHaekkandi()
 {
     ascending temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
 
-void tolvufolkService::sortByDescending()
+void tolvufolkService::radaEftirLaekkandi()
 {
     descending temp;
     sort(_folk.begin(), _folk.end(), temp);
 }
 
-void tolvufolkService::deleteSingleTolvufolk(int nr)
+void tolvufolkService::eydaStakiTolvufolk(int nr)
 {
     _folk.erase(_folk.begin() + nr);
 }
