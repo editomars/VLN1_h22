@@ -64,7 +64,8 @@ void NotendaUI::keyra()
         else if (skipun == "update" || skipun == "u")
         {
             skrifaUt();
-            uppfaeraPersonu(gogn);
+
+            uppfaeraPersonu();
             aframhaldandiUI();
         }
 
@@ -78,9 +79,7 @@ void NotendaUI::keyra()
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUt();
-            tortimaLista(gogn);
-
-
+            tortimaLista();
         }
 
         else if (skipun == "quit" || skipun == "q")
@@ -113,20 +112,24 @@ void NotendaUI::skrifaUt()
     cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
-void NotendaUI::uppfaeraPersonu(vector<tolvufolk>& gogn)
+
+void NotendaUI::uppfaeraPersonu()
 {
-    system("cls");
-    prentaLista();
-    int persNR;
     string skipunin;
+    int persNR;
+    tolvufolk target;
+    system("cls");
+
+    prentaLista();
+
     cout << "Update scientist number: ";
     cin >> persNR;
     persNR --;
-
+    target = _service.getSingleTolvufolk(persNR);
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one of the following command*                    ||*" << endl;
+    cout << "*||Please enter one the following command*                       ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||name   - update name, please write 'name'                     ||*" << endl;
+    cout << "*||name - update name, please write 'name'                       ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
     cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
     cout << "*||death  - update year of death, please write 'deat'            ||*" << endl;
@@ -135,44 +138,41 @@ void NotendaUI::uppfaeraPersonu(vector<tolvufolk>& gogn)
 
     if (skipunin == "name" || skipunin == "n")
     {
-        string nafn;
-        cout << "Enter updated name for " << gogn[persNR].getNafn() << ": ";
-        cin.ignore();
-        getline(cin,nafn);
-        gogn[persNR].uppfNafn(nafn);
+        string fornafn, eftirnafn;
+        cout << "Enter updated name for " << target.getNafn() << ": ";
+        cin >> fornafn >> eftirnafn;
+        _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
 
     else if (skipunin == "gender" || skipunin == "g")
     {
         string nyttKyn;
-        cout << "Enter updated gender for " << gogn[persNR].getNafn() << ": ";
+        cout << "Enter updated gender for " << target.getNafn() << ": ";
         cin >> nyttKyn;
-        while (nyttKyn != "f" && nyttKyn != "m")
+        while (nyttKyn != "kk" && nyttKyn != "kvk")
         {
             cerr << "Input not valid, try again: ";
             cin >> nyttKyn;
         }
-        gogn[persNR].uppfGender(nyttKyn);
+        _service.updateTolvufolkSingle(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
+
     }
 
     else if (skipunin == "birth" || skipunin == "b")
     {
         int nytt;
-        cout << "Enter updated year of birth for " << gogn[persNR].getNafn() << ": ";
+        cout << "Enter updated year of birth for " << target.getNafn() << ": ";
         cin >> nytt;
-        gogn[persNR].uppfFaedingarar(nytt);
+        _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
 
     else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
-        cout << "Enter updated year of death for " << gogn[persNR].getNafn() << ": ";
+        cout << "Enter updated year of death for " << target.getNafn() << ": ";
         cin >> nytt;
-        gogn[persNR].uppfDanarar(nytt);
+        _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
-
-    refreshTxtFile(gogn);
-
 }
 
 void NotendaUI::leitarMoguleikar()
@@ -315,13 +315,62 @@ void NotendaUI::flokkunarMoguleikar()
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            _service.radaEftirHaekkandi();
+            _service.radaNafniHaekkandi();
             prentaLista();
         }
         else if(skipunin == "descending" || skipunin == "d")
         {
-            _service.radaEftirLaekkandi();
+            _service.radaNafniLaekkandi();
             prentaLista();
+        }
+    }
+
+    else if(skipunin == "age" || skipunin == "a")
+    {
+    system("cls");
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
+    cout << "*||descending - Sort age by descending order                     ||*" << endl;
+    cout << "*==================================================================*" << endl;
+
+    cin >> skipunin;
+
+        if(skipunin == "ascending" || skipunin == "a")
+        {
+            _service.radaAldriHaekkandi();
+            prentaLista();
+        }
+        else if(skipunin == "descending" || skipunin == "d")
+        {
+            _service.radaAldriLaekkandi();
+            prentaLista();
+
+        }
+    }
+    else if(skipunin == "birth" || skipunin == "b")
+    {
+        system("cls");
+        cout << "*==================================================================*" << endl;
+        cout << "*||Please enter one the following command                        ||*" << endl;
+        cout << "*==================================================================*" << endl;
+        cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
+        cout << "*||descending - Sort age by descending order                     ||*" << endl;
+        cout << "*==================================================================*" << endl;
+
+        cin >> skipunin;
+
+        if(skipunin == "ascending" || skipunin == "a")
+        {
+            _service.radaFaedinguHaekkandi();
+            prentaLista();
+        }
+        else if(skipunin == "descending" || skipunin == "d")
+        {
+            _service.radaFaedinguLaekkandi();
+            prentaLista();
+
         }
     }
 }
@@ -384,7 +433,7 @@ void NotendaUI::eydaPersonu()
     _service.eydaStakiTolvufolk(persNR);
 }
 
-void NotendaUI::tortimaLista(vector<tolvufolk> &gogn)
+void NotendaUI::tortimaLista()
 {
     string skipun;
     cout << "By the Emperor, are you sure? (Y/N): ";
@@ -398,10 +447,9 @@ void NotendaUI::tortimaLista(vector<tolvufolk> &gogn)
         if (skipun == "Y" || skipun == "y")
         {
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
-            gogn.clear();
-            refreshTxtFile(gogn);
-            aframhaldandiUI();
 
+            _service.clearTolvufolk();
+            aframhaldandiUI();
         }
         else
         {
@@ -416,29 +464,26 @@ void NotendaUI::tortimaLista(vector<tolvufolk> &gogn)
         aframhaldandiUI();
     }
 }
-
-void NotendaUI::refreshTxtFile(const vector<tolvufolk>& gogn)
-{
-    _service.eydaTolvufolk();
-    for(size_t i = 0; i < gogn.size(); i++)
-    {
-         _service.vidbotarTolvufolk(gogn[i]);
-    }
-}
-
 void NotendaUI::aframhaldandiUI()
 {
-    string answer;
-    cout << "Continue? (Y/N): ";
-    cin >> answer;
-    if (answer == "Y" || answer == "y")
-    {
-        skrifaUt();
-        ath = false;
-    }
-    else
-    {
-        ath = true;
-    }
 
+    string answer = "o";
+
+    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
+    {
+        cout << "Continue? (Y/N): ";
+        cin >> answer;
+
+        if (answer == "Y" || answer == "y")
+        {
+            skrifaUt();
+            ath = false;
+            break;
+        }
+        else if(answer == "N" || answer == "n")
+        {
+            ath = true;
+            break;
+        }
+    }
 }

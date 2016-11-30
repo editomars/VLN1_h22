@@ -17,9 +17,9 @@ public:
     void eydaPersonu(); //Eyda personu UI grein
     void prentaLista(); //Skrifar út gögn á console
     void leitaAdNafni(const vector<tolvufolk>& gogn);
-    void uppfaeraPersonu(vector<tolvufolk>& gogn);
-    void refreshTxtFile(const vector<tolvufolk>& gogn);
-    void tortimaLista(vector<tolvufolk>& gogn);
+    void uppfaeraPersonu();
+    void tortimaLista();
+
 private:
     tolvufolkService _service;
     void skrifaUt(); //Skrifa út aðalvalmynd
