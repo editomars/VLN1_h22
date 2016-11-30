@@ -62,7 +62,7 @@ void NotendaUI::keyra()
             uppfaeraPersonu();
         }
 
-        else if (skipun == "search" || skipun == "s")
+        else if (skipun == "search" || skipun == "se")
         {
             skrifaUt();
             leitaAdNafni(gogn);
@@ -79,7 +79,7 @@ void NotendaUI::keyra()
             break;
         }
 
-        else if (skipun == "save" || skipun == "sa")
+        else if (skipun == "save" || skipun == "s")
         {
             cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
             cin >> skipun;
@@ -136,22 +136,28 @@ void NotendaUI::uppfaeraPersonu()
     cin >> persNR;
     persNR --;
     target = _service.getSingleTolvufolk(persNR);
+
+    system("cls");
+    cout << "Update information for: " << endl << endl;
+    cout << "Name: " << target.getNafn() << ",\tGender: " << target.getKyn() << ",\tBorn: "
+         << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
+
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one the following command.                       ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||name - update name, please write 'name'                       ||*" << endl;
+    cout << "*||name   - update name, please write 'name'                     ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
     cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
-    cout << "*||death  - update year of death, please write 'deat'            ||*" << endl;
+    cout << "*||death  - update year of death, please write 'death'           ||*" << endl;
     cout << "*==================================================================*" << endl;
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
         string fornafn, eftirnafn;
-        cout << "Enter updated first name for " << target.getNafn() << ": ";
+        cout << "Enter updated first name: ";
         cin >> fornafn;
-        cout << "Enter updated last name for " << target.getNafn() << ": ";
+        cout << "Enter updated last name: ";
         cin >> eftirnafn;
         _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
@@ -159,7 +165,7 @@ void NotendaUI::uppfaeraPersonu()
     else if (skipunin == "gender" || skipunin == "g")
     {
         string nyttKyn;
-        cout << "Enter updated gender for " << target.getNafn() << ": ";
+        cout << "Enter updated gender: ";
         cin >> nyttKyn;
         while (nyttKyn != "kk" && nyttKyn != "kvk")
         {
@@ -173,7 +179,7 @@ void NotendaUI::uppfaeraPersonu()
     else if (skipunin == "birth" || skipunin == "b")
     {
         int nytt;
-        cout << "Enter updated year of birth for " << target.getNafn() << ": ";
+        cout << "Enter updated year of birth: ";
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
@@ -181,7 +187,7 @@ void NotendaUI::uppfaeraPersonu()
     else if (skipunin == "death" || skipunin == "d")
     {
         int nytt;
-        cout << "Enter updated year of death for " << target.getNafn() << ": ";
+        cout << "Enter updated year of death: ";
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
