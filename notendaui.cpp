@@ -102,7 +102,7 @@ void NotendaUI::skrifaUt()
     system("cls");
 
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following commands                       ||*" << endl;
+    cout << "*||Please enter one the following commands.                      ||*" << endl;
     cout << "*==================================================================*" << endl;
     cout << "*||list - Shows a list of all known entries in the database.     ||*" << endl;
     cout << "*||add - Add a new entry into the database.                      ||*" << endl;
@@ -125,7 +125,7 @@ void NotendaUI::updatePerson()
     persNR --;
     target = _service.getSingleTolvufolk(persNR);
     cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command*                       ||*" << endl;
+    cout << "*||Please enter one the following command.                       ||*" << endl;
     cout << "*==================================================================*" << endl;
     cout << "*||name - update name, please write 'name'                       ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
@@ -188,9 +188,7 @@ void NotendaUI::searchOptions()
 
 void NotendaUI::printList()
 {
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    hausUI();
     vector<tolvufolk> data = _service.getTolvufolk(false);
     for (size_t i = 0; i < data.size(); i++)
     {
@@ -210,6 +208,7 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
     searchOptions();
     string skipunin;
     cin >> skipunin;
+    bool notFound = true;
 
     if (skipunin == "name" || skipunin == "n")
     {
@@ -218,15 +217,21 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
         cout << "Name to search: ";
         cin.ignore();
         getline(cin,nafn);
-        cout << endl;
+        hausUI();
         for(size_t i = 0; i < data.size(); i++)
         {
             if (nafn == data[i].getNafn() )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << data[i];
+                notFound = false;
+            }
+            else if (data.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
     else if (skipunin == "age" || skipunin == "a")
@@ -235,15 +240,21 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
         int age;
         cout << "Age to search: ";
         cin >> age;
-        cout << endl;
+        hausUI();
         for(size_t i = 0; i < data.size(); i++)
         {
             if (age == (data[i].getDanarar() - data[i].getFaedingarar() ) )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << data[i];
+                notFound = false;
+            }
+            else if (data.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
     else if (skipunin == "birth" || skipunin == "b")
@@ -252,15 +263,21 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
         int birth;
         cout << "Year of birth to search: ";
         cin >> birth;
-        cout << endl;
+        hausUI();
         for(size_t i = 0; i < data.size(); i++)
         {
             if (birth == data[i].getFaedingarar() )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << data[i];
+                notFound = false;
+            }
+            else if (data.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
     else if (skipunin == "death" || skipunin == "d")
@@ -269,15 +286,21 @@ void NotendaUI::searchName(const vector<tolvufolk>& data)
         int death;
         cout << "Year of birth to search: ";
         cin >> death;
-        cout << endl;
+        hausUI();
         for(size_t i = 0; i < data.size(); i++)
         {
             if (death == data[i].getDanarar() )
             {
+                cout << "|" << i + 1 << " \t\t ";
                 cout << data[i];
+                notFound = false;
+            }
+            else if (data.size() == (i + 1) && notFound == true )
+            {
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
             }
         }
-        cout << endl;
+        cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
 
 }
@@ -478,4 +501,11 @@ void NotendaUI::continueUI()
         check = true;
     }
 
+}
+
+void NotendaUI::hausUI()
+{
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
