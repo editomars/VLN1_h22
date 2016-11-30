@@ -314,13 +314,62 @@ void NotendaUI::sortOptions()
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            _service.sortByAscending();
+            _service.radaNafniHaekkandi();
             printList();
         }
         else if(skipunin == "descending" || skipunin == "d")
         {
-            _service.sortByDescending();
+            _service.radaNafniLaekkandi();
             printList();
+        }
+    }
+
+    else if(skipunin == "age" || skipunin == "a")
+    {
+    system("cls");
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
+    cout << "*||descending - Sort age by descending order                     ||*" << endl;
+    cout << "*==================================================================*" << endl;
+
+    cin >> skipunin;
+
+        if(skipunin == "ascending" || skipunin == "a")
+        {
+            _service.radaAldriHaekkandi();
+            printList();
+        }
+        else if(skipunin == "descending" || skipunin == "d")
+        {
+            _service.radaAldriLaekkandi();
+            printList();
+
+        }
+    }
+    else if(skipunin == "birth" || skipunin == "b")
+    {
+        system("cls");
+        cout << "*==================================================================*" << endl;
+        cout << "*||Please enter one the following command                        ||*" << endl;
+        cout << "*==================================================================*" << endl;
+        cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
+        cout << "*||descending - Sort age by descending order                     ||*" << endl;
+        cout << "*==================================================================*" << endl;
+
+        cin >> skipunin;
+
+        if(skipunin == "ascending" || skipunin == "a")
+        {
+            _service.radaFaedinguHaekkandi();
+            printList();
+        }
+        else if(skipunin == "descending" || skipunin == "d")
+        {
+            _service.radaFaedinguLaekkandi();
+            printList();
+
         }
     }
 }
@@ -430,12 +479,14 @@ void NotendaUI::continueUI()
     string answer;
     cout << "Continue? (Y/N): ";
     cin >> answer;
+
+    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
     if (answer == "Y" || answer == "y")
     {
         skrifaUt();
         check = false;
     }
-    else
+    else if(answer == "N" || answer == "n")
     {
         check = true;
     }
