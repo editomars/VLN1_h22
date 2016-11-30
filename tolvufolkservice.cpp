@@ -25,24 +25,37 @@ void tolvufolkService::deleteTolvufolk()
     _dataaccess.deleteFile();
 }
 
-void tolvufolkService::addTolvufolk(const tolvufolk& t)
+void tolvufolkService::appendTolvufolk(const tolvufolk& t)
+{
+    _dataaccess.appendToFile(t);
+}
+
+void tolvufolkService::appendTolvufolk(const vector<tolvufolk>& folk)
+{
+    for (size_t i = 0; i < folk.size(); ++i)
+    {
+        _dataaccess.appendToFile(folk[i]);
+    }
+}
+
+void tolvufolkService::writeTolvufolk(const tolvufolk& t)
 {
     _dataaccess.writeToFile(t);
 }
 
-void tolvufolkService::addTolvufolk(const vector<tolvufolk>& folk)
+void tolvufolkService::writeTolvufolk(const vector<tolvufolk>& folk)
 {
-    for (size_t i = 0; i < folk.size(); ++i)
-    {
-        _dataaccess.writeToFile(folk[i]);
-    }
+    deleteTolvufolk();
+    appendTolvufolk(folk);
 }
-/*
-vector<tolvufolk> tolvufolkService::sortByName(const vector<tolvufolk>& folk)
+
+void tolvufolkService::addTolvufolk(const tolvufolk &t)
+{
+    _folk.push_back(t);
+}
+
+void tolvufolkService::sortByName()
 {
     samanburdur temp;
-    sort(folk.begin(), folk.end(), temp);
-    return folk;
-
+    sort(_folk.begin(), _folk.end(), temp);
 }
-*/

@@ -18,9 +18,9 @@ bool check = true;
 void NotendaUI::keyra()
 {
 
+    _service.writeTolvufolk(tolvufolk("Charles Babbage", "kk", 1990, 1991));
+    _service.appendTolvufolk(tolvufolk("Ada Lovelace", "kvk", 1880, 1890));
     vector<tolvufolk> data = _service.getTolvufolk();
-
-
 
     skrifaUt();
 
@@ -349,7 +349,7 @@ void NotendaUI::addPerson(vector<tolvufolk>& data)
 
     tolvufolk Tempr(nName, gGender, bYear, dYear);
     data.push_back(Tempr);
-    _service.addTolvufolk(Tempr);
+    _service.appendTolvufolk(Tempr);
 
 }
 
@@ -403,7 +403,7 @@ void NotendaUI::refreshTxtFile(const vector<tolvufolk>& data)
     _service.deleteTolvufolk();
     for(size_t i = 0; i < data.size(); i++)
     {
-         _service.addTolvufolk(data[i]);
+         _service.appendTolvufolk(data[i]);
     }
 }
 
