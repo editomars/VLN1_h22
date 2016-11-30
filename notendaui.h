@@ -14,7 +14,7 @@ public:
     void keyra();
 
     void baetaVidPersonu(); //Baeta vid personu UI grein
-    void eydaPersonu(); //Eyda personu UI grein
+    void eydaPersonu(const vector<tolvufolk>& gogn); //Eyda personu UI grein
     void prentaLista(); //Skrifar út gögn á console
     void leitaAdNafni(const vector<tolvufolk>& gogn);
     void uppfaeraPersonu();
@@ -27,6 +27,7 @@ private:
     void leitarMoguleikar();
     void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
     void hausUI();
+    void skipunaAframhald();
 };
 
 #endif // NOTENDAUI_H
