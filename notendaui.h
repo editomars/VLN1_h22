@@ -29,7 +29,7 @@ private:
     void hausUI();
     void upphafsUI();
     void adalvalmyndUI();
-    void skipunaAframhald();
+    bool skipunaAframhald();
 };
 
 #endif // NOTENDAUI_H

@@ -11,8 +11,6 @@ NotendaUI::NotendaUI()
 
 }
 
-bool haf = false;
-
 
 void NotendaUI::keyra()
 {
@@ -150,118 +148,116 @@ void NotendaUI::prentaLista()
 
 void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
 {
-    hefjauppfaera:
-    leitarMoguleikar();
-    string skipunin;
-    cin >> skipunin;
-    bool notFound = true;
-
-    if (skipunin == "name" || skipunin == "n")
+    do
     {
         leitarMoguleikar();
-        string nafn;
-        cout << "Name to search: ";
-        cin.ignore();
-        getline(cin,nafn);
-        cout << endl;
-        hausUI();
-        for(size_t i = 0; i < gogn.size(); i++)
-        {
-            if (nafn == gogn[i].getNafn() )
-            {
-                cout << "|" << i + 1 << " \t\t ";
-                cout << gogn[i];
-                notFound = false;
-            }
-            else if (gogn.size() == (i + 1) && notFound == true )
-            {
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-            }
-        }
-        cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    }
+        string skipunin;
+        cin >> skipunin;
+        bool notFound = true;
 
-    else if (skipunin == "age" || skipunin == "a")
-    {
-        leitarMoguleikar();
-        int age;
-        cout << "Age to search: ";
-        cin >> age;
-        cout << endl;
-        hausUI();
-        for(size_t i = 0; i < gogn.size(); i++)
+        if (skipunin == "name" || skipunin == "n")
         {
-            if (age == (gogn[i].getDanarar() - gogn[i].getFaedingarar() ) )
+            leitarMoguleikar();
+            string nafn;
+            cout << "Name to search: ";
+            cin.ignore();
+            getline(cin,nafn);
+            cout << endl;
+            hausUI();
+            for(size_t i = 0; i < gogn.size(); i++)
             {
-                cout << "|" << i + 1 << " \t\t ";
-                cout << gogn[i];
-                notFound = false;
+                if (nafn == gogn[i].getNafn() )
+                {
+                    cout << "|" << i + 1 << " \t\t ";
+                    cout << gogn[i];
+                    notFound = false;
+                }
+                else if (gogn.size() == (i + 1) && notFound == true )
+                {
+                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                }
             }
-            else if (gogn.size() == (i + 1) && notFound == true )
-            {
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-            }
+            cout << "----------------------------------------------------------------------------------------------------------" << endl;
         }
-        cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    }
 
-    else if (skipunin == "birth" || skipunin == "b")
-    {
-        leitarMoguleikar();
-        int birth;
-        cout << "Year of birth to search: ";
-        cin >> birth;
-        cout << endl;
-        hausUI();
-        for(size_t i = 0; i < gogn.size(); i++)
+        else if (skipunin == "age" || skipunin == "a")
         {
-            if (birth == gogn[i].getFaedingarar() )
+            leitarMoguleikar();
+            int age;
+            cout << "Age to search: ";
+            cin >> age;
+            cout << endl;
+            hausUI();
+            for(size_t i = 0; i < gogn.size(); i++)
             {
-                cout << "|" << i + 1 << " \t\t ";
-                cout << gogn[i];
-                notFound = false;
+                if (age == (gogn[i].getDanarar() - gogn[i].getFaedingarar() ) )
+                {
+                    cout << "|" << i + 1 << " \t\t ";
+                    cout << gogn[i];
+                    notFound = false;
+                }
+                else if (gogn.size() == (i + 1) && notFound == true )
+                {
+                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                }
             }
-            else if (gogn.size() == (i + 1) && notFound == true )
-            {
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-            }
+            cout << "----------------------------------------------------------------------------------------------------------" << endl;
         }
-        cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    }
 
-    else if (skipunin == "death" || skipunin == "d")
-    {
-        leitarMoguleikar();
-        int death;
-        cout << "Year of birth to search: ";
-        cin >> death;
-        cout << endl;
-        hausUI();
-        for(size_t i = 0; i < gogn.size(); i++)
+        else if (skipunin == "birth" || skipunin == "b")
         {
-            if (death == gogn[i].getDanarar() )
+            leitarMoguleikar();
+            int birth;
+            cout << "Year of birth to search: ";
+            cin >> birth;
+            cout << endl;
+            hausUI();
+            for(size_t i = 0; i < gogn.size(); i++)
             {
-                cout << "|" << i + 1 << " \t\t ";
-                cout << gogn[i];
-                notFound = false;
+                if (birth == gogn[i].getFaedingarar() )
+                {
+                    cout << "|" << i + 1 << " \t\t ";
+                    cout << gogn[i];
+                    notFound = false;
+                }
+                else if (gogn.size() == (i + 1) && notFound == true )
+                {
+                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                }
             }
-            else if (gogn.size() == (i + 1) && notFound == true )
-            {
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-            }
+            cout << "----------------------------------------------------------------------------------------------------------" << endl;
         }
-        cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    }
-    else if (skipunin == "return" || skipunin == "r")
-    {
-        adalvalmyndUI();
-    }
 
-    skipunaAframhald();
-    if (haf == true)
-    {
-        goto hefjauppfaera;
-    }
+        else if (skipunin == "death" || skipunin == "d")
+        {
+            leitarMoguleikar();
+            int death;
+            cout << "Year of birth to search: ";
+            cin >> death;
+            cout << endl;
+            hausUI();
+            for(size_t i = 0; i < gogn.size(); i++)
+            {
+                if (death == gogn[i].getDanarar() )
+                {
+                    cout << "|" << i + 1 << " \t\t ";
+                    cout << gogn[i];
+                    notFound = false;
+                }
+                else if (gogn.size() == (i + 1) && notFound == true )
+                {
+                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                }
+            }
+            cout << "----------------------------------------------------------------------------------------------------------" << endl;
+        }
+        else if (skipunin == "return" || skipunin == "r")
+        {
+            adalvalmyndUI();
+        }
+
+
+    }while(skipunaAframhald());
 
 }
 
@@ -377,82 +373,77 @@ void NotendaUI::flokkunarMoguleikar()
 
 void NotendaUI::baetaVidPersonu()
 {
-    hefjabaeta:
-    string firstName;
-    string lastName;
-    string gGender;
-    int bYear;
-    int dYear;
-
-    cout << "Enter firstname: ";
-    cin >> firstName;
-
-    cout << "Enter lastname: ";
-    cin >> lastName;
-
-    cout << "Enter gender(f/m) [lowercase]: ";
-    cin >> gGender;
-
-    while (gGender != "m" && gGender != "f")
+    do
     {
-        cin.clear();
-        cerr << "Input not valid, try again: ";
+        string firstName;
+        string lastName;
+        string gGender;
+        int bYear;
+        int dYear;
+
+        cout << "Enter firstname: ";
+        cin >> firstName;
+
+        cout << "Enter lastname: ";
+        cin >> lastName;
+
+        cout << "Enter gender(f/m) [lowercase]: ";
         cin >> gGender;
-    }
 
-    cout << "Enter year of birth: ";
-    cin >> bYear;
+        while (gGender != "m" && gGender != "f")
+        {
+            cin.clear();
+            cerr << "Input not valid, try again: ";
+            cin >> gGender;
+        }
 
-    while (0 > bYear || cin.fail())
-    {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cerr << "Input not valid, try again: ";
+        cout << "Enter year of birth: ";
         cin >> bYear;
-    }
 
-    cout << "Enter year of death(-1 if still alive): ";
-    cin >> dYear;
+        while (0 > bYear || cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> bYear;
+        }
 
-    while (-1 > dYear || !cin)
-    {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cerr << "Input not valid, try again: ";
+        cout << "Enter year of death(-1 if still alive): ";
         cin >> dYear;
-    }
 
-    _service.baetaVidTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
+        while (-1 > dYear || !cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> dYear;
+        }
 
-    skipunaAframhald();
-    if (haf == true)
-    {
-        goto hefjabaeta;
-    }
+        _service.baetaVidTolvufolk(tolvufolk(firstName + " " + lastName, gGender, bYear, dYear));
+
+
+    }while(skipunaAframhald());
 }
 
 void NotendaUI::eydaPersonu(const vector<tolvufolk>& gogn)
 {
-    hefjaeyda:
-    system("cls");
-    prentaLista();
-    int persNR;
-    cout << "Delete scientist number: ";
-    cin >> persNR;
-    persNR--;
-    while (persNR > gogn.size() || persNR < 0)
+    do
     {
-        cerr << "Input not valid, try again: ";
+        system("cls");
+        prentaLista();
+        int persNR;
+        cout << "Delete scientist number: ";
         cin >> persNR;
         persNR--;
-    }
-    _service.eydaStakiTolvufolk(persNR);
+        while (persNR > gogn.size() || persNR < 0)
+        {
+            cerr << "Input not valid, try again: ";
+            cin >> persNR;
+            persNR--;
+        }
+        _service.eydaStakiTolvufolk(persNR);
 
-    skipunaAframhald();
-    if (haf == true)
-    {
-        goto hefjaeyda;
-    }
+    }while(skipunaAframhald());
 }
 
 void NotendaUI::tortimaLista()
@@ -511,27 +502,26 @@ bool NotendaUI::aframhaldandiUI()
     return false;
 }
 
-void NotendaUI::skipunaAframhald()
+bool NotendaUI::skipunaAframhald()
 {
 
-string answer = "o";
+    string answer = "o";
 
-while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
+    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
     {
         cout << "Another entry? (Y/N): ";
         cin >> answer;
 
         if (answer == "Y" || answer == "y")
         {
-            haf = true;
-            break;
+            return true;
         }
         else if(answer == "N" || answer == "n")
         {
-            haf = false;
-            break;
+            return false;
         }
     }
+     return false;
 }
 
 void NotendaUI::upphafsUI()
