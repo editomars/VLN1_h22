@@ -431,12 +431,14 @@ void NotendaUI::continueUI()
     string answer;
     cout << "Continue? (Y/N): ";
     cin >> answer;
+
+    while (answer != "Y" || answer != "y" || answer != "N" || answer != "n")
     if (answer == "Y" || answer == "y")
     {
         skrifaUt();
         check = false;
     }
-    else
+    else if(answer == "N" || answer == "n")
     {
         check = true;
     }
