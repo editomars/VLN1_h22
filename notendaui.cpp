@@ -21,79 +21,8 @@ void NotendaUI::keyra()
     _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
 
 
+    adalvalmyndUI();
 
-    vector<tolvufolk> gogn = _service.getTolvufolk(true);
-
-    skrifaUt();
-
-    do
-        {
-        ath = true;
-        string skipun;
-        cin >> skipun;
-
-        if (skipun == "list" || skipun == "l")
-        {
-            system("cls");
-            cout << "List of computer scientists: " << endl;
-            prentaLista();
-            aframhaldandiUI();
-        }
-        else if (skipun == "sort"|| skipun == "so")
-        {
-            skrifaUt();
-            flokkunarMoguleikar();
-            aframhaldandiUI();
-        }
-
-        else if (skipun == "add" || skipun == "a")
-        {
-            system("cls");
-            cout << "Adding computer scientist: " << endl;
-            baetaVidPersonu();
-            prentaLista();
-            aframhaldandiUI();
-        }
-
-        else if (skipun == "delete" || skipun == "d")
-        {
-            eydaPersonu();
-            aframhaldandiUI();
-        }
-
-        else if (skipun == "update" || skipun == "u")
-        {
-            skrifaUt();
-
-            uppfaeraPersonu();
-            aframhaldandiUI();
-        }
-
-        else if (skipun == "search" || skipun == "s")
-        {
-            skrifaUt();
-            leitaAdNafni(gogn);
-            aframhaldandiUI();
-        }
-
-        else if (skipun == "purge" || skipun == "p")
-        {
-            skrifaUt();
-            tortimaLista();
-        }
-
-        else if (skipun == "quit" || skipun == "q")
-        {
-            ath = true;
-        }
-
-        else
-        {
-            skrifaUt();
-            cerr << "Input not valid, try again: ";
-            ath = false;
-        }
-    } while (ath == false);
 }
 
 void NotendaUI::skrifaUt()
@@ -129,10 +58,11 @@ void NotendaUI::uppfaeraPersonu()
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one the following command.                       ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||name - update name, please write 'name'                       ||*" << endl;
+    cout << "*||name   - update name, please write 'name'                     ||*" << endl;
     cout << "*||gender - update gender, please write 'gender'                 ||*" << endl;
     cout << "*||birth  - update year of birth, please write 'birth'           ||*" << endl;
     cout << "*||death  - update year of death, please write 'deat'            ||*" << endl;
+    cout << "*||return - Returns to the main menu                             ||*" << endl;
     cout << "*==================================================================*" << endl;
     cin >> skipunin;
 
@@ -173,6 +103,10 @@ void NotendaUI::uppfaeraPersonu()
         cin >> nytt;
         _service.updateTolvufolkSingle(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
+    else if (skipunin == "return" || skipunin == "r")
+    {
+        adalvalmyndUI();
+    }
 }
 
 void NotendaUI::leitarMoguleikar()
@@ -181,10 +115,11 @@ void NotendaUI::leitarMoguleikar()
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one of the following command                     ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||name  - Search by name, please write 'name'                   ||*" << endl;
-    cout << "*||age   - Search by age, please write 'age'                     ||*" << endl;
-    cout << "*||birth - Search by year of birth, please write 'birth'         ||*" << endl;
-    cout << "*||death - Search by year of death, please write 'death'         ||*" << endl;
+    cout << "*||name   - Search by name, please write 'name'                  ||*" << endl;
+    cout << "*||age    - Search by age, please write 'age'                    ||*" << endl;
+    cout << "*||birth  - Search by year of birth, please write 'birth'        ||*" << endl;
+    cout << "*||death  - Search by year of death, please write 'death'        ||*" << endl;
+    cout << "*||return - Returns to the main menu                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
 
@@ -311,6 +246,10 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
         }
         cout << "----------------------------------------------------------------------------------------------------------" << endl;
     }
+    else if (skipunin == "return" || skipunin == "r")
+    {
+        adalvalmyndUI();
+    }
 
 }
 
@@ -322,23 +261,18 @@ void NotendaUI::flokkunarMoguleikar()
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one of the following command                     ||*" << endl;
     cout << "*==================================================================*" << endl;
-    cout << "*||name  - Sort by name, please write 'name'                     ||*" << endl;
-    cout << "*||age   - Sort by age, please write 'age'                       ||*" << endl;
-    cout << "*||birth - Sort by year of birth, please write 'birth'           ||*" << endl;
-    cout << "*||death - Sort by year of death, please write 'death'           ||*" << endl;
+    cout << "*||name   - Sort by name, please write 'name'                    ||*" << endl;
+    cout << "*||age    - Sort by age, please write 'age'                      ||*" << endl;
+    cout << "*||birth  - Sort by year of birth, please write 'birth'          ||*" << endl;
+    cout << "*||death  - Sort by year of death, please write 'death'          ||*" << endl;
+    cout << "*||return - Returns to the main menu                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
     {
-    system("cls");
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one of the following command                     ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||ascending  - Sort names by ascending order                    ||*" << endl;
-    cout << "*||descending - Sort names by descending order                   ||*" << endl;
-    cout << "*==================================================================*" << endl;
+    upphafsUI();
 
     cin >> skipunin;
 
@@ -352,17 +286,15 @@ void NotendaUI::flokkunarMoguleikar()
             _service.radaNafniLaekkandi();
             prentaLista();
         }
+        else if (skipunin == "return" || skipunin == "r")
+        {
+            adalvalmyndUI();
+        }
     }
 
     else if(skipunin == "age" || skipunin == "a")
     {
-    system("cls");
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one the following command                        ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
-    cout << "*||descending - Sort age by descending order                     ||*" << endl;
-    cout << "*==================================================================*" << endl;
+    upphafsUI();
 
     cin >> skipunin;
 
@@ -377,16 +309,14 @@ void NotendaUI::flokkunarMoguleikar()
             prentaLista();
 
         }
+        else if (skipunin == "return" || skipunin == "r")
+        {
+            adalvalmyndUI();
+        }
     }
     else if(skipunin == "birth" || skipunin == "b")
     {
-        system("cls");
-        cout << "*==================================================================*" << endl;
-        cout << "*||Please enter one the following command                        ||*" << endl;
-        cout << "*==================================================================*" << endl;
-        cout << "*||ascending - Sort age by ascending order                       ||*" << endl;
-        cout << "*||descending - Sort age by descending order                     ||*" << endl;
-        cout << "*==================================================================*" << endl;
+        upphafsUI();
 
         cin >> skipunin;
 
@@ -400,6 +330,10 @@ void NotendaUI::flokkunarMoguleikar()
             _service.radaFaedinguLaekkandi();
             prentaLista();
 
+        }
+        else if (skipunin == "return" || skipunin == "r")
+        {
+            adalvalmyndUI();
         }
     }
 }
@@ -517,9 +451,98 @@ void NotendaUI::aframhaldandiUI()
     }
 }
 
+void NotendaUI::upphafsUI()
+{
+    system("cls");
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one the following command                        ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||ascending  - Sort age by ascending order                      ||*" << endl;
+    cout << "*||descending - Sort age by descending order                     ||*" << endl;
+    cout << "*||return     - Returns to the main menu                         ||*" << endl;
+    cout << "*==================================================================*" << endl;
+}
+
 void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
+}
+
+void NotendaUI::adalvalmyndUI()
+{
+
+    vector<tolvufolk> gogn = _service.getTolvufolk(true);
+
+    skrifaUt();
+
+    do
+        {
+        ath = true;
+        string skipun;
+        cin >> skipun;
+
+        if (skipun == "list" || skipun == "l")
+        {
+            system("cls");
+            cout << "List of computer scientists: " << endl;
+            prentaLista();
+            aframhaldandiUI();
+        }
+        else if (skipun == "sort"|| skipun == "so")
+        {
+            skrifaUt();
+            flokkunarMoguleikar();
+            aframhaldandiUI();
+        }
+
+        else if (skipun == "add" || skipun == "a")
+        {
+            system("cls");
+            cout << "Adding computer scientist: " << endl;
+            baetaVidPersonu();
+            prentaLista();
+            aframhaldandiUI();
+        }
+
+        else if (skipun == "delete" || skipun == "d")
+        {
+            eydaPersonu();
+            aframhaldandiUI();
+        }
+
+        else if (skipun == "update" || skipun == "u")
+        {
+            skrifaUt();
+
+            uppfaeraPersonu();
+            aframhaldandiUI();
+        }
+
+        else if (skipun == "search" || skipun == "s")
+        {
+            skrifaUt();
+            leitaAdNafni(gogn);
+            aframhaldandiUI();
+        }
+
+        else if (skipun == "purge" || skipun == "p")
+        {
+            skrifaUt();
+            tortimaLista();
+        }
+
+        else if (skipun == "quit" || skipun == "q")
+        {
+            ath = true;
+        }
+
+        else
+        {
+            skrifaUt();
+            cerr << "Input not valid, try again: ";
+            ath = false;
+        }
+    } while (ath == false);
 }
