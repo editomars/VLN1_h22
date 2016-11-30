@@ -198,9 +198,6 @@ void NotendaUI::leitarMoguleikar()
 
 void NotendaUI::prentaLista()
 {
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
     hausUI();
     vector<tolvufolk> gogn = _service.getTolvufolk(false);
     for (size_t i = 0; i < gogn.size(); i++)

@@ -25,6 +25,9 @@ public:
     void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk í vector
     void updateTolvufolkSingle(int nr, string name, string kyn, int fYear, int dYear); //Uppfærir eitt stak í vector
     void clearTolvufolk(); //Hreinsar öll gögn úr vector
+    vector<tolvufolk> leitaTolvufolkEftirNafni(string nafn);
+    vector<tolvufolk> leitaTolvufolkEftirAldri(int aldur);
+    vector<tolvufolk> leitaTolvufolkEftirArtali(int ar, bool f); //bool = true til að leita að fæðingarári, false fyrir dánarár
     void flokkaEftirNafni();
     void radaNafniHaekkandi();
     void radaNafniLaekkandi();
