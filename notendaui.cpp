@@ -11,8 +11,12 @@ NotendaUI::NotendaUI()
 
 }
 
+<<<<<<< HEAD
 bool ath = true;
 bool haf = false;
+=======
+
+>>>>>>> 693bebd428e1801f33299f679a2bec9a8ffcdfb3
 
 void NotendaUI::keyra()
 {
@@ -29,7 +33,6 @@ void NotendaUI::keyra()
 
     do
         {
-        ath = true;
         string skipun;
         cin >> skipun;
 
@@ -38,13 +41,11 @@ void NotendaUI::keyra()
             system("cls");
             cout << "List of computer scientists: " << endl;
             prentaLista();
-            aframhaldandiUI();
         }
         else if (skipun == "sort"|| skipun == "so")
         {
             skrifaUt();
             flokkunarMoguleikar();
-            aframhaldandiUI();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -53,28 +54,28 @@ void NotendaUI::keyra()
             cout << "Adding computer scientist: " << endl;
             baetaVidPersonu();
             prentaLista();
-            aframhaldandiUI();
         }
 
         else if (skipun == "delete" || skipun == "d")
         {
+<<<<<<< HEAD
             eydaPersonu(gogn);
             aframhaldandiUI();
+=======
+            eydaPersonu();
+>>>>>>> 693bebd428e1801f33299f679a2bec9a8ffcdfb3
         }
 
         else if (skipun == "update" || skipun == "u")
         {
             skrifaUt();
-
             uppfaeraPersonu();
-            aframhaldandiUI();
         }
 
         else if (skipun == "search" || skipun == "s")
         {
             skrifaUt();
             leitaAdNafni(gogn);
-            aframhaldandiUI();
         }
 
         else if (skipun == "purge" || skipun == "p")
@@ -85,21 +86,33 @@ void NotendaUI::keyra()
 
         else if (skipun == "quit" || skipun == "q")
         {
-            ath = true;
+            break;
         }
 
         else if (skipun == "save" || skipun == "sa")
         {
-            _service.yfirskrifaTolvufolk();
+            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
+            cin >> skipun;
+            if (skipun == "Y" || skipun == "y")
+            {
+                _service.yfirskrifaTolvufolk();
+                cout << "Data has been saved" << endl;
+            }
+            else
+            {
+                cout << "Saving has been cancelled" << endl;
+            }
         }
 
         else
         {
             skrifaUt();
             cerr << "Input not valid, try again: ";
-            ath = false;
         }
-    } while (ath == false);
+
+
+
+    } while (aframhaldandiUI());
 }
 
 void NotendaUI::skrifaUt()
@@ -147,8 +160,10 @@ void NotendaUI::uppfaeraPersonu()
     if (skipunin == "name" || skipunin == "n")
     {
         string fornafn, eftirnafn;
-        cout << "Enter updated name for " << target.getNafn() << ": ";
-        cin >> fornafn >> eftirnafn;
+        cout << "Enter updated first name for " << target.getNafn() << ": ";
+        cin >> fornafn;
+        cout << "Enter updated last name for " << target.getNafn() << ": ";
+        cin >> eftirnafn;
         _service.updateTolvufolkSingle(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
 
@@ -521,8 +536,12 @@ void NotendaUI::tortimaLista()
         aframhaldandiUI();
     }
 }
+<<<<<<< HEAD
 
 void NotendaUI::aframhaldandiUI()
+=======
+bool NotendaUI::aframhaldandiUI()
+>>>>>>> 693bebd428e1801f33299f679a2bec9a8ffcdfb3
 {
 
     string answer = "o";
@@ -535,15 +554,18 @@ void NotendaUI::aframhaldandiUI()
         if (answer == "Y" || answer == "y")
         {
             skrifaUt();
-            ath = false;
-            break;
+            return true;
         }
         else if(answer == "N" || answer == "n")
         {
-            ath = true;
-            break;
+            return false;
+        }
+        else
+        {
+            cout << "Invalid input, try again!" << endl;
         }
     }
+    return false;
 }
 
 void NotendaUI::skipunaAframhald()
