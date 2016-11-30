@@ -17,9 +17,8 @@ public:
     void deletePerson(); //delete person UI grein
     void printList(); //Skrifar út gögn á console
     void searchName(const vector<tolvufolk>& data);
-    void updatePerson(vector<tolvufolk>& data);
-    void refreshTxtFile(const vector<tolvufolk>& data);
-    void purgeList(vector<tolvufolk>& data);
+    void updatePerson();
+    void purgeList();
 private:
     tolvufolkService _service;
     void skrifaUt(); //Skrifa út aðalvalmynd
