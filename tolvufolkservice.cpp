@@ -86,14 +86,19 @@ struct daudiLaekkandi
 //----------------------- Svæði fyrir public föll byrjar ----------------------
 
 //Get föll
-vector<tolvufolk> tolvufolkService::getTolvufolk()
+vector<tolvufolk> tolvufolkService::getTolvufolk() const
 {
     return _folk;
 }
 
-tolvufolk tolvufolkService::getStaktTolvufolk(int ndx)
+tolvufolk tolvufolkService::getStaktTolvufolk(int ndx) const
 {
     return _folk[ndx];
+}
+
+int tolvufolkService::getSize() const
+{
+    return _folk.size();
 }
 
 //Föll sem tengja við gagnagrunn

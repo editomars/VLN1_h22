@@ -39,6 +39,7 @@ private:
     void upphafsUI(); //Vantar comment
     void radaUI(); //Vantar comment
     void hausUI(); //Vantar comment
+    void prentaRadad(const vector<tolvufolk>& gogn); //Prentar út gögn í vector eða not found skilaboð
 };
 
 #endif // NOTENDAUI_H

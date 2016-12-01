@@ -15,8 +15,9 @@ public:
     tolvufolkService();
 
     //Get föll
-    vector<tolvufolk> getTolvufolk(); //Skilar vectornum af gögnum sem notandi er að nota
-    tolvufolk getStaktTolvufolk(int ndx); //Sækir eitt stak af tolvufolki
+    vector<tolvufolk> getTolvufolk() const; //Skilar vectornum af gögnum sem notandi er að nota
+    tolvufolk getStaktTolvufolk(int ndx) const; //Sækir eitt stak af tolvufolki
+    int getSize() const; //Skilar stærð af vector gögnum
 
     //Föll sem tengja við Gagnagrunn
     void saekjaGogn(); //Sækir gögn í gagnaggrunn

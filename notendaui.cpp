@@ -166,7 +166,6 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
 
 void NotendaUI::eydaPersonu() //Delete UI grein
 {
-    vector<tolvufolk> gogn = _service.getTolvufolk();
     do
     {
         system("cls");
@@ -174,13 +173,13 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         int persNR;
         cout << "Delete scientist number: ";
         cin >> persNR;
-        persNR--;
-        while (persNR > gogn.size() || persNR < 0)
+        while (persNR > _service.getSize() || persNR <= 0)
         {
             cerr << "Input not valid, try again: ";
             cin >> persNR;
-            persNR--;
         }
+        persNR--;
+        cout << _service.getStaktTolvufolk(persNR).getNafn() << " has been removed.\n";
         _service.eydaStakiTolvufolk(persNR);
 
     }while(skipunaAframhald());
@@ -257,63 +256,34 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
 void NotendaUI::leitaGrein() //Search / Filter UI grein
 {
-    vector<tolvufolk> gogn = _service.getTolvufolk();
+    vector<tolvufolk> gogn;
     do
     {
         leitarMoguleikar();
         string skipunin;
         cin >> skipunin;
-        bool ekkiFundid = true;
 
         if (skipunin == "name" || skipunin == "n")
         {
-            leitarMoguleikar();
             string nafn;
+            leitarMoguleikar();
             cout << "Name to search: ";
             cin.ignore();
             getline(cin,nafn);
             cout << endl;
-            hausUI();
-            for(size_t i = 0; i < gogn.size(); i++)
-            {
-                if (nafn == gogn[i].getNafn() )
-                {
-                    cout << "|" << i + 1 << " \t\t ";
-                    cout << gogn[i];
-                    ekkiFundid = false;
-                }
-
-                else if (gogn.size() == (i + 1) && ekkiFundid == true )
-                {
-                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                }
-            }
-            cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            gogn = _service.leitaStreng("nafn", nafn);
+            prentaRadad(gogn);
         }
 
         else if (skipunin == "age" || skipunin == "a")
         {
-            leitarMoguleikar();
             int age;
+            leitarMoguleikar();
             cout << "Age to search: ";
             cin >> age;
             cout << endl;
-            hausUI();
-            for(size_t i = 0; i < gogn.size(); i++)
-            {
-                if (age == (gogn[i].getDanarar() - gogn[i].getFaedingarar() ) )
-                {
-                    cout << "|" << i + 1 << " \t\t ";
-                    cout << gogn[i];
-                    ekkiFundid = false;
-                }
-
-                else if (gogn.size() == (i + 1) && ekkiFundid == true )
-                {
-                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                }
-            }
-            cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            gogn = _service.leitaHeiltolu("aldur", age);
+            prentaRadad(gogn);
         }
 
         else if (skipunin == "birth" || skipunin == "b")
@@ -323,47 +293,19 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             cout << "Year of birth to search: ";
             cin >> birth;
             cout << endl;
-            hausUI();
-            for(size_t i = 0; i < gogn.size(); i++)
-            {
-                if (birth == gogn[i].getFaedingarar() )
-                {
-                    cout << "|" << i + 1 << " \t\t ";
-                    cout << gogn[i];
-                    ekkiFundid = false;
-                }
-
-                else if (gogn.size() == (i + 1) && ekkiFundid == true )
-                {
-                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                }
-            }
-            cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            gogn = _service.leitaHeiltolu("faedingarar", birth);
+            prentaRadad(gogn);
         }
 
         else if (skipunin == "death" || skipunin == "d")
         {
             leitarMoguleikar();
             int death;
-            cout << "Year of birth to search: ";
+            cout << "Year of death to search: ";
             cin >> death;
             cout << endl;
-            hausUI();
-            for(size_t i = 0; i < gogn.size(); i++)
-            {
-                if (death == gogn[i].getDanarar() )
-                {
-                    cout << "|" << i + 1 << " \t\t ";
-                    cout << gogn[i];
-                    ekkiFundid = false;
-                }
-
-                else if (gogn.size() == (i + 1) && ekkiFundid == true )
-                {
-                    cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                }
-            }
-            cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            gogn = _service.leitaHeiltolu("danarar", death);
+            prentaRadad(gogn);
         }
 
         else if (skipunin == "return" || skipunin == "r")
@@ -692,6 +634,21 @@ void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+}
+
+void NotendaUI::prentaRadad(const vector<tolvufolk>& gogn)
+{
+    hausUI();
+    for(size_t i = 0; i < gogn.size(); i++)
+    {
+            cout << "|" << i + 1 << " \t\t ";
+            cout << gogn[i];
+    }
+    if (gogn.size() == 0)
+    {
+        cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+    }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
