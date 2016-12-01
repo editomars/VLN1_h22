@@ -11,30 +11,30 @@ class NotendaUI
 public:
     NotendaUI();
 
-    void keyra();
+    void keyra(); //main fail
 private:
     tolvufolkService _service;
 
     void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
 
     //Föll sem skipta um UI grein
-    void adalvalmyndUI();
-    void baetaVidPersonu(); //Baeta vid personu UI grein
+    void adalvalmyndUI(); //Main Menu UI grein
+    void baetaVidPersonu(); //Add Person UI grein
     void eydaPersonu(); //Eyda personu UI grein
-    void uppfaeraPersonu();
-    void leitaGrein();
-    void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
-    void tortimaLista();
+    void uppfaeraPersonu(); //Update Person UI grein
+    void leitaGrein(); //Search / Filter UI grein
+    void flokkunarMoguleikar(); //Sort UI grein
+    void tortimaLista(); //Purge UI grein
 
     //Cout blokkir
     void skrifaUt(); //Skrifa út aðalvalmynd
-    void leitarMoguleikar();
-    void upphafsUI();
-    void hausUI();
+    void leitarMoguleikar(); //Vantar comment
+    void upphafsUI(); //Vantar comment
+    void hausUI(); //Vantar comment
 
     //Bool flög
-    bool aframhaldandiUI();
-    bool skipunaAframhald();
+    bool aframhaldandiUI(); //Vantar comment
+    bool skipunaAframhald(); //Vantar comment
 };
 
 #endif // NOTENDAUI_H
