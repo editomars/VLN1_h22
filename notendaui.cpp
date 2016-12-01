@@ -48,7 +48,7 @@ void NotendaUI::uppfaeraPersonu()
     tolvufolk target;
     system("cls");
 
-    prentaLista();
+    prentaLista(_service.getTolvufolk(false));
 
     cout << "Update scientist number: ";
     cin >> persNR;
@@ -132,11 +132,10 @@ void NotendaUI::leitarMoguleikar()
     cout << "*=========================================================================*" << endl;
 }
 
-void NotendaUI::prentaLista()
+void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
 {
     system("cls");
     hausUI();
-    vector<tolvufolk> gogn = _service.getTolvufolk(false);
     for (size_t i = 0; i < gogn.size(); i++)
     {
         cout << "|" << i + 1 << " \t\t ";
@@ -267,6 +266,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
 void NotendaUI::flokkunarMoguleikar()
 {
     string skipunin;
+    vector<tolvufolk> radad;
 
     system("cls");
 
@@ -290,14 +290,14 @@ void NotendaUI::flokkunarMoguleikar()
 
             if(skipunin == "ascending" || skipunin == "a")
             {
-                _service.radaNafniHaekkandi();
-                prentaLista();
+                radad = _service.rada("nafn", "asc");
+                prentaLista(radad);
             }
 
             else if(skipunin == "descending" || skipunin == "d")
             {
-                _service.radaNafniLaekkandi();
-                prentaLista();
+                radad = _service.rada("nafn", "desc");
+                prentaLista(radad);
             }
 
             else if (skipunin == "return" || skipunin == "r")
@@ -314,14 +314,14 @@ void NotendaUI::flokkunarMoguleikar()
 
             if(skipunin == "ascending" || skipunin == "a")
             {
-                _service.radaAldriHaekkandi();
-                prentaLista();
+                radad = _service.rada("aldur", "asc");
+                prentaLista(radad);
             }
 
             else if(skipunin == "descending" || skipunin == "d")
             {
-                _service.radaAldriLaekkandi();
-                prentaLista();
+                radad = _service.rada("aldur", "desc");
+                prentaLista(radad);
 
             }
 
@@ -335,18 +335,19 @@ void NotendaUI::flokkunarMoguleikar()
     {
         upphafsUI();
 
+
         cin >> skipunin;
 
             if(skipunin == "ascending" || skipunin == "a")
             {
-                _service.radaFaedinguHaekkandi();
-                prentaLista();
+                radad = _service.rada("faedingarar", "asc");
+                prentaLista(radad);
             }
 
             else if(skipunin == "descending" || skipunin == "d")
             {
-                _service.radaFaedinguLaekkandi();
-                prentaLista();
+                radad = _service.rada("faedingarar", "desc");
+                prentaLista(radad);
 
             }
 
@@ -370,14 +371,14 @@ void NotendaUI::flokkunarMoguleikar()
 
         if(skipunin == "ascending" || skipunin == "a")
         {
-            _service.radaDaudaHaekkandi();
-            prentaLista();
+            radad = _service.rada("danarar", "asc");
+            prentaLista(radad);
         }
 
         else if(skipunin == "descending" || skipunin == "d")
         {
-            _service.radaDaudaLaekkandi();
-            prentaLista();
+            radad = _service.rada("danarar", "desc");
+            prentaLista(radad);
 
         }
     }
@@ -442,7 +443,7 @@ void NotendaUI::eydaPersonu(const vector<tolvufolk>& gogn)
     do
     {
         system("cls");
-        prentaLista();
+        prentaLista(_service.getTolvufolk(false));
         int persNR;
         cout << "Delete scientist number: ";
         cin >> persNR;
@@ -574,7 +575,7 @@ void NotendaUI::adalvalmyndUI()
 
         if (skipun == "list" || skipun == "l")
         {
-            prentaLista();
+            prentaLista(gogn);
         }
 
         else if (skipun == "sort"|| skipun == "so")
@@ -588,7 +589,7 @@ void NotendaUI::adalvalmyndUI()
             system("cls");
             cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
-            prentaLista();
+            prentaLista(gogn);
         }
 
         else if (skipun == "delete" || skipun == "d")

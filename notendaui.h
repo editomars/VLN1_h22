@@ -14,7 +14,7 @@ public:
     void keyra();
     void baetaVidPersonu(); //Baeta vid personu UI grein
     void eydaPersonu(const vector<tolvufolk>& gogn); //Eyda personu UI grein
-    void prentaLista(); //Skrifar út gögn á console
+    void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
     void leitaAdNafni(const vector<tolvufolk>& gogn);
     void uppfaeraPersonu();
     void tortimaLista();
