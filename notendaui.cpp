@@ -89,11 +89,18 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
         else if (skipun == "quit" || skipun == "q")
         {
             cout << "Do you want to save before you quit? (Y/N): ";
-            cin >> skipun;
-            if(skipun == "Y" || skipun == "y")
+            do
             {
-                vista();
-            }
+                cin >> skipun;
+                if(skipun == "Y" || skipun == "y")
+                {
+                    vista();
+                }
+                else if (skipun != "n" && skipun != "N")
+                {
+                    cout << "Invalid input, try again: ";
+                }
+            }while(skipun != "y" && skipun != "Y" && skipun != "n" && skipun != "N");
             break;
         }
 
@@ -421,12 +428,19 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
     }
 
     cout << "Do you want to save the sorted list? (Y/N): ";
-    cin >> skipunin;
-    if(skipunin == "Y" || skipunin == "y")
+    do
     {
-        _service.uppfaeraTolvufolk(radad);
-        vista();
-    }
+        cin >> skipunin;
+        if(skipunin == "Y" || skipunin == "y")
+        {
+            vista();
+            _service.uppfaeraTolvufolk(radad);
+        }
+        else if (skipunin != "n" && skipunin != "N")
+        {
+            cout << "Invalid input, try again: ";
+        }
+    }while(skipunin != "y" && skipunin != "Y" && skipunin != "n" && skipunin != "N");
 }
 
 void NotendaUI::tortimaLista() //Purge UI grein
@@ -501,11 +515,18 @@ bool NotendaUI::aframhaldandiUI()
         {
             string skipun;
             cout << "Do you want to save before you quit? (Y/N): ";
-            cin >> skipun;
-            if(skipun == "Y" || skipun == "y")
+            do
             {
-                vista();
-            }
+                cin >> skipun;
+                if(skipun == "Y" || skipun == "y")
+                {
+                    vista();
+                }
+                else if (skipun != "n" && skipun != "N")
+                {
+                    cout << "Invalid input, try again: ";
+                }
+            }while(skipun != "y" && skipun != "Y" && skipun != "n" && skipun != "N");
             return false;
         }
 
