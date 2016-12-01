@@ -327,105 +327,167 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 {
     string skipunin;
     vector<tolvufolk> radad;
-
+    bool rettInntak = true;
     rodunarMoguleikar();
 
-    cin >> skipunin;
-
-    if (skipunin == "name" || skipunin == "n")
+    do
     {
-        upphafsUI();
-
+        rettInntak = true;
         cin >> skipunin;
 
-            if(skipunin == "ascending" || skipunin == "a")
-            {
-                radad = _service.rada("nafn", "asc");
-                prentaLista(radad);
-            }
 
-            else if(skipunin == "descending" || skipunin == "d")
-            {
-                radad = _service.rada("nafn", "desc");
-                prentaLista(radad);
-            }
-
-            else if (skipunin == "return" || skipunin == "r")
-            {
-                return;
-            }
-    }
-
-    else if(skipunin == "age" || skipunin == "a")
-    {
-        upphafsUI();
-
-        cin >> skipunin;
-
-            if(skipunin == "ascending" || skipunin == "a")
-            {
-                radad = _service.rada("aldur", "asc");
-                prentaLista(radad);
-            }
-
-            else if(skipunin == "descending" || skipunin == "d")
-            {
-                radad = _service.rada("aldur", "desc");
-                prentaLista(radad);
-
-            }
-
-            else if (skipunin == "return" || skipunin == "r")
-            {
-                return;
-            }
-    }
-
-    else if(skipunin == "birth" || skipunin == "b")
-    {
-        upphafsUI();
-
-
-        cin >> skipunin;
-
-            if(skipunin == "ascending" || skipunin == "a")
-            {
-                radad = _service.rada("faedingarar", "asc");
-                prentaLista(radad);
-            }
-
-            else if(skipunin == "descending" || skipunin == "d")
-            {
-                radad = _service.rada("faedingarar", "desc");
-                prentaLista(radad);
-
-            }
-
-            else if (skipunin == "return" || skipunin == "r")
-            {
-                return;
-            }
-    }
-
-    else if(skipunin == "death" || skipunin == "d")
-    {
-        radaUI();
-
-        cin >> skipunin;
-
-        if(skipunin == "ascending" || skipunin == "a")
+        if (skipunin == "name" || skipunin == "n")
         {
-            radad = _service.rada("danarar", "asc");
-            prentaLista(radad);
+            upphafsUI();
+
+            do
+            {
+                rettInntak = true;
+
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("nafn", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("nafn", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "return" || skipunin == "r")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+            }while(rettInntak == false);
         }
 
-        else if(skipunin == "descending" || skipunin == "d")
+        else if(skipunin == "age" || skipunin == "a")
         {
-            radad = _service.rada("danarar", "desc");
-            prentaLista(radad);
+            upphafsUI();
 
+            do
+            {
+                rettInntak = true;
+
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("aldur", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("aldur", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "return" || skipunin == "r")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+            }while(rettInntak == false);
         }
-    }
+
+        else if(skipunin == "birth" || skipunin == "b")
+        {
+            upphafsUI();
+
+            do
+            {
+                rettInntak = true;
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("faedingarar", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("faedingarar", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "return" || skipunin == "r")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+
+            }while(rettInntak == false);
+        }
+
+        else if(skipunin == "death" || skipunin == "d")
+        {
+            upphafsUI();
+
+            do
+            {
+                rettInntak = true;
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("danarar", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("danarar", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "return" || skipunin == "r")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+
+            }while(rettInntak == false);
+        }
+
+        else if (skipunin == "return" || skipunin == "r")
+        {
+            return;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again: ";
+            rettInntak = false;
+        }
+
+    }while(rettInntak == false);
 
     cout << "Do you want to save the sorted list? (Y/N): ";
     do
