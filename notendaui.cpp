@@ -15,12 +15,7 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
-    _service.yfirskrifaTolvufolk(tolvufolk("Charles Babbage", "m", 1990, 1991));
-    _service.vidbotarTolvufolk(tolvufolk("Ada Lovelace", "f", 1880, 1890));
-    _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
-    _service.vidbotarTolvufolk(tolvufolk("Edit Omarsdottir", "f", 1988, -1));
-
-    _service.saekjaGogn();
+   _service.saekjaGogn();
 
     adalvalmyndUI();
 }
