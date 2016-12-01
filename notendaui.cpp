@@ -93,22 +93,18 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
 
         else if (skipun == "quit" || skipun == "q")
         {
+            cout << "Do you want to save before you quit? (Y/N): ";
+            cin >> skipun;
+            if(skipun == "Y" || skipun == "y")
+            {
+                vista();
+            }
             break;
         }
 
         else if (skipun == "save" || skipun == "s")
         {
-            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
-            cin >> skipun;
-            if (skipun == "Y" || skipun == "y")
-            {
-                _service.yfirskrifaTolvufolk();
-                cout << "Data has been saved" << endl;
-            }
-            else
-            {
-                cout << "Saving has been cancelled" << endl;
-            }
+            vista();
         }
 
         else
@@ -214,15 +210,8 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     cout << "Name: " << target.getNafn() << ",\tGender: "
          << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
 
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command.                           ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-    cout << "*||name   - update name, please write 'name'                            ||*" << endl;
-    cout << "*||gender - update gender, please write 'gender'                        ||*" << endl;
-    cout << "*||birth  - update year of birth, please write 'birth'                  ||*" << endl;
-    cout << "*||death  - update year of death, please write 'death'                  ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    uppfaersluMoguleikar();
+
     cin >> skipunin;
 
     if (skipunin == "name" || skipunin == "n")
@@ -395,17 +384,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
     string skipunin;
     vector<tolvufolk> radad;
 
-    system("cls");
-
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-    cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
-    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
-    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
-    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    rodunarMoguleikar();
 
     cin >> skipunin;
 
@@ -503,6 +482,14 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
         }
     }
+
+    cout << "Do you want to save the sorted list? (Y/N): ";
+    cin >> skipunin;
+    if(skipunin == "Y" || skipunin == "y")
+    {
+        _service.uppfaeraTolvufolk(radad);
+        vista();
+    }
 }
 
 void NotendaUI::tortimaLista() //Purge UI grein
@@ -521,6 +508,7 @@ void NotendaUI::tortimaLista() //Purge UI grein
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
 
             _service.hreinsaTolvufolk();
+            _service.eydaTolvufolk();
         }
 
         else
@@ -533,6 +521,22 @@ void NotendaUI::tortimaLista() //Purge UI grein
     else
     {
         cout << "Purge canceled." << endl;
+    }
+}
+
+void NotendaUI::vista()
+{
+    string skipun;
+    cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N): ";
+    cin >> skipun;
+    if (skipun == "Y" || skipun == "y")
+    {
+        _service.yfirskrifaTolvufolk();
+        cout << "Data has been saved" << endl;
+    }
+    else
+    {
+        cout << "Saving has been cancelled" << endl;
     }
 }
 
@@ -558,6 +562,13 @@ bool NotendaUI::aframhaldandiUI()
 
         else if(svar == "N" || svar == "n")
         {
+            string skipun;
+            cout << "Do you want to save before you quit? (Y/N): ";
+            cin >> skipun;
+            if(skipun == "Y" || skipun == "y")
+            {
+                vista();
+            }
             return false;
         }
 
@@ -591,6 +602,7 @@ bool NotendaUI::skipunaAframhald()
     }
     return false;
 }
+
 
 //------------------------------- Svæði fyrir bool flögg endar ---------------------------------
 
@@ -628,6 +640,36 @@ void NotendaUI::leitarMoguleikar()
     cout << "*||return - Returns to the main menu                                    ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
+
+void NotendaUI::rodunarMoguleikar()
+{
+    system("cls");
+
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command                            ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
+    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
+    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
+    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
+    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+}
+
+void NotendaUI::uppfaersluMoguleikar()
+{
+
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command.                           ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - update name, please write 'name'                            ||*" << endl;
+    cout << "*||gender - update gender, please write 'gender'                        ||*" << endl;
+    cout << "*||birth  - update year of birth, please write 'birth'                  ||*" << endl;
+    cout << "*||death  - update year of death, please write 'death'                  ||*" << endl;
+    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+}
+
 void NotendaUI::upphafsUI()
 {
     system("cls");

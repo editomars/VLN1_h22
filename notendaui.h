@@ -25,6 +25,7 @@ private:
     void leitaGrein(); //Search / Filter UI grein
     void flokkunarMoguleikar(); //Sort UI grein
     void tortimaLista(); //Purge UI grein
+    void vista(); //Vistar UI grein
 
     //Bool flög
     bool aframhaldandiUI(); //Vantar comment
@@ -32,7 +33,9 @@ private:
 
     //Cout blokkir
     void skrifaUt(); //Skrifa út aðalvalmynd
-    void leitarMoguleikar(); //Vantar comment
+    void leitarMoguleikar(); //Birtir moguleika a leitun
+    void rodunarMoguleikar(); //Birtir moguleika a rodun
+    void uppfaersluMoguleikar(); //Birtir moguleika a uppfaerslu
     void upphafsUI(); //Vantar comment
     void radaUI(); //Vantar comment
     void hausUI(); //Vantar comment
