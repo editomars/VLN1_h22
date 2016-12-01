@@ -30,6 +30,7 @@ private:
     void skrifaUt(); //Skrifa út aðalvalmynd
     void leitarMoguleikar(); //Vantar comment
     void upphafsUI(); //Vantar comment
+    void radaUI(); //Vantar comment
     void hausUI(); //Vantar comment
 
     //Bool flög

@@ -488,13 +488,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
     else if(skipunin == "death" || skipunin == "d")
     {
-        system("cls");
-        cout << "*=========================================================================*" << endl;
-        cout << "*||Please enter one of the following command                            ||*" << endl;
-        cout << "*=========================================================================*" << endl;
-        cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
-        cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
-        cout << "*=========================================================================*" << endl;
+        radaUI();
 
         cin >> skipunin;
 
@@ -646,6 +640,17 @@ void NotendaUI::upphafsUI()
     cout << "*||descending - Sort age by descending order                            ||*" << endl;
     cout << "*||return     - Returns to the main menu                                ||*" << endl;
     cout << "*=========================================================================*" << endl;
+}
+
+void NotendaUI::radaUI()
+{
+system("cls");
+cout << "*=========================================================================*" << endl;
+cout << "*||Please enter one of the following command                            ||*" << endl;
+cout << "*=========================================================================*" << endl;
+cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
+cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
+cout << "*=========================================================================*" << endl;
 }
 
 void NotendaUI::hausUI()
