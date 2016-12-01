@@ -26,15 +26,15 @@ private:
     void flokkunarMoguleikar(); //Sort UI grein
     void tortimaLista(); //Purge UI grein
 
+    //Bool flög
+    bool aframhaldandiUI(); //Vantar comment
+    bool skipunaAframhald(); //Vantar comment
+
     //Cout blokkir
     void skrifaUt(); //Skrifa út aðalvalmynd
     void leitarMoguleikar(); //Vantar comment
     void upphafsUI(); //Vantar comment
     void hausUI(); //Vantar comment
-
-    //Bool flög
-    bool aframhaldandiUI(); //Vantar comment
-    bool skipunaAframhald(); //Vantar comment
 };
 
 #endif // NOTENDAUI_H
