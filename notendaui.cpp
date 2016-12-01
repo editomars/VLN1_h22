@@ -256,7 +256,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
     else if (skipunin == "return" || skipunin == "r")
     {
-        adalvalmyndUI();
+        return;
     }
 }
 
@@ -373,7 +373,7 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
 
         else if (skipunin == "return" || skipunin == "r")
         {
-            adalvalmyndUI();
+            return;
         }
 
     }while(skipunaAframhald());
@@ -408,7 +408,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
             else if (skipunin == "return" || skipunin == "r")
             {
-                adalvalmyndUI();
+                return;
             }
     }
 
@@ -433,7 +433,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
             else if (skipunin == "return" || skipunin == "r")
             {
-                adalvalmyndUI();
+                return;
             }
     }
 
@@ -459,7 +459,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
             else if (skipunin == "return" || skipunin == "r")
             {
-                adalvalmyndUI();
+                return;
             }
     }
 
