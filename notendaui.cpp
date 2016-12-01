@@ -338,7 +338,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
         if (skipunin == "name" || skipunin == "n")
         {
-            upphafsUI();
+            radaUI();
 
             do
             {
@@ -373,7 +373,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
         else if(skipunin == "age" || skipunin == "a")
         {
-            upphafsUI();
+            radaUI();
 
             do
             {
@@ -408,7 +408,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
         else if(skipunin == "birth" || skipunin == "b")
         {
-            upphafsUI();
+            radaUI();
 
             do
             {
@@ -443,7 +443,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 
         else if(skipunin == "death" || skipunin == "d")
         {
-            upphafsUI();
+            radaUI();
 
             do
             {
@@ -690,17 +690,6 @@ void NotendaUI::uppfaersluMoguleikar()
     cout << "*=========================================================================*" << endl;
 }
 
-void NotendaUI::upphafsUI()
-{
-    system("cls");
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-    cout << "*||ascending  - Sort age by ascending order                             ||*" << endl;
-    cout << "*||descending - Sort age by descending order                            ||*" << endl;
-    cout << "*||return     - Returns to the main menu                                ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-}
 
 void NotendaUI::radaUI()
 {
@@ -710,6 +699,7 @@ cout << "*||Please enter one of the following command                           
 cout << "*=========================================================================*" << endl;
 cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
 cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
+cout << "*||return     - Returns to the main menu, please write 'return'         ||*" << endl;
 cout << "*=========================================================================*" << endl;
 }
 
