@@ -309,7 +309,15 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             getline(cin,nafn);
             cout << endl;
             gogn = _service.leitaStreng("nafn", nafn);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "age" || skipunin == "a")
@@ -320,7 +328,15 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             cin >> age;
             cout << endl;
             gogn = _service.leitaHeiltolu("aldur", age);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "birth" || skipunin == "b")
@@ -331,7 +347,15 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             cin >> birth;
             cout << endl;
             gogn = _service.leitaHeiltolu("faedingarar", birth);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "death" || skipunin == "d")
@@ -342,7 +366,15 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             cin >> death;
             cout << endl;
             gogn = _service.leitaHeiltolu("danarar", death);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "quit" || skipunin == "q")
@@ -744,20 +776,4 @@ void NotendaUI::hausUI()
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
-
-void NotendaUI::prentaRadad(const vector<tolvufolk>& gogn)
-{
-    hausUI();
-    for(size_t i = 0; i < gogn.size(); i++)
-    {
-            cout << "|" << i + 1 << " \t\t ";
-            cout << gogn[i];
-    }
-    if (gogn.size() == 0)
-    {
-        cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-    }
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-}
-
 //------------------------------- Svæðu fyrir cout blokkir endar -------------------------------
