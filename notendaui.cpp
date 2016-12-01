@@ -178,12 +178,22 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         system("cls");
         prentaLista(_service.getTolvufolk());
         int persNR;
-        cout << "Delete scientist number: ";
+        cout << "Delete scientist number (-1 to cancel deletion): ";
         cin >> persNR;
         while (persNR > _service.getSize() || persNR <= 0)
         {
+            if (persNR == -1)
+            {
+                break;
+            }
             cerr << "Input not valid, try again: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin >> persNR;
+        }
+        if (persNR == -1)
+        {
+            break;
         }
         persNR--;
         cout << _service.getStaktTolvufolk(persNR).getNafn() << " has been removed.\n";
@@ -201,8 +211,23 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
     prentaLista(_service.getTolvufolk());
 
-    cout << "Update scientist number: ";
+    cout << "Update scientist number (-1 to cancel update): ";
     cin >> persNR;
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
     persNR --;
     target = _service.getStaktTolvufolk(persNR);
 
@@ -255,9 +280,14 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
 
-    else if (skipunin == "return" || skipunin == "r")
+    else if (skipunin == "quit" || skipunin == "q")
     {
         return;
+    }
+
+    else
+    {
+        cout << "Invalid input, try again: ";
     }
 }
 
@@ -315,9 +345,14 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             prentaRadad(gogn);
         }
 
-        else if (skipunin == "return" || skipunin == "r")
+        else if (skipunin == "quit" || skipunin == "q")
         {
             return;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again: ";
         }
 
     }while(skipunaAframhald());
@@ -358,7 +393,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                     prentaLista(radad);
                 }
 
-                else if (skipunin == "return" || skipunin == "r")
+                else if (skipunin == "quit" || skipunin == "q")
                 {
                     return;
                 }
@@ -393,7 +428,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                     prentaLista(radad);
                 }
 
-                else if (skipunin == "return" || skipunin == "r")
+                else if (skipunin == "quit" || skipunin == "q")
                 {
                     return;
                 }
@@ -427,7 +462,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                     prentaLista(radad);
                 }
 
-                else if (skipunin == "return" || skipunin == "r")
+                else if (skipunin == "quit" || skipunin == "q")
                 {
                     return;
                 }
@@ -462,7 +497,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                     prentaLista(radad);
                 }
 
-                else if (skipunin == "return" || skipunin == "r")
+                else if (skipunin == "quit" || skipunin == "q")
                 {
                     return;
                 }
@@ -476,7 +511,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
             }while(rettInntak == false);
         }
 
-        else if (skipunin == "return" || skipunin == "r")
+        else if (skipunin == "quit" || skipunin == "q")
         {
             return;
         }
@@ -564,7 +599,7 @@ bool NotendaUI::aframhaldandiUI()
 
     while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
     {
-        cout << "Continue? (Y/N): ";
+        cout << "Return to Main Menu? (Y/N): ";
         cin >> svar;
 
         if (svar == "Y" || svar == "y")
@@ -653,11 +688,11 @@ void NotendaUI::leitarMoguleikar()
     cout << "*=========================================================================*" << endl;
     cout << "*||Please enter one of the following command                            ||*" << endl;
     cout << "*=========================================================================*" << endl;
-    cout << "*||name   - Search by name, please write 'name'                         ||*" << endl;
-    cout << "*||age    - Search by age, please write 'age'                           ||*" << endl;
-    cout << "*||birth  - Search by year of birth, please write 'birth'               ||*" << endl;
-    cout << "*||death  - Search by year of death, please write 'death'               ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*||name   - Search by name, please write 'name'.                        ||*" << endl;
+    cout << "*||age    - Search by age, please write 'age'.                          ||*" << endl;
+    cout << "*||birth  - Search by year of birth, please write 'birth'.              ||*" << endl;
+    cout << "*||death  - Search by year of death, please write 'death'.              ||*" << endl;
+    cout << "*||quit   - Quit searching.                                             ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
 
@@ -672,7 +707,7 @@ void NotendaUI::rodunarMoguleikar()
     cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
     cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
     cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
 
@@ -686,7 +721,7 @@ void NotendaUI::uppfaersluMoguleikar()
     cout << "*||gender - update gender, please write 'gender'                        ||*" << endl;
     cout << "*||birth  - update year of birth, please write 'birth'                  ||*" << endl;
     cout << "*||death  - update year of death, please write 'death'                  ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*||quit   - Quit updating.                                              ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
 
@@ -699,7 +734,7 @@ cout << "*||Please enter one of the following command                           
 cout << "*=========================================================================*" << endl;
 cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
 cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
-cout << "*||return     - Returns to the main menu, please write 'return'         ||*" << endl;
+cout << "*||quit   - Quit sorting.                                               ||*" << endl;
 cout << "*=========================================================================*" << endl;
 }
 
