@@ -133,7 +133,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
         cout << "Enter lastname: ";
         cin >> eftirnafn;
 
-        cout << "Enter gender(f/m) [lowercase]: ";
+        cout << "Enter gender (f/m) [lowercase]: ";
         cin >> kKyn;
 
         while (kKyn != "m" && kKyn != "f")
@@ -154,7 +154,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
             cin >> fAr;
         }
 
-        cout << "Enter year of death(-1 if still alive): ";
+        cout << "Enter year of death (-1 if still alive): ";
         cin >> dAr;
 
         while (-1 > dAr || !cin)
