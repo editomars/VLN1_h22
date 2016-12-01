@@ -1,5 +1,6 @@
 #include "tolvufolk.h"
 
+//Smiðir
 tolvufolk::tolvufolk()
 {
     _nafn = _kyn = "None";
@@ -14,6 +15,7 @@ tolvufolk::tolvufolk(string nafn, string kyn, int fAr, int dAr)
     _danarar = dAr;
 }
 
+//Get föll
 int tolvufolk::getFaedingarar() const
 {
     return _faedingarar;
@@ -33,6 +35,8 @@ string tolvufolk::getKyn() const
 {
     return _kyn;
 }
+
+//Set föll
 void tolvufolk::uppfFaedingarar(int nyttAr)
 {
     _faedingarar = nyttAr;
@@ -52,7 +56,7 @@ void tolvufolk::uppfGender(string nyttKyn)
     _kyn = nyttKyn;
 }
 
-
+//ops
 ostream& operator <<(ostream& out, const tolvufolk& data)
 {
     /*

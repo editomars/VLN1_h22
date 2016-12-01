@@ -13,14 +13,17 @@ public:
     tolvufolk();
 
     tolvufolk(string nafn, string kyn, int fAr, int dAr);
+    //Get föll
     int getFaedingarar() const;
     int getDanarar() const;
     string getNafn() const;
     string getKyn() const;
+    //Set föll
     void uppfFaedingarar(int nyttAr);
     void uppfDanarar(int nyttAr);
     void uppfNafn(string nyttNafn);
     void uppfGender(string nyttKyn);
+    //ops
     friend ostream& operator <<(ostream& out, const tolvufolk& gogn);
 private:
     string _nafn;

@@ -83,10 +83,13 @@ struct daudiLaekkandi
 
 //----------------------- Svæði fyir sorting struct endar ---------------------
 
+//----------------------- Svæði fyrir public föll byrjar ----------------------
+
+//Get föll
 vector<tolvufolk> tolvufolkService::getTolvufolk(bool lesaUrGagnagrunni)
 {
     if (lesaUrGagnagrunni)
-        _folk = _dataaccess.lesaSkra();
+        _folk = _dataaccess.lesa();
     return _folk;
 }
 
@@ -95,27 +98,18 @@ tolvufolk tolvufolkService::getStaktTolvufolk(int ndx)
     return _folk[ndx];
 }
 
-void tolvufolkService::eydaTolvufolk()
-{
-    _dataaccess.eydaSkra();
-}
-
-void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
-{
-    _dataaccess.baetaVidIskra(t);
-}
-
+//Föll sem tengja við gagnagrunn
 void tolvufolkService::vidbotarTolvufolk()
 {
     for (size_t i = 0; i < _folk.size(); ++i)
     {
-        _dataaccess.baetaVidIskra(_folk[i]);
+        _dataaccess.baetaVid(_folk[i]);
     }
 }
 
-void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
+void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
 {
-    _dataaccess.skrifaIskra(t);
+    _dataaccess.baetaVid(t);
 }
 
 void tolvufolkService::yfirskrifaTolvufolk()
@@ -124,6 +118,17 @@ void tolvufolkService::yfirskrifaTolvufolk()
     vidbotarTolvufolk();
 }
 
+void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
+{
+    _dataaccess.skrifa(t);
+}
+
+void tolvufolkService::eydaTolvufolk()
+{
+    _dataaccess.eyda();
+}
+
+//Föll sem breyta vector, en ekki gagnagrunn
 void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
 {
     _folk.push_back(t);
@@ -134,6 +139,11 @@ void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
     _folk = t;
 }
 
+void tolvufolkService::eydaStakiTolvufolk(int nr)
+{
+    _folk.erase(_folk.begin() + nr);
+}
+
 void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)
 {
     _folk[nr].uppfNafn(name);
@@ -142,66 +152,41 @@ void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, in
     _folk[nr].uppfDanarar(dYear);
 }
 
-vector<tolvufolk> tolvufolkService::leitaEftirAldriTolvufolk(int aldur)
-{
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        int samanburdur = (_folk[i].getDanarar() == -1 ? 2016 : _folk[i].getDanarar());
-        if (samanburdur - _folk[i].getFaedingarar() == aldur)
-        {
-            t.push_back(_folk[i]);
-        }
-    }
-    return t;
-}
-
-vector<tolvufolk> tolvufolkService::leitaEftirArtaliTolvufolk(int ar, bool f)
-{
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        if (f){
-            if (_folk[i].getFaedingarar() == ar)
-            {
-                t.push_back(_folk[i]);
-            }
-        }
-
-        else
-        {
-            if (_folk[i].getDanarar() == ar)
-            {
-                t.push_back(_folk[i]);
-            }
-        }
-    }
-    return t;
-}
-
-vector<tolvufolk> tolvufolkService::leitaEftirNafniTolvufolk(string nafn)
-{
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        if (_folk[i].getNafn() == nafn)
-        {
-            t.push_back(_folk[i]);
-        }
-    }
-    return t;
-}
-
 void tolvufolkService::hreinsaTolvufolk()
 
 {
     _folk.clear();
 }
 
-
-void tolvufolkService::eydaStakiTolvufolk(int nr)
+//Föll sem skila umbreyttum gögnum
+vector<tolvufolk> tolvufolkService::leitaStreng(string flokkur, string leitarord)
 {
-    _folk.erase(_folk.begin() + nr);
+    if (flokkur == "nafn")
+    {
+        return leitaEftirNafniTolvufolk(leitarord);
+    }
+    if (flokkur == "kyn")
+    {
+        return leitaEftirKyniTolvufolk(leitarord);
+    }
+    return _folk;
+}
+
+vector<tolvufolk> tolvufolkService::leitaHeiltolu(string flokkur, int leitarord)
+{
+    if (flokkur == "aldur")
+    {
+        return leitaEftirAldriTolvufolk(leitarord);
+    }
+    if (flokkur == "faedingarar")
+    {
+        return leitaEftirArtaliTolvufolk(leitarord, true);
+    }
+    if (flokkur == "danarar")
+    {
+        return leitaEftirArtaliTolvufolk(leitarord, false);
+    }
+    return _folk;
 }
 
 vector<tolvufolk> tolvufolkService::rada(string flokkur, string rod)
@@ -212,47 +197,49 @@ vector<tolvufolk> tolvufolkService::rada(string flokkur, string rod)
         {
             return radaNafniHaekkandi();
         }
-        else if (rod == "desc")
+        if (rod == "desc")
         {
             return radaNafniLaekkandi();
         }
     }
-    else if (flokkur == "aldur")
+    if (flokkur == "aldur")
     {
         if (rod == "asc")
         {
             return radaAldriHaekkandi();
         }
-        else if (rod == "desc")
+        if (rod == "desc")
         {
             return radaAldriLaekkandi();
         }
     }
-    else if (flokkur == "faedingarar")
+    if (flokkur == "faedingarar")
     {
         if (rod == "asc")
         {
             return radaFaedinguHaekkandi();
         }
-        else if (rod == "desc")
+        if (rod == "desc")
         {
             return radaFaedinguLaekkandi();
         }
     }
-    else if (flokkur == "danarar")
+    if (flokkur == "danarar")
     {
         if (rod == "asc")
         {
             return radaDaudaHaekkandi();
         }
-        else if (rod == "desc")
+        if (rod == "desc")
         {
             return radaDaudaLaekkandi();
         }
     }
     return _folk;
 }
+//--------------------------- Svæði fyrir public föll endar ---------------------------------------------
 
+//------------------------ Svæði fyrir private föll byrjar ----------------------------------------------
 //Sort föll --private
 vector<tolvufolk> tolvufolkService::radaNafniHaekkandi()
 {
@@ -315,4 +302,68 @@ vector<tolvufolk> tolvufolkService::radaDaudaLaekkandi()
     vector<tolvufolk> sorted = _folk;
     sort(sorted.begin(), sorted.end(), temp);
     return sorted;
+}
+
+//Leita föll --private (filter föll)
+vector<tolvufolk> tolvufolkService::leitaEftirAldriTolvufolk(int aldur)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        int samanburdur = (_folk[i].getDanarar() == -1 ? 2016 : _folk[i].getDanarar());
+        if (samanburdur - _folk[i].getFaedingarar() == aldur)
+        {
+            t.push_back(_folk[i]);
+        }
+    }
+    return t;
+}
+
+vector<tolvufolk> tolvufolkService::leitaEftirArtaliTolvufolk(int ar, bool f)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        if (f){
+            if (_folk[i].getFaedingarar() == ar)
+            {
+                t.push_back(_folk[i]);
+            }
+        }
+
+        else
+        {
+            if (_folk[i].getDanarar() == ar)
+            {
+                t.push_back(_folk[i]);
+            }
+        }
+    }
+    return t;
+}
+
+vector<tolvufolk> tolvufolkService::leitaEftirNafniTolvufolk(string nafn)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        if (_folk[i].getNafn() == nafn)
+        {
+            t.push_back(_folk[i]);
+        }
+    }
+    return t;
+}
+
+vector<tolvufolk> tolvufolkService::leitaEftirKyniTolvufolk(string kyn)
+{
+    vector<tolvufolk> t;
+    for (size_t i = 0; i < _folk.size(); ++i)
+    {
+        if (_folk[i].getKyn() == kyn)
+        {
+            t.push_back(_folk[i]);
+        }
+    }
+    return t;
 }
