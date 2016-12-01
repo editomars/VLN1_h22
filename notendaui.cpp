@@ -6,11 +6,13 @@
 
 using namespace std;
 
+//Smiður
 NotendaUI::NotendaUI()
 {
 
 }
 
+//"Main" fall
 void NotendaUI::keyra()
 {
 
@@ -22,26 +24,180 @@ void NotendaUI::keyra()
     adalvalmyndUI();
 }
 
-void NotendaUI::skrifaUt()
+void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
 {
     system("cls");
+    hausUI();
+    for (size_t i = 0; i < gogn.size(); i++)
+    {
+        cout << "|" << i + 1 << " \t\t ";
+        cout << gogn[i];
 
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one of the following commands                    ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||list   - Shows a list of all known entries in the database.   ||*" << endl;
-    cout << "*||add    - Add a new entry into the database.                   ||*" << endl;
-    cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
-    cout << "*||update - Updates an entry from the database.                  ||*" << endl;
-    cout << "*||search - Search for an entry from the database.               ||*" << endl;
-    cout << "*||sort   - Sort the entries in the database.                    ||*" << endl;
-    cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
-    cout << "*||save   - Saves data to database.                              ||*" << endl;
-    cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
-    cout << "*==================================================================*" << endl;
+    }
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
-void NotendaUI::uppfaeraPersonu()
+//------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
+
+void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI greinar
+{
+
+    vector<tolvufolk> gogn = _service.getTolvufolk(true);
+
+    skrifaUt();
+
+    do
+    {
+        string skipun;
+        cin >> skipun;
+
+        if (skipun == "list" || skipun == "l")
+        {
+            prentaLista(gogn);
+        }
+
+        else if (skipun == "sort"|| skipun == "so")
+        {
+            skrifaUt();
+            flokkunarMoguleikar();
+        }
+
+        else if (skipun == "add" || skipun == "a")
+        {
+            system("cls");
+            cout << "-----Adding computer scientist-----" << endl;
+            baetaVidPersonu();
+            prentaLista(gogn);
+        }
+
+        else if (skipun == "delete" || skipun == "d")
+        {
+            eydaPersonu();
+        }
+
+        else if (skipun == "update" || skipun == "u")
+        {
+            skrifaUt();
+            uppfaeraPersonu();
+        }
+
+        else if (skipun == "search" || skipun == "se")
+        {
+            skrifaUt();
+            leitaGrein();
+        }
+
+        else if (skipun == "purge" || skipun == "p")
+        {
+            skrifaUt();
+            tortimaLista();
+        }
+
+        else if (skipun == "quit" || skipun == "q")
+        {
+            break;
+        }
+
+        else if (skipun == "save" || skipun == "s")
+        {
+            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
+            cin >> skipun;
+            if (skipun == "Y" || skipun == "y")
+            {
+                _service.yfirskrifaTolvufolk();
+                cout << "Data has been saved" << endl;
+            }
+            else
+            {
+                cout << "Saving has been cancelled" << endl;
+            }
+        }
+
+        else
+        {
+            skrifaUt();
+            cerr << "Input not valid, try again: ";
+        }
+    } while (aframhaldandiUI());
+}
+
+void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
+{
+    do
+    {
+        string fornafn;
+        string eftirnafn;
+        string kKyn;
+        int fAr;
+        int dAr;
+
+        cout << "Enter firstname: ";
+        cin >> fornafn;
+
+        cout << "Enter lastname: ";
+        cin >> eftirnafn;
+
+        cout << "Enter gender(f/m) [lowercase]: ";
+        cin >> kKyn;
+
+        while (kKyn != "m" && kKyn != "f")
+        {
+            cin.clear();
+            cerr << "Input not valid, try again: ";
+            cin >> kKyn;
+        }
+
+        cout << "Enter year of birth: ";
+        cin >> fAr;
+
+        while (0 > fAr || cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> fAr;
+        }
+
+        cout << "Enter year of death(-1 if still alive): ";
+        cin >> dAr;
+
+        while (-1 > dAr || !cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> dAr;
+        }
+
+        _service.baetaVidTolvufolk(tolvufolk(fornafn + " " + eftirnafn, kKyn, fAr, dAr));
+
+
+    }while(skipunaAframhald());
+}
+
+void NotendaUI::eydaPersonu() //Delete UI grein
+{
+    vector<tolvufolk> gogn = _service.getTolvufolk(false);
+    do
+    {
+        system("cls");
+        prentaLista(_service.getTolvufolk(false));
+        int persNR;
+        cout << "Delete scientist number: ";
+        cin >> persNR;
+        persNR--;
+        while (persNR > gogn.size() || persNR < 0)
+        {
+            cerr << "Input not valid, try again: ";
+            cin >> persNR;
+            persNR--;
+        }
+        _service.eydaStakiTolvufolk(persNR);
+
+    }while(skipunaAframhald());
+}
+
+void NotendaUI::uppfaeraPersonu() //Update UI grein
 {
     string skipunin;
     int persNR;
@@ -117,36 +273,9 @@ void NotendaUI::uppfaeraPersonu()
     }
 }
 
-void NotendaUI::leitarMoguleikar()
+void NotendaUI::leitaGrein() //Search / Filter UI grein
 {
-    system("cls");
-
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-    cout << "*||name   - Search by name, please write 'name'                         ||*" << endl;
-    cout << "*||age    - Search by age, please write 'age'                           ||*" << endl;
-    cout << "*||birth  - Search by year of birth, please write 'birth'               ||*" << endl;
-    cout << "*||death  - Search by year of death, please write 'death'               ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-}
-
-void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
-{
-    system("cls");
-    hausUI();
-    for (size_t i = 0; i < gogn.size(); i++)
-    {
-        cout << "|" << i + 1 << " \t\t ";
-        cout << gogn[i];
-
-    }
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-}
-
-void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
-{
+    vector<tolvufolk> gogn = _service.getTolvufolk(false);
     do
     {
         leitarMoguleikar();
@@ -263,7 +392,7 @@ void NotendaUI::leitaAdNafni(const vector<tolvufolk>& gogn)
     }while(skipunaAframhald());
 }
 
-void NotendaUI::flokkunarMoguleikar()
+void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 {
     string skipunin;
     vector<tolvufolk> radad;
@@ -384,82 +513,7 @@ void NotendaUI::flokkunarMoguleikar()
     }
 }
 
-void NotendaUI::baetaVidPersonu()
-{
-    do
-    {
-        string fornafn;
-        string eftirnafn;
-        string kKyn;
-        int fAr;
-        int dAr;
-
-        cout << "Enter firstname: ";
-        cin >> fornafn;
-
-        cout << "Enter lastname: ";
-        cin >> eftirnafn;
-
-        cout << "Enter gender(f/m) [lowercase]: ";
-        cin >> kKyn;
-
-        while (kKyn != "m" && kKyn != "f")
-        {
-            cin.clear();
-            cerr << "Input not valid, try again: ";
-            cin >> kKyn;
-        }
-
-        cout << "Enter year of birth: ";
-        cin >> fAr;
-
-        while (0 > fAr || cin.fail())
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cerr << "Input not valid, try again: ";
-            cin >> fAr;
-        }
-
-        cout << "Enter year of death(-1 if still alive): ";
-        cin >> dAr;
-
-        while (-1 > dAr || !cin)
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cerr << "Input not valid, try again: ";
-            cin >> dAr;
-        }
-
-        _service.baetaVidTolvufolk(tolvufolk(fornafn + " " + eftirnafn, kKyn, fAr, dAr));
-
-
-    }while(skipunaAframhald());
-}
-
-void NotendaUI::eydaPersonu(const vector<tolvufolk>& gogn)
-{
-    do
-    {
-        system("cls");
-        prentaLista(_service.getTolvufolk(false));
-        int persNR;
-        cout << "Delete scientist number: ";
-        cin >> persNR;
-        persNR--;
-        while (persNR > gogn.size() || persNR < 0)
-        {
-            cerr << "Input not valid, try again: ";
-            cin >> persNR;
-            persNR--;
-        }
-        _service.eydaStakiTolvufolk(persNR);
-
-    }while(skipunaAframhald());
-}
-
-void NotendaUI::tortimaLista()
+void NotendaUI::tortimaLista() //Purge UI grein
 {
     string skipun;
     cout << "By the Emperor, are you sure you want to purify this database? (Y/N): ";
@@ -490,6 +544,10 @@ void NotendaUI::tortimaLista()
     }
 }
 
+
+//------------------------------- Svæði fyrir UI greinar endar ---------------------------------
+
+//------------------------------- Svæði fyrir bool flögg byrjar --------------------------------
 bool NotendaUI::aframhaldandiUI()
 {
 
@@ -542,6 +600,42 @@ bool NotendaUI::skipunaAframhald()
     return false;
 }
 
+//------------------------------- Svæði fyrir bool flögg endar ---------------------------------
+
+//------------------------------- Svæði fyrir cout blokkir byrjar ------------------------------
+void NotendaUI::skrifaUt()
+{
+    system("cls");
+
+    cout << "*==================================================================*" << endl;
+    cout << "*||Please enter one of the following commands                    ||*" << endl;
+    cout << "*==================================================================*" << endl;
+    cout << "*||list   - Shows a list of all known entries in the database.   ||*" << endl;
+    cout << "*||add    - Add a new entry into the database.                   ||*" << endl;
+    cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
+    cout << "*||update - Updates an entry from the database.                  ||*" << endl;
+    cout << "*||search - Search for an entry from the database.               ||*" << endl;
+    cout << "*||sort   - Sort the entries in the database.                    ||*" << endl;
+    cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
+    cout << "*||save   - Saves data to database.                              ||*" << endl;
+    cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
+    cout << "*==================================================================*" << endl;
+}
+
+void NotendaUI::leitarMoguleikar()
+{
+    system("cls");
+
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command                            ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Search by name, please write 'name'                         ||*" << endl;
+    cout << "*||age    - Search by age, please write 'age'                           ||*" << endl;
+    cout << "*||birth  - Search by year of birth, please write 'birth'               ||*" << endl;
+    cout << "*||death  - Search by year of death, please write 'death'               ||*" << endl;
+    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+}
 void NotendaUI::upphafsUI()
 {
     system("cls");
@@ -561,84 +655,4 @@ void NotendaUI::hausUI()
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
-void NotendaUI::adalvalmyndUI()
-{
-
-    vector<tolvufolk> gogn = _service.getTolvufolk(true);
-
-    skrifaUt();
-
-    do
-    {
-        string skipun;
-        cin >> skipun;
-
-        if (skipun == "list" || skipun == "l")
-        {
-            prentaLista(gogn);
-        }
-
-        else if (skipun == "sort"|| skipun == "so")
-        {
-            skrifaUt();
-            flokkunarMoguleikar();
-        }
-
-        else if (skipun == "add" || skipun == "a")
-        {
-            system("cls");
-            cout << "-----Adding computer scientist-----" << endl;
-            baetaVidPersonu();
-            prentaLista(gogn);
-        }
-
-        else if (skipun == "delete" || skipun == "d")
-        {
-            eydaPersonu(gogn);
-        }
-
-        else if (skipun == "update" || skipun == "u")
-        {
-            skrifaUt();
-            uppfaeraPersonu();
-        }
-
-        else if (skipun == "search" || skipun == "se")
-        {
-            skrifaUt();
-            leitaAdNafni(gogn);
-        }
-
-        else if (skipun == "purge" || skipun == "p")
-        {
-            skrifaUt();
-            tortimaLista();
-        }
-
-        else if (skipun == "quit" || skipun == "q")
-        {
-            break;
-        }
-
-        else if (skipun == "save" || skipun == "s")
-        {
-            cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N)";
-            cin >> skipun;
-            if (skipun == "Y" || skipun == "y")
-            {
-                _service.yfirskrifaTolvufolk();
-                cout << "Data has been saved" << endl;
-            }
-            else
-            {
-                cout << "Saving has been cancelled" << endl;
-            }
-        }
-
-        else
-        {
-            skrifaUt();
-            cerr << "Input not valid, try again: ";
-        }
-    } while (aframhaldandiUI());
-}
+//------------------------------- Svæðu fyrir cout blokkir endar -------------------------------

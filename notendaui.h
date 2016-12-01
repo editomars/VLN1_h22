@@ -12,23 +12,28 @@ public:
     NotendaUI();
 
     void keyra();
-    void baetaVidPersonu(); //Baeta vid personu UI grein
-    void eydaPersonu(const vector<tolvufolk>& gogn); //Eyda personu UI grein
-    void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
-    void leitaAdNafni(const vector<tolvufolk>& gogn);
-    void uppfaeraPersonu();
-    void tortimaLista();
-
 private:
     tolvufolkService _service;
 
-    void skrifaUt(); //Skrifa út aðalvalmynd
-    bool aframhaldandiUI();
-    void leitarMoguleikar();
-    void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
-    void hausUI();
-    void upphafsUI();
+    void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
+
+    //Föll sem skipta um UI grein
     void adalvalmyndUI();
+    void baetaVidPersonu(); //Baeta vid personu UI grein
+    void eydaPersonu(); //Eyda personu UI grein
+    void uppfaeraPersonu();
+    void leitaGrein();
+    void flokkunarMoguleikar(); //Skrifar út sort valmöguleika notanda
+    void tortimaLista();
+
+    //Cout blokkir
+    void skrifaUt(); //Skrifa út aðalvalmynd
+    void leitarMoguleikar();
+    void upphafsUI();
+    void hausUI();
+
+    //Bool flög
+    bool aframhaldandiUI();
     bool skipunaAframhald();
 };
 
