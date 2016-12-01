@@ -15,10 +15,11 @@ public:
     tolvufolkService();
 
     //Get föll
-    vector<tolvufolk> getTolvufolk(bool lesaUrGagnagrunni); //Skilar vectornum af gögnum sem notandi er að nota, vantar params
+    vector<tolvufolk> getTolvufolk(); //Skilar vectornum af gögnum sem notandi er að nota
     tolvufolk getStaktTolvufolk(int ndx); //Sækir eitt stak af tolvufolki
 
     //Föll sem tengja við Gagnagrunn
+    void saekjaGogn(); //Sækir gögn í gagnaggrunn
     void vidbotarTolvufolk(); //Bætir við vector af tolvufolk (append í gagnagrunn)
     void vidbotarTolvufolk(const tolvufolk& t); //Bætir við einu tilvik af tolvufolk (append í gagnagrunn)
     void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, notar private breytuna _folk

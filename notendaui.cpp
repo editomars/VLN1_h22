@@ -15,11 +15,12 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
-
     _service.yfirskrifaTolvufolk(tolvufolk("Charles Babbage", "m", 1990, 1991));
     _service.vidbotarTolvufolk(tolvufolk("Ada Lovelace", "f", 1880, 1890));
     _service.vidbotarTolvufolk(tolvufolk("zllan Turing", "m", 1918, 1948));
     _service.vidbotarTolvufolk(tolvufolk("Edit Omarsdottir", "f", 1988, -1));
+
+    _service.saekjaGogn();
 
     adalvalmyndUI();
 }
@@ -41,9 +42,6 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
 
 void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI greinar
 {
-
-    vector<tolvufolk> gogn = _service.getTolvufolk(true);
-
     skrifaUt();
 
     do
@@ -53,7 +51,7 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
 
         if (skipun == "list" || skipun == "l")
         {
-            prentaLista(gogn);
+            prentaLista(_service.getTolvufolk());
         }
 
         else if (skipun == "sort"|| skipun == "so")
@@ -67,7 +65,7 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
             system("cls");
             cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
-            prentaLista(gogn);
+            prentaLista(_service.getTolvufolk());
         }
 
         else if (skipun == "delete" || skipun == "d")
@@ -177,11 +175,11 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
 
 void NotendaUI::eydaPersonu() //Delete UI grein
 {
-    vector<tolvufolk> gogn = _service.getTolvufolk(false);
+    vector<tolvufolk> gogn = _service.getTolvufolk();
     do
     {
         system("cls");
-        prentaLista(_service.getTolvufolk(false));
+        prentaLista(_service.getTolvufolk());
         int persNR;
         cout << "Delete scientist number: ";
         cin >> persNR;
@@ -204,7 +202,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     tolvufolk target;
     system("cls");
 
-    prentaLista(_service.getTolvufolk(false));
+    prentaLista(_service.getTolvufolk());
 
     cout << "Update scientist number: ";
     cin >> persNR;
@@ -275,7 +273,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
 void NotendaUI::leitaGrein() //Search / Filter UI grein
 {
-    vector<tolvufolk> gogn = _service.getTolvufolk(false);
+    vector<tolvufolk> gogn = _service.getTolvufolk();
     do
     {
         leitarMoguleikar();
