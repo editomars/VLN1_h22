@@ -157,7 +157,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
         cout << "Enter year of death (-1 if still alive): ";
         cin >> dAr;
 
-        while (-1 > dAr || !cin)
+        while (-1 > dAr || !cin || (dAr < fAr && dAr != -1))
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
