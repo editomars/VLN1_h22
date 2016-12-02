@@ -175,7 +175,6 @@ void NotendaUI::eydaPersonu() //Delete UI grein
 {
     do
     {
-        system("cls");
         prentaLista(_service.getTolvufolk());
         int persNR;
         cout << "Delete scientist number (-1 to cancel deletion): ";
@@ -207,7 +206,6 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     string skipunin;
     int persNR;
     tolvufolk target;
-    system("cls");
 
     prentaLista(_service.getTolvufolk());
 
@@ -234,7 +232,8 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     system("cls");
     cout << "Update information for: " << endl << endl;
     cout << "Name: " << target.getNafn() << ",\tGender: "
-         << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
+         << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: "
+         << target.getDanarar() << endl << endl;
 
     uppfaersluMoguleikar();
 
@@ -302,13 +301,15 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
 
         if (skipunin == "name" || skipunin == "n")
         {
-            string nafn;
             leitarMoguleikar();
-            cout << "Name to search: ";
-            cin.ignore();
-            getline(cin,nafn);
+            string fornafn, eftirnafn;
+            cout << "---Searching by name---" << endl;
+            cout << "Enter first name: ";
+            cin >> fornafn;
+            cout << "Enter last name: ";
+            cin >> eftirnafn;
             cout << endl;
-            gogn = _service.leitaStreng("nafn", nafn);
+            gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
             if (gogn.size() == 0)
             {
                 hausUI();
@@ -362,7 +363,7 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
         {
             leitarMoguleikar();
             int death;
-            cout << "Year of death to search: ";
+            cout << "Year of death to search (-1 for still alive): ";
             cin >> death;
             cout << endl;
             gogn = _service.leitaHeiltolu("danarar", death);
@@ -772,6 +773,7 @@ cout << "*======================================================================
 
 void NotendaUI::hausUI()
 {
+    system("cls");
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
