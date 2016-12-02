@@ -288,6 +288,13 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             leitarMoguleikar();
             cout << "Age to search: ";
             cin >> age;
+            while (-1 > age || !cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << "Input not valid, try again: ";
+                cin >> age;
+            }
             cout << endl;
             gogn = _service.leitaHeiltolu("aldur", age);
             prentaRadad(gogn);
@@ -299,6 +306,13 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             int birth;
             cout << "Year of birth to search: ";
             cin >> birth;
+            while (-1 > birth || !cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << "Input not valid, try again: ";
+                cin >> birth;
+            }
             cout << endl;
             gogn = _service.leitaHeiltolu("faedingarar", birth);
             prentaRadad(gogn);
@@ -310,6 +324,13 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             int death;
             cout << "Year of death to search: ";
             cin >> death;
+            while (-2 > death || !cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << "Input not valid, try again: ";
+                cin >> death;
+            }
             cout << endl;
             gogn = _service.leitaHeiltolu("danarar", death);
             prentaRadad(gogn);
