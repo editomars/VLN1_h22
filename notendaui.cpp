@@ -268,6 +268,14 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         int nytt;
         cout << "Enter updated year of birth: ";
         cin >> nytt;
+
+        while ((nytt > target.getDanarar() && target.getDanarar() != -1) || !cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, birthyear is higher than year of death, try again: ";
+            cin >> nytt;
+        }
         _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
 
