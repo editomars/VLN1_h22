@@ -175,15 +175,24 @@ void NotendaUI::eydaPersonu() //Delete UI grein
 {
     do
     {
-        system("cls");
         prentaLista(_service.getTolvufolk());
         int persNR;
-        cout << "Delete scientist number: ";
+        cout << "Delete scientist number (-1 to cancel deletion): ";
         cin >> persNR;
         while (persNR > _service.getSize() || persNR <= 0)
         {
+            if (persNR == -1)
+            {
+                break;
+            }
             cerr << "Input not valid, try again: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin >> persNR;
+        }
+        if (persNR == -1)
+        {
+            break;
         }
         persNR--;
         cout << _service.getStaktTolvufolk(persNR).getNafn() << " has been removed.\n";
@@ -197,19 +206,34 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     string skipunin;
     int persNR;
     tolvufolk target;
-    system("cls");
 
     prentaLista(_service.getTolvufolk());
 
-    cout << "Update scientist number: ";
+    cout << "Update scientist number (-1 to cancel update): ";
     cin >> persNR;
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
     persNR --;
     target = _service.getStaktTolvufolk(persNR);
 
     system("cls");
     cout << "Update information for: " << endl << endl;
     cout << "Name: " << target.getNafn() << ",\tGender: "
-         << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: " << target.getDanarar() << endl << endl;
+         << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: "
+         << target.getDanarar() << endl << endl;
 
     uppfaersluMoguleikar();
 
@@ -255,9 +279,14 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
 
-    else if (skipunin == "return" || skipunin == "r")
+    else if (skipunin == "quit" || skipunin == "q")
     {
         return;
+    }
+
+    else
+    {
+        cout << "Invalid input, try again: ";
     }
 }
 
@@ -272,14 +301,24 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
 
         if (skipunin == "name" || skipunin == "n")
         {
-            string nafn;
             leitarMoguleikar();
-            cout << "Name to search: ";
-            cin.ignore();
-            getline(cin,nafn);
+            string fornafn, eftirnafn;
+            cout << "---Searching by name---" << endl;
+            cout << "Enter first name: ";
+            cin >> fornafn;
+            cout << "Enter last name: ";
+            cin >> eftirnafn;
             cout << endl;
-            gogn = _service.leitaStreng("nafn", nafn);
-            prentaRadad(gogn);
+            gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "age" || skipunin == "a")
@@ -297,7 +336,15 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             }
             cout << endl;
             gogn = _service.leitaHeiltolu("aldur", age);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "birth" || skipunin == "b")
@@ -315,14 +362,22 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             }
             cout << endl;
             gogn = _service.leitaHeiltolu("faedingarar", birth);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
         else if (skipunin == "death" || skipunin == "d")
         {
             leitarMoguleikar();
             int death;
-            cout << "Year of death to search: ";
+            cout << "Year of death to search (-1 for still alive): ";
             cin >> death;
             while (-2 > death || !cin)
             {
@@ -333,12 +388,25 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             }
             cout << endl;
             gogn = _service.leitaHeiltolu("danarar", death);
-            prentaRadad(gogn);
+            if (gogn.size() == 0)
+            {
+                hausUI();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaLista(gogn);
+            }
         }
 
-        else if (skipunin == "return" || skipunin == "r")
+        else if (skipunin == "quit" || skipunin == "q")
         {
             return;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again: ";
         }
 
     }while(skipunaAframhald());
@@ -348,105 +416,167 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
 {
     string skipunin;
     vector<tolvufolk> radad;
-
+    bool rettInntak = true;
     rodunarMoguleikar();
 
-    cin >> skipunin;
-
-    if (skipunin == "name" || skipunin == "n")
+    do
     {
-        upphafsUI();
-
+        rettInntak = true;
         cin >> skipunin;
 
-            if(skipunin == "ascending" || skipunin == "a")
-            {
-                radad = _service.rada("nafn", "asc");
-                prentaLista(radad);
-            }
 
-            else if(skipunin == "descending" || skipunin == "d")
-            {
-                radad = _service.rada("nafn", "desc");
-                prentaLista(radad);
-            }
-
-            else if (skipunin == "return" || skipunin == "r")
-            {
-                return;
-            }
-    }
-
-    else if(skipunin == "age" || skipunin == "a")
-    {
-        upphafsUI();
-
-        cin >> skipunin;
-
-            if(skipunin == "ascending" || skipunin == "a")
-            {
-                radad = _service.rada("aldur", "asc");
-                prentaLista(radad);
-            }
-
-            else if(skipunin == "descending" || skipunin == "d")
-            {
-                radad = _service.rada("aldur", "desc");
-                prentaLista(radad);
-
-            }
-
-            else if (skipunin == "return" || skipunin == "r")
-            {
-                return;
-            }
-    }
-
-    else if(skipunin == "birth" || skipunin == "b")
-    {
-        upphafsUI();
-
-
-        cin >> skipunin;
-
-            if(skipunin == "ascending" || skipunin == "a")
-            {
-                radad = _service.rada("faedingarar", "asc");
-                prentaLista(radad);
-            }
-
-            else if(skipunin == "descending" || skipunin == "d")
-            {
-                radad = _service.rada("faedingarar", "desc");
-                prentaLista(radad);
-
-            }
-
-            else if (skipunin == "return" || skipunin == "r")
-            {
-                return;
-            }
-    }
-
-    else if(skipunin == "death" || skipunin == "d")
-    {
-        radaUI();
-
-        cin >> skipunin;
-
-        if(skipunin == "ascending" || skipunin == "a")
+        if (skipunin == "name" || skipunin == "n")
         {
-            radad = _service.rada("danarar", "asc");
-            prentaLista(radad);
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("nafn", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("nafn", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+            }while(rettInntak == false);
         }
 
-        else if(skipunin == "descending" || skipunin == "d")
+        else if(skipunin == "age" || skipunin == "a")
         {
-            radad = _service.rada("danarar", "desc");
-            prentaLista(radad);
+            radaUI();
 
+            do
+            {
+                rettInntak = true;
+
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("aldur", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("aldur", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+            }while(rettInntak == false);
         }
-    }
+
+        else if(skipunin == "birth" || skipunin == "b")
+        {
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("faedingarar", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("faedingarar", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+
+            }while(rettInntak == false);
+        }
+
+        else if(skipunin == "death" || skipunin == "d")
+        {
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("danarar", "asc");
+                    prentaLista(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("danarar", "desc");
+                    prentaLista(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+
+            }while(rettInntak == false);
+        }
+
+        else if (skipunin == "quit" || skipunin == "q")
+        {
+            return;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again: ";
+            rettInntak = false;
+        }
+
+    }while(rettInntak == false);
 
     cout << "Do you want to save the sorted list? (Y/N): ";
     do
@@ -523,7 +653,7 @@ bool NotendaUI::aframhaldandiUI()
 
     while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
     {
-        cout << "Continue? (Y/N): ";
+        cout << "Return to Main Menu? (Y/N): ";
         cin >> svar;
 
         if (svar == "Y" || svar == "y")
@@ -612,11 +742,11 @@ void NotendaUI::leitarMoguleikar()
     cout << "*=========================================================================*" << endl;
     cout << "*||Please enter one of the following command                            ||*" << endl;
     cout << "*=========================================================================*" << endl;
-    cout << "*||name   - Search by name, please write 'name'                         ||*" << endl;
-    cout << "*||age    - Search by age, please write 'age'                           ||*" << endl;
-    cout << "*||birth  - Search by year of birth, please write 'birth'               ||*" << endl;
-    cout << "*||death  - Search by year of death, please write 'death'               ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*||name   - Search by name, please write 'name'.                        ||*" << endl;
+    cout << "*||age    - Search by age, please write 'age'.                          ||*" << endl;
+    cout << "*||birth  - Search by year of birth, please write 'birth'.              ||*" << endl;
+    cout << "*||death  - Search by year of death, please write 'death'.              ||*" << endl;
+    cout << "*||quit   - Quit searching.                                             ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
 
@@ -631,7 +761,7 @@ void NotendaUI::rodunarMoguleikar()
     cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
     cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
     cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
 
@@ -645,21 +775,10 @@ void NotendaUI::uppfaersluMoguleikar()
     cout << "*||gender - update gender, please write 'gender'                        ||*" << endl;
     cout << "*||birth  - update year of birth, please write 'birth'                  ||*" << endl;
     cout << "*||death  - update year of death, please write 'death'                  ||*" << endl;
-    cout << "*||return - Returns to the main menu                                    ||*" << endl;
+    cout << "*||quit   - Quit updating.                                              ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
 
-void NotendaUI::upphafsUI()
-{
-    system("cls");
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-    cout << "*||ascending  - Sort age by ascending order                             ||*" << endl;
-    cout << "*||descending - Sort age by descending order                            ||*" << endl;
-    cout << "*||return     - Returns to the main menu                                ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-}
 
 void NotendaUI::radaUI()
 {
@@ -669,29 +788,15 @@ cout << "*||Please enter one of the following command                           
 cout << "*=========================================================================*" << endl;
 cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
 cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
+cout << "*||quit   - Quit sorting.                                               ||*" << endl;
 cout << "*=========================================================================*" << endl;
 }
 
 void NotendaUI::hausUI()
 {
+    system("cls");
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
-
-void NotendaUI::prentaRadad(const vector<tolvufolk>& gogn)
-{
-    hausUI();
-    for(size_t i = 0; i < gogn.size(); i++)
-    {
-            cout << "|" << i + 1 << " \t\t ";
-            cout << gogn[i];
-    }
-    if (gogn.size() == 0)
-    {
-        cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-    }
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-}
-
 //------------------------------- Svæðu fyrir cout blokkir endar -------------------------------
