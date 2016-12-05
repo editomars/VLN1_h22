@@ -56,7 +56,7 @@ private:
     vector<tolvufolk> leitaEftirNafniTolvufolk(string nafn); //Skilar vector flokkað(filtered) eftir nafni
     vector<tolvufolk> leitaEftirAldriTolvufolk(int aldur); //skilar vector flokkað(filtered) eftir aldri
     vector<tolvufolk> leitaEftirArtaliTolvufolk(int ar, bool f); //bool = true til að leita að fæðingarári, false fyrir dánarár
-    vector<tolvufolk> leitaEftirKyniTolvufolk(string kyn); //Skilar vector flokkað(filtered) eftir kyni
+    vector<tolvufolk> leitaEftirKyniTolvufolk(char kyn); //Skilar vector flokkað(filtered) eftir kyni
 };
 
 #endif // TOLVUFOLKSERVICE_H
