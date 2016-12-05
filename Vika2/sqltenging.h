@@ -17,6 +17,7 @@ public:
     vector<tolvufolk> lesa();
 private:
     QSqlDatabase _db;
+    char* str_to_cstr(string str) const;
 };
 
 #endif // SQLTENGING_H

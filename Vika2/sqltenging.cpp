@@ -31,9 +31,26 @@ vector<tolvufolk> sqltenging::lesa()
 
 void sqltenging::baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    //QSqlQuery query(_db);
-    //query.exec
-    string temp = "INSERT INTO TolvuFolk(ForNafn,MidNafn,EftirNafn,Kyn,FaedingarAr,DanarAr)VALUES(" + fNafn + "," + mNafn + "," + eNafn + "," + kyn + "," + fAr + "," + dAr + ")"
-
+    string temp = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
+                  "VALUES('" + fNafn + "','" + mNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr);
+    char* cstr = new char[temp.length()+1];
+    strcpy(cstr, temp.c_str());
+    QSqlQuery query(_db);
+    query.exec(cstr);
+    delete[] cstr;
 }
 
+char* sqltenging::str_to_cstr(string str) const
+{
+    char* c_string;
+
+    c_string = new char[str.length()];
+
+    for (int i = 0; i < str.length(); ++i)
+    {
+        c_string[i] = str[i];
+    }
+    c_string[str.length()] = '\0';
+
+    return c_string;
+}
