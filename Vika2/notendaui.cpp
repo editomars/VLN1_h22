@@ -165,7 +165,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
             cin >> dAr;
         }
 
-        _service.baetaVidTolvufolk(tolvufolk(fornafn + " " + eftirnafn, kKyn, fAr, dAr));
+       // _service.baetaVidTolvufolk(tolvufolk(fornafn + " " + eftirnafn, kKyn, fAr, dAr));
 
 
     }while(skipunaAframhald());
@@ -246,7 +246,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         cin >> fornafn;
         cout << "Enter updated last name: ";
         cin >> eftirnafn;
-        _service.uppfaeraStakTolvufolk(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
+        //_service.uppfaeraStakTolvufolk(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
     }
 
     else if (skipunin == "gender" || skipunin == "g")
@@ -276,7 +276,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
             cerr << "Input not valid, birthyear is higher than year of death, try again: ";
             cin >> nytt;
         }
-        _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
+       // _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
     }
 
     else if (skipunin == "death" || skipunin == "d")
@@ -284,7 +284,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         int nytt;
         cout << "Enter updated year of death: ";
         cin >> nytt;
-        _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
+      //  _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
     }
 
     else if (skipunin == "quit" || skipunin == "q")

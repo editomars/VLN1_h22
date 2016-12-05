@@ -22,7 +22,7 @@ vector<tolvufolk> sqltenging::lesa()
         int faedingarar = query.value("faedingarar").toUInt();
         int danarar = query.value("danarar").toUInt();
 
-        t.push_back(tolvufolk(fornafn + " " + eftirnafn, kyn, faedingarar, danarar));
+        //t.push_back(tolvufolk(fornafn + " " + eftirnafn, kyn, faedingarar, danarar));
         //tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, fAr, dAr);
     }
 

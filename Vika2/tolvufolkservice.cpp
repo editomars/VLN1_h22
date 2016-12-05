@@ -11,7 +11,7 @@ struct nafnHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
-        return (i.getNafn() < j.getNafn());
+        return (i.getFornafn() < j.getNafn());
     }
 };
 
@@ -154,8 +154,8 @@ void tolvufolkService::eydaStakiTolvufolk(int nr)
 
 void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)
 {
-    _folk[nr].uppfNafn(name);
-    _folk[nr].uppfGender(kyn);
+    //_folk[nr].uppfNafn(name);
+    //_folk[nr].uppfGender(kyn);
     _folk[nr].uppfFaedingarar(fYear);
     _folk[nr].uppfDanarar(dYear);
 }
@@ -175,7 +175,10 @@ vector<tolvufolk> tolvufolkService::leitaStreng(string flokkur, string leitarord
     }
     if (flokkur == "kyn")
     {
-        return leitaEftirKyniTolvufolk(leitarord);
+        if (leitarord == "m")
+            return leitaEftirKyniTolvufolk('m');
+        else
+            return leitaEftirKyniTolvufolk('f');
     }
     return _folk;
 }
@@ -363,7 +366,7 @@ vector<tolvufolk> tolvufolkService::leitaEftirNafniTolvufolk(string nafn)
     return t;
 }
 
-vector<tolvufolk> tolvufolkService::leitaEftirKyniTolvufolk(string kyn)
+vector<tolvufolk> tolvufolkService::leitaEftirKyniTolvufolk(char kyn)
 {
     vector<tolvufolk> t;
     for (size_t i = 0; i < _folk.size(); ++i)
