@@ -24,7 +24,7 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     hausUI();
     for (size_t i = 0; i < gogn.size(); i++)
     {
-        cout << "|" << i + 1 << " \t\t ";
+        cout << "|" << gogn[i].getId() << " \t\t ";
         cout << gogn[i];
 
     }
