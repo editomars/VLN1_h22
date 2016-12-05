@@ -86,10 +86,6 @@ struct daudiLaekkandi
 //----------------------- Svæði fyrir public föll byrjar ----------------------
 
 //Get föll
-vector<tolvufolk> tolvufolkService::getTolvufolk() const
-{
-    return _folk;
-}
 
 tolvufolk tolvufolkService::getStaktTolvufolk(int ndx) const
 {
@@ -102,28 +98,20 @@ int tolvufolkService::getSize() const
 }
 
 //Föll sem tengja við gagnagrunn
-void tolvufolkService::saekjaGogn()
+vector<tolvufolk> tolvufolkService::getTolvufolk() const
 {
-    _folk = _dataaccess.lesaFolk();
+    return _dataaccess.lesaFolk();
 }
 
-void tolvufolkService::vidbotarTolvufolk()
+void tolvufolkService::addTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        //_dataaccess.baetaVid(_folk[i]);
-    }
-}
-
-void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
-{
-    //_dataaccess.baetaVid(t);
+    _dataaccess.baetaVidTolvuFolk(fNafn, mNafn, eNafn, kyn, fAr, dAr);
 }
 
 void tolvufolkService::yfirskrifaTolvufolk()
 {
-    eydaTolvufolk();
-    vidbotarTolvufolk();
+    //eydaTolvufolk();
+    //vidbotarTolvufolk();
 }
 
 void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)

@@ -12,7 +12,7 @@ class sqltenging
 public:
     sqltenging();
     vector<velar> lesaVelar();
-    vector<tolvufolk> lesaFolk();
+    vector<tolvufolk> lesaFolk() const;
 
     void baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr);
     void baetaVidTolvuVel(string nafn, int bAr, bool byggd, string tegund);

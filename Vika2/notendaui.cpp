@@ -15,8 +15,6 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
-   _service.saekjaGogn();
-
     adalvalmyndUI();
 }
 
@@ -101,7 +99,7 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
                     cout << "Invalid input, try again: ";
                 }
             }while(skipun != "y" && skipun != "Y" && skipun != "n" && skipun != "N");
-            break;
+            return;
         }
 
         else if (skipun == "save" || skipun == "s")
