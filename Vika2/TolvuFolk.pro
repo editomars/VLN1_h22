@@ -1,5 +1,6 @@
 QT += core
 QT -= gui
+QT += sql
 
 CONFIG += c++11
 
@@ -13,10 +14,12 @@ SOURCES += main.cpp \
     notendaui.cpp \
     tolvufolk.cpp \
     tolvufolkservice.cpp \
-    skraarvinnsla.cpp
+    skraarvinnsla.cpp \
+    sqltenging.cpp
 
 HEADERS += \
     notendaui.h \
     tolvufolk.h \
     tolvufolkservice.h \
-    skraarvinnsla.h
+    skraarvinnsla.h \
+    sqltenging.h
