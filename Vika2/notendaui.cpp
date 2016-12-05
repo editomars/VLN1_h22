@@ -218,7 +218,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     {
         return;
     }
-    while (persNR > _service.getSize() || persNR <= 0)
+    while (/*persNR > _service.getSize() ||*/ persNR <= 0)
     {
         if (persNR == -1)
         {
@@ -229,7 +229,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> persNR;
     }
-    persNR --;
+
     target = _service.getStaktTolvufolk(persNR);
 
     system("cls");
