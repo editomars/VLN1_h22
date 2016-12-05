@@ -39,7 +39,7 @@ public:
     vector<tolvufolk> leitaStreng(string flokkur, string leitarord); //Skilar vector sem er flokkaður(filteraður) ef flokka á strengjaflokk (nafn eða kyn)
     vector<tolvufolk> leitaHeiltolu(string flokkur, int leitarord); //Skilar vector sem er flokkar(filteraður) ef flokka á integer flokk (faedingarar, danarar eða aldur)
 private:
-    sqltenging _dataaccess;
+    sqltenging _dataFaccess;
     vector<tolvufolk> _folk;
 
     //raða föll

@@ -104,20 +104,20 @@ int tolvufolkService::getSize() const
 //Föll sem tengja við gagnagrunn
 void tolvufolkService::saekjaGogn()
 {
-    _folk = _dataaccess.lesa();
+    _folk = _dataFaccess.lesaFolk();
 }
 
 void tolvufolkService::vidbotarTolvufolk()
 {
     for (size_t i = 0; i < _folk.size(); ++i)
     {
-        //_dataaccess.baetaVid(_folk[i]);
+        //_dataFaccess.baetaVid(_folk[i]);
     }
 }
 
 void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
 {
-    //_dataaccess.baetaVid(t);
+    //_dataFaccess.baetaVid(t);
 }
 
 void tolvufolkService::yfirskrifaTolvufolk()
@@ -128,12 +128,12 @@ void tolvufolkService::yfirskrifaTolvufolk()
 
 void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
 {
-    //_dataaccess.skrifa(t);
+    //_dataFaccess.skrifa(t);
 }
 
 void tolvufolkService::eydaTolvufolk()
 {
-    //_dataaccess.eyda();
+    //_dataFaccess.eyda();
 }
 
 //Föll sem breyta vector, en ekki gagnagrunn

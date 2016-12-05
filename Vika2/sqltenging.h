@@ -4,12 +4,14 @@
 #include <QtSql>
 #include <vector>
 #include "tolvufolk.h"
+#include "velar.h"
 
 class sqltenging
 {
 public:
     sqltenging();
-    vector<tolvufolk> lesa();
+    vector<velar> lesaVelar();
+    vector<tolvufolk> lesaFolk();
 private:
     QSqlDatabase db;
 };
