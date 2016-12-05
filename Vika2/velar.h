@@ -12,8 +12,9 @@ class velar
 public:
     velar();
 
-    velar(string vNafn, int bAr, string tegund, string bygd);
+    velar(int id, string vNafn, int bAr, string tegund, string bygd);
     //Get föll
+    int getID() const;
     string getVelaNafn() const;
     int getByggingarAr() const;
     string getTegund() const;
@@ -26,6 +27,7 @@ public:
     //ops
     friend ostream& operator <<(ostream& out, const velar& gogn);
 private:
+    int _id;
     string _vNafn;
     int _bAr;
     string _tegund;

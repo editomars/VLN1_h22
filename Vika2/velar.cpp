@@ -8,8 +8,9 @@ velar::velar()
 
 }
 
-velar::velar(string vNafn, int bAr, string tegund, string bygd)
+velar::velar(int id, string vNafn, int bAr, string tegund, string bygd)
 {
+    _id = id;
     _vNafn = vNafn;
     _bAr = bAr;
     _tegund = tegund;
@@ -17,6 +18,11 @@ velar::velar(string vNafn, int bAr, string tegund, string bygd)
 }
 
 //Get föll
+int velar::getID() const
+{
+    return _id;
+}
+
 string velar::getVelaNafn() const
 {
     return _vNafn;

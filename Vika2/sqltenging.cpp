@@ -16,12 +16,14 @@ vector<tolvufolk> sqltenging::lesa()
     query.exec("SELECT * FROM TolvuFolk");
 
     while(query.next()){
-        string name = query.value("name").toString().toStdString();
+        string fornafn = query.value("fornafn").toString().toStdString();
+        string eftirnafn = query.value("eftirnafn").toString().toStdString();
         string kyn = query.value("kyn").toString().toStdString();
         int faedingarar = query.value("faedingarar").toUInt();
         int danarar = query.value("danarar").toUInt();
 
-        t.push_back(tolvufolk(name, kyn, faedingarar, danarar));
+        t.push_back(tolvufolk(fornafn + " " + eftirnafn, kyn, faedingarar, danarar));
+        //tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, fAr, dAr);
     }
 
     return t;
