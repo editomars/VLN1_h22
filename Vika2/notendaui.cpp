@@ -183,7 +183,7 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         int persNR;
         cout << "Delete scientist number (-1 to cancel deletion): ";
         cin >> persNR;
-        while (persNR > _service.getSize() || persNR <= 0)
+        while (/*persNR > _service.getSize() ||*/ persNR <= 0)
         {
             if (persNR == -1)
             {
