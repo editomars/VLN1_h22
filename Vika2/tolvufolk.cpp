@@ -3,24 +3,46 @@
 //Smiðir
 tolvufolk::tolvufolk()
 {
-    _nafn = _kyn = "None";
-    _faedingarar = _danarar = 0;
+
 }
 
-tolvufolk::tolvufolk(string nafn, string kyn, int fAr, int dAr)
+tolvufolk::tolvufolk(int id, string fornafn, string midnafn, string eftirnafn, char kyn, int faedingarar, int danarar)
 {
-    _nafn = nafn;
+    _id = id;
+    _fornafn = fornafn;
+    _midnafn = midnafn;
+    _eftirnafn = eftirnafn;
     _kyn = kyn;
-    _faedingarar = fAr;
-    _danarar = dAr;
+    _danarar = danarar;
+    _faedingarar = faedingarar;
 }
 
 //Get föll
+
+int tolvufolk::getId() const
+{
+    return _id;
+}
+string tolvufolk::getFornafn() const
+{
+    return _fornafn;
+}
+string tolvufolk::getMidnafn() const
+{
+    return _midnafn;
+}
+string tolvufolk::getEftirnafn() const
+{
+    return _eftirnafn;
+}
+char tolvufolk::getKyn() const
+{
+    return _kyn;
+}
 int tolvufolk::getFaedingarar() const
 {
     return _faedingarar;
 }
-
 int tolvufolk::getDanarar() const
 {
     return _danarar;
@@ -28,13 +50,18 @@ int tolvufolk::getDanarar() const
 
 string tolvufolk::getNafn() const
 {
-    return _nafn;
+    if(_midnafn.length() == 0)
+    {
+
+       return _fornafn + " " + _eftirnafn;
+    }
+    else
+       return _fornafn + " " + _midnafn + " " + _eftirnafn;
+
 }
 
-string tolvufolk::getKyn() const
-{
-    return _kyn;
-}
+
+
 
 //Set föll
 void tolvufolk::uppfFaedingarar(int nyttAr)
@@ -47,14 +74,7 @@ void tolvufolk::uppfDanarar(int nyttAr)
     _danarar = nyttAr;
 }
 
-void tolvufolk::uppfNafn(string nyttNafn)
-{
-    _nafn = nyttNafn;
-}
-void tolvufolk::uppfGender(string nyttKyn)
-{
-    _kyn = nyttKyn;
-}
+
 
 //ops
 ostream& operator <<(ostream& out, const tolvufolk& data)

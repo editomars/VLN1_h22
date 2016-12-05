@@ -12,24 +12,31 @@ class tolvufolk
 public:
     tolvufolk();
 
-    tolvufolk(string nafn, string kyn, int fAr, int dAr);
+    tolvufolk(int id, string fornafn, string midnafn, string eftirnafn, char kyn, int faedingarar, int danarar);
     //Get föll
+    int getId() const;
+    string getNafn() const;
+    string getFornafn() const;
+    string getMidnafn() const;
+    string getEftirnafn() const;
+    char getKyn() const;
     int getFaedingarar() const;
     int getDanarar() const;
-    string getNafn() const;
-    string getKyn() const;
+
     //Set föll
     void uppfFaedingarar(int nyttAr);
     void uppfDanarar(int nyttAr);
-    void uppfNafn(string nyttNafn);
-    void uppfGender(string nyttKyn);
+
     //ops
     friend ostream& operator <<(ostream& out, const tolvufolk& gogn);
 private:
-    string _nafn;
-    string _kyn;
-    int _danarar;
+    int _id;
+    string _fornafn;
+    string _midnafn;
+    string _eftirnafn;
+    char _kyn;
     int _faedingarar;
+    int _danarar;
 };
 
 #endif // TOLVUFOLK_H
