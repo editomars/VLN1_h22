@@ -87,9 +87,9 @@ struct daudiLaekkandi
 
 //Get föll
 
-tolvufolk tolvufolkService::getStaktTolvufolk(int ndx) const
+tolvufolk tolvufolkService::getStaktTolvufolk(int id) const
 {
-    return _folk[ndx];
+    //return _dataaccess.lesaStaktFolk(id);
 }
 
 int tolvufolkService::getSize() const
@@ -135,9 +135,9 @@ void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
     _folk = t;
 }
 
-void tolvufolkService::eydaStakiTolvufolk(int nr)
+void tolvufolkService::eydaStakiTolvufolk(int id)
 {
-    _folk.erase(_folk.begin() + nr);
+    _dataaccess.eydaFolk(id);
 }
 
 void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)

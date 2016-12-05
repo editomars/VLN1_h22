@@ -15,6 +15,7 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
+    //_service.addTolvufolk("Aron","b","Cann",'f',1900,2000);
     adalvalmyndUI();
 }
 
@@ -29,6 +30,7 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
 
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
+
 }
 
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
@@ -196,7 +198,6 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         {
             break;
         }
-        persNR--;
         cout << _service.getStaktTolvufolk(persNR).getNafn() << " has been removed.\n";
         _service.eydaStakiTolvufolk(persNR);
 

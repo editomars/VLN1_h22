@@ -31,6 +31,43 @@ vector<tolvufolk> sqltenging::lesaFolk() const
     return t;
 }
 
+tolvufolk sqltenging::lesaStaktFolk(int id) const
+{
+    string str;
+
+    str = "SELECT * FROM tolvufolk WHERE ID = " + to_string(id);
+    char* cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    QSqlQuery query(_db);
+    query.exec(cstr);
+    delete[] cstr;
+
+    if (query.next()){
+        int id = query.value("id").toUInt();
+        string fornafn = query.value("fornafn").toString().toStdString();
+        string midnafn = query.value("Midnafn").toString().toStdString();
+        string eftirnafn = query.value("eftirnafn").toString().toStdString();
+        char kyn = query.value("kyn").toString().toStdString()[0];
+        int faedingarar = query.value("faedingarar").toUInt();
+        int danarar = query.value("danarar").toUInt();
+
+        return tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, faedingarar, danarar);
+    }
+    return tolvufolk();
+}
+
+void sqltenging::eydaFolk(int id)
+{
+
+    string temp = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
+    char* cstr = new char[temp.length()+1];
+    strcpy(cstr, temp.c_str());
+    QSqlQuery query(_db);
+    query.exec(cstr);
+    delete[] cstr;
+
+}
+
 vector<velar> sqltenging::lesaVelar()
 {
     vector<velar> v;
