@@ -3,18 +3,19 @@
 //Smiðir
 velar::velar()
 {
-    _vNafn = _tegund = _bygd = "None";
+    _vNafn = _tegund = "None";
+    _byggd = false;
     _bAr = 0;
 
 }
 
-velar::velar(int id, string vNafn, int bAr, string tegund, string bygd)
+velar::velar(int id, string vNafn, int bAr, string tegund, bool byggd)
 {
     _id = id;
     _vNafn = vNafn;
     _bAr = bAr;
     _tegund = tegund;
-    _bygd = bygd;
+    _byggd = byggd;
 }
 
 //Get föll
@@ -38,9 +39,9 @@ string velar::getTegund() const
     return _tegund;
 }
 
-string velar::getBygd() const
+bool velar::getByggd() const
 {
-    return _bygd;
+    return _byggd;
 }
 
 //Set föll
@@ -58,9 +59,9 @@ void velar::uppfTegund(int nyttTegund)
 {
     _tegund = nyttTegund;
 }
-void velar::uppfBygd(string nyttBygd)
+void velar::uppfByggd(bool nyttByggd)
 {
-    _bygd = nyttBygd;
+    _byggd = nyttByggd;
 }
 
 //ops
@@ -70,7 +71,7 @@ ostream& operator <<(ostream& out, const velar& data)
     out << "Name of machine: " << data.getVelaNafn() << endl;
     out << "Year of creation: " << data.getByggingarAr() << endl;
     out << "Type: " << data.getTegund() << endl;
-    out << "Was it built?: " << data.getBygd() << endl;
+    out << "Was it built?: " << data.getByggd() << endl;
 
 
     /*
