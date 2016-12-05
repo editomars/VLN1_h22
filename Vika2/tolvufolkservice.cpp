@@ -111,13 +111,13 @@ void tolvufolkService::vidbotarTolvufolk()
 {
     for (size_t i = 0; i < _folk.size(); ++i)
     {
-        _dataaccess.baetaVid(_folk[i]);
+        //_dataaccess.baetaVid(_folk[i]);
     }
 }
 
 void tolvufolkService::vidbotarTolvufolk(const tolvufolk& t)
 {
-    _dataaccess.baetaVid(t);
+    //_dataaccess.baetaVid(t);
 }
 
 void tolvufolkService::yfirskrifaTolvufolk()
@@ -128,12 +128,12 @@ void tolvufolkService::yfirskrifaTolvufolk()
 
 void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
 {
-    _dataaccess.skrifa(t);
+    //_dataaccess.skrifa(t);
 }
 
 void tolvufolkService::eydaTolvufolk()
 {
-    _dataaccess.eyda();
+    //_dataaccess.eyda();
 }
 
 //Föll sem breyta vector, en ekki gagnagrunn
