@@ -15,11 +15,11 @@ public:
     tolvufolkService();
 
     //Get föll
-    tolvufolk getStaktTolvufolk(int ndx) const; //Sækir eitt stak af tolvufolki
     int getSize() const; //Skilar stærð af vector gögnum
 
     //Föll sem tengja við Gagnagrunn
     vector<tolvufolk> getTolvufolk() const; //Skilar vectornum af gögnum sem notandi er að nota
+    tolvufolk getStaktTolvufolk(int id) const; //Sækir eitt stak af tolvufolki
     void addTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
     void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, notar private breytuna _folk
     void yfirskrifaTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk

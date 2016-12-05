@@ -16,6 +16,7 @@ public:
 
     void baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr);
     void baetaVidTolvuVel(string nafn, int bAr, bool byggd, string tegund);
+    void eydaFolk(int id);
 private:
     QSqlDatabase _db;
 };

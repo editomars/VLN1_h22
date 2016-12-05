@@ -31,6 +31,18 @@ vector<tolvufolk> sqltenging::lesaFolk() const
     return t;
 }
 
+void sqltenging::eydaFolk(int id)
+{
+
+    string temp = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
+    char* cstr = new char[temp.length()+1];
+    strcpy(cstr, temp.c_str());
+    QSqlQuery query(_db);
+    query.exec(cstr);
+    delete[] cstr;
+
+}
+
 vector<velar> sqltenging::lesaVelar()
 {
     vector<velar> v;
