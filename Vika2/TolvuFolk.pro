@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     tolvufolkservice.cpp \
     skraarvinnsla.cpp \
     sqltenging.cpp \
-    velar.cpp
+    velar.cpp \
+    velarservice.cpp
 
 HEADERS += \
     notendaui.h \
@@ -24,4 +25,5 @@ HEADERS += \
     tolvufolkservice.h \
     skraarvinnsla.h \
     sqltenging.h \
-    velar.h
+    velar.h \
+    velarservice.h
