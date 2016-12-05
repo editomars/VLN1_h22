@@ -8,7 +8,7 @@ sqltenging::sqltenging()
     _db.open();
 }
 
-vector<tolvufolk> sqltenging::lesa()
+vector<tolvufolk> sqltenging::lesaFolk()
 {
     vector<tolvufolk> t;
     QSqlQuery query(_db);
@@ -29,6 +29,31 @@ vector<tolvufolk> sqltenging::lesa()
     return t;
 }
 
+vector<velar> sqltenging::lesaVelar()
+{
+    vector<velar> v;
+    QSqlQuery query(_db);
+
+    query.exec("SELECT * FROM TolvuVelar");
+
+
+    while(query.next()){
+        /*
+        string fornafn = query.value("fornafn").toString().toStdString();
+        string eftirnafn = query.value("eftirnafn").toString().toStdString();
+        string kyn = query.value("kyn").toString().toStdString();
+        int faedingarar = query.value("faedingarar").toUInt();
+        int danarar = query.value("danarar").toUInt();
+        */
+
+        //t.push_back(tolvufolk(fornafn + " " + eftirnafn, kyn, faedingarar, danarar));
+        //tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, fAr, dAr);
+
+    }
+
+    return v;
+}
+
 void sqltenging::baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
     string temp = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
@@ -38,19 +63,4 @@ void sqltenging::baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, cha
     QSqlQuery query(_db);
     query.exec(cstr);
     delete[] cstr;
-}
-
-char* sqltenging::str_to_cstr(string str) const
-{
-    char* c_string;
-
-    c_string = new char[str.length()];
-
-    for (int i = 0; i < str.length(); ++i)
-    {
-        c_string[i] = str[i];
-    }
-    c_string[str.length()] = '\0';
-
-    return c_string;
 }

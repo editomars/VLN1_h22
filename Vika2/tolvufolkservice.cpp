@@ -104,7 +104,7 @@ int tolvufolkService::getSize() const
 //Föll sem tengja við gagnagrunn
 void tolvufolkService::saekjaGogn()
 {
-    _folk = _dataaccess.lesa();
+    _folk = _dataaccess.lesaFolk();
 }
 
 void tolvufolkService::vidbotarTolvufolk()

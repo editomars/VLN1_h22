@@ -15,11 +15,13 @@ SOURCES += main.cpp \
     tolvufolk.cpp \
     tolvufolkservice.cpp \
     sqltenging.cpp \
-    velar.cpp
+    velar.cpp \
+    velarservice.cpp
 
 HEADERS += \
     notendaui.h \
     tolvufolk.h \
     tolvufolkservice.h \
     sqltenging.h \
-    velar.h
+    velar.h \
+    velarservice.h

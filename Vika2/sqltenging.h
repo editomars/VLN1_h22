@@ -5,19 +5,19 @@
 #include <vector>
 #include <string>
 #include "tolvufolk.h"
+#include "velar.h"
 
 class sqltenging
 {
 public:
     sqltenging();
+    vector<velar> lesaVelar();
+    vector<tolvufolk> lesaFolk();
 
     void baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr);
     void baetaVidTolvuVel(string nafn, int bAr, bool byggd, string tegund);
-
-    vector<tolvufolk> lesa();
 private:
     QSqlDatabase _db;
-    char* str_to_cstr(string str) const;
 };
 
 #endif // SQLTENGING_H
