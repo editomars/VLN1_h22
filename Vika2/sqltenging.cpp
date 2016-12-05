@@ -2,16 +2,16 @@
 
 sqltenging::sqltenging()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    _db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "vln1.sqlite";
-    db.setDatabaseName(dbName);
-    db.open();
+    _db.setDatabaseName(dbName);
+    _db.open();
 }
 
 vector<tolvufolk> sqltenging::lesa()
 {
     vector<tolvufolk> t;
-    QSqlQuery query(db);
+    QSqlQuery query(_db);
 
     query.exec("SELECT * FROM TolvuFolk");
 
@@ -28,3 +28,12 @@ vector<tolvufolk> sqltenging::lesa()
 
     return t;
 }
+
+void sqltenging::baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
+{
+    //QSqlQuery query(_db);
+    //query.exec
+    string temp = "INSERT INTO TolvuFolk(ForNafn,MidNafn,EftirNafn,Kyn,FaedingarAr,DanarAr)VALUES(" + fNafn + "," + mNafn + "," + eNafn + "," + kyn + "," + fAr + "," + dAr + ")"
+
+}
+
