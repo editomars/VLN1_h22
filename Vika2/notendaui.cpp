@@ -956,7 +956,11 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
             nyttbAr = target.getByggingarAr();
         }
 
-        while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n' || byggdIn != '0')
+        cout << "Enter updated type: ";
+        cin >> nyttTegund;
+
+
+        do
         {
             cout << "Was it built? (y/n)";
             cin >> byggdIn;
@@ -981,11 +985,7 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
             {
                 cout << "Invalid input, try again!" << endl;
             }
-        }
-
-
-    cout << "Enter updated type: ";
-    cin >> nyttTegund;
+        }while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n' || byggdIn != '0');
 
     _vService.uppfaeraVelar((target.getID()), vNafn, nyttbAr, byggd, nyttTegund);
 
@@ -1353,9 +1353,9 @@ bool NotendaUI::aframhaldandiUITolvuVelar()
 
 bool NotendaUI::aframhaldandiUITolvuFolk()
 {
-    string svar = "o";
+    string svar;
 
-    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
+    do
     {
         cout << "Return to people menu? (Y/N): ";
         cin >> svar;
@@ -1374,8 +1374,9 @@ bool NotendaUI::aframhaldandiUITolvuFolk()
         else
         {
             cout << "Invalid input, try again!" << endl;
+            svar = "X";
         }
-    }
+    }while (svar != "Y" || svar != "y" || svar != "N" || svar != "n");
     return false;
 }
 
