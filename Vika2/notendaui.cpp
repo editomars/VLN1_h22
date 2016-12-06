@@ -1015,8 +1015,8 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             gogn = _vService.leitaVelarNafn(nafn);
             if (gogn.size() == 0)
             {
-                hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                hausUI();
+                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
@@ -1024,84 +1024,93 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             }
         }
 
-/*        else if (skipunin == "age" || skipunin == "a")
+        else if (skipunin == "create" || skipunin == "c")
         {
-            int age;
+            int artal;
             leitarMoguleikarVelar();
-            cout << "Age to search: ";
-            cin >> age;
-            while (-1 > age || !cin)
+            cout << "Year to search: ";
+            cin >> artal;
+            while (!cin)
             {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cerr << "Input not valid, try again: ";
-                cin >> age;
+                cin >> artal;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("aldur", age);
+            gogn = _vService.leitaVelarBar(artal);
             if (gogn.size() == 0)
             {
-                hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                hausUI();
+                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaListaTolvuFolk(gogn);
+                prentaListaTolvuVelar(gogn);
             }
         }
 
-        else if (skipunin == "birth" || skipunin == "b")
+        else if (skipunin == "type" || skipunin == "t")
         {
             leitarMoguleikarVelar();
-            int birth;
-            cout << "Year of birth to search: ";
-            cin >> birth;
-            while (-1 > birth || !cin)
-            {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cerr << "Input not valid, try again: ";
-                cin >> birth;
-            }
+            string tegund;
+            cout << "Type to search: ";
+            cin >> tegund;
+
             cout << endl;
-            gogn = _service.leitaHeiltolu("faedingarar", birth);
+            gogn = _vService.leitaVelarTegund(tegund);
             if (gogn.size() == 0)
             {
-                hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                hausUI();
+                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
-            }else
+            }
+            else
             {
-                prentaListaTolvuFolk(gogn);
+                prentaListaTolvuVelar(gogn);
             }
         }
 
-        else if (skipunin == "death" || skipunin == "d")
+        else if (skipunin == "made" || skipunin == "m")
         {
             leitarMoguleikarVelar();
-            int death;
-            cout << "Year of death to search (-1 for still alive): ";
-            cin >> death;
-            while (-2 > death || !cin)
+            bool byggd;
+            char byggdIn;
+
+            do
             {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cerr << "Input not valid, try again: ";
-                cin >> death;
-            }
+                cout << "Was it built? (y/n): ";
+                cin >> byggdIn;
+
+                if(byggdIn == 'y' || byggdIn == 'Y')
+                {
+                    byggd = true;
+                    break;
+                }
+                else if(byggdIn == 'n' || byggdIn == 'N')
+                {
+                    byggd = false;
+                    break;
+                }
+                else
+                {
+                    cout << "Invalid input, try again!" << endl;
+                }
+            }while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n');
+
             cout << endl;
-            gogn = _service.leitaHeiltolu("danarar", death);
+            gogn = _vService.leitaVelarByggd(byggd);
             if (gogn.size() == 0)
             {
-                hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                hausUI();
+                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaListaTolvuFolk(gogn);
+                prentaListaTolvuVelar(gogn);
             }
         }
-*/
+
         else if (skipunin == "quit" || skipunin == "q")
         {
             return;
