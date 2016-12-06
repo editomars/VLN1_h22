@@ -32,7 +32,13 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
-    _service.uppfaeraStakTolvufolk(1,"Edit","Omarsdottir",'f',1988,2915);
+}
+void NotendaUI::prentaPersonu(const tolvufolk kall, int i)
+{
+    hausUI();
+    cout << "|" << i+1 << " \t\t " << kall;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+
 }
 
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
@@ -218,12 +224,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     system("cls");
     cout << "Updating information for: " << endl << endl;
 
-    cout << "-------------------------------------------------------------------------" << endl;
-    cout << "Name: " << target.getNafn() << ",\tGender: "
-         << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: "
-         << target.getDanarar() << endl;
-    cout << "-------------------------------------------------------------------------" << endl << endl;
-
+    prentaPersonu(target, persNR);
 
     cout << "To hold section as is, enter 0." << endl << endl;
 
@@ -294,6 +295,9 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
     _service.uppfaeraStakTolvufolk(target.getId(), fornafn, eftirnafn, nyttKyn, nyttF, nyttD);
 
+    system("cls");
+    cout << "Updated information:" << endl << endl;
+    prentaPersonu((_service.getStaktTolvufolk(persNR)), persNR);
 
 }
 
@@ -770,20 +774,6 @@ void NotendaUI::rodunarMoguleikar()
     cout << "*=========================================================================*" << endl;
 }
 
-void NotendaUI::uppfaersluMoguleikar()
-{
-
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command.                           ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-    cout << "*||name   - update name, please write 'name'                            ||*" << endl;
-    cout << "*||gender - update gender, please write 'gender'                        ||*" << endl;
-    cout << "*||birth  - update year of birth, please write 'birth'                  ||*" << endl;
-    cout << "*||death  - update year of death, please write 'death'                  ||*" << endl;
-    cout << "*||quit   - Quit updating.                                              ||*" << endl;
-    cout << "*=========================================================================*" << endl;
-}
-
 
 void NotendaUI::radaUI()
 {
@@ -799,7 +789,6 @@ cout << "*======================================================================
 
 void NotendaUI::hausUI()
 {
-    system("cls");
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;

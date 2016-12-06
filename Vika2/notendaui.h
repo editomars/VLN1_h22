@@ -18,6 +18,7 @@ private:
     tolvufolkService _service;
     velarService _vService;
     void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
+    void prentaPersonu(const tolvufolk kall, int i);
 
     //Föll sem skipta um UI grein
     void adalvalmyndUI(); //Main Menu UI grein
