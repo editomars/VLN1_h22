@@ -115,7 +115,7 @@ void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, i
     saekjaGogn();
 }
 
-void tolvufolkService::eydaTolvufolk()
+void tolvufolkService::tortimaTolvufolk()
 {
     _dataaccess.tortimaFolki();
 }

@@ -22,7 +22,7 @@ public:
     //Föll sem tengja við Gagnagrunn
     void saekjaGogn(); //Sækir gögn í gagnagrunn og geymir í vector _folk
     void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
-    void eydaTolvufolk(); //Eyðir öllum gögnum
+    void tortimaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk, notar ID
     void uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr);
 
