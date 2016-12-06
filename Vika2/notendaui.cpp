@@ -32,7 +32,7 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
-    _service.uppfaeraStakTolvufolk(1,"Edit","Ómarsdóttir",'f',1988,2915);
+    _service.uppfaeraStakTolvufolk(1,"Edit","Omarsdottir",'f',1988,2915);
 }
 
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
