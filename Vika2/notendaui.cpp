@@ -839,10 +839,12 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
             if(byggdIn == 'y' || byggdIn == 'Y')
             {
                 byggd = true;
+                break;
             }
             else if(byggdIn == 'n' || byggdIn == 'N')
             {
                 byggd = false;
+                break;
             }
             else
             {
@@ -1089,7 +1091,7 @@ cout << "*======================================================================
 void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
