@@ -17,6 +17,7 @@ void NotendaUI::keyra()
 {
 
     _service.saekjaGogn();
+    _vService.saekjaGogn();
     adalvalmyndUI();
 }
 
@@ -661,7 +662,6 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         {
             byggd = false;
         }
-
 
         _vService.baetaVidVelar(vNafn, bAr, byggd, tegund);
 

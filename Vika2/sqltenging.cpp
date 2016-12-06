@@ -15,6 +15,14 @@ vector<velar> sqltenging::lesaVelar()
     return selectVelar(sql);
 }
 
+void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
+{
+    string sql = "INSERT INTO TolvuVelar(Nafn, Byggingarar, Byggd, Tegund)"
+                  "VALUES('" + nafn + "'," + to_string(bAr) + "," + to_string(byggd) + ",'" + tegund + "')";
+    udiSkipun(sql);
+}
+
+
 // FOLK
 vector<tolvufolk> sqltenging::lesaFolk() const
 {
