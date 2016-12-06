@@ -13,13 +13,16 @@ public:
     sqltenging();
     vector<velar> lesaVelar();
     vector<tolvufolk> lesaFolk() const;
-    tolvufolk lesaStaktFolk(int id) const;
 
-    void baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr);
-    void baetaVidTolvuVel(string nafn, int bAr, bool byggd, string tegund);
+    void baetaVidFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr);
+    void baetaVidVel(string nafn, int bAr, bool byggd, string tegund);
     void eydaFolk(int id);
 private:
     QSqlDatabase _db;
+    vector<tolvufolk> selectFolk(string sql) const;
+    vector<velar> selectVelar(string sql) const;
+    void udiFolk(string sql); //UPDATE, DELETE, INSERT fólk
+    void udiVelar(string sql); //UPDATE, DELETE, INSERT vélar
 };
 
 #endif // SQLTENGING_H

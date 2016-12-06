@@ -87,7 +87,15 @@ struct daudiLaekkandi
 
 //Get föll
 
+tolvufolk tolvufolkService::getStaktTolvufolk(int ndx) const
+{
+    return _folk[ndx];
+}
 
+vector<tolvufolk> tolvufolkService::getTolvufolk() const
+{
+    return _folk;
+}
 
 int tolvufolkService::getSize() const
 {
@@ -95,19 +103,15 @@ int tolvufolkService::getSize() const
 }
 
 //Föll sem tengja við gagnagrunn
-vector<tolvufolk> tolvufolkService::getTolvufolk() const
+
+vector<tolvufolk> tolvufolkService::saekjaGogn()
 {
-    return _dataaccess.lesaFolk();
+    _folk = _dataaccess.lesaFolk();
 }
 
-tolvufolk tolvufolkService::getStaktTolvufolk(int id) const
+void tolvufolkService::baetaVidTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    return _dataaccess.lesaStaktFolk(id);
-}
-
-void tolvufolkService::addTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
-{
-    _dataaccess.baetaVidTolvuFolk(fNafn, mNafn, eNafn, kyn, fAr, dAr);
+    _dataaccess.baetaVidFolk(fNafn, mNafn, eNafn, kyn, fAr, dAr);
 }
 
 void tolvufolkService::yfirskrifaTolvufolk()

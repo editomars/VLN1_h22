@@ -16,6 +16,7 @@ NotendaUI::NotendaUI()
 void NotendaUI::keyra()
 {
     //_service.addTolvufolk("Aron","b","Cann",'f',1900,2000);
+    _service.saekjaGogn();
     adalvalmyndUI();
 }
 
@@ -25,7 +26,7 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     hausUI();
     for (size_t i = 0; i < gogn.size(); i++)
     {
-        cout << "|" << gogn[i].getId() << " \t\t ";
+        cout << "|" << i+1 << " \t\t ";
         cout << gogn[i];
 
     }
@@ -169,7 +170,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
             cin >> dAr;
         }
 
-        _service.addTolvufolk(fornafn, midnafn, eftirnafn, kKyn, fAr, dAr);
+        _service.baetaVidTolvufolk(fornafn, midnafn, eftirnafn, kKyn, fAr, dAr);
 
 
     }while(skipunaAframhald());

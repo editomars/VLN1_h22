@@ -10,50 +10,9 @@ sqltenging::sqltenging()
 
 vector<tolvufolk> sqltenging::lesaFolk() const
 {
-    vector<tolvufolk> t;
-    QSqlQuery query(_db);
+    string sql = "SELECT * FROM TolvuFolk";
 
-    query.exec("SELECT * FROM TolvuFolk");
-
-    while(query.next()){
-        int id = query.value("id").toUInt();
-        string fornafn = query.value("fornafn").toString().toStdString();
-        string midnafn = query.value("Midnafn").toString().toStdString();
-        string eftirnafn = query.value("eftirnafn").toString().toStdString();
-        char kyn = query.value("kyn").toString().toStdString()[0];
-        int faedingarar = query.value("faedingarar").toUInt();
-        int danarar = query.value("danarar").toUInt();
-
-        t.push_back(tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, faedingarar, danarar));
-        //tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, fAr, dAr);
-    }
-
-    return t;
-}
-
-tolvufolk sqltenging::lesaStaktFolk(int id) const
-{
-    string str;
-
-    str = "SELECT * FROM tolvufolk WHERE ID = " + to_string(id);
-    char* cstr = new char[str.length() + 1];
-    strcpy(cstr, str.c_str());
-    QSqlQuery query(_db);
-    query.exec(cstr);
-    delete[] cstr;
-
-    if (query.next()){
-        int id = query.value("id").toUInt();
-        string fornafn = query.value("fornafn").toString().toStdString();
-        string midnafn = query.value("Midnafn").toString().toStdString();
-        string eftirnafn = query.value("eftirnafn").toString().toStdString();
-        char kyn = query.value("kyn").toString().toStdString()[0];
-        int faedingarar = query.value("faedingarar").toUInt();
-        int danarar = query.value("danarar").toUInt();
-
-        return tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, faedingarar, danarar);
-    }
-    return tolvufolk();
+    return selectFolk(sql);
 }
 
 void sqltenging::eydaFolk(int id)
@@ -93,7 +52,7 @@ vector<velar> sqltenging::lesaVelar()
     return v;
 }
 
-void sqltenging::baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
+void sqltenging::baetaVidFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
     string temp = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
                   "VALUES('" + fNafn + "','" + mNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
@@ -102,4 +61,28 @@ void sqltenging::baetaVidTolvuFolk(string fNafn, string mNafn, string eNafn, cha
     QSqlQuery query(_db);
     query.exec(cstr);
     delete[] cstr;
+}
+
+vector<tolvufolk> sqltenging::selectFolk(string sql) const
+{
+    vector<tolvufolk> t;
+    QSqlQuery query(_db);
+    char* cstr = new char[sql.length()+1];
+    strcpy(cstr, sql.c_str());
+    query.exec(cstr);
+
+    while(query.next())
+    {
+        int id = query.value("id").toUInt();
+        string fornafn = query.value("fornafn").toString().toStdString();
+        string midnafn = query.value("Midnafn").toString().toStdString();
+        string eftirnafn = query.value("eftirnafn").toString().toStdString();
+        char kyn = query.value("kyn").toString().toStdString()[0];
+        int faedingarar = query.value("faedingarar").toUInt();
+        int danarar = query.value("danarar").toUInt();
+
+        t.push_back(tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, faedingarar, danarar));
+    }
+
+    return t;
 }
