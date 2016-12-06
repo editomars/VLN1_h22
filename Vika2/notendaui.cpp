@@ -645,7 +645,7 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         }
 
 
-        _vService.baetaVidVelar(vNafn, bAr, tegund, byggd);
+        //_vService.baetaVidVelar(vNafn, bAr, tegund, byggd);
 
     }while(skipunaAframhald());
 }
