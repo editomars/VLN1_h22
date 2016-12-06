@@ -3,6 +3,8 @@
 
 #include "tolvufolk.h"
 #include "tolvufolkservice.h"
+#include "velar.h"
+#include "velarservice.h"
 #include <string>
 #include <vector>
 
@@ -14,7 +16,7 @@ public:
     void keyra(); //main fail
 private:
     tolvufolkService _service;
-
+    velarService _vService;
     void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
 
     //Föll sem skipta um UI grein
@@ -25,6 +27,7 @@ private:
     void leitaGrein(); //Search / Filter UI grein
     void flokkunarMoguleikar(); //Sort UI grein
     void tortimaLista(); //Purge UI grein
+    void baetaVidVelar(); //add velar Ui grein
 
     //Bool flög
     bool aframhaldandiUI(); //Vantar comment

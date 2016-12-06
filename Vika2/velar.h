@@ -11,8 +11,8 @@ class velar
 {
 public:
     velar();
-
     velar(int id, string vNafn, int bAr, string tegund, bool byggd);
+
     //Get föll
     int getID() const;
     string getVelaNafn() const;
