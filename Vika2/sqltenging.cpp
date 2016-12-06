@@ -22,6 +22,13 @@ void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
     udiSkipun(sql);
 }
 
+void sqltenging::eydaVel(int id)
+{
+
+    string sql = "DELETE FROM TolvuVelar WHERE ID = " + to_string(id);
+    udiSkipun(sql);
+}
+
 void sqltenging::uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund)
 {
     string sql = "UPDATE TolvuVelar "
@@ -33,6 +40,13 @@ void sqltenging::uppfaeraVel(int id, string nafn, int bAr, bool byggd, string te
 
     udiSkipun(sql);
 }
+
+void sqltenging::tortimaVelum()
+{
+    string terminator = "DELETE FROM TolvuVelar";
+    udiSkipun(terminator);
+}
+
 
 
 

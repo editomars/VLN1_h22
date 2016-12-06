@@ -40,3 +40,15 @@ void velarService::uppfaeraVelar(int id, string nafn, int bAr, bool byggd, strin
     _dataaccess.uppfaeraVel(id,nafn,bAr,byggd,tegund);
     saekjaGogn();
 }
+
+void velarService::eydaStakiVel(int id)
+{
+    _dataaccess.eydaVel(id);
+    saekjaGogn();
+}
+
+void velarService::tortimaTolvuVelar()
+{
+    _dataaccess.tortimaVelum();
+
+}

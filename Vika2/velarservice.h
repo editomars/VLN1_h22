@@ -22,6 +22,9 @@ public:
     void saekjaGogn(); //Sækir gögn í gagnaggrunn
     void baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)
     void uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund);
+    void eydaStakiVel(int id);
+    void tortimaTolvuVelar();
+
 private:
     sqltenging _dataaccess;
     vector<velar> _velar;
