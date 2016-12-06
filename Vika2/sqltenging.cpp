@@ -24,12 +24,12 @@ void sqltenging::eydaFolk(int id)
 
 void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    string sql = "UPDATE TolvuFolk"
+    string sql = "UPDATE TolvuFolk "
                  "SET fornafn = '" +  fNafn + "'"
                  ", eftirnafn = '" + eNafn + "'"
                  ", kyn = '" + kyn + "'"
-                 ", fAr = " + to_string(fAr) +
-                 ", dAr = " + to_string(dAr) +
+                 ", faedingarAr = " + to_string(fAr) +
+                 ", danarAr = " + to_string(dAr) + " "
                  "WHERE ID = " + to_string(id);
 
     udiSkipun(sql);
