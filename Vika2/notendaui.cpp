@@ -121,7 +121,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         else if (skipun == "sort" || skipun == "so")
         {
             skrifaUtTolvuVelar();
-            flokkunarMoguleikar();
+            flokkunarMoguleikarTolvuFolk();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -145,13 +145,13 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         else if (skipun == "search" || skipun == "se")
         {
             skrifaUtTolvuVelar();
-            leitaGrein();
+            leitaGreinTolvuFolk();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUtTolvuVelar();
-            tortimaLista();
+            tortimaListaTolvuFolk();
         }
 
         else if (skipun == "return" || skipun == "r")
@@ -184,7 +184,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         else if (skipun == "sort" || skipun == "so")
         {
             skrifaUtTolvuFolk();
-            flokkunarMoguleikar();
+            flokkunarMoguleikarTolvuFolk();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -209,13 +209,13 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         else if (skipun == "search" || skipun == "se")
         {
             skrifaUtTolvuFolk();
-            leitaGrein();
+            leitaGreinTolvuFolk();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUtTolvuFolk();
-            tortimaLista();
+            tortimaListaTolvuFolk();
         }
 
         else if (skipun == "return" || skipun == "r")
@@ -248,7 +248,7 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
         else if (skipun == "sort" || skipun == "so")
         {
             skrifaUtLinked();
-            flokkunarMoguleikar();
+            flokkunarMoguleikarTolvuFolk();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -273,13 +273,13 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
         else if (skipun == "search" || skipun == "se")
         {
             skrifaUtLinked();
-            leitaGrein();
+            leitaGreinTolvuFolk();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUtLinked();
-            tortimaLista();
+            tortimaListaTolvuFolk();
         }
 
         else if (skipun == "return" || skipun == "r")
@@ -489,107 +489,8 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
 }
 
-void NotendaUI::uppfaeraVelar() //Update UI grein
-{
-    string vNafn, nyttTegund;
-    char byggdIn;
-    int velNR, nyttbAr;
-    velar target;
-    bool byggd;
 
-    prentaListaTolvuVelar(_vService.getVelar());
-
-    cout << "Update machine number (-1 to cancel update): ";
-    cin >> velNR;
-    if (velNR == -1)
-    {
-        return;
-    }
-    while (velNR > _vService.getSize() || velNR <= 0)
-    {
-        if (velNR == -1)
-        {
-            break;
-        }
-        cerr << "Input not valid, try again: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> velNR;
-    }
-
-    velNR--;
-    target = _vService.getStaktVelar(velNR);
-
-    system("cls");
-    cout << "Updating information for: " << endl << endl;
-
-    prentaVel(target, velNR);
-
-    cout << "To hold section as is, enter 0." << endl << endl;
-
-    cout << "Enter updated machine name: ";
-    cin >> vNafn;
-
-    if (vNafn == "0")
-        vNafn = target.getVelaNafn();
-
-
-        cout << "Enter updated built year: ";
-        cin >> nyttbAr;
-
-        while (!cin)
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cerr << "Input not valid, try again: ";
-            cin >> nyttbAr;
-        }
-
-        if (nyttbAr == 0)
-        {
-            nyttbAr = target.getByggingarAr();
-        }
-
-        while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n' || byggdIn != '0')
-        {
-            cout << "Was it built? (y/n)";
-            cin >> byggdIn;
-
-            if (byggdIn == '0')
-            {
-                byggdIn = target.getByggd();
-                break;
-            }
-
-            else if(byggdIn == 'y' || byggdIn == 'Y')
-            {
-                byggd = true;
-                break;
-            }
-            else if(byggdIn == 'n' || byggdIn == 'N')
-            {
-                byggd = false;
-                break;
-            }
-            else
-            {
-                cout << "Invalid input, try again!" << endl;
-            }
-        }
-
-
-    cout << "Enter updated type: ";
-    cin >> nyttTegund;
-
-    _vService.uppfaeraVelar((target.getID()), vNafn, nyttbAr, byggd, nyttTegund);
-
-    system("cls");
-    cout << "Updated information:" << endl << endl;
-    prentaVel((_vService.getStaktVelar(velNR)), velNR);
-}
-
-
-void NotendaUI::leitaGrein() //Search / Filter UI grein
+void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 {
     vector<tolvufolk> gogn;
     do
@@ -711,7 +612,7 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
     }while(skipunaAframhald());
 }
 
-void NotendaUI::flokkunarMoguleikar() //Sort UI grein
+void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 {
     string skipunin;
     vector<tolvufolk> radad;
@@ -878,7 +779,7 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
     }while(rettInntak == false);
 }
 
-void NotendaUI::tortimaLista() //Purge UI grein
+void NotendaUI::tortimaListaTolvuFolk() //Purge UI grein
 {
     string skipun;
     cout << "By the Emperor, are you sure you want to purify this database? (Y/N): ";
@@ -992,6 +893,425 @@ void NotendaUI::eydaVel() //Delete UI grein
         _vService.eydaStakiVel(velNR);
 
     }while(skipunaAframhald());
+}
+
+void NotendaUI::uppfaeraVelar() //Update UI grein
+{
+    string vNafn, nyttTegund;
+    char byggdIn;
+    int velNR, nyttbAr;
+    velar target;
+    bool byggd;
+
+    prentaListaTolvuVelar(_vService.getVelar());
+
+    cout << "Update machine number (-1 to cancel update): ";
+    cin >> velNR;
+    if (velNR == -1)
+    {
+        return;
+    }
+    while (velNR > _vService.getSize() || velNR <= 0)
+    {
+        if (velNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> velNR;
+    }
+
+    velNR--;
+    target = _vService.getStaktVelar(velNR);
+
+    system("cls");
+    cout << "Updating information for: " << endl << endl;
+
+    prentaVel(target, velNR);
+
+    cout << "To hold section as is, enter 0." << endl << endl;
+
+    cout << "Enter updated machine name: ";
+    cin >> vNafn;
+
+    if (vNafn == "0")
+        vNafn = target.getVelaNafn();
+
+
+        cout << "Enter updated built year: ";
+        cin >> nyttbAr;
+
+        while (!cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> nyttbAr;
+        }
+
+        if (nyttbAr == 0)
+        {
+            nyttbAr = target.getByggingarAr();
+        }
+
+        while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n' || byggdIn != '0')
+        {
+            cout << "Was it built? (y/n)";
+            cin >> byggdIn;
+
+            if (byggdIn == '0')
+            {
+                byggdIn = target.getByggd();
+                break;
+            }
+
+            else if(byggdIn == 'y' || byggdIn == 'Y')
+            {
+                byggd = true;
+                break;
+            }
+            else if(byggdIn == 'n' || byggdIn == 'N')
+            {
+                byggd = false;
+                break;
+            }
+            else
+            {
+                cout << "Invalid input, try again!" << endl;
+            }
+        }
+
+
+    cout << "Enter updated type: ";
+    cin >> nyttTegund;
+
+    _vService.uppfaeraVelar((target.getID()), vNafn, nyttbAr, byggd, nyttTegund);
+
+    system("cls");
+    cout << "Updated information:" << endl << endl;
+    prentaVel((_vService.getStaktVelar(velNR)), velNR);
+}
+
+void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
+{
+    vector<tolvufolk> gogn;
+    do
+    {
+        leitarMoguleikar();
+        string skipunin;
+        cin >> skipunin;
+
+        if (skipunin == "name" || skipunin == "n")
+        {
+            leitarMoguleikar();
+            string fornafn, eftirnafn;
+            cout << "---Searching by name---" << endl;
+            cout << "Enter first name: ";
+            cin >> fornafn;
+            cout << "Enter last name: ";
+            cin >> eftirnafn;
+            cout << endl;
+            gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
+            if (gogn.size() == 0)
+            {
+                hausUITolvuFolk();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaListaTolvuFolk(gogn);
+            }
+        }
+
+        else if (skipunin == "age" || skipunin == "a")
+        {
+            int age;
+            leitarMoguleikar();
+            cout << "Age to search: ";
+            cin >> age;
+            while (-1 > age || !cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << "Input not valid, try again: ";
+                cin >> age;
+            }
+            cout << endl;
+            gogn = _service.leitaHeiltolu("aldur", age);
+            if (gogn.size() == 0)
+            {
+                hausUITolvuFolk();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaListaTolvuFolk(gogn);
+            }
+        }
+
+        else if (skipunin == "birth" || skipunin == "b")
+        {
+            leitarMoguleikar();
+            int birth;
+            cout << "Year of birth to search: ";
+            cin >> birth;
+            while (-1 > birth || !cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << "Input not valid, try again: ";
+                cin >> birth;
+            }
+            cout << endl;
+            gogn = _service.leitaHeiltolu("faedingarar", birth);
+            if (gogn.size() == 0)
+            {
+                hausUITolvuFolk();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaListaTolvuFolk(gogn);
+            }
+        }
+
+        else if (skipunin == "death" || skipunin == "d")
+        {
+            leitarMoguleikar();
+            int death;
+            cout << "Year of death to search (-1 for still alive): ";
+            cin >> death;
+            while (-2 > death || !cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << "Input not valid, try again: ";
+                cin >> death;
+            }
+            cout << endl;
+            gogn = _service.leitaHeiltolu("danarar", death);
+            if (gogn.size() == 0)
+            {
+                hausUITolvuFolk();
+                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
+                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+            }else
+            {
+                prentaListaTolvuFolk(gogn);
+            }
+        }
+
+        else if (skipunin == "quit" || skipunin == "q")
+        {
+            return;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again: ";
+        }
+
+    }while(skipunaAframhald());
+}
+
+void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
+{
+    string skipunin;
+    vector<tolvufolk> radad;
+    bool rettInntak = true;
+    rodunarMoguleikar();
+
+    do
+    {
+        rettInntak = true;
+        cin >> skipunin;
+
+
+        if (skipunin == "name" || skipunin == "n")
+        {
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("nafn", "asc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("nafn", "desc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+            }while(rettInntak == false);
+        }
+
+        else if(skipunin == "age" || skipunin == "a")
+        {
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("aldur", "asc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("aldur", "desc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+            }while(rettInntak == false);
+        }
+
+        else if(skipunin == "birth" || skipunin == "b")
+        {
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("faedingarar", "asc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("faedingarar", "desc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+
+            }while(rettInntak == false);
+        }
+
+        else if(skipunin == "death" || skipunin == "d")
+        {
+            radaUI();
+
+            do
+            {
+                rettInntak = true;
+                cin >> skipunin;
+
+                if(skipunin == "ascending" || skipunin == "a")
+                {
+                    radad = _service.rada("danarar", "asc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if(skipunin == "descending" || skipunin == "d")
+                {
+                    radad = _service.rada("danarar", "desc");
+                    prentaListaTolvuFolk(radad);
+                }
+
+                else if (skipunin == "quit" || skipunin == "q")
+                {
+                    return;
+                }
+
+                else
+                {
+                    cout << "Invalid input, try again: ";
+                    rettInntak = false;
+                }
+
+            }while(rettInntak == false);
+        }
+
+        else if (skipunin == "quit" || skipunin == "q")
+        {
+            return;
+        }
+
+        else
+        {
+            cout << "Invalid input, try again: ";
+            rettInntak = false;
+        }
+
+    }while(rettInntak == false);
+}
+
+void NotendaUI::tortimaListaVelar() //Purge UI grein
+{
+    string skipun;
+    cout << "By the Emperor, are you sure you want to purify this database? (Y/N): ";
+    cin >> skipun;
+
+    if (skipun == "Y" || skipun == "y")
+    {
+        cout << "Are you really sure? This will EXTERMINATE ALL ENTRIES. (Y/N): ";
+        cin >> skipun;
+
+        if (skipun == "Y" || skipun == "y")
+        {
+            cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
+
+            _service.tortimaTolvufolk();
+
+        }
+
+        else
+        {
+            cout << "Purge canceled." << endl;
+        }
+    }
+
+    else
+    {
+        cout << "Purge canceled." << endl;
+    }
 }
 
 //------------------------------- Svæði fyrir UI greinar endar ---------------------------------

@@ -90,22 +90,6 @@ void sqltenging::tortimaFolki()
     udiSkipun(terminator);
 }
 
-//Vensl
-
-vector<velar> sqltenging::venslNafn(int id, string nafn)
-{
-    string sql = "SELECT f.fornafn, f.eftirnafn t.nafn FROM TolvuFolk f"
-                 "INNER JOIN VenslFolkVelar v ON v.folk_id = f.id"
-                 "INNER JOIN tolvuvelar t ON v.vel_id = t.id"
-                 "WHERE ID = '" + nafn "'." + to_string(id);
-
-
-    return selectVelar(sql);
-}
-
-
-
-
 // Private Functions
 vector<tolvufolk> sqltenging::selectFolk(string sql) const
 {
