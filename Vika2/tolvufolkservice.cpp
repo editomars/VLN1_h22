@@ -109,9 +109,9 @@ void tolvufolkService::saekjaGogn()
     _folk = _dataaccess.lesaFolk();
 }
 
-void tolvufolkService::baetaVidTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
+void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    _dataaccess.baetaVidFolk(fNafn, mNafn, eNafn, kyn, fAr, dAr);
+    _dataaccess.baetaVidFolk(fNafn, eNafn, kyn, fAr, dAr);
     saekjaGogn();
 }
 
@@ -146,15 +146,10 @@ void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
 }
 
 
-void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)
+void tolvufolkService::uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr)
 {
-
-
-
-    //_folk[nr].uppfNafn(name);
-    //_folk[nr].uppfGender(kyn);
-    _folk[nr].uppfFaedingarar(fYear);
-    _folk[nr].uppfDanarar(dYear);
+    _dataaccess.uppfaeraFolk(id,fNafn,eNafn,kyn,fAr,dAr);
+    saekjaGogn();
 }
 
 void tolvufolkService::hreinsaTolvufolk()

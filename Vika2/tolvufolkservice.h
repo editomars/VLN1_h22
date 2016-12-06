@@ -21,7 +21,7 @@ public:
 
     //Föll sem tengja við Gagnagrunn
     void saekjaGogn(); //Sækir gögn í gagnagrunn og geymir í vector _folk
-    void baetaVidTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
+    void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
     void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, notar private breytuna _folk
     void yfirskrifaTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk
     void eydaTolvufolk(); //Eyðir öllum gögnum
@@ -29,7 +29,7 @@ public:
 
     //Föll sem breyta vector en ekki gagnagrunn
     void uppfaeraTolvufolk(const vector<tolvufolk>& t); //yfirskrifar vectorinn, ekki gagnagrunn
-    void uppfaeraStakTolvufolk(int nr, string nafn, string kyn, int fAr, int dAr); //Uppfærir eitt stak í vector
+    void uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr);
     void hreinsaTolvufolk(); //Hreinsar öll gögn úr vector
 
     //Föll sem skila umbreyttum gögnum

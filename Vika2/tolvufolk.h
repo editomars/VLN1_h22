@@ -12,12 +12,11 @@ class tolvufolk
 public:
     tolvufolk();
 
-    tolvufolk(int id, string fornafn, string midnafn, string eftirnafn, char kyn, int faedingarar, int danarar);
+    tolvufolk(int id, string fornafn, string eftirnafn, char kyn, int faedingarar, int danarar);
     //Get föll
     int getId() const;
     string getNafn() const;
     string getFornafn() const;
-    string getMidnafn() const;
     string getEftirnafn() const;
     char getKyn() const;
     int getFaedingarar() const;
@@ -32,7 +31,6 @@ public:
 private:
     int _id;
     string _fornafn;
-    string _midnafn;
     string _eftirnafn;
     char _kyn;
     int _faedingarar;

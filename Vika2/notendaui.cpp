@@ -15,6 +15,7 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
+
     _service.saekjaGogn();
     adalvalmyndUI();
 }
@@ -31,6 +32,7 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
+    _service.uppfaeraStakTolvufolk(1,"Edit","Ómarsdóttir",'f',1988,2915);
 }
 
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
@@ -88,25 +90,7 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
 
         else if (skipun == "quit" || skipun == "q")
         {
-            cout << "Do you want to save before you quit? (Y/N): ";
-            do
-            {
-                cin >> skipun;
-                if(skipun == "Y" || skipun == "y")
-                {
-                    vista();
-                }
-                else if (skipun != "n" && skipun != "N")
-                {
-                    cout << "Invalid input, try again: ";
-                }
-            }while(skipun != "y" && skipun != "Y" && skipun != "n" && skipun != "N");
             return;
-        }
-
-        else if (skipun == "save" || skipun == "s")
-        {
-            vista();
         }
 
         else
@@ -122,7 +106,6 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
     do
     {
         string fornafn;
-        string midnafn;
         string eftirnafn;
         char kKyn;
         int fAr;
@@ -130,9 +113,6 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
 
         cout << "Enter firstname: ";
         cin >> fornafn;
-
-        cout << "Enter middle name: ";
-        cin >> midnafn;
 
         cout << "Enter lastname: ";
         cin >> eftirnafn;
@@ -169,7 +149,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
             cin >> dAr;
         }
 
-        _service.baetaVidTolvufolk(fornafn, midnafn, eftirnafn, kKyn, fAr, dAr);
+        _service.baetaVidTolvufolk(fornafn, eftirnafn, kKyn, fAr, dAr);
 
 
     }while(skipunaAframhald());
@@ -262,7 +242,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
             cerr << "Input not valid, try again: ";
             cin >> nyttKyn;
         }
-        _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
+        //_service.uppfaeraStakTolvufolk(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
 
     }
 
@@ -588,21 +568,6 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
         }
 
     }while(rettInntak == false);
-
-    cout << "Do you want to save the sorted list? (Y/N): ";
-    do
-    {
-        cin >> skipunin;
-        if(skipunin == "Y" || skipunin == "y")
-        {
-            vista();
-            _service.uppfaeraTolvufolk(radad);
-        }
-        else if (skipunin != "n" && skipunin != "N")
-        {
-            cout << "Invalid input, try again: ";
-        }
-    }while(skipunin != "y" && skipunin != "Y" && skipunin != "n" && skipunin != "N");
 }
 
 void NotendaUI::tortimaLista() //Purge UI grein
@@ -628,28 +593,11 @@ void NotendaUI::tortimaLista() //Purge UI grein
         {
             cout << "Purge canceled." << endl;
         }
-
     }
 
     else
     {
         cout << "Purge canceled." << endl;
-    }
-}
-
-void NotendaUI::vista()
-{
-    string skipun;
-    cout << "Saving will overwrite previous data, are you sure you want to continue? (Y/N): ";
-    cin >> skipun;
-    if (skipun == "Y" || skipun == "y")
-    {
-        _service.yfirskrifaTolvufolk();
-        cout << "Data has been saved" << endl;
-    }
-    else
-    {
-        cout << "Saving has been cancelled" << endl;
     }
 }
 
@@ -659,7 +607,6 @@ void NotendaUI::vista()
 //------------------------------- Svæði fyrir bool flögg byrjar --------------------------------
 bool NotendaUI::aframhaldandiUI()
 {
-
     string svar = "o";
 
     while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
@@ -675,20 +622,6 @@ bool NotendaUI::aframhaldandiUI()
 
         else if(svar == "N" || svar == "n")
         {
-            string skipun;
-            cout << "Do you want to save before you quit? (Y/N): ";
-            do
-            {
-                cin >> skipun;
-                if(skipun == "Y" || skipun == "y")
-                {
-                    vista();
-                }
-                else if (skipun != "n" && skipun != "N")
-                {
-                    cout << "Invalid input, try again: ";
-                }
-            }while(skipun != "y" && skipun != "Y" && skipun != "n" && skipun != "N");
             return false;
         }
 
@@ -741,7 +674,6 @@ void NotendaUI::skrifaUt()
     cout << "*||search - Search for an entry from the database.               ||*" << endl;
     cout << "*||sort   - Sort the entries in the database.                    ||*" << endl;
     cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
-    cout << "*||save   - Saves data to database.                              ||*" << endl;
     cout << "*||quit   - Exits/quits the program.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }

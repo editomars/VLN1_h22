@@ -6,11 +6,10 @@ tolvufolk::tolvufolk()
 
 }
 
-tolvufolk::tolvufolk(int id, string fornafn, string midnafn, string eftirnafn, char kyn, int faedingarar, int danarar)
+tolvufolk::tolvufolk(int id, string fornafn, string eftirnafn, char kyn, int faedingarar, int danarar)
 {
     _id = id;
     _fornafn = fornafn;
-    _midnafn = midnafn;
     _eftirnafn = eftirnafn;
     _kyn = kyn;
     _danarar = danarar;
@@ -26,10 +25,6 @@ int tolvufolk::getId() const
 string tolvufolk::getFornafn() const
 {
     return _fornafn;
-}
-string tolvufolk::getMidnafn() const
-{
-    return _midnafn;
 }
 string tolvufolk::getEftirnafn() const
 {
@@ -50,18 +45,8 @@ int tolvufolk::getDanarar() const
 
 string tolvufolk::getNafn() const
 {
-    if(_midnafn.length() == 0)
-    {
-
        return _fornafn + " " + _eftirnafn;
-    }
-    else
-       return _fornafn + " " + _midnafn + " " + _eftirnafn;
-
 }
-
-
-
 
 //Set föll
 void tolvufolk::uppfFaedingarar(int nyttAr)
