@@ -17,7 +17,8 @@ public:
 private:
     tolvufolkService _service;
     velarService _vService;
-    void prentaLista(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
+    void prentaListaTolvuFolk(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
+    void prentaListaTolvuVelar(const vector<velar>& gogn); //Skrifar út gögn á console
     void prentaPersonu(const tolvufolk kall, int i);
 
     //Föll sem skipta um UI grein
@@ -51,6 +52,7 @@ private:
     void upphafsUI(); //Vantar comment
     void radaUI(); //Vantar comment
     void hausUI(); //Vantar comment
+    void hausUITolvuFolk(); //Vantar comment
 };
 
 #endif // NOTENDAUI_H

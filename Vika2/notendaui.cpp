@@ -21,7 +21,21 @@ void NotendaUI::keyra()
     adalvalmyndUI();
 }
 
-void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
+void NotendaUI::prentaListaTolvuFolk(const vector<tolvufolk>& gogn)
+{
+    system("cls");
+    hausUITolvuFolk();
+    for (size_t i = 0; i < gogn.size(); i++)
+    {
+        cout << "|" << i+1 << " \t\t ";
+        cout << gogn[i];
+
+    }
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+
+}
+
+void NotendaUI::prentaListaTolvuVelar(const vector<velar>& gogn)
 {
     system("cls");
     hausUI();
@@ -34,9 +48,10 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
 }
+
 void NotendaUI::prentaPersonu(const tolvufolk kall, int i)
 {
-    hausUI();
+    hausUITolvuFolk();
     cout << "|" << i+1 << " \t\t " << kall;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
@@ -92,21 +107,21 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         if (skipun == "list" || skipun == "l")
         {
-            prentaLista(_service.getTolvufolk());
+            prentaListaTolvuVelar(_vService.getVelar());
         }
 
         else if (skipun == "sort" || skipun == "so")
         {
-            skrifaUt();
+            skrifaUtTolvuVelar();
             flokkunarMoguleikar();
         }
 
         else if (skipun == "add" || skipun == "a")
         {
             system("cls");
-            cout << "-----Adding computer scientist-----" << endl;
-            baetaVidPersonu();
-            prentaLista(_service.getTolvufolk());
+            cout << "-----Adding computer machines-----" << endl;
+            baetaVidVelar();
+            prentaListaTolvuVelar(_vService.getVelar());
         }
 
         else if (skipun == "delete" || skipun == "d")
@@ -116,19 +131,19 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "update" || skipun == "u")
         {
-            skrifaUt();
+            skrifaUtTolvuVelar();
             uppfaeraPersonu();
         }
 
         else if (skipun == "search" || skipun == "se")
         {
-            skrifaUt();
+            skrifaUtTolvuVelar();
             leitaGrein();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
-            skrifaUt();
+            skrifaUtTolvuVelar();
             tortimaLista();
         }
 
@@ -139,7 +154,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else
         {
-            skrifaUt();
+            skrifaUtTolvuVelar();
             cerr << "Input not valid, try again: ";
         }
     } while (aframhaldandiUITolvuVelar());
@@ -156,12 +171,12 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         if (skipun == "list" || skipun == "l")
         {
-            prentaLista(_service.getTolvufolk());
+            prentaListaTolvuFolk(_service.getTolvufolk());
         }
 
         else if (skipun == "sort" || skipun == "so")
         {
-            skrifaUt();
+            skrifaUtTolvuFolk();
             flokkunarMoguleikar();
         }
 
@@ -170,7 +185,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
             system("cls");
             cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
-            prentaLista(_service.getTolvufolk());
+            prentaListaTolvuFolk(_service.getTolvufolk());
         }
 
         else if (skipun == "delete" || skipun == "d")
@@ -180,19 +195,19 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         else if (skipun == "update" || skipun == "u")
         {
-            skrifaUt();
+            skrifaUtTolvuFolk();
             uppfaeraPersonu();
         }
 
         else if (skipun == "search" || skipun == "se")
         {
-            skrifaUt();
+            skrifaUtTolvuFolk();
             leitaGrein();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
-            skrifaUt();
+            skrifaUtTolvuFolk();
             tortimaLista();
         }
 
@@ -203,7 +218,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         else
         {
-            skrifaUt();
+            skrifaUtTolvuFolk();
             cerr << "Input not valid, try again: ";
         }
     } while (aframhaldandiUITolvuFolk());
@@ -211,7 +226,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
 void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og tölvur, branchar út í aðrar UI greinar
 {
-    skrifaUtTolvuFolk();
+    skrifaUtLinked();
 
     do
     {
@@ -220,12 +235,12 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
 
         if (skipun == "list" || skipun == "l")
         {
-            prentaLista(_service.getTolvufolk());
+            prentaListaTolvuFolk(_service.getTolvufolk());
         }
 
         else if (skipun == "sort" || skipun == "so")
         {
-            skrifaUt();
+            skrifaUtLinked();
             flokkunarMoguleikar();
         }
 
@@ -234,7 +249,7 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
             system("cls");
             cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
-            prentaLista(_service.getTolvufolk());
+            prentaListaTolvuFolk(_service.getTolvufolk());
         }
 
         else if (skipun == "delete" || skipun == "d")
@@ -244,19 +259,19 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
 
         else if (skipun == "update" || skipun == "u")
         {
-            skrifaUt();
+            skrifaUtLinked();
             uppfaeraPersonu();
         }
 
         else if (skipun == "search" || skipun == "se")
         {
-            skrifaUt();
+            skrifaUtLinked();
             leitaGrein();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
-            skrifaUt();
+            skrifaUtLinked();
             tortimaLista();
         }
 
@@ -267,7 +282,7 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
 
         else
         {
-            skrifaUt();
+            skrifaUtLinked();
             cerr << "Input not valid, try again: ";
         }
     } while (aframhaldandiUILinked());
@@ -331,7 +346,7 @@ void NotendaUI::eydaPersonu() //Delete UI grein
 {
     do
     {
-        prentaLista(_service.getTolvufolk());
+        prentaListaTolvuFolk(_service.getTolvufolk());
         int persNR;
         cout << "Delete scientist number (-1 to cancel deletion): ";
         cin >> persNR;
@@ -364,7 +379,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     int persNR, nyttD, nyttF;
     tolvufolk target;
 
-    prentaLista(_service.getTolvufolk());
+    prentaListaTolvuFolk(_service.getTolvufolk());
 
     cout << "Update scientist number (-1 to cancel update): ";
     cin >> persNR;
@@ -489,12 +504,12 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
             if (gogn.size() == 0)
             {
-                hausUI();
+                hausUITolvuFolk();
                 cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaLista(gogn);
+                prentaListaTolvuFolk(gogn);
             }
         }
 
@@ -515,12 +530,12 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             gogn = _service.leitaHeiltolu("aldur", age);
             if (gogn.size() == 0)
             {
-                hausUI();
+                hausUITolvuFolk();
                 cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaLista(gogn);
+                prentaListaTolvuFolk(gogn);
             }
         }
 
@@ -541,12 +556,12 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             gogn = _service.leitaHeiltolu("faedingarar", birth);
             if (gogn.size() == 0)
             {
-                hausUI();
+                hausUITolvuFolk();
                 cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaLista(gogn);
+                prentaListaTolvuFolk(gogn);
             }
         }
 
@@ -567,12 +582,12 @@ void NotendaUI::leitaGrein() //Search / Filter UI grein
             gogn = _service.leitaHeiltolu("danarar", death);
             if (gogn.size() == 0)
             {
-                hausUI();
+                hausUITolvuFolk();
                 cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaLista(gogn);
+                prentaListaTolvuFolk(gogn);
             }
         }
 
@@ -615,13 +630,13 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                 if(skipunin == "ascending" || skipunin == "a")
                 {
                     radad = _service.rada("nafn", "asc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("nafn", "desc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -650,13 +665,13 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                 if(skipunin == "ascending" || skipunin == "a")
                 {
                     radad = _service.rada("aldur", "asc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("aldur", "desc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -684,13 +699,13 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                 if(skipunin == "ascending" || skipunin == "a")
                 {
                     radad = _service.rada("faedingarar", "asc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("faedingarar", "desc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -719,13 +734,13 @@ void NotendaUI::flokkunarMoguleikar() //Sort UI grein
                 if(skipunin == "ascending" || skipunin == "a")
                 {
                     radad = _service.rada("danarar", "asc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("danarar", "desc");
-                    prentaLista(radad);
+                    prentaListaTolvuFolk(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -816,16 +831,23 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         cout << "Enter type: ";
         cin >> tegund;
 
-        cout << "Was it built? (y/n)";
-        cin >> byggdIn;
+        while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n')
+        {
+            cout << "Was it built? (y/n)";
+            cin >> byggdIn;
 
-        if(byggdIn == 'y' || byggdIn == 'Y')
-        {
-            byggd = true;
-        }
-        else if(byggdIn == 'n' || byggdIn == 'N')
-        {
-            byggd = false;
+            if(byggdIn == 'y' || byggdIn == 'Y')
+            {
+                byggd = true;
+            }
+            else if(byggdIn == 'n' || byggdIn == 'N')
+            {
+                byggd = false;
+            }
+            else
+            {
+                cout << "Invalid input, try again!" << endl;
+            }
         }
 
         _vService.baetaVidVelar(vNafn, bAr, byggd, tegund);
@@ -1065,6 +1087,13 @@ cout << "*======================================================================
 }
 
 void NotendaUI::hausUI()
+{
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+}
+
+void NotendaUI::hausUITolvuFolk()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
     cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
