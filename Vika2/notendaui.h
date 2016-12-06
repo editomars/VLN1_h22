@@ -54,7 +54,8 @@ private:
     void skrifaUtLinked(); // skrifa út valmynd fyri bæði tölvur og tölvufólk
     void leitarMoguleikarTolvuFolk(); //Birtir moguleika a leitun
     void leitarMoguleikarVelar(); //Birtir moguleika a leitun
-    void rodunarMoguleikar(); //Birtir moguleika a rodun
+    void rodunarMoguleikarTolvuFolk(); //Birtir moguleika a rodun
+    void rodunarMoguleikarVelar(); //Birtir moguleika a rodun
     void uppfaersluMoguleikar(); //Birtir moguleika a uppfaerslu
     void upphafsUI(); //Vantar comment
     void radaUI(); //Vantar comment
