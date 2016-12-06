@@ -22,6 +22,20 @@ void sqltenging::eydaFolk(int id)
     udiSkipun(sql);
 }
 
+void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr)
+{
+    string sql = "UPDATE TolvuFolk"
+                 "SET fornafn = '" +  fNafn + "'"
+                 ", eftirnafn = '" + eNafn + "'"
+                 ", kyn = '" + kyn + "'"
+                 ", fAr = '" + fAr + "'"
+                 ", dAr = '" + dAr + "'"
+                 "WHERE ID = '" + id + "'";
+
+    udiSkipun(sql);
+
+}
+
 vector<velar> sqltenging::lesaVelar()
 {
     string sql = "SELECT * FROM TolvuVelar";

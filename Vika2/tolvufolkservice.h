@@ -28,7 +28,6 @@ public:
     void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
 
     //Föll sem breyta vector en ekki gagnagrunn
-    void baetaVidTolvufolk(const tolvufolk& t); //Bætir við einu tilviki af tolvufolk í vectorinn (ekki í gagnagrunn)
     void uppfaeraTolvufolk(const vector<tolvufolk>& t); //yfirskrifar vectorinn, ekki gagnagrunn
     void uppfaeraStakTolvufolk(int nr, string nafn, string kyn, int fAr, int dAr); //Uppfærir eitt stak í vector
     void hreinsaTolvufolk(); //Hreinsar öll gögn úr vector

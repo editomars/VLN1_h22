@@ -138,10 +138,7 @@ void tolvufolkService::eydaStakiTolvufolk(int id)
 }
 
 //Föll sem breyta vector, en ekki gagnagrunn
-void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
-{
-    _folk.push_back(t);
-}
+
 
 void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
 {
@@ -151,6 +148,9 @@ void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
 
 void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)
 {
+
+
+
     //_folk[nr].uppfNafn(name);
     //_folk[nr].uppfGender(kyn);
     _folk[nr].uppfFaedingarar(fYear);
