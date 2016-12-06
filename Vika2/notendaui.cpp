@@ -15,7 +15,6 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
-    //_service.addTolvufolk("Aron","b","Cann",'f',1900,2000);
     _service.saekjaGogn();
     adalvalmyndUI();
 }

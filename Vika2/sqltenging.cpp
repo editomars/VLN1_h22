@@ -18,49 +18,22 @@ vector<tolvufolk> sqltenging::lesaFolk() const
 void sqltenging::eydaFolk(int id)
 {
 
-    string temp = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
-    char* cstr = new char[temp.length()+1];
-    strcpy(cstr, temp.c_str());
-    QSqlQuery query(_db);
-    query.exec(cstr);
-    delete[] cstr;
-
+    string sql = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
+    udiSkipun(sql);
 }
 
 vector<velar> sqltenging::lesaVelar()
 {
-    vector<velar> v;
-    QSqlQuery query(_db);
+    string sql = "SELECT * FROM TolvuVelar";
 
-    query.exec("SELECT * FROM TolvuVelar");
-
-
-    while(query.next()){
-        /*
-        string fornafn = query.value("fornafn").toString().toStdString();
-        string eftirnafn = query.value("eftirnafn").toString().toStdString();
-        string kyn = query.value("kyn").toString().toStdString();
-        int faedingarar = query.value("faedingarar").toUInt();
-        int danarar = query.value("danarar").toUInt();
-        */
-
-        //t.push_back(tolvufolk(fornafn + " " + eftirnafn, kyn, faedingarar, danarar));
-        //tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, fAr, dAr);
-
-    }
-
-    return v;
+    return selectVelar(sql);
 }
 
 void sqltenging::baetaVidFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    string temp = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
+    string sql = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
                   "VALUES('" + fNafn + "','" + mNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
-    char* cstr = new char[temp.length()+1];
-    strcpy(cstr, temp.c_str());
-    QSqlQuery query(_db);
-    query.exec(cstr);
-    delete[] cstr;
+    udiSkipun(sql);
 }
 
 vector<tolvufolk> sqltenging::selectFolk(string sql) const
@@ -85,4 +58,35 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
     }
 
     return t;
+}
+
+vector<velar> sqltenging::selectVelar(string sql) const
+{
+    vector<velar> v;
+    QSqlQuery query(_db);
+    char* cstr = new char[sql.length()+1];
+    strcpy(cstr, sql.c_str());
+    query.exec(cstr);
+
+    while(query.next())
+    {
+        int id = query.value("id").toUInt();
+        string nafn = query.value("Nafn").toString().toStdString();
+        int ar = query.value("byggingarar").toUInt();
+        bool byggd = query.value("byggd").toBool();
+        string tegund = query.value("tegund").toString().toStdString();
+
+        v.push_back(velar(id, nafn, ar, tegund, byggd));
+    }
+
+    return v;
+}
+
+void sqltenging::udiSkipun(string sql)
+{
+    char* cstr = new char[sql.length()+1];
+    strcpy(cstr, sql.c_str());
+    QSqlQuery query(_db);
+    query.exec(cstr);
+    delete[] cstr;
 }

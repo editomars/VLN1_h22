@@ -104,7 +104,7 @@ int tolvufolkService::getSize() const
 
 //Föll sem tengja við gagnagrunn
 
-vector<tolvufolk> tolvufolkService::saekjaGogn()
+void tolvufolkService::saekjaGogn()
 {
     _folk = _dataaccess.lesaFolk();
 }
@@ -112,6 +112,7 @@ vector<tolvufolk> tolvufolkService::saekjaGogn()
 void tolvufolkService::baetaVidTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
 {
     _dataaccess.baetaVidFolk(fNafn, mNafn, eNafn, kyn, fAr, dAr);
+    saekjaGogn();
 }
 
 void tolvufolkService::yfirskrifaTolvufolk()
@@ -130,6 +131,12 @@ void tolvufolkService::eydaTolvufolk()
     //_dataaccess.eyda();
 }
 
+void tolvufolkService::eydaStakiTolvufolk(int id)
+{
+    _dataaccess.eydaFolk(id);
+    saekjaGogn();
+}
+
 //Föll sem breyta vector, en ekki gagnagrunn
 void tolvufolkService::baetaVidTolvufolk(const tolvufolk &t)
 {
@@ -141,10 +148,6 @@ void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
     _folk = t;
 }
 
-void tolvufolkService::eydaStakiTolvufolk(int id)
-{
-    _dataaccess.eydaFolk(id);
-}
 
 void tolvufolkService::uppfaeraStakTolvufolk(int nr, string name, string kyn, int fYear, int dYear)
 {

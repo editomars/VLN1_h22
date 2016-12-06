@@ -21,8 +21,7 @@ private:
     QSqlDatabase _db;
     vector<tolvufolk> selectFolk(string sql) const;
     vector<velar> selectVelar(string sql) const;
-    void udiFolk(string sql); //UPDATE, DELETE, INSERT fólk
-    void udiVelar(string sql); //UPDATE, DELETE, INSERT vélar
+    void udiSkipun(string sql); //UPDATE, DELETE, INSERT fólk
 };
 
 #endif // SQLTENGING_H
