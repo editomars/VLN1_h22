@@ -26,7 +26,6 @@ public:
     void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk, notar ID
     void uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr);
 
-
     //Föll sem skila umbreyttum gögnum
     vector<tolvufolk> rada(string flokkur, string rod); //Skilar vector sem er raðaður eftir flokk og rod á að vera "asc" eða "desc" fyrir ascending og descending
     vector<tolvufolk> leitaStreng(string flokkur, string leitarord); //Skilar vector sem er flokkaður(filteraður) ef flokka á strengjaflokk (nafn eða kyn)

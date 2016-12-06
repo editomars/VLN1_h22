@@ -47,7 +47,6 @@ void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int 
                  "WHERE ID = " + to_string(id);
 
     udiSkipun(sql);
-
 }
 
 void sqltenging::tortimaFolki()

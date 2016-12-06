@@ -603,6 +603,52 @@ void NotendaUI::tortimaLista() //Purge UI grein
     }
 }
 
+//------------------------------- Svæði fyrir UI greinar velar ---------------------------------
+
+void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
+{
+    do
+    {
+        string vNafn;
+        int bAr;
+        char tegund;
+        char byggdIn;
+        bool byggd;
+
+        cout << "Enter machine name: ";
+        cin >> vNafn;
+
+        cout << "Enter year built: ";
+        cin >> bAr;
+
+        while (0 > bAr || cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> bAr;
+        }
+
+        cout << "Enter type: ";
+        cin >> tegund;
+
+        cout << "Was it built? (y/n)";
+        cin >> byggdIn;
+
+        if(byggdIn == 'y' || byggdIn == 'Y')
+        {
+            byggd = true;
+        }
+        else if(byggdIn == 'n' || byggdIn == 'N')
+        {
+            byggd = false;
+        }
+
+
+        _vService.baetaVidVelar(vNafn, bAr, tegund, byggd);
+
+    }while(skipunaAframhald());
+}
 
 //------------------------------- Svæði fyrir UI greinar endar ---------------------------------
 
