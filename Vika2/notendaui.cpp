@@ -589,7 +589,6 @@ void NotendaUI::tortimaLista() //Purge UI grein
 
             _service.tortimaTolvufolk();
 
-
         }
 
         else
