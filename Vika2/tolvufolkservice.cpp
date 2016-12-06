@@ -123,7 +123,7 @@ void tolvufolkService::tortimaTolvufolk()
 
 void tolvufolkService::eydaStakiTolvufolk(int nr)
 {
-    _dataaccess.eydaFolk(_folk[nr].getId());
+    _dataaccess.eydaFolk(_folk[nr].getID());
     saekjaGogn();
 }
 
