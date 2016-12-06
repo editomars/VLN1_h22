@@ -26,6 +26,9 @@ public:
     void uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr);
     void tortimaFolki();
 
+    // Functions for relations
+
+
 private:
     QSqlDatabase _db;
     vector<tolvufolk> selectFolk(string sql) const;

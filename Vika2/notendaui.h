@@ -34,7 +34,8 @@ private:
     void leitaGrein(); //Search / Filter UI grein
     void flokkunarMoguleikar(); //Sort UI grein
     void tortimaLista(); //Purge UI grein
-    void baetaVidVelar(); //add velar Ui grein
+    void baetaVidVelar(); //Add velar UI grein
+    void eydaVel(); //Eyda vel UI grei
 
     //Bool flög
     bool aframhaldandiUITolvuVelar(); //Vantar comment

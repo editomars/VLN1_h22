@@ -18,7 +18,7 @@ tolvufolk::tolvufolk(int id, string fornafn, string eftirnafn, char kyn, int fae
 
 //Get föll
 
-int tolvufolk::getId() const
+int tolvufolk::getID() const
 {
     return _id;
 }

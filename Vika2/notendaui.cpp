@@ -134,7 +134,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "delete" || skipun == "d")
         {
-            eydaPersonu();
+            eydaVel();
         }
 
         else if (skipun == "update" || skipun == "u")
@@ -481,7 +481,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     }while(nyttD < nyttF && nyttD != -1);
 
 
-    _service.uppfaeraStakTolvufolk(target.getId(), fornafn, eftirnafn, nyttKyn, nyttF, nyttD);
+    _service.uppfaeraStakTolvufolk(target.getID(), fornafn, eftirnafn, nyttKyn, nyttF, nyttD);
 
     system("cls");
     cout << "Updated information:" << endl << endl;
@@ -960,6 +960,36 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         }
 
         _vService.baetaVidVelar(vNafn, bAr, byggd, tegund);
+
+    }while(skipunaAframhald());
+}
+
+void NotendaUI::eydaVel() //Delete UI grein
+{
+    do
+    {
+        prentaListaTolvuVelar(_vService.getVelar());
+        int velNR;
+        cout << "Delete machine number (-1 to cancel deletion): ";
+        cin >> velNR;
+        while (velNR <= 0)
+        {
+            if (velNR == -1)
+            {
+                break;
+            }
+            cerr << "Input not valid, try again: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin >> velNR;
+        }
+        if (velNR == -1)
+        {
+            break;
+        }
+        velNR--;
+        cout << _vService.getStaktVelar(velNR).getVelaNafn() << " has been removed.\n";
+        _vService.eydaStakiVel(velNR);
 
     }while(skipunaAframhald());
 }

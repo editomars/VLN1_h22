@@ -69,57 +69,24 @@ void velar::uppfByggd(bool nyttByggd)
 ostream& operator <<(ostream& out, const velar& data)
 {
 
-    out << "Name of machine: " << data.getVelaNafn() << endl;
-    out << "Year of creation: " << data.getByggingarAr() << endl;
-    out << "Type: " << data.getTegund() << endl;
-    out << "Was it built?: " << data.getByggd() << endl;
-
-
-    /*
-    if (data.getVelaNafn().length() < 13)
+    string svar = "";
+    if (data.getByggd() == 1)
     {
-        if (data.getBygd() == -1)
-        {
-            out << "|" << data.getVelaNafn() << " \t\t\t |" << data.getByggingarAr() <<  " \t\t |" << data.getTegund() <<  " \t\t |Still alive \t |";
-            out << 2016- data.getTegund() << " \t |" << endl;
-        }
-
-        else
-        {
-            out << "|" << data.getVelaNafn() << " \t\t\t |" << data.getByggingarAr() <<  " \t\t |" << data.getTegund() <<  " \t\t |";
-            out << data.getBygd() <<  " \t\t |" << data.getBygd() - data.getTegund() << " \t |" << endl;
-        }
+        svar = "Yes";
     }
-
-    else if (data.getVelaNafn().length() < 21 && data.getVelaNafn().length() >= 12)
-    {
-        if (data.getBygd() == -1)
-        {
-            out << "|" << data.getVelaNafn() << " \t\t |" << data.getByggingarAr() <<  " \t\t |" << data.getTegund() <<  " \t\t |Still alive \t |";
-            out << 2016- data.getTegund() << " \t |" << endl;
-        }
-
-        else
-        {
-            out << "|" << datagetVelaNafn() << " \t\t |" << data.getByggingarAr() <<  " \t\t |" << data.getTegund() <<  " \t\t |";
-            out << data.getBygd() <<  " \t\t |" << data.getBygd() - data.getTegund() << " \t |" << endl;
-        }
-    }
-
     else
     {
-        if (data.getBygd() == -1)
-        {
-            out << "|" << datagetVelaNafn() << " \t |" << data.getByggingarAr() <<  " \t\t |" << data.getTegund() <<  " \t\t |Still alive \t |";
-            out << 2016- data.getTegund() << " \t |" << endl;
-        }
-
-        else
-        {
-            out << "|" << datagetVelaNafn() << " \t |" << data.getByggingarAr() <<  " \t\t |" << data.getTegund() <<  " \t\t |";
-            out << data.getBygd() <<  " \t\t |" << data.getBygd() - data.getTegund() << " \t |" << endl;
-        }
+        svar = "No";
     }
-    */
+
+    //out << "Name of machine: " << data.getVelaNafn() << endl;
+    //out << "Year of creation: " << data.getByggingarAr() << endl;
+    //out << "Type: " << data.getTegund() << endl;
+    //out << "Was it built?: " << data.getByggd() << endl;
+
+    out << "|" << data.getVelaNafn() << " \t\t |" << data.getByggingarAr() <<  " \t\t   |" << data.getTegund() <<  " \t\t  |";
+    out << svar << " \t\t\t |" << endl;
+
+
     return out;
 }
