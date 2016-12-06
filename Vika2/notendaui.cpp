@@ -178,6 +178,7 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         {
             break;
         }
+        persNR--;
         cout << _service.getStaktTolvufolk(persNR).getNafn() << " has been removed.\n";
         _service.eydaStakiTolvufolk(persNR);
 
@@ -210,6 +211,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
         cin >> persNR;
     }
 
+    persNR--;
     target = _service.getStaktTolvufolk(persNR);
 
     system("cls");
