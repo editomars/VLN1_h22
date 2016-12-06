@@ -50,5 +50,6 @@ void velarService::eydaStakiVel(int id)
 void velarService::tortimaTolvuVelar()
 {
     _dataaccess.tortimaVelum();
+    _velar.clear();
 
 }

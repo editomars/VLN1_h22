@@ -118,6 +118,7 @@ void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, i
 void tolvufolkService::tortimaTolvufolk()
 {
     _dataaccess.tortimaFolki();
+    _folk.clear();
 }
 
 void tolvufolkService::eydaStakiTolvufolk(int nr)
