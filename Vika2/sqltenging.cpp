@@ -23,6 +23,11 @@ vector<tolvufolk> sqltenging::lesaFolk() const
     return selectFolk(sql);
 }
 
+void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
+{
+
+}
+
 void sqltenging::baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
     string sql = "INSERT INTO TolvuFolk(ForNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
