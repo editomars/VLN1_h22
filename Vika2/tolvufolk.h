@@ -14,7 +14,7 @@ public:
 
     tolvufolk(int id, string fornafn, string eftirnafn, char kyn, int faedingarar, int danarar);
     //Get föll
-    int getId() const;
+    int getID() const;
     string getNafn() const;
     string getFornafn() const;
     string getEftirnafn() const;
