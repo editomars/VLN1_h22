@@ -34,7 +34,6 @@ void NotendaUI::prentaLista(const vector<tolvufolk>& gogn)
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
     _service.uppfaeraStakTolvufolk(1,"Edit","Omarsdottir",'f',1988,2915);
-    _vService.baetaVidVelar("bigMac",1928, true, "computer");
 }
 
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
