@@ -587,8 +587,9 @@ void NotendaUI::tortimaLista() //Purge UI grein
         {
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
 
-            _service.hreinsaTolvufolk();
             _service.tortimaTolvufolk();
+
+
         }
 
         else
