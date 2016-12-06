@@ -620,7 +620,7 @@ bool NotendaUI::aframhaldandiUI()
 
         else if(svar == "N" || svar == "n")
         {
-            string skipun;
+            return false;
         }
 
         else
