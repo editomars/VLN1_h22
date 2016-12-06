@@ -27,6 +27,9 @@ public:
 
     //leitaFöll
     vector<velar> leitaVelarNafn (string nafn);
+    vector<velar> leitaVelarBar (int bAr);
+    vector<velar> leitaVelarTegund (string tegund);
+    vector<velar> leitaVelarByggd (bool byggd);
 
 
 private:

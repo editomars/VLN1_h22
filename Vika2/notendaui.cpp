@@ -144,8 +144,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "search" || skipun == "se")
         {
-            skrifaUtTolvuVelar();
-            leitaGreinTolvuFolk();
+            leitaGreinVelar();
         }
 
         else if (skipun == "purge" || skipun == "p")
@@ -495,13 +494,13 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
     vector<tolvufolk> gogn;
     do
     {
-        leitarMoguleikar();
+        leitarMoguleikarTolvuFolk();
         string skipunin;
         cin >> skipunin;
 
         if (skipunin == "name" || skipunin == "n")
         {
-            leitarMoguleikar();
+            leitarMoguleikarTolvuFolk();
             string fornafn, eftirnafn;
             cout << "---Searching by name---" << endl;
             cout << "Enter first name: ";
@@ -524,7 +523,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
         else if (skipunin == "age" || skipunin == "a")
         {
             int age;
-            leitarMoguleikar();
+            leitarMoguleikarTolvuFolk();
             cout << "Age to search: ";
             cin >> age;
             while (-1 > age || !cin)
@@ -549,7 +548,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         else if (skipunin == "birth" || skipunin == "b")
         {
-            leitarMoguleikar();
+            leitarMoguleikarTolvuFolk();
             int birth;
             cout << "Year of birth to search: ";
             cin >> birth;
@@ -575,7 +574,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         else if (skipunin == "death" || skipunin == "d")
         {
-            leitarMoguleikar();
+            leitarMoguleikarTolvuFolk();
             int death;
             cout << "Year of death to search (-1 for still alive): ";
             cin >> death;
@@ -999,19 +998,21 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
     vector<velar> gogn;
     do
     {
-        leitarMoguleikar();
+        leitarMoguleikarVelar();
         string skipunin;
         cin >> skipunin;
 
         if (skipunin == "name" || skipunin == "n")
         {
-            leitarMoguleikar();
             string nafn;
+
+            leitarMoguleikarVelar();
+
             cout << "---Searching by name---" << endl;
             cout << "Enter name: ";
             cin >> nafn;
             cout << endl;
-            gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
+            gogn = _vService.leitaVelarNafn(nafn);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -1019,14 +1020,14 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
-                prentaListaTolvuFolk(gogn);
+                prentaListaTolvuVelar(gogn);
             }
         }
 
-        else if (skipunin == "age" || skipunin == "a")
+/*        else if (skipunin == "age" || skipunin == "a")
         {
             int age;
-            leitarMoguleikar();
+            leitarMoguleikarVelar();
             cout << "Age to search: ";
             cin >> age;
             while (-1 > age || !cin)
@@ -1051,7 +1052,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
 
         else if (skipunin == "birth" || skipunin == "b")
         {
-            leitarMoguleikar();
+            leitarMoguleikarVelar();
             int birth;
             cout << "Year of birth to search: ";
             cin >> birth;
@@ -1077,7 +1078,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
 
         else if (skipunin == "death" || skipunin == "d")
         {
-            leitarMoguleikar();
+            leitarMoguleikarVelar();
             int death;
             cout << "Year of death to search (-1 for still alive): ";
             cin >> death;
@@ -1100,7 +1101,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
                 prentaListaTolvuFolk(gogn);
             }
         }
-
+*/
         else if (skipunin == "quit" || skipunin == "q")
         {
             return;
@@ -1501,7 +1502,7 @@ void NotendaUI::skrifaUtLinked()
     cout << "*==================================================================*" << endl;
 }
 
-void NotendaUI::leitarMoguleikar()
+void NotendaUI::leitarMoguleikarTolvuFolk()
 {
     system("cls");
 
@@ -1514,6 +1515,21 @@ void NotendaUI::leitarMoguleikar()
     cout << "*||death  - Search by year of death, please write 'death'.              ||*" << endl;
     cout << "*||quit   - Quit searching.                                             ||*" << endl;
     cout << "*=========================================================================*" << endl;
+}
+
+void NotendaUI::leitarMoguleikarVelar()
+{
+    system("cls");
+
+    cout << "*=====================================================================================*" << endl;
+    cout << "*||Please enter one of the following command                                        ||*" << endl;
+    cout << "*=====================================================================================*" << endl;
+    cout << "*||name   - Search by name, please write 'name'.                                    ||*" << endl;
+    cout << "*||create - Search by date of creation, please write 'create'.                      ||*" << endl;
+    cout << "*||type   - Search by type, please write 'type'.                                    ||*" << endl;
+    cout << "*||made   - To search based on if machine was created or not, please write 'made'.  ||*" << endl;
+    cout << "*||quit   - Quit searching.                                                         ||*" << endl;
+    cout << "*=====================================================================================*" << endl;
 }
 
 void NotendaUI::rodunarMoguleikar()
@@ -1530,6 +1546,21 @@ void NotendaUI::rodunarMoguleikar()
     cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
+/*
+void NotendaUI::rodunarMoguleikar()
+{
+    system("cls");
+
+    cout << "*=========================================================================*" << endl;
+    cout << "*||Please enter one of the following command                            ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
+    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
+    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
+    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
+    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
+    cout << "*=========================================================================*" << endl;
+}*/
 
 
 void NotendaUI::radaUI()
