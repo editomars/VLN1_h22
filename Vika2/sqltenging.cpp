@@ -73,6 +73,12 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
     return t;
 }
 
+void sqltenging::tortimaFolki()
+{
+    string terminator = "DELETE FROM tolvufolk";
+    udiSkipun(terminator);
+}
+
 vector<velar> sqltenging::selectVelar(string sql) const
 {
     vector<velar> v;

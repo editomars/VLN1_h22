@@ -115,20 +115,9 @@ void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, i
     saekjaGogn();
 }
 
-void tolvufolkService::yfirskrifaTolvufolk()
-{
-    //eydaTolvufolk();
-    //vidbotarTolvufolk();
-}
-
-void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
-{
-    //_dataaccess.skrifa(t);
-}
-
 void tolvufolkService::eydaTolvufolk()
 {
-    //_dataaccess.eyda();
+    _dataaccess.tortimaFolki();
 }
 
 void tolvufolkService::eydaStakiTolvufolk(int id)
