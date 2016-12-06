@@ -32,6 +32,5 @@ void velarService::saekjaGogn()
 void velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund)
 {
     _dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
-
     saekjaGogn();
 }
