@@ -57,6 +57,14 @@ void NotendaUI::prentaPersonu(const tolvufolk kall, int i)
 
 }
 
+void NotendaUI::prentaVel(const velar kall, int i)
+{
+    hausUI();
+    cout << "|" << i+1 << " \t\t " << kall;
+    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+
+}
+
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
 
 void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI greinar
@@ -131,8 +139,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "update" || skipun == "u")
         {
-            skrifaUtTolvuVelar();
-            uppfaeraPersonu();
+            uppfaeraVelar();
         }
 
         else if (skipun == "search" || skipun == "se")
@@ -481,6 +488,106 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     prentaPersonu((_service.getStaktTolvufolk(persNR)), persNR);
 
 }
+
+void NotendaUI::uppfaeraVelar() //Update UI grein
+{
+    string vNafn, nyttTegund;
+    char byggdIn;
+    int velNR, nyttbAr;
+    velar target;
+    bool byggd;
+
+    prentaListaTolvuVelar(_vService.getVelar());
+
+    cout << "Update machine number (-1 to cancel update): ";
+    cin >> velNR;
+    if (velNR == -1)
+    {
+        return;
+    }
+    while (velNR > _vService.getSize() || velNR <= 0)
+    {
+        if (velNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> velNR;
+    }
+
+    velNR--;
+    target = _vService.getStaktVelar(velNR);
+
+    system("cls");
+    cout << "Updating information for: " << endl << endl;
+
+    prentaVel(target, velNR);
+
+    cout << "To hold section as is, enter 0." << endl << endl;
+
+    cout << "Enter updated machine name: ";
+    cin >> vNafn;
+
+    if (vNafn == "0")
+        vNafn = target.getVelaNafn();
+
+
+        cout << "Enter updated built year: ";
+        cin >> nyttbAr;
+
+        while (!cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> nyttbAr;
+        }
+
+        if (nyttbAr == 0)
+        {
+            nyttbAr = target.getByggingarAr();
+        }
+
+        while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n' || byggdIn != '0')
+        {
+            cout << "Was it built? (y/n)";
+            cin >> byggdIn;
+
+            if (byggdIn == '0')
+            {
+                byggdIn = target.getByggd();
+                break;
+            }
+
+            else if(byggdIn == 'y' || byggdIn == 'Y')
+            {
+                byggd = true;
+                break;
+            }
+            else if(byggdIn == 'n' || byggdIn == 'N')
+            {
+                byggd = false;
+                break;
+            }
+            else
+            {
+                cout << "Invalid input, try again!" << endl;
+            }
+        }
+
+
+    cout << "Enter updated type: ";
+    cin >> nyttTegund;
+
+    _vService.uppfaeraVelar((target.getID()), vNafn, nyttbAr, byggd, nyttTegund);
+
+    system("cls");
+    cout << "Updated information:" << endl << endl;
+    prentaVel((_vService.getStaktVelar(velNR)), velNR);
+}
+
 
 void NotendaUI::leitaGrein() //Search / Filter UI grein
 {

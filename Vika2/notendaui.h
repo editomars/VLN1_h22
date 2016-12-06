@@ -20,6 +20,7 @@ private:
     void prentaListaTolvuFolk(const vector<tolvufolk>& gogn); //Skrifar út gögn á console
     void prentaListaTolvuVelar(const vector<velar>& gogn); //Skrifar út gögn á console
     void prentaPersonu(const tolvufolk kall, int i);
+    void prentaVel(const velar kall, int i);
 
     //Föll sem skipta um UI grein
     void adalvalmyndUI(); //Main Menu UI grein
@@ -29,6 +30,7 @@ private:
     void baetaVidPersonu(); //Add Person UI grein
     void eydaPersonu(); //Eyda personu UI grein
     void uppfaeraPersonu(); //Update Person UI grein
+    void uppfaeraVelar();
     void leitaGrein(); //Search / Filter UI grein
     void flokkunarMoguleikar(); //Sort UI grein
     void tortimaLista(); //Purge UI grein
