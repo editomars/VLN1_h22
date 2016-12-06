@@ -4,12 +4,6 @@ velarService::velarService()
 {
 
 }
-
-velarService::velarService()
-{
-
-}
-
 //----------------------- Svæði fyrir public föll byrjar ----------------------
 
 //Get föll
@@ -35,9 +29,9 @@ void velarService::saekjaGogn()
 }
 
 
-void velarService::vidbotarVelar(string vNafn, int bAr, bool byggd, string tegund)
+void velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund)
 {
-    _dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
+    //_dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
     saekjaGogn();
 }
 
@@ -49,7 +43,7 @@ void velarService::vidbotarVelar(const velar& v)
 void velarService::yfirskrifaVelar()
 {
     eydaVelar();
-    vidbotarVelar();
+    //vidbotarVelar();
 }
 
 void velarService::yfirskrifaVelar(const velar& v)
@@ -62,16 +56,6 @@ void velarService::eydaVelar()
     //_dataVaccess.eyda();
 }
 
-//Föll sem breyta vector, en ekki gagnagrunn
-void velarService::baetaVidVelar(const velar &v)
-{
-    _velar.push_back(v);
-}
-
-void velarService::uppfaeraVelar(const vector<velar>& v)
-{
-    _velar = v;
-}
 
 void velarService::eydaStakiVelar(int nr)
 {
