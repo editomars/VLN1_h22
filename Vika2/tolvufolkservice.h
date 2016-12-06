@@ -24,7 +24,7 @@ public:
     void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
     void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, notar private breytuna _folk
     void yfirskrifaTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk
-    void eydaTolvufolk(); //Eyðir öllum gögnum
+    void tortimaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk, notar ID
 
     //Föll sem breyta vector en ekki gagnagrunn
