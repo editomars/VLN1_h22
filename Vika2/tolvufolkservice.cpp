@@ -126,25 +126,10 @@ void tolvufolkService::eydaStakiTolvufolk(int nr)
     saekjaGogn();
 }
 
-//Föll sem breyta vector, en ekki gagnagrunn
-
-
-void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
-{
-    _folk = t;
-}
-
-
 void tolvufolkService::uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr)
 {
     _dataaccess.uppfaeraFolk(id,fNafn,eNafn,kyn,fAr,dAr);
     saekjaGogn();
-}
-
-void tolvufolkService::hreinsaTolvufolk()
-
-{
-    _folk.clear();
 }
 
 //Föll sem skila umbreyttum gögnum
