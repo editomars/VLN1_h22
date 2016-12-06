@@ -11,11 +11,14 @@ class sqltenging
 {
 public:
     sqltenging();
-    vector<velar> lesaVelar();
-    vector<tolvufolk> lesaFolk() const;
 
-    void baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr);
+    // Functions for Vélar
+    vector<velar> lesaVelar();
     void baetaVidVel(string nafn, int bAr, bool byggd, string tegund);
+
+    // Functions for Fólk
+    vector<tolvufolk> lesaFolk() const;
+    void baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr);
     void eydaFolk(int id);
     void uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr);
     void tortimaFolki();

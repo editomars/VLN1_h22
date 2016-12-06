@@ -7,7 +7,23 @@ sqltenging::sqltenging()
     _db.setDatabaseName(dbName);
     _db.open();
 }
+// VELAR
+vector<velar> sqltenging::lesaVelar()
+{
+    string sql = "SELECT * FROM TolvuVelar";
 
+    return selectVelar(sql);
+}
+
+void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
+{
+    string sql = "INSERT INTO TolvuVelar(Nafn, Byggingarar, Byggd, Tegund)"
+                  "VALUES('" + nafn + "'," + to_string(bAr) + "," + to_string(byggd) + ",'" + tegund + "')";
+    udiSkipun(sql);
+}
+
+
+// FOLK
 vector<tolvufolk> sqltenging::lesaFolk() const
 {
     string sql = "SELECT * FROM TolvuFolk";
@@ -15,6 +31,12 @@ vector<tolvufolk> sqltenging::lesaFolk() const
     return selectFolk(sql);
 }
 
+void sqltenging::baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
+{
+    string sql = "INSERT INTO TolvuFolk(ForNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
+                  "VALUES('" + fNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
+    udiSkipun(sql);
+}
 void sqltenging::eydaFolk(int id)
 {
 
@@ -33,23 +55,16 @@ void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int 
                  "WHERE ID = " + to_string(id);
 
     udiSkipun(sql);
-
 }
 
-vector<velar> sqltenging::lesaVelar()
+void sqltenging::tortimaFolki()
 {
-    string sql = "SELECT * FROM TolvuVelar";
-
-    return selectVelar(sql);
+    string terminator = "DELETE FROM tolvufolk";
+    udiSkipun(terminator);
 }
 
-void sqltenging::baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
-{
-    string sql = "INSERT INTO TolvuFolk(ForNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
-                  "VALUES('" + fNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
-    udiSkipun(sql);
-}
 
+// Private Functions
 vector<tolvufolk> sqltenging::selectFolk(string sql) const
 {
     vector<tolvufolk> t;
@@ -71,12 +86,6 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
     }
 
     return t;
-}
-
-void sqltenging::tortimaFolki()
-{
-    string terminator = "DELETE FROM tolvufolk";
-    udiSkipun(terminator);
 }
 
 vector<velar> sqltenging::selectVelar(string sql) const
@@ -109,4 +118,4 @@ void sqltenging::udiSkipun(string sql)
     query.exec(cstr);
     delete[] cstr;
 }
-
+// End of private functions
