@@ -187,8 +187,9 @@ void NotendaUI::eydaPersonu() //Delete UI grein
 
 void NotendaUI::uppfaeraPersonu() //Update UI grein
 {
-    string skipunin;
-    int persNR;
+    string fornafn, eftirnafn;
+    char nyttKyn;
+    int persNR, nyttD, nyttF;
     tolvufolk target;
 
     prentaLista(_service.getTolvufolk());
@@ -223,71 +224,76 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
          << target.getDanarar() << endl;
     cout << "-------------------------------------------------------------------------" << endl << endl;
 
-   // uppfaersluMoguleikar();
 
-  //  cin >> skipunin;
+    cout << "To hold section as is, enter 0." << endl << endl;
 
-    cout << "To hold section as is, enter -1." << endl << endl;
+    cout << "Enter updated first name: ";
+    cin >> fornafn;
 
-        string fornafn, eftirnafn;
-        cout << "Enter updated first name: ";
-        cin >> fornafn;
+    if (fornafn == "0")
+        fornafn = target.getFornafn();
 
-        if (fornafn == "-1")
-        {
-            fornafn = target.getFornafn();
-        }
+    cout << "Enter updated last name: ";
+    cin >> eftirnafn;
 
-        cout << fornafn << endl;
-        cout << "Enter updated last name: ";
-        cin >> eftirnafn;
+    if (eftirnafn == "0")
+        eftirnafn = target.getEftirnafn();
 
-        char nyttKyn;
-        cout << "Enter updated gender: ";
+    cout << "Enter updated gender: ";
+    cin >> nyttKyn;
+
+    while (nyttKyn != 'm' && nyttKyn != 'f' && nyttKyn != '0')
+    {
+        cerr << "Input not valid, try again: ";
         cin >> nyttKyn;
+    }
 
+    if (nyttKyn == '0')
+        nyttKyn = target.getKyn();
 
-        while (nyttKyn != 'm' && nyttKyn != 'f' && nyttKyn != '-1')
-        {
-            cerr << "Input not valid, try again: ";
-            cin >> nyttKyn;
-        }
-
-        if (nyttKyn == '-1')
-        {
-            nyttKyn = target.getKyn();
-        }
-        //_service.uppfaeraStakTolvufolk(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
-
-
-        int nytt;
+    do
+    {
         cout << "Enter updated year of birth: ";
-        cin >> nytt;
+        cin >> nyttF;
 
-        while ((nytt > target.getDanarar() && target.getDanarar() != -1) || !cin)
+        while (!cin)
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cerr << "Input not valid, birthyear is higher than year of death, try again: ";
-            cin >> nytt;
+            cerr << "Input not valid, try again: ";
+            cin >> nyttF;
         }
-       // _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
+
+        if (nyttF == 0)
+            nyttF = target.getFaedingarar();
 
 
         cout << "Enter updated year of death: ";
-        cin >> nytt;
-      //  _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
+        cin >> nyttD;
+
+        while (!cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Input not valid, try again: ";
+            cin >> nyttD;
+        }
+
+        if (nyttD == 0)
+            nyttD = target.getDanarar();
+
+        if (nyttD < nyttF && nyttD != -1)
+        {
+            cout << "Year of death is lower than birthyear, try again." << endl;
+        }
 
 
-/*    else if (skipunin == "quit" || skipunin == "q")
-    {
-        return;
-    }
 
-    else
-    {
-        cout << "Invalid input, try again: ";
-    } */
+    }while(nyttD < nyttF && nyttD != -1);
+
+
+    _service.uppfaeraStakTolvufolk(target.getId(), fornafn, eftirnafn, nyttKyn, nyttF, nyttD);
+
 
 }
 
