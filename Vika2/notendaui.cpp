@@ -199,7 +199,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     {
         return;
     }
-    while (/*persNR > _service.getSize() ||*/ persNR <= 0)
+    while (persNR > _service.getSize() || persNR <= 0)
     {
         if (persNR == -1)
         {
@@ -215,41 +215,51 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     target = _service.getStaktTolvufolk(persNR);
 
     system("cls");
-    cout << "Update information for: " << endl << endl;
+    cout << "Updating information for: " << endl << endl;
+
+    cout << "-------------------------------------------------------------------------" << endl;
     cout << "Name: " << target.getNafn() << ",\tGender: "
          << target.getKyn() << ",\tBorn: " << target.getFaedingarar() << ",\tDied: "
-         << target.getDanarar() << endl << endl;
+         << target.getDanarar() << endl;
+    cout << "-------------------------------------------------------------------------" << endl << endl;
 
-    uppfaersluMoguleikar();
+   // uppfaersluMoguleikar();
 
-    cin >> skipunin;
+  //  cin >> skipunin;
 
-    if (skipunin == "name" || skipunin == "n")
-    {
+    cout << "To hold section as is, enter -1." << endl << endl;
+
         string fornafn, eftirnafn;
         cout << "Enter updated first name: ";
         cin >> fornafn;
+
+        if (fornafn == "-1")
+        {
+            fornafn = target.getFornafn();
+        }
+
+        cout << fornafn << endl;
         cout << "Enter updated last name: ";
         cin >> eftirnafn;
-        //_service.uppfaeraStakTolvufolk(persNR, fornafn + " " + eftirnafn, target.getKyn(), target.getFaedingarar(), target.getDanarar());
-    }
 
-    else if (skipunin == "gender" || skipunin == "g")
-    {
-        string nyttKyn;
+        char nyttKyn;
         cout << "Enter updated gender: ";
         cin >> nyttKyn;
-        while (nyttKyn != "m" && nyttKyn != "f")
+
+
+        while (nyttKyn != 'm' && nyttKyn != 'f' && nyttKyn != '-1')
         {
             cerr << "Input not valid, try again: ";
             cin >> nyttKyn;
         }
+
+        if (nyttKyn == '-1')
+        {
+            nyttKyn = target.getKyn();
+        }
         //_service.uppfaeraStakTolvufolk(persNR, target.getNafn(), nyttKyn, target.getFaedingarar(), target.getDanarar());
 
-    }
 
-    else if (skipunin == "birth" || skipunin == "b")
-    {
         int nytt;
         cout << "Enter updated year of birth: ";
         cin >> nytt;
@@ -262,17 +272,14 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
             cin >> nytt;
         }
        // _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), nytt, target.getDanarar());
-    }
 
-    else if (skipunin == "death" || skipunin == "d")
-    {
-        int nytt;
+
         cout << "Enter updated year of death: ";
         cin >> nytt;
       //  _service.uppfaeraStakTolvufolk(persNR, target.getNafn(), target.getKyn(), target.getFaedingarar(), nytt);
-    }
 
-    else if (skipunin == "quit" || skipunin == "q")
+
+/*    else if (skipunin == "quit" || skipunin == "q")
     {
         return;
     }
@@ -280,7 +287,8 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     else
     {
         cout << "Invalid input, try again: ";
-    }
+    } */
+
 }
 
 void NotendaUI::leitaGrein() //Search / Filter UI grein
