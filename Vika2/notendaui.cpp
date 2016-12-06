@@ -617,7 +617,7 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
     string skipunin;
     vector<tolvufolk> radad;
     bool rettInntak = true;
-    rodunarMoguleikar();
+    rodunarMoguleikarTolvuFolk();
 
     do
     {
@@ -1121,7 +1121,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
     string skipunin;
     vector<tolvufolk> radad;
     bool rettInntak = true;
-    rodunarMoguleikar();
+    rodunarMoguleikarVelar();
 
     do
     {
@@ -1164,7 +1164,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
             }while(rettInntak == false);
         }
 
-        else if(skipunin == "age" || skipunin == "a")
+        else if(skipunin == "create" || skipunin == "a")
         {
             radaUI();
 
@@ -1533,7 +1533,7 @@ void NotendaUI::leitarMoguleikarVelar()
     cout << "*=====================================================================================*" << endl;
 }
 
-void NotendaUI::rodunarMoguleikar()
+void NotendaUI::rodunarMoguleikarTolvuFolk()
 {
     system("cls");
 
@@ -1547,8 +1547,8 @@ void NotendaUI::rodunarMoguleikar()
     cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
-/*
-void NotendaUI::rodunarMoguleikar()
+
+void NotendaUI::rodunarMoguleikarVelar()
 {
     system("cls");
 
@@ -1561,7 +1561,7 @@ void NotendaUI::rodunarMoguleikar()
     cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
     cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
-}*/
+}
 
 
 void NotendaUI::radaUI()
