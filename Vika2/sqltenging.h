@@ -15,6 +15,9 @@ public:
     // Functions for Vélar
     vector<velar> lesaVelar();
     void baetaVidVel(string nafn, int bAr, bool byggd, string tegund);
+    void eydaVel(int id);
+    void uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund);
+    void tortimaVelum();
 
     // Functions for Fólk
     vector<tolvufolk> lesaFolk() const;

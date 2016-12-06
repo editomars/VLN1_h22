@@ -22,6 +22,19 @@ void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
     udiSkipun(sql);
 }
 
+void sqltenging::uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund)
+{
+    string sql = "UPDATE TolvuVelar "
+                 "SET nafn = '" +  nafn + "'"
+                 ", byggingarar = " + to_string(bAr) +
+                 ", byggd = " + to_string(byggd) +
+                 ", tegund = '" + tegund + "'"
+                 "WHERE ID = " + to_string(id);
+
+    udiSkipun(sql);
+}
+
+
 
 // FOLK
 vector<tolvufolk> sqltenging::lesaFolk() const

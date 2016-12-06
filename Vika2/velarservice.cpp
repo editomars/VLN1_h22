@@ -34,3 +34,9 @@ void velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegun
     _dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
     saekjaGogn();
 }
+
+void velarService::uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund)
+{
+    _dataaccess.uppfaeraVel(id,nafn,bAr,byggd,tegund);
+    saekjaGogn();
+}

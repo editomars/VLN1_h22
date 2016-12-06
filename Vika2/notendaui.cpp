@@ -18,6 +18,8 @@ void NotendaUI::keyra()
 
     _service.saekjaGogn();
     _vService.saekjaGogn();
+    //_vService.baetaVidVelar("P",10,false,"haust");
+    //_vService.uppfaeraVelar(1,"BigMac",1992, true, "vetur");
     adalvalmyndUI();
 }
 
