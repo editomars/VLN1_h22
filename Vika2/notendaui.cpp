@@ -122,7 +122,6 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
     do
     {
         string fornafn;
-        string midnafn;
         string eftirnafn;
         char kKyn;
         int fAr;
@@ -130,9 +129,6 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
 
         cout << "Enter firstname: ";
         cin >> fornafn;
-
-        cout << "Enter middle name: ";
-        cin >> midnafn;
 
         cout << "Enter lastname: ";
         cin >> eftirnafn;
@@ -169,7 +165,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
             cin >> dAr;
         }
 
-        _service.baetaVidTolvufolk(fornafn, midnafn, eftirnafn, kKyn, fAr, dAr);
+        _service.baetaVidTolvufolk(fornafn, eftirnafn, kKyn, fAr, dAr);
 
 
     }while(skipunaAframhald());

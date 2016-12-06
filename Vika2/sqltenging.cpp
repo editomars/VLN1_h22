@@ -29,10 +29,10 @@ vector<velar> sqltenging::lesaVelar()
     return selectVelar(sql);
 }
 
-void sqltenging::baetaVidFolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
+void sqltenging::baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
     string sql = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
-                  "VALUES('" + fNafn + "','" + mNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
+                  "VALUES('" + fNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
     udiSkipun(sql);
 }
 
@@ -54,7 +54,7 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
         int faedingarar = query.value("faedingarar").toUInt();
         int danarar = query.value("danarar").toUInt();
 
-        t.push_back(tolvufolk(id, fornafn, midnafn, eftirnafn, kyn, faedingarar, danarar));
+        t.push_back(tolvufolk(id, fornafn, eftirnafn, kyn, faedingarar, danarar));
     }
 
     return t;
@@ -90,3 +90,4 @@ void sqltenging::udiSkipun(string sql)
     query.exec(cstr);
     delete[] cstr;
 }
+

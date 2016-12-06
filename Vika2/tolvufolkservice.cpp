@@ -109,9 +109,9 @@ void tolvufolkService::saekjaGogn()
     _folk = _dataaccess.lesaFolk();
 }
 
-void tolvufolkService::baetaVidTolvufolk(string fNafn, string mNafn, string eNafn, char kyn, int fAr, int dAr)
+void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    _dataaccess.baetaVidFolk(fNafn, mNafn, eNafn, kyn, fAr, dAr);
+    _dataaccess.baetaVidFolk(fNafn, eNafn, kyn, fAr, dAr);
     saekjaGogn();
 }
 
