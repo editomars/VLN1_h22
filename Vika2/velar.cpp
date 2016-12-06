@@ -59,6 +59,7 @@ void velar::uppfTegund(int nyttTegund)
 {
     _tegund = nyttTegund;
 }
+
 void velar::uppfByggd(bool nyttByggd)
 {
     _byggd = nyttByggd;

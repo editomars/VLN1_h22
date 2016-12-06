@@ -90,4 +90,3 @@ void sqltenging::udiSkipun(string sql)
     delete[] cstr;
 }
 
-
