@@ -612,7 +612,7 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
     {
         string vNafn;
         int bAr;
-        char tegund;
+        string tegund;
         char byggdIn;
         bool byggd;
 
@@ -646,7 +646,7 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         }
 
 
-        _vService.baetaVidVelar(vNafn, bAr, tegund, byggd);
+        _vService.baetaVidVelar(vNafn, bAr, byggd, tegund);
 
     }while(skipunaAframhald());
 }

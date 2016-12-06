@@ -28,13 +28,13 @@ public:
     void eydaVelar(); //Eyðir öllum gögnum
 
     //Föll sem breyta vector en ekki gagnagrunn
-    void baetaVidVelar(const velar& v); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)
+    void baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)
     void uppfaeraVelar(const vector<velar>& v); //yfirskrifar vectorinn, ekki gagnagrunn
     void eydaStakiVelar(int id); //Eyðir stykki af tölvufólk í vector
     void uppfaeraStakVelar(int id, string vNafn, int bAr, string tegund, bool byggd); //Uppfærir eitt stak í vector
     void hreinsaVelar(); //Hreinsar öll gögn úr vector
 private:
-    sqltenging _dataVaccess;
+    sqltenging _dataaccess;
     vector<velar> _velar;
 };
 
