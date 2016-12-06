@@ -115,47 +115,21 @@ void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, i
     saekjaGogn();
 }
 
-void tolvufolkService::yfirskrifaTolvufolk()
+void tolvufolkService::tortimaTolvufolk()
 {
-    //eydaTolvufolk();
-    //vidbotarTolvufolk();
+    _dataaccess.tortimaFolki();
 }
 
-void tolvufolkService::yfirskrifaTolvufolk(const tolvufolk& t)
+void tolvufolkService::eydaStakiTolvufolk(int nr)
 {
-    //_dataaccess.skrifa(t);
-}
-
-void tolvufolkService::eydaTolvufolk()
-{
-    //_dataaccess.eyda();
-}
-
-void tolvufolkService::eydaStakiTolvufolk(int id)
-{
-    _dataaccess.eydaFolk(id);
+    _dataaccess.eydaFolk(_folk[nr].getId());
     saekjaGogn();
 }
-
-//Föll sem breyta vector, en ekki gagnagrunn
-
-
-void tolvufolkService::uppfaeraTolvufolk(const vector<tolvufolk>& t)
-{
-    _folk = t;
-}
-
 
 void tolvufolkService::uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr)
 {
     _dataaccess.uppfaeraFolk(id,fNafn,eNafn,kyn,fAr,dAr);
     saekjaGogn();
-}
-
-void tolvufolkService::hreinsaTolvufolk()
-
-{
-    _folk.clear();
 }
 
 //Föll sem skila umbreyttum gögnum

@@ -5,6 +5,11 @@ velarService::velarService()
 
 }
 
+velarService::velarService()
+{
+
+}
+
 //----------------------- Svæði fyrir public föll byrjar ----------------------
 
 //Get föll
@@ -26,16 +31,14 @@ int velarService::getSize() const
 //Föll sem tengja við gagnagrunn
 void velarService::saekjaGogn()
 {
-    _velar = _dataVaccess.lesaVelar();
+    _velar = _dataaccess.lesaVelar();
 }
 
 
-void velarService::vidbotarVelar()
+void velarService::vidbotarVelar(string vNafn, int bAr, bool byggd, string tegund)
 {
-    for (size_t i = 0; i < _velar.size(); ++i)
-    {
-        //_dataVaccess.baetaVid(_velar[i]);
-    }
+    _dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
+    saekjaGogn();
 }
 
 void velarService::vidbotarVelar(const velar& v)

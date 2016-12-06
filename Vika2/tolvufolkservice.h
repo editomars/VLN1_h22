@@ -22,15 +22,9 @@ public:
     //Föll sem tengja við Gagnagrunn
     void saekjaGogn(); //Sækir gögn í gagnagrunn og geymir í vector _folk
     void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
-    void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, notar private breytuna _folk
-    void yfirskrifaTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk
-    void eydaTolvufolk(); //Eyðir öllum gögnum
-    void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
-
-    //Föll sem breyta vector en ekki gagnagrunn
-    void uppfaeraTolvufolk(const vector<tolvufolk>& t); //yfirskrifar vectorinn, ekki gagnagrunn
+    void tortimaTolvufolk(); //Eyðir öllum gögnum
+    void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk, notar ID
     void uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr);
-    void hreinsaTolvufolk(); //Hreinsar öll gögn úr vector
 
     //Föll sem skila umbreyttum gögnum
     vector<tolvufolk> rada(string flokkur, string rod); //Skilar vector sem er raðaður eftir flokk og rod á að vera "asc" eða "desc" fyrir ascending og descending
