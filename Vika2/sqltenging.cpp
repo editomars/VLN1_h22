@@ -89,11 +89,7 @@ void sqltenging::tortimaFolki()
     string terminator = "DELETE FROM tolvufolk";
     udiSkipun(terminator);
 }
-
 //Vensl
-
-
-
 
 
 // Private Functions

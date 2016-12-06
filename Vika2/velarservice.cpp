@@ -53,3 +53,51 @@ void velarService::tortimaTolvuVelar()
     _velar.clear();
 
 }
+vector<velar> velarService::leitaVelarNafn(string nafn)
+{
+    vector<velar> t;
+    for (size_t i = 0; i < _velar.size(); ++i)
+    {
+        if (_velar[i].getVelaNafn() == nafn)
+        {
+            t.push_back(_velar[i]);
+        }
+    }
+    return t;
+}
+vector<velar> velarService::leitaVelarBar(int bAr)
+{
+    vector<velar> t;
+    for (size_t i = 0; i < _velar.size(); ++i)
+    {
+        if (_velar[i].getByggingarAr() == bAr)
+        {
+            t.push_back(_velar[i]);
+        }
+    }
+    return t;
+}
+vector<velar> velarService::leitaVelarTegund (string tegund)
+{
+    vector<velar> t;
+    for (size_t i = 0; i < _velar.size(); ++i)
+    {
+        if (_velar[i].getTegund() == tegund)
+        {
+            t.push_back(_velar[i]);
+        }
+    }
+    return t;
+}
+vector<velar> velarService::leitaVelarByggd (bool byggd)
+{
+    vector<velar> t;
+    for (size_t i = 0; i < _velar.size(); ++i)
+    {
+        if (_velar[i].getByggd() == byggd)
+        {
+            t.push_back(_velar[i]);
+        }
+    }
+    return t;
+}

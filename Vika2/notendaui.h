@@ -30,12 +30,15 @@ private:
     void baetaVidPersonu(); //Add Person UI grein
     void eydaPersonu(); //Eyda personu UI grein
     void uppfaeraPersonu(); //Update Person UI grein
-    void uppfaeraVelar();
-    void leitaGrein(); //Search / Filter UI grein
-    void flokkunarMoguleikar(); //Sort UI grein
-    void tortimaLista(); //Purge UI grein
+    void leitaGreinTolvuFolk(); //Search / Filter UI grein
+    void flokkunarMoguleikarTolvuFolk(); //Sort UI grein
+    void tortimaListaTolvuFolk(); //Purge UI grein
     void baetaVidVelar(); //Add velar UI grein
     void eydaVel(); //Eyda vel UI grei
+    void uppfaeraVelar(); //Update Machine UI grein
+    void leitaGreinVelar(); //Search / Filter UI grein
+    void flokkunarMoguleikarVelar(); //Sort UI grein
+    void tortimaListaVelar(); //Purge UI grein
 
     //Bool flög
     bool aframhaldandiUITolvuVelar(); //Vantar comment
@@ -49,8 +52,10 @@ private:
     void skrifaUtTolvuVelar(); //Skrifa út valmynd fyrir tölvur
     void skrifaUtTolvuFolk(); //Skrifa út valmynd fyrir tölvufólk
     void skrifaUtLinked(); // skrifa út valmynd fyri bæði tölvur og tölvufólk
-    void leitarMoguleikar(); //Birtir moguleika a leitun
-    void rodunarMoguleikar(); //Birtir moguleika a rodun
+    void leitarMoguleikarTolvuFolk(); //Birtir moguleika a leitun
+    void leitarMoguleikarVelar(); //Birtir moguleika a leitun
+    void rodunarMoguleikarTolvuFolk(); //Birtir moguleika a rodun
+    void rodunarMoguleikarVelar(); //Birtir moguleika a rodun
     void uppfaersluMoguleikar(); //Birtir moguleika a uppfaerslu
     void upphafsUI(); //Vantar comment
     void radaUI(); //Vantar comment
