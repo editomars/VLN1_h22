@@ -31,7 +31,7 @@ vector<velar> sqltenging::lesaVelar()
 
 void sqltenging::baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
-    string sql = "INSERT INTO TolvuFolk(ForNafn, MidNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
+    string sql = "INSERT INTO TolvuFolk(ForNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
                   "VALUES('" + fNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
     udiSkipun(sql);
 }
@@ -48,7 +48,6 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
     {
         int id = query.value("id").toUInt();
         string fornafn = query.value("fornafn").toString().toStdString();
-        string midnafn = query.value("Midnafn").toString().toStdString();
         string eftirnafn = query.value("eftirnafn").toString().toStdString();
         char kyn = query.value("kyn").toString().toStdString()[0];
         int faedingarar = query.value("faedingarar").toUInt();

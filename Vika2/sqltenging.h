@@ -17,6 +17,7 @@ public:
     void baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr);
     void baetaVidVel(string nafn, int bAr, bool byggd, string tegund);
     void eydaFolk(int id);
+    void uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr)
 private:
     QSqlDatabase _db;
     vector<tolvufolk> selectFolk(string sql) const;
