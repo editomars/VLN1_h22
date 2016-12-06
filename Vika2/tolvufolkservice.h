@@ -25,7 +25,7 @@ public:
     void yfirskrifaTolvufolk(); //Yfiskrifar gögnin á undan með nýjum gögnum, notar private breytuna _folk
     void yfirskrifaTolvufolk(const tolvufolk& t); //Yfirskrifar gögnin á undan með einu tilviki af tolvufólk
     void eydaTolvufolk(); //Eyðir öllum gögnum
-    void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
+    void eydaStakiTolvufolk(int nr); //Eyðir stykki af tölvufólk, notar ID
 
     //Föll sem breyta vector en ekki gagnagrunn
     void uppfaeraTolvufolk(const vector<tolvufolk>& t); //yfirskrifar vectorinn, ekki gagnagrunn
