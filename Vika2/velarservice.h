@@ -25,6 +25,10 @@ public:
     void eydaStakiVel(int id);
     void tortimaTolvuVelar();
 
+    //leitaFöll
+    vector<velar> leitaVelarNafn (string nafn);
+
+
 private:
     sqltenging _dataaccess;
     vector<velar> _velar;

@@ -996,7 +996,7 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
 
 void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
 {
-    vector<tolvufolk> gogn;
+    vector<velar> gogn;
     do
     {
         leitarMoguleikar();
@@ -1006,12 +1006,10 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
         if (skipunin == "name" || skipunin == "n")
         {
             leitarMoguleikar();
-            string fornafn, eftirnafn;
+            string nafn;
             cout << "---Searching by name---" << endl;
-            cout << "Enter first name: ";
-            cin >> fornafn;
-            cout << "Enter last name: ";
-            cin >> eftirnafn;
+            cout << "Enter name: ";
+            cin >> nafn;
             cout << endl;
             gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
             if (gogn.size() == 0)
@@ -1298,7 +1296,7 @@ void NotendaUI::tortimaListaVelar() //Purge UI grein
         {
             cout << "Acknowledged, by your will, all ENTRIES will be EXTERMINATED." << endl;
 
-            _service.tortimaTolvufolk();
+            _vService.tortimaTolvuVelar();
 
         }
 
