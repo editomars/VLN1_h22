@@ -42,7 +42,8 @@ public:
     void eydaVenslVel(int id);
     void eydaStakiVensl(int folkID, int velID);
 
-
+    vector<tolvufolk> lesaFolkVenslad(int velarID) const; //Sækir fólk venslað við ákveðið vélar ID
+    vector<velar> lesaVelarVenslad(int folkID) const; //Sækir velar venslað við ákveðið fólk ID
 
 private:
     QSqlDatabase _db;

@@ -208,6 +208,7 @@ int sqltenging::saekjaSize(string flokkur) const
 
 //Vensl
 
+<<<<<<< HEAD
 void sqltenging::buaTilVensl(int folkID, int velID)
 {
     string sql = "INSERT INTO venslfolkvelar(folk_id,vel_id)"
@@ -234,6 +235,27 @@ void sqltenging::eydaStakiVensl(int folkID, int velID)
                  "WHERE folk_id = " + to_string(folkID) + " "
                  "AND vel_id = " + to_string(velID);
     udiSkipun(sql);
+
+vector<tolvufolk> sqltenging::lesaFolkVenslad(int velarID) const
+{
+    string sql = "SELECT f.id, f.fornafn, f.eftirnafn, f.kyn, f.faedingarar, f.danarar "
+            "FROM tolvufolk f "
+            "INNER JOIN venslfolkvelar v ON v.folk_id = f.id "
+            "INNER JOIN tolvuvelar t ON v.vel_id = t.id "
+            "WHERE t.id = " + to_string(velarID);
+
+    return selectFolk(sql);
+}
+
+vector<velar> sqltenging::lesaVelarVenslad(int folkID) const
+{
+    string sql = "SELECT t.id, t.nafn, t.byggingarar, t.byggd, t.tegund "
+            "FROM tolvulvelar t "
+            "INNER JOIN venslfolkvelar v ON v.vel_id = t.id "
+            "INNER JOIN tolvufolk f ON v.folk_id = f.id "
+            "WHERE f.id = " + to_string(folkID);
+
+    return selectVelar(sql);
 }
 
 // Private Functions
