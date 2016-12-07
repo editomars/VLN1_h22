@@ -1589,7 +1589,7 @@ cout << "*======================================================================
 void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t |" << endl;
+    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t\t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
