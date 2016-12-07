@@ -251,7 +251,7 @@ vector<tolvufolk> sqltenging::lesaFolkVenslad(int velarID) const
 vector<velar> sqltenging::lesaVelarVenslad(int folkID) const
 {
     string sql = "SELECT t.id, t.nafn, t.byggingarar, t.byggd, t.tegund "
-            "FROM tolvulvelar t "
+            "FROM tolvuvelar t "
             "INNER JOIN venslfolkvelar v ON v.vel_id = t.id "
             "INNER JOIN tolvufolk f ON v.folk_id = f.id "
             "WHERE f.id = " + to_string(folkID);

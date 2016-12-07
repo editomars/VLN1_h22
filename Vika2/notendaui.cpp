@@ -86,9 +86,12 @@ void NotendaUI::prentaFolkVensl()
 
     persNR--;
     ID = gogn[persNR].getID();
-    cout << ID << endl;
+    target = _service.getStaktTolvufolk(ID);
+
+    system("cls");
     prentaListaTolvuVelar(_vService.getVelarVensl(ID));
 
+    cout << "These are the Machines linked to " << target.getNafn() << endl << endl;
 
 }
 
@@ -189,9 +192,10 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         if (skipun == "list" || skipun == "l")
         {
             satt = false;
+            system("cls");
             prentaListaTolvuVelar(_vService.getVelar());
 
-            cout << "Want to see links of these machines? (Y/N): ";
+            cout << "Do you want to see people linked to these machines? (Y/N): ";
             if (sjaVelarVensl())
             {
                 prentaVelarvensl();
@@ -280,6 +284,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         if (skipun == "list" || skipun == "l")
         {
             satt = false;
+            system("cls");
             prentaListaTolvuFolk(_service.getTolvufolk());
 
             cout << "Want to see what machines these people are linked to? (Y/N): ";
@@ -1537,6 +1542,10 @@ bool NotendaUI::sjaVelarVensl()
         else if(svar == "N" || svar == "n")
         {
             return false;
+        }
+        else
+        {
+            cout << "Invalid input, try again: ";
         }
 
     }while (svar != "Y" || svar != "y" || svar != "N" || svar != "n");
