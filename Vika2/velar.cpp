@@ -94,8 +94,11 @@ ostream& operator <<(ostream& out, const velar& data)
     {
         out << "\t";
     }
-    out <<  " \t\t  |";
-    out << svar << " \t\t\t |" << endl;
+    if (data.getTegund().size() < 11)
+    {
+        out <<  " \t";
+    }
+    out << "  \t  |" << svar << " \t\t\t |" << endl;
 
 
     return out;
