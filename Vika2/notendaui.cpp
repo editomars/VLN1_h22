@@ -1173,7 +1173,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
             }while(rettInntak == false);
         }
 
-        else if(skipunin == "create" || skipunin == "a")
+        else if(skipunin == "create" || skipunin == "c")
         {
             radaUI();
 
@@ -1564,9 +1564,9 @@ void NotendaUI::rodunarMoguleikarVelar()
     cout << "*||Please enter one of the following command                            ||*" << endl;
     cout << "*=========================================================================*" << endl;
     cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
-    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
-    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
-    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
+    cout << "*||create - Sort by date of creation, please write 'create'.            ||*" << endl;
+    cout << "*||type   - sort by type, please write 'type'.                          ||*" << endl;
+    cout << "*||made   - sort by if machine was built or not, please write 'made'.   ||*" << endl;
     cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
@@ -1587,7 +1587,7 @@ cout << "*======================================================================
 void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t|" << endl;
+    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
