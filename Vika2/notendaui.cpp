@@ -635,13 +635,13 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
                 if(skipunin == "ascending" || skipunin == "a")
                 {
-                    radad = _service.rada("nafn", "asc");
+                    radad = _service.rada("fornafn", "asc");
                     prentaListaTolvuFolk(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
-                    radad = _service.rada("nafn", "desc");
+                    radad = _service.rada("fornafn", "desc");
                     prentaListaTolvuFolk(radad);
                 }
 
