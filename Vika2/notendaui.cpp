@@ -245,14 +245,6 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
             flokkunarMoguleikarTolvuFolk();
         }
 
-        else if (skipun == "add" || skipun == "a")
-        {
-            system("cls");
-            cout << "-----Adding computer scientist-----" << endl;
-            baetaVidPersonu();
-            prentaListaTolvuFolk(_service.getTolvufolk());
-        }
-
         else if (skipun == "delete" || skipun == "d")
         {
             eydaPersonu();
@@ -1499,7 +1491,6 @@ void NotendaUI::skrifaUtLinked()
     cout << "*||Please enter one of the following commands - Linked Databases ||*" << endl;
     cout << "*==================================================================*" << endl;
     cout << "*||list   - Shows a list of all known entries in the databases.  ||*" << endl;
-    cout << "*||add    - Add a new entry into the databases.                  ||*" << endl;
     cout << "*||delete - Removes an entry from the databases.                 ||*" << endl;
     cout << "*||update - Updates an entry from the databases.                 ||*" << endl;
     cout << "*||search - Search for an entry from the databases.              ||*" << endl;
