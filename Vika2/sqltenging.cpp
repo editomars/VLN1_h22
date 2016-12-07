@@ -75,6 +75,8 @@ void sqltenging::eydaVel(int id)
 
     string sql = "DELETE FROM TolvuVelar WHERE ID = " + to_string(id);
     udiSkipun(sql);
+
+    eydaVenslVel(id);
 }
 
 void sqltenging::uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund)
@@ -158,6 +160,8 @@ void sqltenging::eydaFolk(int id)
 
     string sql = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
     udiSkipun(sql);
+
+    eydaVenslFolk(id);
 }
 
 void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr)
