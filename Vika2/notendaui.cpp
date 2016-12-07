@@ -238,6 +238,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
         int dAr;
 
         cout << "Enter name: ";
+        cin.ignore();
         getline(cin, nafn);
 
         cout << "Enter gender (f/m) [lowercase]: ";
@@ -348,6 +349,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     cout << "To hold section as is, enter 0." << endl << endl;
 
     cout << "Enter updated name: ";
+    cin.ignore();
     getline(cin, nafn);
 
     if (nafn == "0")
@@ -430,6 +432,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             string nafn;
             cout << "---Searching by name---" << endl;
             cout << "Enter name: ";
+            cin.ignore();
             getline(cin, nafn);
             cout << endl;
             gogn = _service.leitaStreng("nafn", nafn, 'a');
