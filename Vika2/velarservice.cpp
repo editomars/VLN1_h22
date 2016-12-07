@@ -22,6 +22,11 @@ int velarService::getSize() const
     return _dataaccess.saekjaSize("velar");
 }
 
+vector<velar> velarService::rada(string flokkur, string rod)
+{
+    return _dataaccess.lesaVelarSorted(flokkur,rod);
+}
+
 //Föll sem breyta gagnagrunni
 
 void velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund)

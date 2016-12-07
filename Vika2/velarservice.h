@@ -17,6 +17,8 @@ public:
     vector<velar> getVelar() const; //Skilar vectornum af gögnum sem notandi er að nota
     velar getStaktVelar(int ndx) const; //Sækir eitt stak af velum
     int getSize() const; //Skilar stærð af vector gögnum
+    vector<velar> rada(string flokkur, string rod); //Skilar vector sem er raðaður eftir flokk og rod á að vera "asc" eða "desc" fyrir ascending og descending
+
 
     //Föll sem breyta Gagnagrunn
     void baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)

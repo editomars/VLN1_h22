@@ -118,7 +118,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         else if (skipun == "sort" || skipun == "so")
         {
             skrifaUtTolvuVelar();
-            flokkunarMoguleikarTolvuFolk();
+            flokkunarMoguleikarVelar();
         }
 
         else if (skipun == "add" || skipun == "a")
@@ -147,7 +147,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         else if (skipun == "purge" || skipun == "p")
         {
             skrifaUtTolvuVelar();
-            tortimaListaTolvuFolk();
+            tortimaListaVelar();
         }
 
         else if (skipun == "return" || skipun == "r")
@@ -1105,7 +1105,8 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
                 hausUI();
                 cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
-            }else
+            }
+            else
             {
                 prentaListaTolvuVelar(gogn);
             }
@@ -1127,7 +1128,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
 void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 {
     string skipunin;
-    vector<tolvufolk> radad;
+    vector<velar> radad;
     bool rettInntak = true;
     rodunarMoguleikarVelar();
 
@@ -1135,7 +1136,6 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
     {
         rettInntak = true;
         cin >> skipunin;
-
 
         if (skipunin == "name" || skipunin == "n")
         {
@@ -1149,14 +1149,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
                 if(skipunin == "ascending" || skipunin == "a")
                 {
-                    radad = _service.rada("nafn", "asc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("Nafn", "asc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
-                    radad = _service.rada("nafn", "desc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("Nafn", "desc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1184,14 +1184,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
                 if(skipunin == "ascending" || skipunin == "a")
                 {
-                    radad = _service.rada("aldur", "asc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("byggingarar", "asc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
-                    radad = _service.rada("aldur", "desc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("byggingarar", "desc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1207,7 +1207,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
             }while(rettInntak == false);
         }
 
-        else if(skipunin == "birth" || skipunin == "b")
+        else if(skipunin == "type" || skipunin == "t")
         {
             radaUI();
 
@@ -1218,14 +1218,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
                 if(skipunin == "ascending" || skipunin == "a")
                 {
-                    radad = _service.rada("faedingarar", "asc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("tegund", "asc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
-                    radad = _service.rada("faedingarar", "desc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("tegund", "desc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1242,7 +1242,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
             }while(rettInntak == false);
         }
 
-        else if(skipunin == "death" || skipunin == "d")
+        else if(skipunin == "made" || skipunin == "m")
         {
             radaUI();
 
@@ -1253,14 +1253,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
                 if(skipunin == "ascending" || skipunin == "a")
                 {
-                    radad = _service.rada("danarar", "asc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("byggd", "asc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
-                    radad = _service.rada("danarar", "desc");
-                    prentaListaTolvuFolk(radad);
+                    radad = _vService.rada("byggd", "desc");
+                    prentaListaTolvuVelar(radad);
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
