@@ -134,6 +134,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         else if (skipun == "add" || skipun == "a")
         {
             satt = false;
+            system("cls");
             cout << "-----Adding computer machines-----" << endl;
             baetaVidVelar();
             prentaListaTolvuVelar(_vService.getVelar());
@@ -267,9 +268,14 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
         int fAr;
         int dAr;
 
-        cout << "Enter name: ";
+        cout << "Enter name (-1 to cancel add): ";
         cin.ignore();
         getline(cin, nafn);
+
+        if (nafn == "-1")
+        {
+            break;
+        }
 
         cout << "Enter gender (f/m) [lowercase]: ";
         cin >> kKyn;
@@ -778,8 +784,14 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         char byggdIn;
         bool byggd;
 
-        cout << "Enter machine name: ";
-        cin >> vNafn;
+        cout << "Enter machine name (-1 to cancel add): ";
+        cin.ignore();
+        getline(cin, vNafn);
+
+        if (vNafn == "-1")
+        {
+            break;
+        }
 
         cout << "Enter year built: ";
         cin >> bAr;
