@@ -19,8 +19,7 @@ public:
     vector<tolvufolk> getTolvufolk() const; //Skilar vectornum af gögnum sem notandi er að nota
     tolvufolk getStaktTolvufolk(int id) const; //Sækir eitt stak af tolvufolki
 
-    //Föll sem tengja við Gagnagrunn
-    void saekjaGogn(); //Sækir gögn í gagnagrunn og geymir í vector _folk
+    //Föll sem bæta við Gagnagrunn
     void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
     void tortimaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID

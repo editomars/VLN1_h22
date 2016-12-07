@@ -23,6 +23,14 @@ vector<velar> sqltenging::lesaVelar(int id) const
     return selectVelar(sql);
 }
 
+vector<velar> sqltenging::lesaVelarSorted(string flokkur, string rod)
+{
+    string sql = "SELECT * FROM TolvuVelar "
+            "ORDER BY " + flokkur + " " + rod;
+
+    return selectVelar(sql);
+}
+
 void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
 {
     string sql = "INSERT INTO TolvuVelar(Nafn, Byggingarar, Byggd, Tegund)"
@@ -66,6 +74,14 @@ vector<tolvufolk> sqltenging::lesaFolk(int id) const
     if (id != -1){
         sql += " WHERE ID = " + to_string(id);
     }
+
+    return selectFolk(sql);
+}
+
+vector<tolvufolk> sqltenging::lesaFolkSorted(string flokkur, string rod)
+{
+    string sql = "SELECT * FROM TolvuFolk "
+            "ORDER BY " + flokkur + " " + rod;
 
     return selectFolk(sql);
 }
