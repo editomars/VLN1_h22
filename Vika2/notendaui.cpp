@@ -15,9 +15,6 @@ NotendaUI::NotendaUI()
 //"Main" fall
 void NotendaUI::keyra()
 {
-
-    _service.saekjaGogn();
-    _vService.saekjaGogn();
     adalvalmyndUI();
 }
 
@@ -352,7 +349,8 @@ void NotendaUI::eydaPersonu() //Delete UI grein
 {
     do
     {
-        prentaListaTolvuFolk(_service.getTolvufolk());
+        vector<tolvufolk> gogn = _service.getTolvufolk();
+        prentaListaTolvuFolk(gogn);
         int persNR;
         cout << "Delete scientist number (-1 to cancel deletion): ";
         cin >> persNR;
@@ -372,8 +370,9 @@ void NotendaUI::eydaPersonu() //Delete UI grein
             break;
         }
         persNR--;
-        cout << _service.getStaktTolvufolk(persNR).getNafn() << " has been removed.\n";
-        _service.eydaStakiTolvufolk(persNR);
+        int id = gogn[persNR].getID();
+        cout << _service.getStaktTolvufolk(id).getNafn() << " has been removed.\n";
+        _service.eydaStakiTolvufolk(id);
 
     }while(skipunaAframhald());
 }
@@ -384,8 +383,8 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     char nyttKyn;
     int persNR, nyttD, nyttF;
     tolvufolk target;
-
-    prentaListaTolvuFolk(_service.getTolvufolk());
+    vector<tolvufolk> gogn = _service.getTolvufolk();
+    prentaListaTolvuFolk(gogn);
 
     cout << "Update scientist number (-1 to cancel update): ";
     cin >> persNR;
@@ -406,7 +405,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     }
 
     persNR--;
-    target = _service.getStaktTolvufolk(persNR);
+    target = _service.getStaktTolvufolk(gogn[persNR].getID());
 
     system("cls");
     cout << "Updating information for: " << endl << endl;
@@ -484,7 +483,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
     system("cls");
     cout << "Updated information:" << endl << endl;
-    prentaPersonu((_service.getStaktTolvufolk(persNR)), persNR);
+    prentaPersonu((_service.getStaktTolvufolk(gogn[persNR].getID())), persNR);
 
 }
 
@@ -868,7 +867,8 @@ void NotendaUI::eydaVel() //Delete UI grein
 {
     do
     {
-        prentaListaTolvuVelar(_vService.getVelar());
+        vector<velar> gogn = _vService.getVelar();
+        prentaListaTolvuVelar(gogn);
         int velNR;
         cout << "Delete machine number (-1 to cancel deletion): ";
         cin >> velNR;
@@ -888,8 +888,9 @@ void NotendaUI::eydaVel() //Delete UI grein
             break;
         }
         velNR--;
-        cout << _vService.getStaktVelar(velNR).getVelaNafn() << " has been removed.\n";
-        _vService.eydaStakiVel(velNR);
+        int id = gogn[velNR].getID();
+        cout << _vService.getStaktVelar(id).getVelaNafn() << " has been removed.\n";
+        _vService.eydaStakiVel(id);
 
     }while(skipunaAframhald());
 }
@@ -901,8 +902,8 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
     int velNR, nyttbAr;
     velar target;
     bool byggd;
-
-    prentaListaTolvuVelar(_vService.getVelar());
+    vector<velar> gogn = _vService.getVelar();
+    prentaListaTolvuVelar(gogn);
 
     cout << "Update machine number (-1 to cancel update): ";
     cin >> velNR;
@@ -923,7 +924,8 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
     }
 
     velNR--;
-    target = _vService.getStaktVelar(velNR);
+    int id = gogn[velNR].getID();
+    target = _vService.getStaktVelar(id);
 
     system("cls");
     cout << "Updating information for: " << endl << endl;
@@ -990,7 +992,7 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
 
     system("cls");
     cout << "Updated information:" << endl << endl;
-    prentaVel((_vService.getStaktVelar(velNR)), velNR);
+    prentaVel((_vService.getStaktVelar(id)), velNR);
 }
 
 void NotendaUI::leitaGreinVelar() //Search / Filter UI grein

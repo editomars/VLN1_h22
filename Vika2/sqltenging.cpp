@@ -2,15 +2,23 @@
 
 sqltenging::sqltenging()
 {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "vln1.sqlite";
-    _db.setDatabaseName(dbName);
-    _db.open();
+    _db = QSqlDatabase::database();
+    if (!_db.isOpen())
+    {
+        _db = QSqlDatabase::addDatabase("QSQLITE");
+        QString dbName = "vln1.sqlite";
+        _db.setDatabaseName(dbName);
+        _db.open();
+    }
 }
 // VELAR
-vector<velar> sqltenging::lesaVelar()
+vector<velar> sqltenging::lesaVelar(int id) const
 {
     string sql = "SELECT * FROM TolvuVelar";
+
+    if (id != -1){
+        sql += " WHERE id = " + to_string(id);
+    }
 
     return selectVelar(sql);
 }
@@ -51,9 +59,13 @@ void sqltenging::tortimaVelum()
 
 
 // FOLK
-vector<tolvufolk> sqltenging::lesaFolk() const
+vector<tolvufolk> sqltenging::lesaFolk(int id) const
 {
     string sql = "SELECT * FROM TolvuFolk";
+
+    if (id != -1){
+        sql += " WHERE ID = " + to_string(id);
+    }
 
     return selectFolk(sql);
 }
@@ -89,6 +101,32 @@ void sqltenging::tortimaFolki()
     string terminator = "DELETE FROM tolvufolk";
     udiSkipun(terminator);
 }
+
+int sqltenging::saekjaSize(string flokkur) const
+{
+    int size = 0;
+    string sql = "SELECT COUNT(*) as Size from ";
+    if (flokkur == "velar"){
+        sql += "TolvuVelar";
+    }else if (flokkur == "folk"){
+        sql += "TolvuFolk";
+    }else{
+        size = -1;
+    }
+
+    if (size != -1)
+    {
+        QSqlQuery query(_db);
+        char* cstr = new char[sql.length()+1];
+        strcpy(cstr, sql.c_str());
+        query.exec(cstr);
+        if (query.next()){
+            size = query.value("Size").toUInt();
+        }
+    }
+    return size;
+}
+
 //Vensl
 
 

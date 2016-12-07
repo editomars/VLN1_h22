@@ -18,8 +18,7 @@ public:
     velar getStaktVelar(int ndx) const; //Sækir eitt stak af velum
     int getSize() const; //Skilar stærð af vector gögnum
 
-    //Föll sem tengja við Gagnagrunn
-    void saekjaGogn(); //Sækir gögn í gagnaggrunn
+    //Föll sem breyta Gagnagrunn
     void baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)
     void uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund);
     void eydaStakiVel(int id);

@@ -87,50 +87,41 @@ struct daudiLaekkandi
 
 //Get föll
 
-tolvufolk tolvufolkService::getStaktTolvufolk(int ndx) const
+tolvufolk tolvufolkService::getStaktTolvufolk(int id) const
 {
-    return _folk[ndx];
+    return _dataaccess.lesaFolk(id)[0];
 }
 
 vector<tolvufolk> tolvufolkService::getTolvufolk() const
 {
-    return _folk;
+    return _dataaccess.lesaFolk(-1);
 }
 
 int tolvufolkService::getSize() const
 {
-    return _folk.size();
+    return _dataaccess.saekjaSize("folk");
 }
 
-//Föll sem tengja við gagnagrunn
-
-void tolvufolkService::saekjaGogn()
-{
-    _folk = _dataaccess.lesaFolk();
-}
+//Föll sem breyta gagnagrunn
 
 void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
 {
     _dataaccess.baetaVidFolk(fNafn, eNafn, kyn, fAr, dAr);
-    saekjaGogn();
 }
 
 void tolvufolkService::tortimaTolvufolk()
 {
     _dataaccess.tortimaFolki();
-    _folk.clear();
 }
 
-void tolvufolkService::eydaStakiTolvufolk(int nr)
+void tolvufolkService::eydaStakiTolvufolk(int id)
 {
-    _dataaccess.eydaFolk(_folk[nr].getID());
-    saekjaGogn();
+    _dataaccess.eydaFolk(id);
 }
 
 void tolvufolkService::uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr)
 {
     _dataaccess.uppfaeraFolk(id,fNafn,eNafn,kyn,fAr,dAr);
-    saekjaGogn();
 }
 
 //Föll sem skila umbreyttum gögnum
