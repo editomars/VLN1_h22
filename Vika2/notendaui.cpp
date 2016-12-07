@@ -322,6 +322,7 @@ void NotendaUI::tengjaFolkiVel()
     tolvufolk folktarget;
     velar veltarget;
     vector<tolvufolk> gogn = _service.getTolvufolk();
+    vector<velar> velargogn = _vService.getVelar();
     prentaListaTolvuFolk(gogn);
 
     cout << "Enter number of scientist to link to a machine (-1 to cancel): ";
@@ -347,6 +348,7 @@ void NotendaUI::tengjaFolkiVel()
     folktarget = _service.getStaktTolvufolk(gogn[persNR].getID());
 
     system("cls");
+    prentaListaTolvuVelar(velargogn);
     cout << "Enter number of machine to link with " << folktarget.getNafn() << ": ";
     cin >> machNR;
 
