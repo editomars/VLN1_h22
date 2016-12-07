@@ -1500,14 +1500,19 @@ void NotendaUI::skrifaUtLinked()
     cout << "*||return - Return to the main menu.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
-
-void NotendaUI::leitarMoguleikarTolvuFolk()
+void NotendaUI::skipunaGluggi()
 {
     system("cls");
 
     cout << "*=========================================================================*" << endl;
     cout << "*||Please enter one of the following command                            ||*" << endl;
     cout << "*=========================================================================*" << endl;
+
+}
+
+void NotendaUI::leitarMoguleikarTolvuFolk()
+{
+    skipunaGluggi();
     cout << "*||name   - Search by name, please write 'name'.                        ||*" << endl;
     cout << "*||age    - Search by age, please write 'age'.                          ||*" << endl;
     cout << "*||birth  - Search by year of birth, please write 'birth'.              ||*" << endl;
@@ -1518,11 +1523,7 @@ void NotendaUI::leitarMoguleikarTolvuFolk()
 
 void NotendaUI::leitarMoguleikarVelar()
 {
-    system("cls");
-
-    cout << "*=====================================================================================*" << endl;
-    cout << "*||Please enter one of the following command                                        ||*" << endl;
-    cout << "*=====================================================================================*" << endl;
+    skipunaGluggi();
     cout << "*||name   - Search by name, please write 'name'.                                    ||*" << endl;
     cout << "*||create - Search by date of creation, please write 'create'.                      ||*" << endl;
     cout << "*||type   - Search by type, please write 'type'.                                    ||*" << endl;
@@ -1533,11 +1534,7 @@ void NotendaUI::leitarMoguleikarVelar()
 
 void NotendaUI::rodunarMoguleikarTolvuFolk()
 {
-    system("cls");
-
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    skipunaGluggi();
     cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
     cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
     cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
@@ -1548,11 +1545,7 @@ void NotendaUI::rodunarMoguleikarTolvuFolk()
 
 void NotendaUI::rodunarMoguleikarVelar()
 {
-    system("cls");
-
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    skipunaGluggi();
     cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
     cout << "*||create - Sort by date of creation, please write 'create'.            ||*" << endl;
     cout << "*||type   - sort by type, please write 'type'.                          ||*" << endl;
@@ -1564,14 +1557,11 @@ void NotendaUI::rodunarMoguleikarVelar()
 
 void NotendaUI::radaUI()
 {
-system("cls");
-cout << "*=========================================================================*" << endl;
-cout << "*||Please enter one of the following command                            ||*" << endl;
-cout << "*=========================================================================*" << endl;
-cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
-cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
-cout << "*||quit   - Quit sorting.                                               ||*" << endl;
-cout << "*=========================================================================*" << endl;
+    skipunaGluggi();
+    cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
+    cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
+    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
+    cout << "*=========================================================================*" << endl;
 }
 
 void NotendaUI::hausUI()

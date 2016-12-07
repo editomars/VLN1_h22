@@ -52,6 +52,7 @@ private:
     void skrifaUtTolvuVelar(); //Skrifa út valmynd fyrir tölvur
     void skrifaUtTolvuFolk(); //Skrifa út valmynd fyrir tölvufólk
     void skrifaUtLinked(); // skrifa út valmynd fyri bæði tölvur og tölvufólk
+    void skipunaGluggi(); //Skrifa út gluggan fyrir ofan skipanir
     void leitarMoguleikarTolvuFolk(); //Birtir moguleika a leitun
     void leitarMoguleikarVelar(); //Birtir moguleika a leitun
     void rodunarMoguleikarTolvuFolk(); //Birtir moguleika a rodun
