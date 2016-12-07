@@ -84,7 +84,17 @@ ostream& operator <<(ostream& out, const velar& data)
     //out << "Type: " << data.getTegund() << endl;
     //out << "Was it built?: " << data.getByggd() << endl;
 
-    out << "|" << data.getVelaNafn() << " \t\t |" << data.getByggingarAr() <<  " \t\t   |" << data.getTegund() <<  " \t\t  |";
+    out << "|" << data.getVelaNafn();
+    if(data.getVelaNafn().size() < 5)
+    {
+        out << "\t";
+    }
+    out << " \t\t |" << data.getByggingarAr() <<  " \t\t   |" << data.getTegund();
+    if (data.getTegund().size() < 3)
+    {
+        out << "\t";
+    }
+    out <<  " \t\t  |";
     out << svar << " \t\t\t |" << endl;
 
 

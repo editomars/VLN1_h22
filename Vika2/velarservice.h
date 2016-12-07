@@ -26,17 +26,13 @@ public:
     void eydaStakiVel(int id);
     void tortimaTolvuVelar();
 
-
-    //leitaFöll
-    vector<velar> leitaVelarNafn (string nafn);
-    vector<velar> leitaVelarBar (int bAr);
-    vector<velar> leitaVelarTegund (string tegund);
-    vector<velar> leitaVelarByggd (bool byggd);
-
-
+    //Föll sem skila umbreyttum gögnum
+    vector<velar> rada(string flokkur, string rod) const;
+    vector<velar> leitaStreng(string flokkur, string leitarord, char pos); //Skilar vector sem er flokkaður(filteraður) ef flokka á strengjaflokk (nafn eða kyn)
+    vector<velar> leitaHeiltolu(string flokkur, char type, int leitarord); //Skilar vector sem er flokkar(filteraður) ef flokka á integer flokk (faedingarar, danarar eða aldur), type er < > = til að fá stærra, minna eða jafnt og
+    vector<velar> leitaHeiltolubil(string flokkur, int laegraBil, int haerraBil); //Skilar vector sem er filteraður á heiltölubili
 private:
     sqltenging _dataaccess;
-    vector<velar> _velar;
 };
 
 #endif // VELARSERVICE_H

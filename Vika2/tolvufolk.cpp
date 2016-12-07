@@ -43,6 +43,11 @@ int tolvufolk::getDanarar() const
     return _danarar;
 }
 
+int tolvufolk::getAldur() const
+{
+    return (_danarar == -1 ? 2016 - _faedingarar : _danarar - _faedingarar);
+}
+
 string tolvufolk::getNafn() const
 {
        return _fornafn + " " + _eftirnafn;

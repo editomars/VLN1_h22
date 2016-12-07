@@ -70,37 +70,27 @@ void tolvufolkService::uppfaeraStakTolvufolk(int id, string fNafn , string eNafn
 }
 
 //Föll sem skila umbreyttum gögnum
-vector<tolvufolk> tolvufolkService::leitaStreng(string flokkur, string leitarord)
+vector<tolvufolk> tolvufolkService::leitaStreng(string flokkur, string leitarord, char pos)
 {
-    if (flokkur == "nafn")
-    {
-        return leitaEftirNafniTolvufolk(leitarord);
-    }
-    if (flokkur == "kyn")
-    {
-        if (leitarord == "m")
-            return leitaEftirKyniTolvufolk('m');
-        else
-            return leitaEftirKyniTolvufolk('f');
-    }
-    return _folk;
+    return _dataaccess.leitaFolk(flokkur, leitarord, pos);
 }
 
-vector<tolvufolk> tolvufolkService::leitaHeiltolu(string flokkur, int leitarord)
+vector<tolvufolk> tolvufolkService::leitaHeiltolu(string flokkur, char type, int leitarord)
 {
     if (flokkur == "aldur")
     {
-        return leitaEftirAldriTolvufolk(leitarord);
+        return leitaAldur(type, leitarord);
     }
-    if (flokkur == "faedingarar")
+    return _dataaccess.leitaFolk(flokkur, type, leitarord);
+}
+
+vector<tolvufolk> tolvufolkService::leitaHeiltolubil(string flokkur, int laegraBil, int haerraBil)
+{
+    if (flokkur == "aldur")
     {
-        return leitaEftirArtaliTolvufolk(leitarord, true);
+        return leitaAldur(laegraBil, haerraBil);
     }
-    if (flokkur == "danarar")
-    {
-        return leitaEftirArtaliTolvufolk(leitarord, false);
-    }
-    return _folk;
+    return _dataaccess.leitaFolk(flokkur, laegraBil, haerraBil);
 }
 
 vector<tolvufolk> tolvufolkService::rada(string flokkur, string rod)
@@ -134,66 +124,41 @@ vector<tolvufolk> tolvufolkService::radaAldriLaekkandi(vector<tolvufolk> gogn)
     return sorted;
 }
 
-//Leita föll --private (filter föll)
-vector<tolvufolk> tolvufolkService::leitaEftirAldriTolvufolk(int aldur)
+//Leita föll
+vector<tolvufolk> tolvufolkService::leitaAldur(char type, int leitarord)
 {
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        int samanburdur = (_folk[i].getDanarar() == -1 ? 2016 : _folk[i].getDanarar());
-        if (samanburdur - _folk[i].getFaedingarar() == aldur)
-        {
-            t.push_back(_folk[i]);
-        }
-    }
-    return t;
-}
+    vector<tolvufolk> gogn = _dataaccess.lesaFolk(-1);
+    vector<tolvufolk> filtered;
 
-vector<tolvufolk> tolvufolkService::leitaEftirArtaliTolvufolk(int ar, bool f)
-{
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
+    for (size_t i = 0; i < gogn.size(); ++i)
     {
-        if (f){
-            if (_folk[i].getFaedingarar() == ar)
-            {
-                t.push_back(_folk[i]);
+        if (type == '<'){
+            if (gogn[i].getAldur() < leitarord){
+                filtered.push_back(gogn[i]);
             }
-        }
-
-        else
-        {
-            if (_folk[i].getDanarar() == ar)
-            {
-                t.push_back(_folk[i]);
+        }else if (type == '>'){
+            if (gogn[i].getAldur() > leitarord){
+                filtered.push_back(gogn[i]);
+            }
+        }else if (type == '='){
+            if (gogn[i].getAldur() == leitarord){
+                filtered.push_back(gogn[i]);
             }
         }
     }
-    return t;
+    return filtered;
 }
 
-vector<tolvufolk> tolvufolkService::leitaEftirNafniTolvufolk(string nafn)
+vector<tolvufolk> tolvufolkService::leitaAldur(int laegraBil, int haerraBil)
 {
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        if (_folk[i].getNafn() == nafn)
-        {
-            t.push_back(_folk[i]);
-        }
-    }
-    return t;
-}
+    vector<tolvufolk> gogn = _dataaccess.lesaFolk(-1);
+    vector<tolvufolk> filtered;
 
-vector<tolvufolk> tolvufolkService::leitaEftirKyniTolvufolk(char kyn)
-{
-    vector<tolvufolk> t;
-    for (size_t i = 0; i < _folk.size(); ++i)
-    {
-        if (_folk[i].getKyn() == kyn)
-        {
-            t.push_back(_folk[i]);
+    for (size_t i = 0; i < gogn.size(); ++i){
+        if (gogn[i].getAldur() > laegraBil && gogn[i].getAldur() < haerraBil){
+            filtered.push_back(gogn[i]);
         }
     }
-    return t;
+
+    return filtered;
 }

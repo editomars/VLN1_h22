@@ -26,7 +26,6 @@ void NotendaUI::prentaListaTolvuFolk(const vector<tolvufolk>& gogn)
     {
         cout << "|" << i+1 << " \t\t ";
         cout << gogn[i];
-
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
@@ -40,7 +39,6 @@ void NotendaUI::prentaListaTolvuVelar(const vector<velar>& gogn)
     {
         cout << "|" << i+1 << " \t\t ";
         cout << gogn[i];
-
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
@@ -504,10 +502,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             cout << "---Searching by name---" << endl;
             cout << "Enter first name: ";
             cin >> fornafn;
-            cout << "Enter last name: ";
-            cin >> eftirnafn;
             cout << endl;
-            gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
+            gogn = _service.leitaStreng("fornafn", fornafn, 'a');
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -533,7 +529,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 cin >> age;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("aldur", age);
+            gogn = _service.leitaHeiltolu("aldur", '=', age);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -559,7 +555,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 cin >> birth;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("faedingarar", birth);
+            gogn = _service.leitaHeiltolu("faedingarar", '=', birth);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -585,7 +581,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 cin >> death;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("danarar", death);
+            gogn = _service.leitaHeiltolu("danarar", '=', death);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -937,9 +933,10 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
     cout << "Enter updated machine name: ";
     cin >> vNafn;
 
-    if (vNafn == "0")
+     if (vNafn == "0")
+    {
         vNafn = target.getVelaNafn();
-
+    }
 
         cout << "Enter updated built year: ";
         cin >> nyttbAr;
@@ -1014,7 +1011,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             cout << "Enter name: ";
             cin >> nafn;
             cout << endl;
-            gogn = _vService.leitaVelarNafn(nafn);
+            gogn = _vService.leitaStreng("Nafn", nafn, 'a');
             if (gogn.size() == 0)
             {
                 hausUI();
@@ -1040,7 +1037,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
                 cin >> artal;
             }
             cout << endl;
-            gogn = _vService.leitaVelarBar(artal);
+            gogn = _vService.leitaHeiltolu("Byggingarar", '=', artal);
             if (gogn.size() == 0)
             {
                 hausUI();
@@ -1060,7 +1057,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             cin >> tegund;
 
             cout << endl;
-            gogn = _vService.leitaVelarTegund(tegund);
+            gogn = _vService.leitaStreng("Tegund", tegund, 'a');
             if (gogn.size() == 0)
             {
                 hausUI();
@@ -1076,7 +1073,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
         else if (skipunin == "made" || skipunin == "m")
         {
             leitarMoguleikarVelar();
-            bool byggd;
+            int byggd;
             char byggdIn;
 
             do
@@ -1086,12 +1083,12 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
 
                 if(byggdIn == 'y' || byggdIn == 'Y')
                 {
-                    byggd = true;
+                    byggd = 1;
                     break;
                 }
                 else if(byggdIn == 'n' || byggdIn == 'N')
                 {
-                    byggd = false;
+                    byggd = 0;
                     break;
                 }
                 else
@@ -1101,7 +1098,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             }while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n');
 
             cout << endl;
-            gogn = _vService.leitaVelarByggd(byggd);
+            gogn = _vService.leitaHeiltolu("Byggd", '=', byggd);
             if (gogn.size() == 0)
             {
                 hausUI();
@@ -1174,7 +1171,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
             }while(rettInntak == false);
         }
 
-        else if(skipunin == "create" || skipunin == "a")
+        else if(skipunin == "create" || skipunin == "c")
         {
             radaUI();
 
@@ -1441,7 +1438,6 @@ bool NotendaUI::skipunaAframhald()
     return false;
 }
 
-
 //------------------------------- Svæði fyrir bool flögg endar ---------------------------------
 
 //------------------------------- Svæði fyrir cout blokkir byrjar ------------------------------
@@ -1566,9 +1562,9 @@ void NotendaUI::rodunarMoguleikarVelar()
     cout << "*||Please enter one of the following command                            ||*" << endl;
     cout << "*=========================================================================*" << endl;
     cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
-    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
-    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
-    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
+    cout << "*||create - Sort by date of creation, please write 'create'.            ||*" << endl;
+    cout << "*||type   - sort by type, please write 'type'.                          ||*" << endl;
+    cout << "*||made   - sort by if machine was built or not, please write 'made'.   ||*" << endl;
     cout << "*||quit   - Quit sorting.                                               ||*" << endl;
     cout << "*=========================================================================*" << endl;
 }
