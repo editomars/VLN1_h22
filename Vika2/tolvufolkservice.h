@@ -34,14 +34,8 @@ private:
     vector<tolvufolk> _folk;
 
     //raða föll
-    vector<tolvufolk> radaNafniHaekkandi();
-    vector<tolvufolk> radaNafniLaekkandi();
-    vector<tolvufolk> radaAldriHaekkandi();
-    vector<tolvufolk> radaAldriLaekkandi();
-    vector<tolvufolk> radaFaedinguHaekkandi();
-    vector<tolvufolk> radaFaedinguLaekkandi();
-    vector<tolvufolk> radaDaudaHaekkandi();
-    vector<tolvufolk> radaDaudaLaekkandi();
+    vector<tolvufolk> radaAldriHaekkandi(vector<tolvufolk> gogn);
+    vector<tolvufolk> radaAldriLaekkandi(vector<tolvufolk> gogn);
 
     //Leita föll (filterar)
     vector<tolvufolk> leitaEftirNafniTolvufolk(string nafn); //Skilar vector flokkað(filtered) eftir nafni

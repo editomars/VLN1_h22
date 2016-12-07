@@ -105,24 +105,31 @@ vector<tolvufolk> tolvufolkService::leitaHeiltolu(string flokkur, int leitarord)
 
 vector<tolvufolk> tolvufolkService::rada(string flokkur, string rod)
 {
+    if (flokkur == "aldur"){
+        if (rod == "asc"){
+            return radaAldriHaekkandi(_dataaccess.lesaFolk(-1));
+        }else if (rod == "desc"){
+            return radaAldriLaekkandi(_dataaccess.lesaFolk(-1));
+        }
+    }
     return _dataaccess.lesaFolkSorted(flokkur,rod);
 }
 //--------------------------- Svæði fyrir public föll endar ---------------------------------------------
 
 //------------------------ Svæði fyrir private föll byrjar ----------------------------------------------
 //Sort föll --private
-vector<tolvufolk> tolvufolkService::radaAldriHaekkandi()
+vector<tolvufolk> tolvufolkService::radaAldriHaekkandi(vector<tolvufolk> gogn)
 {
     aldurHaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
+    vector<tolvufolk> sorted = gogn;
     sort(sorted.begin(), sorted.end(), temp);
     return sorted;
 }
 
-vector<tolvufolk> tolvufolkService::radaAldriLaekkandi()
+vector<tolvufolk> tolvufolkService::radaAldriLaekkandi(vector<tolvufolk> gogn)
 {
     aldurLaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
+    vector<tolvufolk> sorted = gogn;
     sort(sorted.begin(), sorted.end(), temp);
     return sorted;
 }
