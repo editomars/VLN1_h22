@@ -26,7 +26,6 @@ void NotendaUI::prentaListaTolvuFolk(const vector<tolvufolk>& gogn)
     {
         cout << "|" << i+1 << " \t\t ";
         cout << gogn[i];
-
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
@@ -40,7 +39,6 @@ void NotendaUI::prentaListaTolvuVelar(const vector<velar>& gogn)
     {
         cout << "|" << i+1 << " \t\t ";
         cout << gogn[i];
-
     }
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 
@@ -937,9 +935,10 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
     cout << "Enter updated machine name: ";
     cin >> vNafn;
 
-    if (vNafn == "0")
+     if (vNafn == "0")
+    {
         vNafn = target.getVelaNafn();
-
+    }
 
         cout << "Enter updated built year: ";
         cin >> nyttbAr;
@@ -1441,7 +1440,6 @@ bool NotendaUI::skipunaAframhald()
     return false;
 }
 
-
 //------------------------------- Svæði fyrir bool flögg endar ---------------------------------
 
 //------------------------------- Svæði fyrir cout blokkir byrjar ------------------------------
@@ -1589,7 +1587,7 @@ cout << "*======================================================================
 void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t |" << endl;
+    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t|" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
