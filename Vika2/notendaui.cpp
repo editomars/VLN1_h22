@@ -224,7 +224,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         {
             skrifaUtTolvuFolk();
             cerr << "Input not valid, try again: ";
-        }
+        }continue;
     } while (aframhaldandiUITolvuFolk());
 }
 
