@@ -6,24 +6,6 @@ tolvufolkService::tolvufolkService()
 }
 
 //----------------------- Svæði fyir sorting struct byrjar ---------------------
-//rada eftir stafrosrod abc..
-struct nafnHaekkandi
-{
-    bool operator () (tolvufolk i, tolvufolk j)
-    {
-        return (i.getFornafn() < j.getNafn());
-    }
-};
-
-//rada eftir stafrosrod cba..
-struct nafnLaekkandi
-{
-    bool operator () (tolvufolk i, tolvufolk j)
-    {
-        return (i.getNafn() > j.getNafn());
-    }
-};
-
 //rada aldri haekkandi
 struct aldurHaekkandi
 {
@@ -44,43 +26,6 @@ struct aldurLaekkandi
         return ((sidastaAri-i.getFaedingarar()) > (sidastaArj-j.getFaedingarar()));
     }
 };
-
-struct faedingHaekkandi
-{
-    bool operator () (tolvufolk i, tolvufolk j)
-    {
-        return (i.getFaedingarar() < j.getFaedingarar());
-    }
-};
-
-struct faedingLaekkandi
-{
-    bool operator () (tolvufolk i, tolvufolk j)
-    {
-        return (i.getFaedingarar() > j.getFaedingarar());
-    }
-};
-
-struct daudiHaekkandi
-{
-    bool operator () (tolvufolk i, tolvufolk j)
-    {
-        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
-        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
-        return (sidastaAri < sidastaArj);
-    }
-};
-
-struct daudiLaekkandi
-{
-    bool operator () (tolvufolk i, tolvufolk j)
-    {
-        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
-        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
-        return (sidastaAri > sidastaArj);
-    }
-};
-
 //----------------------- Svæði fyir sorting struct endar ---------------------
 
 //----------------------- Svæði fyrir public föll byrjar ----------------------
@@ -160,115 +105,31 @@ vector<tolvufolk> tolvufolkService::leitaHeiltolu(string flokkur, int leitarord)
 
 vector<tolvufolk> tolvufolkService::rada(string flokkur, string rod)
 {
-    if (flokkur == "nafn")
-    {
-        if (rod == "asc")
-        {
-            return radaNafniHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaNafniLaekkandi();
+    if (flokkur == "aldur"){
+        if (rod == "asc"){
+            return radaAldriHaekkandi(_dataaccess.lesaFolk(-1));
+        }else if (rod == "desc"){
+            return radaAldriLaekkandi(_dataaccess.lesaFolk(-1));
         }
     }
-    if (flokkur == "aldur")
-    {
-        if (rod == "asc")
-        {
-            return radaAldriHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaAldriLaekkandi();
-        }
-    }
-    if (flokkur == "faedingarar")
-    {
-        if (rod == "asc")
-        {
-            return radaFaedinguHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaFaedinguLaekkandi();
-        }
-    }
-    if (flokkur == "danarar")
-    {
-        if (rod == "asc")
-        {
-            return radaDaudaHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaDaudaLaekkandi();
-        }
-    }
-    return _folk;
+    return _dataaccess.lesaFolkSorted(flokkur,rod);
 }
 //--------------------------- Svæði fyrir public föll endar ---------------------------------------------
 
 //------------------------ Svæði fyrir private föll byrjar ----------------------------------------------
 //Sort föll --private
-vector<tolvufolk> tolvufolkService::radaNafniHaekkandi()
-{
-    nafnHaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
-    sort(sorted.begin(), sorted.end(), temp);
-    return sorted;
-}
-
-vector<tolvufolk> tolvufolkService::radaNafniLaekkandi()
-{
-    nafnLaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
-    sort(sorted.begin(), sorted.end(), temp);
-    return sorted;
-}
-
-vector<tolvufolk> tolvufolkService::radaAldriHaekkandi()
+vector<tolvufolk> tolvufolkService::radaAldriHaekkandi(vector<tolvufolk> gogn)
 {
     aldurHaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
+    vector<tolvufolk> sorted = gogn;
     sort(sorted.begin(), sorted.end(), temp);
     return sorted;
 }
 
-vector<tolvufolk> tolvufolkService::radaAldriLaekkandi()
+vector<tolvufolk> tolvufolkService::radaAldriLaekkandi(vector<tolvufolk> gogn)
 {
     aldurLaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
-    sort(sorted.begin(), sorted.end(), temp);
-    return sorted;
-}
-
-vector<tolvufolk> tolvufolkService::radaFaedinguHaekkandi()
-{
-    faedingHaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
-    sort(sorted.begin(), sorted.end(), temp);
-    return sorted;
-}
-
-vector<tolvufolk> tolvufolkService::radaFaedinguLaekkandi()
-{
-    faedingLaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
-    sort(sorted.begin(), sorted.end(), temp);
-    return sorted;
-}
-vector<tolvufolk> tolvufolkService::radaDaudaHaekkandi()
-{
-    daudiHaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
-    sort(sorted.begin(), sorted.end(), temp);
-    return sorted;
-}
-
-vector<tolvufolk> tolvufolkService::radaDaudaLaekkandi()
-{
-    daudiLaekkandi temp;
-    vector<tolvufolk> sorted = _folk;
+    vector<tolvufolk> sorted = gogn;
     sort(sorted.begin(), sorted.end(), temp);
     return sorted;
 }
