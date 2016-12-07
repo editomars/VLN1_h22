@@ -23,7 +23,7 @@ vector<velar> sqltenging::lesaVelar(int id) const
     return selectVelar(sql);
 }
 
-vector<velar> sqltenging::lesaVelarSorted(string flokkur, string rod)
+vector<velar> sqltenging::lesaVelarSorted(string flokkur, string rod) const
 {
     string sql = "SELECT * FROM TolvuVelar "
             "ORDER BY " + flokkur + " " + rod;

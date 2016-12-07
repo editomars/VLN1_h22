@@ -14,7 +14,7 @@ public:
 
     // Functions for Vélar
     vector<velar> lesaVelar(int id) const; //sækir vector með 1 stykki
-    vector<velar> lesaVelarSorted(string flokkur, string rod); //Sækir sorteraðan vector, flokkur = töfluflokkur í gagngarunn og röð er "asc" eða "desc"
+    vector<velar> lesaVelarSorted(string flokkur, string rod) const; //Sækir sorteraðan vector, flokkur = töfluflokkur í gagngarunn og röð er "asc" eða "desc"
     vector<velar> leitaVelar(string flokkur, string leitarord, char pos); //Leitar að leitarord í töfluflokk, pos = 'b' til að leita í byrjun orðs, 'e' í enda, annars hvar sem er í orði
     vector<velar> leitaVelar(string flokkur, char type, int leitarord); //type = '<' til að leita að heilölu minni en leitarord, '>' fyrir stærri en, '=' fyrir jafnt og
     vector<velar> leitaVelar(string flokkur, int laegraBil, int haerraBil); //skilar flokk á ákeðnu heiltölubili

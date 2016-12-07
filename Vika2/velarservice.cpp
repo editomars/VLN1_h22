@@ -44,51 +44,23 @@ void velarService::tortimaTolvuVelar()
     _dataaccess.tortimaVelum();
 
 }
-vector<velar> velarService::leitaVelarNafn(string nafn)
+
+vector<velar> velarService::rada(string flokkur, string rod) const
 {
-    vector<velar> t;
-    for (size_t i = 0; i < _velar.size(); ++i)
-    {
-        if (_velar[i].getVelaNafn() == nafn)
-        {
-            t.push_back(_velar[i]);
-        }
-    }
-    return t;
+    return _dataaccess.lesaVelarSorted(flokkur, rod);
 }
-vector<velar> velarService::leitaVelarBar(int bAr)
+
+vector<velar> velarService::leitaStreng(string flokkur, string leitarord, char pos)
 {
-    vector<velar> t;
-    for (size_t i = 0; i < _velar.size(); ++i)
-    {
-        if (_velar[i].getByggingarAr() == bAr)
-        {
-            t.push_back(_velar[i]);
-        }
-    }
-    return t;
+    return _dataaccess.leitaVelar(flokkur, leitarord, pos);
 }
-vector<velar> velarService::leitaVelarTegund (string tegund)
+
+vector<velar> velarService::leitaHeiltolu(string flokkur, char type, int leitarord)
 {
-    vector<velar> t;
-    for (size_t i = 0; i < _velar.size(); ++i)
-    {
-        if (_velar[i].getTegund() == tegund)
-        {
-            t.push_back(_velar[i]);
-        }
-    }
-    return t;
+    return _dataaccess.leitaVelar(flokkur, type, leitarord);
 }
-vector<velar> velarService::leitaVelarByggd (bool byggd)
+
+vector<velar> velarService::leitaHeiltolubil(string flokkur, int laegraBil, int haerraBil)
 {
-    vector<velar> t;
-    for (size_t i = 0; i < _velar.size(); ++i)
-    {
-        if (_velar[i].getByggd() == byggd)
-        {
-            t.push_back(_velar[i]);
-        }
-    }
-    return t;
+    return _dataaccess.leitaVelar(flokkur, laegraBil, haerraBil);
 }
