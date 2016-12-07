@@ -197,9 +197,7 @@ int sqltenging::saekjaSize(string flokkur) const
     if (size != -1)
     {
         QSqlQuery query(_db);
-        char* cstr = new char[sql.length()+1];
-        strcpy(cstr, sql.c_str());
-        query.exec(cstr);
+        query.exec(sql.c_str());
         if (query.next()){
             size = query.value("Size").toUInt();
         }
@@ -266,9 +264,7 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
 {
     vector<tolvufolk> t;
     QSqlQuery query(_db);
-    char* cstr = new char[sql.length()+1];
-    strcpy(cstr, sql.c_str());
-    query.exec(cstr);
+    query.exec(sql.c_str());
 
     while(query.next())
     {
@@ -288,9 +284,7 @@ vector<velar> sqltenging::selectVelar(string sql) const
 {
     vector<velar> v;
     QSqlQuery query(_db);
-    char* cstr = new char[sql.length()+1];
-    strcpy(cstr, sql.c_str());
-    query.exec(cstr);
+    query.exec(sql.c_str());
 
     while(query.next())
     {
@@ -308,10 +302,7 @@ vector<velar> sqltenging::selectVelar(string sql) const
 
 void sqltenging::udiSkipun(string sql)
 {
-    char* cstr = new char[sql.length()+1];
-    strcpy(cstr, sql.c_str());
     QSqlQuery query(_db);
-    query.exec(cstr);
-    delete[] cstr;
+    query.exec(sql.c_str());
 }
 // End of private functions
