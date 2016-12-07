@@ -26,6 +26,7 @@ public:
     void uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund);
     void eydaStakiVel(int id);
     void tortimaTolvuVelar();
+    void venslaVidVel(int folkID, int velID); // venslar folk_id vid vel_id
 
     //Föll sem skila umbreyttum gögnum
     vector<velar> rada(string flokkur, string rod) const;
