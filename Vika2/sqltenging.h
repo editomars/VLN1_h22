@@ -37,7 +37,8 @@ public:
 
     int saekjaSize(string flokkur) const; //Skilar fjölda véla eða fólks (flokkur == "folk" eda "velar")
     // Functions for relations
-
+    vector<tolvufolk> lesaFolkVenslad(int velarID) const; //Sækir fólk venslað við ákveðið vélar ID
+    vector<velar> lesaVelarVenslad(int folkID) const; //Sækir velar venslað við ákveðið fólk ID
 
 private:
     QSqlDatabase _db;

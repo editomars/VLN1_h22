@@ -17,6 +17,11 @@ velar velarService::getStaktVelar(int id) const
     return _dataaccess.lesaVelar(id)[0];
 }
 
+vector<velar> velarService::getVelarVensl(int folk_id) const
+{
+    return _dataaccess.lesaVelarVenslad(folk_id);
+}
+
 int velarService::getSize() const
 {
     return _dataaccess.saekjaSize("velar");
