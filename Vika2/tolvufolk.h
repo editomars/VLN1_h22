@@ -21,6 +21,7 @@ public:
     char getKyn() const;
     int getFaedingarar() const;
     int getDanarar() const;
+    int getAldur() const;
 
     //Set föll
     void uppfFaedingarar(int nyttAr);
