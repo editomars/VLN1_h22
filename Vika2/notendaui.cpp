@@ -33,7 +33,6 @@ void NotendaUI::prentaListaTolvuFolk(const vector<tolvufolk>& gogn)
 
 void NotendaUI::prentaListaTolvuVelar(const vector<velar>& gogn)
 {
-    system("cls");
     hausUI();
     for (size_t i = 0; i < gogn.size(); i++)
     {
@@ -110,6 +109,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         if (skipun == "list" || skipun == "l")
         {
+            system("cls");
             prentaListaTolvuVelar(_vService.getVelar());
         }
 
@@ -237,6 +237,7 @@ void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og töl
         if (skipun == "list" || skipun == "l")
         {
             prentaListaTolvuFolk(_service.getTolvufolk());
+            prentaListaTolvuVelar(_vService.getVelar());
         }
 
         else if (skipun == "sort" || skipun == "so")
