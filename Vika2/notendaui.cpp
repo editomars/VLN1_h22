@@ -107,9 +107,10 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         string skipun;
         cin >> skipun;
 
+        system("cls");
+
         if (skipun == "list" || skipun == "l")
-        {
-            system("cls");
+        {            
             prentaListaTolvuVelar(_vService.getVelar());
         }
 
@@ -121,7 +122,6 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "add" || skipun == "a")
         {
-            system("cls");
             cout << "-----Adding computer machines-----" << endl;
             baetaVidVelar();
             prentaListaTolvuVelar(_vService.getVelar());
