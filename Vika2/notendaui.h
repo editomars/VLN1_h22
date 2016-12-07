@@ -44,6 +44,7 @@ private:
     bool aframhaldandiUITolvuVelar(); //Vantar comment
     bool aframhaldandiUITolvuFolk(); //Vantar comment
     bool aframhaldandiUIAdal(); //Vantar comment
+    bool aframhaldandiUIAlmennt(); //Vantar comment
     bool skipunaAframhald(); //Vantar comment
 
     //Cout blokkir

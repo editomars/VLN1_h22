@@ -122,6 +122,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         {
             satt = false;
             prentaListaTolvuVelar(_vService.getVelar());
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "sort" || skipun == "so")
@@ -163,6 +164,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
             satt = false;
             skrifaUtTolvuVelar();
             tortimaListaVelar();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "return" || skipun == "r")
@@ -200,6 +202,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         {
             satt = false;
             prentaListaTolvuFolk(_service.getTolvufolk());
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "link" || skipun == "li")
@@ -248,6 +251,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
             satt = false;
             skrifaUtTolvuFolk();
             tortimaListaTolvuFolk();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "return" || skipun == "r")
@@ -1384,6 +1388,28 @@ bool NotendaUI::aframhaldandiUITolvuFolk()
 {
     skrifaUtTolvuFolk();
     return true;
+}
+
+bool NotendaUI::aframhaldandiUIAlmennt()
+{
+    string svar = "o";
+
+    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
+    {
+        cout << "Another entry? (Y/N): ";
+        cin >> svar;
+
+        if (svar == "Y" || svar == "y")
+        {
+            return true;
+        }
+
+        else if(svar == "N" || svar == "n")
+        {
+            return false;
+        }
+    }
+    return false;
 }
 
 bool NotendaUI::skipunaAframhald()
