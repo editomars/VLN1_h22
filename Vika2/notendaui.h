@@ -26,7 +26,6 @@ private:
     void adalvalmyndUI(); //Main Menu UI grein
     void adalvalmyndUITolvuVelar(); //Menu UI grein fyrir tölvur
     void adalvalmyndUITolvuFolk(); //Menu UI grein fyrir tölvufólk
-    void adalvalmyndUILinked(); //Menu UI grein fyrir bæði tölvufólk og tölvur
     void baetaVidPersonu(); //Add Person UI grein
     void eydaPersonu(); //Eyda personu UI grein
     void uppfaeraPersonu(); //Update Person UI grein
@@ -43,15 +42,14 @@ private:
     //Bool flög
     bool aframhaldandiUITolvuVelar(); //Vantar comment
     bool aframhaldandiUITolvuFolk(); //Vantar comment
-    bool aframhaldandiUILinked(); //Vantar comment
     bool aframhaldandiUIAdal(); //Vantar comment
     bool skipunaAframhald(); //Vantar comment
 
     //Cout blokkir
     void skrifaUt(); //Skrifa út aðalvalmynd
-    void skrifaUtTolvuVelar(); //Skrifa út valmynd fyrir tölvur
-    void skrifaUtTolvuFolk(); //Skrifa út valmynd fyrir tölvufólk
-    void skrifaUtLinked(); // skrifa út valmynd fyri bæði tölvur og tölvufólk
+    void skrifaUtTolvuVelar(); //Skrifa út gluggan fyrir tölvur
+    void skrifaUtTolvuFolk(); //Skrifa út gluggan fyrir tölvufólk
+    void skrifaUtVal(); //Skrifa út aðal valmynd fyrir tölvur og tölvufólk
     void skipunaGluggi(); //Skrifa út gluggan fyrir ofan skipanir
     void haettaLeit(); //Skrifa út gluggan fyrir neðan leit skipanir
     void haettaSort(); //Skrifa út gluggan fyrir neðan sort skipanir

@@ -64,36 +64,39 @@ void NotendaUI::prentaVel(const velar kall, int i)
 void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI greinar
 {
     skrifaUt();
+    bool satt = false;
 
     do
     {
+        if (satt == true)
+        {
+            cerr << "Input not valid, try again: ";
+        }
         string skipun;
         cin >> skipun;
 
         if (skipun == "machines" || skipun == "machine" || skipun == "m")
         {
+            satt = false;
             adalvalmyndUITolvuVelar();
         }
 
         else if (skipun == "people" || skipun == "p")
         {
+            satt = false;
             adalvalmyndUITolvuFolk();
-        }
-
-        else if (skipun == "both" || skipun == "b" || skipun == "linked" || skipun == "link" || skipun == "l")
-        {
-            adalvalmyndUILinked();
         }
 
         else if (skipun == "quit" || skipun == "q")
         {
+            satt = false;
             return;
         }
 
         else
         {
             skrifaUt();
-            cerr << "Input not valid, try again: ";
+            satt = true;
         }
     } while (aframhaldandiUIAdal());
 }
@@ -223,63 +226,6 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
             cerr << "Input not valid, try again: ";
         }
     } while (aframhaldandiUITolvuFolk());
-}
-
-void NotendaUI::adalvalmyndUILinked() //Greinin fyrir bæði tölvufólk og tölvur, branchar út í aðrar UI greinar
-{
-    skrifaUtLinked();
-
-    do
-    {
-        string skipun;
-        cin >> skipun;
-
-        if (skipun == "list" || skipun == "l")
-        {
-            prentaListaTolvuFolk(_service.getTolvufolk());
-            prentaListaTolvuVelar(_vService.getVelar());
-        }
-
-        else if (skipun == "sort" || skipun == "so")
-        {
-            skrifaUtLinked();
-            flokkunarMoguleikarTolvuFolk();
-        }
-
-        else if (skipun == "delete" || skipun == "d")
-        {
-            eydaPersonu();
-        }
-
-        else if (skipun == "update" || skipun == "u")
-        {
-            skrifaUtLinked();
-            uppfaeraPersonu();
-        }
-
-        else if (skipun == "search" || skipun == "se")
-        {
-            skrifaUtLinked();
-            leitaGreinTolvuFolk();
-        }
-
-        else if (skipun == "purge" || skipun == "p")
-        {
-            skrifaUtLinked();
-            tortimaListaTolvuFolk();
-        }
-
-        else if (skipun == "return" || skipun == "r")
-        {
-            return;
-        }
-
-        else
-        {
-            skrifaUtLinked();
-            cerr << "Input not valid, try again: ";
-        }
-    } while (aframhaldandiUILinked());
 }
 
 void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
@@ -1370,34 +1316,6 @@ bool NotendaUI::aframhaldandiUITolvuFolk()
     return false;
 }
 
-bool NotendaUI::aframhaldandiUILinked()
-{
-    string svar = "o";
-
-    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
-    {
-        cout << "Return to linked menu? (Y/N): ";
-        cin >> svar;
-
-        if (svar == "Y" || svar == "y")
-        {
-            skrifaUtLinked();
-            return true;
-        }
-
-        else if(svar == "N" || svar == "n")
-        {
-            return false;
-        }
-
-        else
-        {
-            cout << "Invalid input, try again!" << endl;
-        }
-    }
-    return false;
-}
-
 bool NotendaUI::skipunaAframhald()
 {
 
@@ -1433,7 +1351,6 @@ void NotendaUI::skrifaUt()
     cout << "*==================================================================*" << endl;
     cout << "*||machines  - Access options to the computer machine database.  ||*" << endl;
     cout << "*||people    - Access options to the people database.            ||*" << endl;
-    cout << "*||both/link - Access options to a linked database for both.     ||*" << endl;
     cout << "*||quit      - Exits/quits the program.                          ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
@@ -1441,27 +1358,21 @@ void NotendaUI::skrifaUt()
 void NotendaUI::skrifaUtTolvuVelar()
 {
     system("cls");
-
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one of the following commands - Machine Database ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||list   - Shows a list of all known entries in the database.   ||*" << endl;
-    cout << "*||add    - Add a new entry into the database.                   ||*" << endl;
-    cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
-    cout << "*||update - Updates an entry from the database.                  ||*" << endl;
-    cout << "*||search - Search for an entry from the database.               ||*" << endl;
-    cout << "*||sort   - Sort the entries in the database.                    ||*" << endl;
-    cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
-    cout << "*||return - Return to the main menu.                             ||*" << endl;
-    cout << "*==================================================================*" << endl;
+    skrifaUtVal();
 }
 
 void NotendaUI::skrifaUtTolvuFolk()
 {
     system("cls");
-
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one of the following commands - People Database  ||*" << endl;
+    skrifaUtVal();
+}
+
+void NotendaUI::skrifaUtVal()
+{
     cout << "*==================================================================*" << endl;
     cout << "*||list   - Shows a list of all known entries in the database.   ||*" << endl;
     cout << "*||add    - Add a new entry into the database.                   ||*" << endl;
@@ -1470,23 +1381,6 @@ void NotendaUI::skrifaUtTolvuFolk()
     cout << "*||search - Search for an entry from the database.               ||*" << endl;
     cout << "*||sort   - Sort the entries in the database.                    ||*" << endl;
     cout << "*||purge  - Removes every entry from the database.               ||*" << endl;
-    cout << "*||return - Return to the main menu.                             ||*" << endl;
-    cout << "*==================================================================*" << endl;
-}
-
-void NotendaUI::skrifaUtLinked()
-{
-    system("cls");
-
-    cout << "*==================================================================*" << endl;
-    cout << "*||Please enter one of the following commands - Linked Databases ||*" << endl;
-    cout << "*==================================================================*" << endl;
-    cout << "*||list   - Shows a list of all known entries in the databases.  ||*" << endl;
-    cout << "*||delete - Removes an entry from the databases.                 ||*" << endl;
-    cout << "*||update - Updates an entry from the databases.                 ||*" << endl;
-    cout << "*||search - Search for an entry from the databases.              ||*" << endl;
-    cout << "*||sort   - Sort the entries in the databases.                   ||*" << endl;
-    cout << "*||purge  - Removes every entry from the databases.              ||*" << endl;
     cout << "*||return - Return to the main menu.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
