@@ -208,7 +208,6 @@ int sqltenging::saekjaSize(string flokkur) const
 
 //Vensl
 
-<<<<<<< HEAD
 void sqltenging::buaTilVensl(int folkID, int velID)
 {
     string sql = "INSERT INTO venslfolkvelar(folk_id,vel_id)"
@@ -235,6 +234,7 @@ void sqltenging::eydaStakiVensl(int folkID, int velID)
                  "WHERE folk_id = " + to_string(folkID) + " "
                  "AND vel_id = " + to_string(velID);
     udiSkipun(sql);
+}
 
 vector<tolvufolk> sqltenging::lesaFolkVenslad(int velarID) const
 {
