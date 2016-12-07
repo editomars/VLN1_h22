@@ -160,51 +160,7 @@ vector<tolvufolk> tolvufolkService::leitaHeiltolu(string flokkur, int leitarord)
 
 vector<tolvufolk> tolvufolkService::rada(string flokkur, string rod)
 {
-    if (flokkur == "nafn")
-    {
-        if (rod == "asc")
-        {
-            return radaNafniHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaNafniLaekkandi();
-        }
-    }
-    if (flokkur == "aldur")
-    {
-        if (rod == "asc")
-        {
-            return radaAldriHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaAldriLaekkandi();
-        }
-    }
-    if (flokkur == "faedingarar")
-    {
-        if (rod == "asc")
-        {
-            return radaFaedinguHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaFaedinguLaekkandi();
-        }
-    }
-    if (flokkur == "danarar")
-    {
-        if (rod == "asc")
-        {
-            return radaDaudaHaekkandi();
-        }
-        if (rod == "desc")
-        {
-            return radaDaudaLaekkandi();
-        }
-    }
-    return _folk;
+    return _dataaccess.lesaFolkSorted(flokkur,rod);
 }
 //--------------------------- Svæði fyrir public föll endar ---------------------------------------------
 
