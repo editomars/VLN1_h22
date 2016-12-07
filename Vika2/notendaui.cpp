@@ -347,11 +347,37 @@ void NotendaUI::tengjaFolkiVel()
 
     persNR--;
     folktarget = _service.getStaktTolvufolk(gogn[persNR].getID());
+    int folkID = gogn[persNR].getID();
 
     system("cls");
     prentaListaTolvuVelar(velargogn);
     cout << "Enter number of machine to link with " << folktarget.getNafn() << ": ";
     cin >> machNR;
+
+    if (machNR == -1)
+    {
+        return;
+    }
+    while (machNR > _vService.getSize() || machNR <= 0)
+    {
+        if (machNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> machNR;
+    }
+
+    machNR--;
+
+    int velID = velargogn[machNR].getID();
+    veltarget = _vService.getStaktVelar(velID);
+
+    _service.venslaVidVel(folkID, velID);
+
+    cout << folktarget.getNafn() << " is now linked with " << veltarget.getVelaNafn() << endl;
 
 }
 
