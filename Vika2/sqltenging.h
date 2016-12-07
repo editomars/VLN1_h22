@@ -29,9 +29,9 @@ public:
     vector<tolvufolk> leitaFolk(string flokkur, string leitarord, char pos); //Leitar að leitarord í töfluflokk, pos = "b" fyrir beginning, "e" fyrir end. Allt annað fyrir any
     vector<tolvufolk> leitaFolk(string flokkur, char type, int leitarord);
     vector<tolvufolk> leitaFolk(string flokkur, int laegraBil, int haerraBil);
-    void baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr);
+    void baetaVidFolk(string nafn, char kyn, int fAr, int dAr);
     void eydaFolk(int id);
-    void uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr);
+    void uppfaeraFolk(int id, string nafn, char kyn, int fAr, int dAr);
     void tortimaFolki();
 
 

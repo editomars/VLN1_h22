@@ -149,10 +149,10 @@ vector<tolvufolk> sqltenging::leitaFolk(string flokkur, int laegraBil, int haerr
     return selectFolk(sql);
 }
 
-void sqltenging::baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
+void sqltenging::baetaVidFolk(string nafn, char kyn, int fAr, int dAr)
 {
-    string sql = "INSERT INTO TolvuFolk(ForNafn, EftirNafn, Kyn, FaedingarAr, DanarAr)"
-                  "VALUES('" + fNafn + "','" + eNafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
+    string sql = "INSERT INTO TolvuFolk(Nafn, Kyn, FaedingarAr, DanarAr)"
+                  "VALUES('" + nafn + "','" + kyn + "'," + to_string(fAr) + "," + to_string(dAr) + ")";
     udiSkipun(sql);
 }
 void sqltenging::eydaFolk(int id)
@@ -164,11 +164,10 @@ void sqltenging::eydaFolk(int id)
     eydaVenslFolk(id);
 }
 
-void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr)
+void sqltenging::uppfaeraFolk(int id, string nafn, char kyn, int fAr, int dAr)
 {
     string sql = "UPDATE TolvuFolk "
-                 "SET fornafn = '" +  fNafn + "'"
-                 ", eftirnafn = '" + eNafn + "'"
+                 "SET nafn = '" +  nafn + "'"
                  ", kyn = '" + kyn + "'"
                  ", faedingarAr = " + to_string(fAr) +
                  ", danarAr = " + to_string(dAr) + " "
@@ -242,7 +241,7 @@ void sqltenging::eydaStakiVensl(int folkID, int velID)
 
 vector<tolvufolk> sqltenging::lesaFolkVenslad(int velarID) const
 {
-    string sql = "SELECT f.id, f.fornafn, f.eftirnafn, f.kyn, f.faedingarar, f.danarar "
+    string sql = "SELECT f.id, f.nafn, f.kyn, f.faedingarar, f.danarar "
             "FROM tolvufolk f "
             "INNER JOIN venslfolkvelar v ON v.folk_id = f.id "
             "INNER JOIN tolvuvelar t ON v.vel_id = t.id "
@@ -274,13 +273,12 @@ vector<tolvufolk> sqltenging::selectFolk(string sql) const
     while(query.next())
     {
         int id = query.value("id").toUInt();
-        string fornafn = query.value("fornafn").toString().toStdString();
-        string eftirnafn = query.value("eftirnafn").toString().toStdString();
+        string nafn = query.value("nafn").toString().toStdString();
         char kyn = query.value("kyn").toString().toStdString()[0];
         int faedingarar = query.value("faedingarar").toUInt();
         int danarar = query.value("danarar").toUInt();
 
-        t.push_back(tolvufolk(id, fornafn, eftirnafn, kyn, faedingarar, danarar));
+        t.push_back(tolvufolk(id, nafn, kyn, faedingarar, danarar));
     }
 
     return t;

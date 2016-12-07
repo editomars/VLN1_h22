@@ -21,10 +21,10 @@ public:
     vector<tolvufolk> getTolvufolkVensl(int vel_id) const; //Skilar vector af tölvufólki venslað við eitthverja vél
 
     //Föll sem bæta við Gagnagrunn
-    void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
+    void baetaVidTolvufolk(string nafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
     void tortimaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
-    void uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr);
+    void uppfaeraStakTolvufolk(int id, string nafn, char kyn, int fAr, int dAr);
     void venslaVidVel(int folk_id, int vel_id); //Venslar folk_id við vel_id
 
     //Föll sem skila umbreyttum gögnum
