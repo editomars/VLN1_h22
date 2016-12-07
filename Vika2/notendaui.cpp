@@ -1368,17 +1368,17 @@ void NotendaUI::skrifaUt()
 void NotendaUI::skrifaUtTolvuVelar()
 {
     system("cls");
-    skrifaUtVal();
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one of the following commands - Machine Database ||*" << endl;
+    skrifaUtVal();
 }
 
 void NotendaUI::skrifaUtTolvuFolk()
 {
     system("cls");
-    skrifaUtVal();
     cout << "*==================================================================*" << endl;
     cout << "*||Please enter one of the following commands - People Database  ||*" << endl;
+    skrifaUtVal();
 }
 
 void NotendaUI::skrifaUtVal()
