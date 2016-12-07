@@ -18,6 +18,7 @@ public:
     int getSize() const; //Skilar stærð af vector gögnum
     vector<tolvufolk> getTolvufolk() const; //Skilar vectornum af gögnum sem notandi er að nota
     tolvufolk getStaktTolvufolk(int id) const; //Sækir eitt stak af tolvufolki
+    vector<tolvufolk> getTolvufolkVensl(int vel_id) const; //Skilar vector af tölvufólki venslað við eitthverja vél
 
     //Föll sem bæta við Gagnagrunn
     void baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki

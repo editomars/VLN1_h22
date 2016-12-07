@@ -16,6 +16,7 @@ public:
     //Get föll
     vector<velar> getVelar() const; //Skilar vectornum af gögnum sem notandi er að nota
     velar getStaktVelar(int ndx) const; //Sækir eitt stak af velum
+    vector<velar> getVelarVensl(int folk_id) const; //Skilar öllum vélum venslaðar við eitthverja persónu
     int getSize() const; //Skilar stærð af vector gögnum
     vector<velar> rada(string flokkur, string rod); //Skilar vector sem er raðaður eftir flokk og rod á að vera "asc" eða "desc" fyrir ascending og descending
 

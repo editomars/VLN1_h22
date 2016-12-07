@@ -42,6 +42,11 @@ vector<tolvufolk> tolvufolkService::getTolvufolk() const
     return _dataaccess.lesaFolk(-1);
 }
 
+vector<tolvufolk> tolvufolkService::getTolvufolkVensl(int vel_id) const
+{
+    return _dataaccess.lesaFolkVenslad(vel_id);
+}
+
 int tolvufolkService::getSize() const
 {
     return _dataaccess.saekjaSize("folk");
