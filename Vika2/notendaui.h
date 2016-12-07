@@ -53,13 +53,21 @@ private:
     void skrifaUtTolvuFolk(); //Skrifa út valmynd fyrir tölvufólk
     void skrifaUtLinked(); // skrifa út valmynd fyri bæði tölvur og tölvufólk
     void skipunaGluggi(); //Skrifa út gluggan fyrir ofan skipanir
+    void haettaLeit(); //Skrifa út gluggan fyrir neðan leit skipanir
+    void haettaSort(); //Skrifa út gluggan fyrir neðan sort skipanir
     void leitarMoguleikarTolvuFolk(); //Birtir moguleika a leitun
     void leitarMoguleikarVelar(); //Birtir moguleika a leitun
     void rodunarMoguleikarTolvuFolk(); //Birtir moguleika a rodun
     void rodunarMoguleikarVelar(); //Birtir moguleika a rodun
     void uppfaersluMoguleikar(); //Birtir moguleika a uppfaerslu
     void upphafsUI(); //Vantar comment
-    void radaUI(); //Vantar comment
+    void radaUINafn(); //Vantar comment
+    void radaUIAldur(); //Vantar comment
+    void radaUIFaedingar(); //Vantar comment
+    void radaUIDaudi(); //Vantar comment
+    void radaUIbAr(); //Vantar comment
+    void radaUITypa(); //Vantar comment
+    void radaUIByggd(); //Vantar comment
     void hausUI(); //Vantar comment
     void hausUITolvuFolk(); //Vantar comment
 };

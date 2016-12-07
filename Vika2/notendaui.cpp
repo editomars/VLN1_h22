@@ -614,7 +614,7 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
         if (skipunin == "name" || skipunin == "n")
         {
-            radaUI();
+            radaUINafn();
 
             do
             {
@@ -649,7 +649,7 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
         else if(skipunin == "age" || skipunin == "a")
         {
-            radaUI();
+            radaUIAldur();
 
             do
             {
@@ -684,7 +684,7 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
         else if(skipunin == "birth" || skipunin == "b")
         {
-            radaUI();
+            radaUIFaedingar();
 
             do
             {
@@ -719,7 +719,7 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
         else if(skipunin == "death" || skipunin == "d")
         {
-            radaUI();
+            radaUIDaudi();
 
             do
             {
@@ -1131,7 +1131,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
         if (skipunin == "name" || skipunin == "n")
         {
-            radaUI();
+            radaUINafn();
 
             do
             {
@@ -1166,7 +1166,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
         else if(skipunin == "create" || skipunin == "c")
         {
-            radaUI();
+            radaUIbAr();
 
             do
             {
@@ -1201,7 +1201,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
         else if(skipunin == "type" || skipunin == "t")
         {
-            radaUI();
+            radaUITypa();
 
             do
             {
@@ -1236,7 +1236,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
         else if(skipunin == "made" || skipunin == "m")
         {
-            radaUI();
+            radaUIByggd();
 
             do
             {
@@ -1500,68 +1500,124 @@ void NotendaUI::skrifaUtLinked()
     cout << "*||return - Return to the main menu.                             ||*" << endl;
     cout << "*==================================================================*" << endl;
 }
+
 void NotendaUI::skipunaGluggi()
 {
     system("cls");
 
-    cout << "*=========================================================================*" << endl;
-    cout << "*||Please enter one of the following command                            ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    cout << "*==========================================================================================*" << endl;
+    cout << "*||Please enter one of the following command                                             ||*" << endl;
+    cout << "*==========================================================================================*" << endl;
 
+}
+
+void NotendaUI::haettaLeit()
+{
+    cout << "*||quit   - Quit searching.                                                              ||*" << endl;
+    cout << "*==========================================================================================*" << endl;
+}
+
+void NotendaUI::haettaSort()
+{
+    cout << "*||quit   - Quit sorting.                                                                ||*" << endl;
+    cout << "*==========================================================================================*" << endl;
 }
 
 void NotendaUI::leitarMoguleikarTolvuFolk()
 {
     skipunaGluggi();
-    cout << "*||name   - Search by name, please write 'name'.                        ||*" << endl;
-    cout << "*||age    - Search by age, please write 'age'.                          ||*" << endl;
-    cout << "*||birth  - Search by year of birth, please write 'birth'.              ||*" << endl;
-    cout << "*||death  - Search by year of death, please write 'death'.              ||*" << endl;
-    cout << "*||quit   - Quit searching.                                             ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Search by name, please write 'name'.                                         ||*" << endl;
+    cout << "*||age    - Search by age, please write 'age'.                                           ||*" << endl;
+    cout << "*||birth  - Search by year of birth, please write 'birth'.                               ||*" << endl;
+    cout << "*||death  - Search by year of death, please write 'death'.                               ||*" << endl;
+    haettaLeit();
 }
 
 void NotendaUI::leitarMoguleikarVelar()
 {
     skipunaGluggi();
-    cout << "*||name   - Search by name, please write 'name'.                                    ||*" << endl;
-    cout << "*||create - Search by date of creation, please write 'create'.                      ||*" << endl;
-    cout << "*||type   - Search by type, please write 'type'.                                    ||*" << endl;
-    cout << "*||made   - To search based on if machine was created or not, please write 'made'.  ||*" << endl;
-    cout << "*||quit   - Quit searching.                                                         ||*" << endl;
-    cout << "*=====================================================================================*" << endl;
+    cout << "*||name   - Search by name, please write 'name'.                                         ||*" << endl;
+    cout << "*||create - Search by date of creation, please write 'create'.                           ||*" << endl;
+    cout << "*||type   - Search by type, please write 'type'.                                         ||*" << endl;
+    cout << "*||made   - To search based on if machine was created or not, please write 'made'.       ||*" << endl;
+    haettaLeit();
 }
 
 void NotendaUI::rodunarMoguleikarTolvuFolk()
 {
     skipunaGluggi();
-    cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
-    cout << "*||age    - Sort by age, please write 'age'                             ||*" << endl;
-    cout << "*||birth  - Sort by year of birth, please write 'birth'                 ||*" << endl;
-    cout << "*||death  - Sort by year of death, please write 'death'                 ||*" << endl;
-    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Sort by name, please write 'name'                                            ||*" << endl;
+    cout << "*||age    - Sort by age, please write 'age'                                              ||*" << endl;
+    cout << "*||birth  - Sort by year of birth, please write 'birth'                                  ||*" << endl;
+    cout << "*||death  - Sort by year of death, please write 'death'                                  ||*" << endl;
+    haettaSort();
 }
 
 void NotendaUI::rodunarMoguleikarVelar()
 {
     skipunaGluggi();
-    cout << "*||name   - Sort by name, please write 'name'                           ||*" << endl;
-    cout << "*||create - Sort by date of creation, please write 'create'.            ||*" << endl;
-    cout << "*||type   - sort by type, please write 'type'.                          ||*" << endl;
-    cout << "*||made   - sort by if machine was built or not, please write 'made'.   ||*" << endl;
-    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    cout << "*||name   - Sort by name, please write 'name'                                            ||*" << endl;
+    cout << "*||create - Sort by date of creation, please write 'create'.                             ||*" << endl;
+    cout << "*||type   - sort by type, please write 'type'.                                           ||*" << endl;
+    cout << "*||made   - sort by if machine was built or not, please write 'made'.                    ||*" << endl;
+    haettaSort();
+}
+
+void NotendaUI::radaUINafn()
+{
+    skipunaGluggi();
+    cout << "*||ascending  - Sort name by ascending order, please write 'ascending'                   ||*" << endl;
+    cout << "*||descending - Sort name by descending order, please write 'descending'                 ||*" << endl;
+    haettaSort();
 }
 
 
-void NotendaUI::radaUI()
+void NotendaUI::radaUIAldur()
 {
     skipunaGluggi();
-    cout << "*||ascending  - Sort age by ascending order, please write 'ascending'   ||*" << endl;
-    cout << "*||descending - Sort age by descending order, please write 'descending' ||*" << endl;
-    cout << "*||quit   - Quit sorting.                                               ||*" << endl;
-    cout << "*=========================================================================*" << endl;
+    cout << "*||ascending  - Sort age by ascending order, please write 'ascending'                    ||*" << endl;
+    cout << "*||descending - Sort age by descending order, please write 'descending'                  ||*" << endl;
+    haettaSort();
+}
+
+void NotendaUI::radaUIFaedingar()
+{
+    skipunaGluggi();
+    cout << "*||ascending  - Sort birth by ascending order, please write 'ascending'                  ||*" << endl;
+    cout << "*||descending - Sort birth by descending order, please write 'descending'                ||*" << endl;
+    haettaSort();
+}
+
+void NotendaUI::radaUIDaudi()
+{
+    skipunaGluggi();
+    cout << "*||ascending  - Sort death by ascending order, please write 'ascending'                  ||*" << endl;
+    cout << "*||descending - Sort death by descending order, please write 'descending'                ||*" << endl;
+    haettaSort();
+}
+
+void NotendaUI::radaUIbAr()
+{
+    skipunaGluggi();
+    cout << "*||ascending  - Sort year of creation by ascending order, please write 'ascending'       ||*" << endl;
+    cout << "*||descending - Sort year of creation by descending order, please write 'descending'     ||*" << endl;
+    haettaSort();
+}
+
+void NotendaUI::radaUITypa()
+{
+    skipunaGluggi();
+    cout << "*||ascending  - Sort type by ascending order, please write 'ascending'                   ||*" << endl;
+    cout << "*||descending - Sort type by descending order, please write 'descending'                 ||*" << endl;
+    haettaSort();
+}
+
+void NotendaUI::radaUIByggd()
+{
+    skipunaGluggi();
+    cout << "*||ascending  - Sort if machine was built by ascending order, please write 'ascending'   ||*" << endl;
+    cout << "*||descending - Sort if machine was built by descending order, please write 'descending' ||*" << endl;
+    haettaSort();
 }
 
 void NotendaUI::hausUI()
