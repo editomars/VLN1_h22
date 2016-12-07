@@ -72,6 +72,7 @@ void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI 
         {
             cerr << "Input not valid, try again: ";
         }
+
         string skipun;
         cin >> skipun;
 
@@ -105,26 +106,34 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 {
     skrifaUtTolvuVelar();
 
+    bool satt = false;
+
     do
     {
+        if (satt == true)
+        {
+            cerr << "Input not valid, try again: ";
+        }
+
         string skipun;
         cin >> skipun;
 
-        system("cls");
-
         if (skipun == "list" || skipun == "l")
         {
+            satt = false;
             prentaListaTolvuVelar(_vService.getVelar());
         }
 
         else if (skipun == "sort" || skipun == "so")
         {
+            satt = false;
             skrifaUtTolvuVelar();
             flokkunarMoguleikarVelar();
         }
 
         else if (skipun == "add" || skipun == "a")
         {
+            satt = false;
             cout << "-----Adding computer machines-----" << endl;
             baetaVidVelar();
             prentaListaTolvuVelar(_vService.getVelar());
@@ -132,34 +141,39 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "delete" || skipun == "d")
         {
+            satt = false;
             eydaVel();
         }
 
         else if (skipun == "update" || skipun == "u")
         {
+            satt = false;
             uppfaeraVelar();
         }
 
         else if (skipun == "search" || skipun == "se")
         {
+            satt = false;
             leitaGreinVelar();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
+            satt = false;
             skrifaUtTolvuVelar();
             tortimaListaVelar();
         }
 
         else if (skipun == "return" || skipun == "r")
         {
+            satt = false;
             return;
         }
 
         else
         {
             skrifaUtTolvuVelar();
-            cerr << "Input not valid, try again: ";
+            satt = true;
         }
     } while (aframhaldandiUITolvuVelar());
 }
@@ -168,13 +182,22 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 {
     skrifaUtTolvuFolk();
 
+    bool satt = false;
+
     do
     {
+        if (satt == true)
+        {
+            satt = false;
+            cerr << "Input not valid, try again: ";
+        }
+
         string skipun;
         cin >> skipun;
 
         if (skipun == "list" || skipun == "l")
         {
+            satt = false;
             prentaListaTolvuFolk(_service.getTolvufolk());
         }
 
@@ -185,12 +208,14 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         else if (skipun == "sort" || skipun == "so")
         {
-           // skrifaUtTolvuFolk();
+
+            satt = false;
             flokkunarMoguleikarTolvuFolk();
         }
 
         else if (skipun == "add" || skipun == "a")
         {
+            satt = false;
             system("cls");
             cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
@@ -199,37 +224,42 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         else if (skipun == "delete" || skipun == "d")
         {
+            satt = false;
             eydaPersonu();
         }
 
         else if (skipun == "update" || skipun == "u")
         {
-            //skrifaUtTolvuFolk();
+
+            satt = false;
             uppfaeraPersonu();
         }
 
         else if (skipun == "search" || skipun == "se")
         {
+            satt = false;
             skrifaUtTolvuFolk();
             leitaGreinTolvuFolk();
         }
 
         else if (skipun == "purge" || skipun == "p")
         {
+            satt = false;
             skrifaUtTolvuFolk();
             tortimaListaTolvuFolk();
         }
 
         else if (skipun == "return" || skipun == "r")
         {
+            satt = false;
             return;
         }
 
         else
         {
             skrifaUtTolvuFolk();
-            cerr << "Input not valid, try again: ";
-        }continue;
+            satt = true;
+        }
     } while (aframhaldandiUITolvuFolk());
 }
 
@@ -1334,59 +1364,14 @@ bool NotendaUI::aframhaldandiUIAdal()
 
 bool NotendaUI::aframhaldandiUITolvuVelar()
 {
-    string svar = "o";
-
-    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
-    {
-        cout << "Return to machine menu? (Y/N): ";
-        cin >> svar;
-
-        if (svar == "Y" || svar == "y")
-        {
-            skrifaUtTolvuVelar();
-            return true;
-        }
-
-        else if(svar == "N" || svar == "n")
-        {
-            return false;
-        }
-
-        else
-        {
-            cout << "Invalid input, try again!" << endl;
-        }
-    }
-    return false;
+    skrifaUtTolvuVelar();
+    return true;
 }
 
 bool NotendaUI::aframhaldandiUITolvuFolk()
 {
-    string svar;
-
-    do
-    {
-        cout << "Return to people menu? (Y/N): ";
-        cin >> svar;
-
-        if (svar == "Y" || svar == "y")
-        {
-            skrifaUtTolvuFolk();
-            return true;
-        }
-
-        else if(svar == "N" || svar == "n")
-        {
-            return false;
-        }
-
-        else
-        {
-            cout << "Invalid input, try again!" << endl;
-            svar = "X";
-        }
-    }while (svar != "Y" || svar != "y" || svar != "N" || svar != "n");
-    return false;
+    skrifaUtTolvuFolk();
+    return true;
 }
 
 bool NotendaUI::skipunaAframhald()
