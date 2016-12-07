@@ -32,6 +32,11 @@ vector<velar> velarService::rada(string flokkur, string rod)
     return _dataaccess.lesaVelarSorted(flokkur,rod);
 }
 
+void velarService::venslaVidVel(int folkID, int velID)
+{
+    _dataaccess.buaTilVensl(folkID,velID);
+}
+
 //Föll sem breyta gagnagrunni
 
 void velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund)
