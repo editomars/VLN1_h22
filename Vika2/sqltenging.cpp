@@ -143,6 +143,8 @@ int sqltenging::saekjaSize(string flokkur) const
     return size;
 }
 
+
+
 //Vensl
 
 
