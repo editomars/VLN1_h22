@@ -113,7 +113,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         system("cls");
 
         if (skipun == "list" || skipun == "l")
-        {            
+        {
             prentaListaTolvuVelar(_vService.getVelar());
         }
 
@@ -178,9 +178,14 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
             prentaListaTolvuFolk(_service.getTolvufolk());
         }
 
+        else if (skipun == "link" || skipun == "li")
+        {
+            tengjaFolkiVel();
+        }
+
         else if (skipun == "sort" || skipun == "so")
         {
-            skrifaUtTolvuFolk();
+           // skrifaUtTolvuFolk();
             flokkunarMoguleikarTolvuFolk();
         }
 
@@ -199,7 +204,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         else if (skipun == "update" || skipun == "u")
         {
-            skrifaUtTolvuFolk();
+            //skrifaUtTolvuFolk();
             uppfaeraPersonu();
         }
 
@@ -312,6 +317,43 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         _service.eydaStakiTolvufolk(id);
 
     }while(skipunaAframhald());
+}
+
+void NotendaUI::tengjaFolkiVel()
+{
+    int persNR;
+    int machNR;
+    tolvufolk folktarget;
+    velar veltarget;
+    vector<tolvufolk> gogn = _service.getTolvufolk();
+    prentaListaTolvuFolk(gogn);
+
+    cout << "Enter number of scientist to link to a machine (-1 to cancel): ";
+    cin >> persNR;
+
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
+
+    persNR--;
+    folktarget = _service.getStaktTolvufolk(gogn[persNR].getID());
+
+    system("cls");
+    cout << "Enter number of machine to link with " << folktarget.getNafn() << ": ";
+    cin >> machNR;
+
 }
 
 void NotendaUI::uppfaeraPersonu() //Update UI grein
@@ -1385,6 +1427,7 @@ void NotendaUI::skrifaUtVal()
 {
     cout << "*==================================================================*" << endl;
     cout << "*||list   - Shows a list of all known entries in the database.   ||*" << endl;
+    cout << "*||link   - Link scientist and machines together.                ||*" << endl;
     cout << "*||add    - Add a new entry into the database.                   ||*" << endl;
     cout << "*||delete - Removes an entry from the database.                  ||*" << endl;
     cout << "*||update - Updates an entry from the database.                  ||*" << endl;

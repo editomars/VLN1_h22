@@ -33,6 +33,7 @@ private:
     void flokkunarMoguleikarTolvuFolk(); //Sort UI grein
     void tortimaListaTolvuFolk(); //Purge UI grein
     void baetaVidVelar(); //Add velar UI grein
+    void tengjaFolkiVel(); //Venlsar persónu með vél
     void eydaVel(); //Eyda vel UI grei
     void uppfaeraVelar(); //Update Machine UI grein
     void leitaGreinVelar(); //Search / Filter UI grein
