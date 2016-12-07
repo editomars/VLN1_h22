@@ -54,9 +54,9 @@ int tolvufolkService::getSize() const
 
 //Föll sem breyta gagnagrunn
 
-void tolvufolkService::baetaVidTolvufolk(string fNafn, string eNafn, char kyn, int fAr, int dAr)
+void tolvufolkService::baetaVidTolvufolk(string nafn, char kyn, int fAr, int dAr)
 {
-    _dataaccess.baetaVidFolk(fNafn, eNafn, kyn, fAr, dAr);
+    _dataaccess.baetaVidFolk(nafn, kyn, fAr, dAr);
 }
 
 void tolvufolkService::tortimaTolvufolk()
@@ -69,9 +69,9 @@ void tolvufolkService::eydaStakiTolvufolk(int id)
     _dataaccess.eydaFolk(id);
 }
 
-void tolvufolkService::uppfaeraStakTolvufolk(int id, string fNafn , string eNafn, char kyn, int fAr, int dAr)
+void tolvufolkService::uppfaeraStakTolvufolk(int id, string nafn, char kyn, int fAr, int dAr)
 {
-    _dataaccess.uppfaeraFolk(id,fNafn,eNafn,kyn,fAr,dAr);
+    _dataaccess.uppfaeraFolk(id,nafn,kyn,fAr,dAr);
 }
 
 void tolvufolkService::venslaVidVel(int folk_id, int vel_id)
@@ -165,7 +165,7 @@ vector<tolvufolk> tolvufolkService::leitaAldur(int laegraBil, int haerraBil)
     vector<tolvufolk> filtered;
 
     for (size_t i = 0; i < gogn.size(); ++i){
-        if (gogn[i].getAldur() > laegraBil && gogn[i].getAldur() < haerraBil){
+        if (gogn[i].getAldur() >= laegraBil && gogn[i].getAldur() <= haerraBil){
             filtered.push_back(gogn[i]);
         }
     }

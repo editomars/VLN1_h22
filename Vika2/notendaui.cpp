@@ -286,17 +286,13 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
 {
     do
     {
-        string fornafn;
-        string eftirnafn;
+        string nafn;
         char kKyn;
         int fAr;
         int dAr;
 
-        cout << "Enter firstname: ";
-        cin >> fornafn;
-
-        cout << "Enter lastname: ";
-        cin >> eftirnafn;
+        cout << "Enter name: ";
+        getline(cin, nafn);
 
         cout << "Enter gender (f/m) [lowercase]: ";
         cin >> kKyn;
@@ -330,7 +326,7 @@ void NotendaUI::baetaVidPersonu() //UI grein til að bæta við persónu
             cin >> dAr;
         }
 
-        _service.baetaVidTolvufolk(fornafn, eftirnafn, kKyn, fAr, dAr);
+        _service.baetaVidTolvufolk(nafn, kKyn, fAr, dAr);
 
 
     }while(skipunaAframhald());
@@ -370,7 +366,7 @@ void NotendaUI::eydaPersonu() //Delete UI grein
 
 void NotendaUI::uppfaeraPersonu() //Update UI grein
 {
-    string fornafn, eftirnafn;
+    string nafn;
     char nyttKyn;
     int persNR, nyttD, nyttF;
     tolvufolk target;
@@ -405,17 +401,11 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 
     cout << "To hold section as is, enter 0." << endl << endl;
 
-    cout << "Enter updated first name: ";
-    cin >> fornafn;
+    cout << "Enter updated name: ";
+    getline(cin, nafn);
 
-    if (fornafn == "0")
-        fornafn = target.getFornafn();
-
-    cout << "Enter updated last name: ";
-    cin >> eftirnafn;
-
-    if (eftirnafn == "0")
-        eftirnafn = target.getEftirnafn();
+    if (nafn == "0")
+        nafn = target.getNafn();
 
     cout << "Enter updated gender: ";
     cin >> nyttKyn;
@@ -470,7 +460,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     }while(nyttD < nyttF && nyttD != -1);
 
 
-    _service.uppfaeraStakTolvufolk(target.getID(), fornafn, eftirnafn, nyttKyn, nyttF, nyttD);
+    _service.uppfaeraStakTolvufolk(target.getID(), nafn, nyttKyn, nyttF, nyttD);
 
     system("cls");
     cout << "Updated information:" << endl << endl;
@@ -491,12 +481,12 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
         if (skipunin == "name" || skipunin == "n")
         {
             leitarMoguleikarTolvuFolk();
-            string fornafn, eftirnafn;
+            string nafn;
             cout << "---Searching by name---" << endl;
-            cout << "Enter first name: ";
-            cin >> fornafn;
+            cout << "Enter name: ";
+            getline(cin, nafn);
             cout << endl;
-            gogn = _service.leitaStreng("fornafn", fornafn, 'a');
+            gogn = _service.leitaStreng("nafn", nafn, 'a');
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -624,13 +614,13 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
                 if(skipunin == "ascending" || skipunin == "a")
                 {
-                    radad = _service.rada("fornafn", "asc");
+                    radad = _service.rada("nafn", "asc");
                     prentaListaTolvuFolk(radad);
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
-                    radad = _service.rada("fornafn", "desc");
+                    radad = _service.rada("nafn", "desc");
                     prentaListaTolvuFolk(radad);
                 }
 
