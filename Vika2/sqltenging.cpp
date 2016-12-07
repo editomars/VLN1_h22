@@ -208,6 +208,33 @@ int sqltenging::saekjaSize(string flokkur) const
 
 //Vensl
 
+void sqltenging::buaTilVensl(int folkID, int velID)
+{
+    string sql = "INSERT INTO venslfolkvelar(folk_id,vel_id)"
+                 "VALUES(" + to_string(folkID) + "," + to_string(velID) + ")";
+    udiSkipun(sql);
+
+}
+
+void sqltenging::eydaVenslFolk(int id)
+{
+    string sql = "DELETE FROM venslfolkvelar WHERE folk_id = " + to_string(id);
+    udiSkipun(sql);
+}
+
+void sqltenging::eydaVenslVel(int id)
+{
+    string sql = "DELETE FROM venslfolkvelar WHERE folk_id = " + to_string(id);
+    udiSkipun(sql);
+}
+
+void sqltenging::eydaStakiVensl(int folkID, int velID)
+{
+    string sql = "DELETE FROM venslfolkvelar"
+                 "WHERE folk_id = " + to_string(folkID) + " "
+                 "AND vel_id = " + to_string(velID);
+    udiSkipun(sql);
+}
 
 // Private Functions
 vector<tolvufolk> sqltenging::selectFolk(string sql) const
