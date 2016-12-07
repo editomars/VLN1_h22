@@ -125,6 +125,11 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
             aframhaldandiUIAlmennt();
         }
 
+        else if (skipun == "link" || skipun == "li")
+        {
+            tengjaFolkiVel();
+        }
+
         else if (skipun == "sort" || skipun == "so")
         {
             satt = false;
