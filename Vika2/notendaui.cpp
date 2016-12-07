@@ -504,10 +504,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             cout << "---Searching by name---" << endl;
             cout << "Enter first name: ";
             cin >> fornafn;
-            cout << "Enter last name: ";
-            cin >> eftirnafn;
             cout << endl;
-            gogn = _service.leitaStreng("nafn", fornafn + " " + eftirnafn);
+            gogn = _service.leitaStreng("fornafn", fornafn, 'a');
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -533,7 +531,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 cin >> age;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("aldur", age);
+            gogn = _service.leitaHeiltolu("aldur", '=', age);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -559,7 +557,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 cin >> birth;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("faedingarar", birth);
+            gogn = _service.leitaHeiltolu("faedingarar", '=', birth);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
@@ -585,7 +583,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 cin >> death;
             }
             cout << endl;
-            gogn = _service.leitaHeiltolu("danarar", death);
+            gogn = _service.leitaHeiltolu("danarar", '=', death);
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();

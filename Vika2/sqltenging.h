@@ -15,6 +15,9 @@ public:
     // Functions for Vélar
     vector<velar> lesaVelar(int id) const; //sækir vector með 1 stykki
     vector<velar> lesaVelarSorted(string flokkur, string rod); //Sækir sorteraðan vector, flokkur = töfluflokkur í gagngarunn og röð er "asc" eða "desc"
+    vector<velar> leitaVelar(string flokkur, string leitarord, char pos); //Leitar að leitarord í töfluflokk, pos = 'b' til að leita í byrjun orðs, 'e' í enda, annars hvar sem er í orði
+    vector<velar> leitaVelar(string flokkur, char type, int leitarord); //type = '<' til að leita að heilölu minni en leitarord, '>' fyrir stærri en, '=' fyrir jafnt og
+    vector<velar> leitaVelar(string flokkur, int laegraBil, int haerraBil); //skilar flokk á ákeðnu heiltölubili
     void baetaVidVel(string nafn, int bAr, bool byggd, string tegund);
     void eydaVel(int id);
     void uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund);
@@ -23,6 +26,9 @@ public:
     // Functions for Fólk
     vector<tolvufolk> lesaFolk(int id) const; //sækir vector með 1 stak
     vector<tolvufolk> lesaFolkSorted(string flokkur, string rod); //Sækir sorteraðan vector, flokkur = töfluflokkur í gagnagrunn og röð er "asc" eða "desc"
+    vector<tolvufolk> leitaFolk(string flokkur, string leitarord, char pos); //Leitar að leitarord í töfluflokk, pos = "b" fyrir beginning, "e" fyrir end. Allt annað fyrir any
+    vector<tolvufolk> leitaFolk(string flokkur, char type, int leitarord);
+    vector<tolvufolk> leitaFolk(string flokkur, int laegraBil, int haerraBil);
     void baetaVidFolk(string fNafn, string eNafn, char kyn, int fAr, int dAr);
     void eydaFolk(int id);
     void uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr);

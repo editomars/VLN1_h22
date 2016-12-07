@@ -27,21 +27,19 @@ public:
 
     //Föll sem skila umbreyttum gögnum
     vector<tolvufolk> rada(string flokkur, string rod); //Skilar vector sem er raðaður eftir flokk og rod á að vera "asc" eða "desc" fyrir ascending og descending
-    vector<tolvufolk> leitaStreng(string flokkur, string leitarord); //Skilar vector sem er flokkaður(filteraður) ef flokka á strengjaflokk (nafn eða kyn)
-    vector<tolvufolk> leitaHeiltolu(string flokkur, int leitarord); //Skilar vector sem er flokkar(filteraður) ef flokka á integer flokk (faedingarar, danarar eða aldur)
+    vector<tolvufolk> leitaStreng(string flokkur, string leitarord, char pos); //Skilar vector sem er flokkaður(filteraður) ef flokka á strengjaflokk (nafn eða kyn)
+    vector<tolvufolk> leitaHeiltolu(string flokkur, char type, int leitarord); //Skilar vector sem er flokkar(filteraður) ef flokka á integer flokk (faedingarar, danarar eða aldur), type er < > = til að fá stærra, minna eða jafnt og
+    vector<tolvufolk> leitaHeiltolubil(string flokkur, int laegraBil, int haerraBil); //Skilar vector sem er filteraður á heiltölubili
 private:
     sqltenging _dataaccess;
-    vector<tolvufolk> _folk;
 
     //raða föll
     vector<tolvufolk> radaAldriHaekkandi(vector<tolvufolk> gogn);
     vector<tolvufolk> radaAldriLaekkandi(vector<tolvufolk> gogn);
 
-    //Leita föll (filterar)
-    vector<tolvufolk> leitaEftirNafniTolvufolk(string nafn); //Skilar vector flokkað(filtered) eftir nafni
-    vector<tolvufolk> leitaEftirAldriTolvufolk(int aldur); //skilar vector flokkað(filtered) eftir aldri
-    vector<tolvufolk> leitaEftirArtaliTolvufolk(int ar, bool f); //bool = true til að leita að fæðingarári, false fyrir dánarár
-    vector<tolvufolk> leitaEftirKyniTolvufolk(char kyn); //Skilar vector flokkað(filtered) eftir kyni
+    //Filter föll
+    vector<tolvufolk> leitaAldur(char type, int leitarord);
+    vector<tolvufolk> leitaAldur(int laegraBil, int haerraBil);
 };
 
 #endif // TOLVUFOLKSERVICE_H

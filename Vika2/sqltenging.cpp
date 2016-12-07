@@ -31,6 +31,38 @@ vector<velar> sqltenging::lesaVelarSorted(string flokkur, string rod)
     return selectVelar(sql);
 }
 
+vector<velar> sqltenging::leitaVelar(string flokkur, string leitarord, char pos)
+{
+    string sql = "SELECT * FROM TolvuVelar "
+            "WHERE " + flokkur + " LIKE ";
+
+    if (pos == 'b'){
+        sql += "'" + leitarord + "%'";
+    }else if (pos == 'e'){
+        sql += "'%" + leitarord + "'";
+    }else{
+        sql += "'%" + leitarord + "%'";
+    }
+
+    return selectVelar(sql);
+}
+
+vector<velar> sqltenging::leitaVelar(string flokkur, char type, int leitarord)
+{
+    string sql = "SELECT * FROM TolvuVelar "
+            "WHERE " + flokkur + " " + type + " " + to_string(leitarord);
+
+    return selectVelar(sql);
+}
+
+vector<velar> sqltenging::leitaVelar(string flokkur, int laegraBil, int haerraBil)
+{
+    string sql = "SELECT * FROM TolvuVelar "
+            "WHERE " + flokkur + " BETWEEN " + to_string(laegraBil) + " AND " + to_string(haerraBil);
+
+    return selectVelar(sql);
+}
+
 void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
 {
     string sql = "INSERT INTO TolvuVelar(Nafn, Byggingarar, Byggd, Tegund)"
@@ -63,9 +95,6 @@ void sqltenging::tortimaVelum()
     udiSkipun(terminator);
 }
 
-
-
-
 // FOLK
 vector<tolvufolk> sqltenging::lesaFolk(int id) const
 {
@@ -82,6 +111,38 @@ vector<tolvufolk> sqltenging::lesaFolkSorted(string flokkur, string rod)
 {
     string sql = "SELECT * FROM TolvuFolk "
             "ORDER BY " + flokkur + " " + rod;
+
+    return selectFolk(sql);
+}
+
+vector<tolvufolk> sqltenging::leitaFolk(string flokkur, string leitarord, char pos)
+{
+    string sql = "SELECT * FROM Tolvufolk "
+            "WHERE " + flokkur + " LIKE ";
+
+    if (pos == 'b'){
+        sql += "'" + leitarord + "%'";
+    }else if (pos == 'e'){
+        sql += "'%" + leitarord + "'";
+    }else{
+        sql += "'%" + leitarord + "%'";
+    }
+
+    return selectFolk(sql);
+}
+
+vector<tolvufolk> sqltenging::leitaFolk(string flokkur, char type, int leitarord)
+{
+    string sql = "SELECT * FROM TolvuFolk "
+            "WHERE " + flokkur + " " + type + " " + to_string(leitarord);
+
+    return selectFolk(sql);
+}
+
+vector<tolvufolk> sqltenging::leitaFolk(string flokkur, int laegraBil, int haerraBil)
+{
+    string sql = "SELECT * FROM TolvuFolk "
+            "WHERE " + flokkur + " BETWEEN " + to_string(laegraBil) + " AND " + to_string(haerraBil);
 
     return selectFolk(sql);
 }
