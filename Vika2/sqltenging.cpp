@@ -75,6 +75,8 @@ void sqltenging::eydaVel(int id)
 
     string sql = "DELETE FROM TolvuVelar WHERE ID = " + to_string(id);
     udiSkipun(sql);
+
+    eydaVenslVel(id);
 }
 
 void sqltenging::uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund)
@@ -158,6 +160,8 @@ void sqltenging::eydaFolk(int id)
 
     string sql = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
     udiSkipun(sql);
+
+    eydaVenslFolk(id);
 }
 
 void sqltenging::uppfaeraFolk(int id, string fNafn, string eNafn, char kyn, int fAr, int dAr)
@@ -207,6 +211,34 @@ int sqltenging::saekjaSize(string flokkur) const
 
 
 //Vensl
+
+void sqltenging::buaTilVensl(int folkID, int velID)
+{
+    string sql = "INSERT INTO venslfolkvelar(folk_id,vel_id)"
+                 "VALUES(" + to_string(folkID) + "," + to_string(velID) + ")";
+    udiSkipun(sql);
+
+}
+
+void sqltenging::eydaVenslFolk(int id)
+{
+    string sql = "DELETE FROM venslfolkvelar WHERE folk_id = " + to_string(id);
+    udiSkipun(sql);
+}
+
+void sqltenging::eydaVenslVel(int id)
+{
+    string sql = "DELETE FROM venslfolkvelar WHERE folk_id = " + to_string(id);
+    udiSkipun(sql);
+}
+
+void sqltenging::eydaStakiVensl(int folkID, int velID)
+{
+    string sql = "DELETE FROM venslfolkvelar"
+                 "WHERE folk_id = " + to_string(folkID) + " "
+                 "AND vel_id = " + to_string(velID);
+    udiSkipun(sql);
+}
 
 vector<tolvufolk> sqltenging::lesaFolkVenslad(int velarID) const
 {
