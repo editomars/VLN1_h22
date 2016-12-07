@@ -59,6 +59,74 @@ void NotendaUI::prentaVel(const velar kall, int i)
 
 }
 
+void NotendaUI::prentaFolkVensl()
+{
+    int persNR;
+    int ID;
+    tolvufolk target;
+    vector<tolvufolk> gogn = _service.getTolvufolk();
+
+    cout << "Enter number of scientist you want to see linked machines with: ";
+    cin >> persNR;
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
+
+    persNR--;
+    ID = gogn[persNR].getID();
+    cout << ID << endl;
+    prentaListaTolvuVelar(_vService.getVelarVensl(ID));
+
+
+}
+
+void NotendaUI::prentaVelarvensl()
+{
+    int velNR;
+    int id;
+    vector<velar> gogn = _vService.getVelar();
+    velar target;
+
+    cout << "Enter number of machine to see people that are linked to it (-1 to cancel): ";
+    cin >> velNR;
+
+    if (velNR == -1)
+    {
+        return;
+    }
+    while (velNR > _vService.getSize() || velNR <= 0)
+    {
+        if (velNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> velNR;
+    }
+
+    velNR--;
+    id = gogn[velNR].getID();
+    target = _vService.getStaktVelar(id);
+
+
+    prentaListaTolvuFolk(_service.getTolvufolkVensl(id));
+    cout << "These are the people linked to: " << target.getVelaNafn() << endl << endl;
+}
+
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
 
 void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI greinar
@@ -122,6 +190,12 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         {
             satt = false;
             prentaListaTolvuVelar(_vService.getVelar());
+
+            cout << "Want to see links of these machines? (Y/N): ";
+            if (sjaVelarVensl())
+            {
+                prentaVelarvensl();
+            }
             aframhaldandiUIAlmennt();
         }
 
@@ -207,6 +281,12 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         {
             satt = false;
             prentaListaTolvuFolk(_service.getTolvufolk());
+
+            cout << "Want to see what machines these people are linked to? (Y/N): ";
+            if (sjaVelarVensl())
+            {
+                prentaFolkVensl();
+            }
             aframhaldandiUIAlmennt();
         }
 
@@ -1440,9 +1520,36 @@ bool NotendaUI::skipunaAframhald()
     return false;
 }
 
+
+bool NotendaUI::sjaVelarVensl()
+{
+    string svar;
+    do
+    {
+
+        cin >> svar;
+
+        if (svar == "Y" || svar == "y")
+        {
+            return true;
+        }
+
+        else if(svar == "N" || svar == "n")
+        {
+            return false;
+        }
+
+    }while (svar != "Y" || svar != "y" || svar != "N" || svar != "n");
+
+    return false;
+}
+
 //------------------------------- Svæði fyrir bool flögg endar ---------------------------------
 
 //------------------------------- Svæði fyrir cout blokkir byrjar ------------------------------
+
+
+
 void NotendaUI::skrifaUt()
 {
     system("cls");
