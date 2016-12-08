@@ -33,6 +33,7 @@ void NotendaUI::prentaListaTolvuFolk(const vector<tolvufolk>& gogn)
 
 void NotendaUI::prentaListaTolvuVelar(const vector<velar>& gogn)
 {
+    system("cls");
     hausUI();
     for (size_t i = 0; i < gogn.size(); i++)
     {
@@ -535,14 +536,23 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
 void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 {
     vector<tolvufolk> gogn;
+    bool satt = false;
+
+    leitarMoguleikarTolvuFolk();
+
     do
     {
-        leitarMoguleikarTolvuFolk();
+        if (satt == true)
+        {
+            cerr << "Input not valid, try again: ";
+        }
+
         string skipunin;
         cin >> skipunin;
 
         if (skipunin == "name" || skipunin == "n")
         {
+            satt = false;
             leitarMoguleikarTolvuFolk();
             string nafn;
             cout << "---Searching by name---" << endl;
@@ -564,6 +574,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         else if (skipunin == "age" || skipunin == "a")
         {
+            satt = false;
             int age;
             leitarMoguleikarTolvuFolk();
             cout << "Age to search: ";
@@ -590,6 +601,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         else if (skipunin == "birth" || skipunin == "b")
         {
+            satt = false;
             leitarMoguleikarTolvuFolk();
             int birth;
             cout << "Year of birth to search: ";
@@ -616,6 +628,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         else if (skipunin == "death" || skipunin == "d")
         {
+            satt = false;
             leitarMoguleikarTolvuFolk();
             int death;
             cout << "Year of death to search (-1 for still alive): ";
@@ -634,7 +647,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
                 hausUITolvuFolk();
                 cout << "|No person with those parameters exists in the database.                                                 |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
-            }else
+            }
+            else
             {
                 prentaListaTolvuFolk(gogn);
             }
@@ -642,12 +656,15 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         else if (skipunin == "quit" || skipunin == "q")
         {
+            satt = false;
             return;
         }
 
         else
         {
-            cout << "Invalid input, try again: ";
+            leitarMoguleikarTolvuFolk();
+            satt = true;
+
         }
 
     }while(skipunaAframhald());
@@ -1399,22 +1416,9 @@ bool NotendaUI::aframhaldandiUIAlmennt()
 {
     string svar = "o";
 
-    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
-    {
-        cout << "Another entry? (Y/N): ";
-        cin >> svar;
-
-        if (svar == "Y" || svar == "y")
-        {
-            return true;
-        }
-
-        else if(svar == "N" || svar == "n")
-        {
-            return false;
-        }
-    }
-    return false;
+    cout << "Input anything to continue: ";
+    cin >> svar;
+    return true;
 }
 
 bool NotendaUI::skipunaAframhald()
