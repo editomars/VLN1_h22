@@ -60,77 +60,6 @@ void NotendaUI::prentaVel(const velar kall, int i)
 
 }
 
-void NotendaUI::prentaFolkVensl()
-{
-    int persNR;
-    int ID;
-    tolvufolk target;
-    vector<tolvufolk> gogn = _service.getTolvufolk();
-
-    cout << "Enter number of scientist you want to see linked machines with: ";
-    cin >> persNR;
-    if (persNR == -1)
-    {
-        return;
-    }
-    while (persNR > _service.getSize() || persNR <= 0)
-    {
-        if (persNR == -1)
-        {
-            break;
-        }
-        cerr << "Input not valid, try again: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> persNR;
-    }
-
-    persNR--;
-    ID = gogn[persNR].getID();
-    target = _service.getStaktTolvufolk(ID);
-
-    system("cls");
-    prentaListaTolvuVelar(_vService.getVelarVensl(ID));
-
-    cout << "These are the Machines linked to " << target.getNafn() << endl << endl;
-
-}
-
-void NotendaUI::prentaVelarvensl()
-{
-    int velNR;
-    int id;
-    vector<velar> gogn = _vService.getVelar();
-    velar target;
-
-    cout << "Enter number of machine to see people that are linked to it (-1 to cancel): ";
-    cin >> velNR;
-
-    if (velNR == -1)
-    {
-        return;
-    }
-    while (velNR > _vService.getSize() || velNR <= 0)
-    {
-        if (velNR == -1)
-        {
-            break;
-        }
-        cerr << "Input not valid, try again: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> velNR;
-    }
-
-    velNR--;
-    id = gogn[velNR].getID();
-    target = _vService.getStaktVelar(id);
-
-
-    prentaListaTolvuFolk(_service.getTolvufolkVensl(id));
-    cout << "These are the people linked to: " << target.getVelaNafn() << endl;
-}
-
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
 
 void NotendaUI::adalvalmyndUI() //Upphaflega greinin, branchar út í aðrar UI greinar
@@ -447,70 +376,6 @@ void NotendaUI::eydaPersonu() //Delete UI grein
     }while(skipunaAframhald());
 }
 
-void NotendaUI::tengjaFolkiVel()
-{
-    int persNR;
-    int machNR;
-    tolvufolk folktarget;
-    velar veltarget;
-    vector<tolvufolk> gogn = _service.getTolvufolk();
-    vector<velar> velargogn = _vService.getVelar();
-    prentaListaTolvuFolk(gogn);
-
-    cout << "Enter number of scientist to link to a machine (-1 to cancel): ";
-    cin >> persNR;
-
-    if (persNR == -1)
-    {
-        return;
-    }
-    while (persNR > _service.getSize() || persNR <= 0)
-    {
-        if (persNR == -1)
-        {
-            break;
-        }
-        cerr << "Input not valid, try again: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> persNR;
-    }
-
-    persNR--;
-    folktarget = _service.getStaktTolvufolk(gogn[persNR].getID());
-    int folkID = gogn[persNR].getID();
-
-    system("cls");
-    prentaListaTolvuVelar(velargogn);
-    cout << "Enter number of machine to link with " << folktarget.getNafn() << ": ";
-    cin >> machNR;
-
-    if (machNR == -1)
-    {
-        return;
-    }
-    while (machNR > _vService.getSize() || machNR <= 0)
-    {
-        if (machNR == -1)
-        {
-            break;
-        }
-        cerr << "Input not valid, try again: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> machNR;
-    }
-
-    machNR--;
-
-    int velID = velargogn[machNR].getID();
-    veltarget = _vService.getStaktVelar(velID);
-
-    _service.venslaVidVel(folkID, velID);
-
-    cout << folktarget.getNafn() << " is now linked with " << veltarget.getVelaNafn() << endl;
-
-}
 
 void NotendaUI::uppfaeraPersonu() //Update UI grein
 {
@@ -1003,7 +868,7 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
 
         while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n')
         {
-            cout << "Was it built? (y/n)";
+            cout << "Was it built? (y/n): ";
             cin >> byggdIn;
 
             if(byggdIn == 'y' || byggdIn == 'Y')
@@ -1514,6 +1379,147 @@ void NotendaUI::tortimaListaVelar() //Purge UI grein
         cout << "Purge canceled." << endl;
     }
 }
+
+//------------------------------- Svæði fyrir UI greinar vensl ---------------------------------
+
+
+void NotendaUI::tengjaFolkiVel()  //vennsla fólk og vél
+{
+    int persNR;
+    int machNR;
+    tolvufolk folktarget;
+    velar veltarget;
+    vector<tolvufolk> gogn = _service.getTolvufolk();
+    vector<velar> velargogn = _vService.getVelar();
+    prentaListaTolvuFolk(gogn);
+
+    cout << "Enter number of scientist to link to a machine (-1 to cancel): ";
+    cin >> persNR;
+
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
+
+    persNR--;
+    folktarget = _service.getStaktTolvufolk(gogn[persNR].getID());
+    int folkID = gogn[persNR].getID();
+
+    system("cls");
+    prentaListaTolvuVelar(velargogn);
+    cout << "Enter number of machine to link with " << folktarget.getNafn() << ": ";
+    cin >> machNR;
+
+    if (machNR == -1)
+    {
+        return;
+    }
+    while (machNR > _vService.getSize() || machNR <= 0)
+    {
+        if (machNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> machNR;
+    }
+
+    machNR--;
+
+    int velID = velargogn[machNR].getID();
+    veltarget = _vService.getStaktVelar(velID);
+
+    _service.venslaVidVel(folkID, velID);
+
+    cout << folktarget.getNafn() << " is now linked with " << veltarget.getVelaNafn() << endl;
+
+}
+
+
+void NotendaUI::prentaFolkVensl()
+{
+    int persNR;
+    int ID;
+    tolvufolk target;
+    vector<tolvufolk> gogn = _service.getTolvufolk();
+
+    cout << "Enter number of scientist you want to see linked machines with: ";
+    cin >> persNR;
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
+
+    persNR--;
+    ID = gogn[persNR].getID();
+    target = _service.getStaktTolvufolk(ID);
+
+    system("cls");
+    prentaListaTolvuVelar(_vService.getVelarVensl(ID));
+
+    cout << "These are the Machines linked to " << target.getNafn() << endl << endl;
+
+}
+
+void NotendaUI::prentaVelarvensl()
+{
+    int velNR;
+    int id;
+    vector<velar> gogn = _vService.getVelar();
+    velar target;
+
+    cout << "Enter number of machine to see people that are linked to it (-1 to cancel): ";
+    cin >> velNR;
+
+    if (velNR == -1)
+    {
+        return;
+    }
+    while (velNR > _vService.getSize() || velNR <= 0)
+    {
+        if (velNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> velNR;
+    }
+
+    velNR--;
+    id = gogn[velNR].getID();
+    target = _vService.getStaktVelar(id);
+
+
+    prentaListaTolvuFolk(_service.getTolvufolkVensl(id));
+    cout << "These are the people linked to: " << target.getVelaNafn() << endl;
+}
+
 
 //------------------------------- Svæði fyrir UI greinar endar ---------------------------------
 
