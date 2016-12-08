@@ -13,8 +13,10 @@ velar::velar(int id, string vNafn, int bAr, string tegund, bool byggd)
 {
     _id = id;
     _vNafn = vNafn;
+    _vNafn[0] = toupper(_vNafn[0]);
     _bAr = bAr;
     _tegund = tegund;
+    _tegund[0] = toupper(_tegund[0]);
     _byggd = byggd;
 }
 

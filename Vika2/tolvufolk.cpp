@@ -10,6 +10,7 @@ tolvufolk::tolvufolk(int id, string nafn, char kyn, int faedingarar, int danarar
 {
     _id = id;
     _nafn = nafn;
+    _nafn[0] = toupper(_nafn[0]);
     _kyn = kyn;
     _danarar = danarar;
     _faedingarar = faedingarar;
