@@ -1036,7 +1036,7 @@ void NotendaUI::eydaVel() //Delete UI grein
         int velNR;
         cout << "Delete machine number (-1 to cancel deletion): ";
         cin >> velNR;
-        while (velNR <= 0)
+        while (velNR <= 0 || velNR > _vService.getSize())
         {
             if (velNR == -1)
             {
