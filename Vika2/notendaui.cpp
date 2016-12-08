@@ -424,7 +424,7 @@ void NotendaUI::eydaPersonu() //Delete UI grein
         int persNR;
         cout << "Delete scientist number (-1 to cancel deletion): ";
         cin >> persNR;
-        while (/*persNR > _service.getSize() ||*/ persNR <= 0)
+        while (persNR > _service.getSize() || persNR <= 0)
         {
             if (persNR == -1)
             {
@@ -1001,7 +1001,7 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         cout << "Enter type: ";
         cin >> tegund;
 
-        while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n')
+        do
         {
             cout << "Was it built? (y/n)";
             cin >> byggdIn;
@@ -1020,7 +1020,7 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
             {
                 cout << "Invalid input, try again!" << endl;
             }
-        }
+        }while (byggdIn != 'Y' || byggdIn != 'y' || byggdIn != 'N' || byggdIn != 'n');
 
         _vService.baetaVidVelar(vNafn, bAr, byggd, tegund);
 
@@ -1548,9 +1548,9 @@ bool NotendaUI::aframhaldandiUIAlmennt()
 bool NotendaUI::skipunaAframhald()
 {
 
-    string svar = "o";
+    string svar;
 
-    while (svar != "Y" || svar != "y" || svar != "N" || svar != "n")
+    do
     {
         cout << "Another entry? (Y/N): ";
         cin >> svar;
@@ -1564,7 +1564,11 @@ bool NotendaUI::skipunaAframhald()
         {
             return false;
         }
-    }
+        else
+        {
+            cout << "Input invalid" << endl;
+        }
+    }while (svar != "Y" || svar != "y" || svar != "N" || svar != "n");
     return false;
 }
 
