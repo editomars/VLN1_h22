@@ -128,7 +128,7 @@ void NotendaUI::prentaVelarvensl()
 
 
     prentaListaTolvuFolk(_service.getTolvufolkVensl(id));
-    cout << "These are the people linked to: " << target.getVelaNafn() << endl << endl;
+    cout << "These are the people linked to: " << target.getVelaNafn() << endl;
 }
 
 //------------------------------- Svæði fyrir UI greinar byrjar --------------------------------
@@ -654,6 +654,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             }else
             {
                 prentaListaTolvuFolk(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
@@ -681,6 +682,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             }else
             {
                 prentaListaTolvuFolk(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
@@ -708,6 +710,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             }else
             {
                 prentaListaTolvuFolk(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
@@ -736,6 +739,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             else
             {
                 prentaListaTolvuFolk(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
@@ -752,7 +756,7 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
 
         }
 
-    }while(skipunaAframhald());
+    }while(satt == true);
 }
 
 void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
@@ -782,12 +786,14 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
                 {
                     radad = _service.rada("nafn", "asc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("nafn", "desc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -817,12 +823,14 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
                 {
                     radad = _service.rada("aldur", "asc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("aldur", "desc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -851,12 +859,14 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
                 {
                     radad = _service.rada("faedingarar", "asc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("faedingarar", "desc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -886,12 +896,14 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
                 {
                     radad = _service.rada("danarar", "asc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _service.rada("danarar", "desc");
                     prentaListaTolvuFolk(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -915,6 +927,7 @@ void NotendaUI::flokkunarMoguleikarTolvuFolk() //Sort UI grein
 
         else
         {
+            rodunarMoguleikarTolvuFolk();
             cout << "Invalid input, try again: ";
             rettInntak = false;
         }
@@ -1150,14 +1163,22 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
 void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
 {
     vector<velar> gogn;
+    bool satt = false;
+    leitarMoguleikarVelar();
+
     do
     {
-        leitarMoguleikarVelar();
+        if (satt == true)
+        {
+            cerr << "Input not valid, try again: ";
+        }
+
         string skipunin;
         cin >> skipunin;
 
         if (skipunin == "name" || skipunin == "n")
         {
+            satt = false;
             string nafn;
 
             leitarMoguleikarVelar();
@@ -1175,11 +1196,13 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             }else
             {
                 prentaListaTolvuVelar(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
         else if (skipunin == "create" || skipunin == "c")
         {
+            satt = false;
             int artal;
             leitarMoguleikarVelar();
             cout << "Year to search: ";
@@ -1201,11 +1224,13 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             }else
             {
                 prentaListaTolvuVelar(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
         else if (skipunin == "type" || skipunin == "t")
         {
+            satt = false;
             leitarMoguleikarVelar();
             string tegund;
             cout << "Type to search: ";
@@ -1222,11 +1247,13 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             else
             {
                 prentaListaTolvuVelar(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
         else if (skipunin == "made" || skipunin == "m")
         {
+            satt = false;
             leitarMoguleikarVelar();
             int byggd;
             char byggdIn;
@@ -1263,20 +1290,23 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             else
             {
                 prentaListaTolvuVelar(gogn);
+                aframhaldandiUIAlmennt();
             }
         }
 
         else if (skipunin == "quit" || skipunin == "q")
         {
+            satt = false;
             return;
         }
 
         else
         {
-            cout << "Invalid input, try again: ";
+            leitarMoguleikarVelar();
+            satt = true;
         }
 
-    }while(skipunaAframhald());
+    }while(satt == true);
 }
 
 void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
@@ -1305,12 +1335,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
                 {
                     radad = _vService.rada("Nafn", "asc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _vService.rada("Nafn", "desc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1340,12 +1372,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
                 {
                     radad = _vService.rada("byggingarar", "asc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _vService.rada("byggingarar", "desc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1374,12 +1408,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
                 {
                     radad = _vService.rada("tegund", "asc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _vService.rada("tegund", "desc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1409,12 +1445,14 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
                 {
                     radad = _vService.rada("byggd", "asc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if(skipunin == "descending" || skipunin == "d")
                 {
                     radad = _vService.rada("byggd", "desc");
                     prentaListaTolvuVelar(radad);
+                    aframhaldandiUIAlmennt();
                 }
 
                 else if (skipunin == "quit" || skipunin == "q")
@@ -1438,6 +1476,7 @@ void NotendaUI::flokkunarMoguleikarVelar() //Sort UI grein
 
         else
         {
+            rodunarMoguleikarVelar();
             cout << "Invalid input, try again: ";
             rettInntak = false;
         }
