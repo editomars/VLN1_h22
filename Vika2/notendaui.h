@@ -21,6 +21,8 @@ private:
     void prentaListaTolvuVelar(const vector<velar>& gogn); //Skrifar út gögn á console
     void prentaPersonu(const tolvufolk kall, int i);
     void prentaVel(const velar kall, int i);
+    void prentaVelarvensl(); //Bidur um vel og prentar ut alla venslada vid þá vél
+    void prentaFolkVensl();
 
     //Föll sem skipta um UI grein
     void adalvalmyndUI(); //Main Menu UI grein
@@ -34,6 +36,7 @@ private:
     void tortimaListaTolvuFolk(); //Purge UI grein
     void baetaVidVelar(); //Add velar UI grein
     void tengjaFolkiVel(); //Venlsar persónu með vél
+
     void eydaVel(); //Eyda vel UI grei
     void uppfaeraVelar(); //Update Machine UI grein
     void leitaGreinVelar(); //Search / Filter UI grein
@@ -46,8 +49,10 @@ private:
     bool aframhaldandiUIAdal(); //Vantar comment
     bool aframhaldandiUIAlmennt(); //Vantar comment
     bool skipunaAframhald(); //Vantar comment
+    bool sjaVelarVensl(); //spyr hvort þú viljir sjá venslin
 
     //Cout blokkir
+
     void skrifaUt(); //Skrifa út aðalvalmynd
     void skrifaUtTolvuVelar(); //Skrifa út gluggan fyrir tölvur
     void skrifaUtTolvuFolk(); //Skrifa út gluggan fyrir tölvufólk
