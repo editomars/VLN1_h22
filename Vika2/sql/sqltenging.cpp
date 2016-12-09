@@ -76,7 +76,7 @@ void sqltenging::eydaVel(int id)
     string sql = "DELETE FROM TolvuVelar WHERE ID = " + to_string(id);
     udiSkipun(sql);
 
-    eydaVenslVel(id);
+    eydaVensl("vel_id",id);
 }
 
 void sqltenging::uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund)
@@ -161,7 +161,7 @@ void sqltenging::eydaFolk(int id)
     string sql = "DELETE FROM TolvuFolk WHERE ID = " + to_string(id);
     udiSkipun(sql);
 
-    eydaVenslFolk(id);
+    eydaVensl("folk_id", id);
 }
 
 void sqltenging::uppfaeraFolk(int id, string nafn, char kyn, int fAr, int dAr)
@@ -217,17 +217,6 @@ void sqltenging::buaTilVensl(int folkID, int velID)
 
 }
 
-void sqltenging::eydaVenslFolk(int id)
-{
-    string sql = "DELETE FROM venslfolkvelar WHERE folk_id = " + to_string(id);
-    udiSkipun(sql);
-}
-
-void sqltenging::eydaVenslVel(int id)
-{
-    string sql = "DELETE FROM venslfolkvelar WHERE folk_id = " + to_string(id);
-    udiSkipun(sql);
-}
 
 void sqltenging::eydaStakiVensl(int folkID, int velID)
 {
@@ -304,5 +293,11 @@ void sqltenging::udiSkipun(string sql)
 {
     QSqlQuery query(_db);
     query.exec(sql.c_str());
+}
+
+void sqltenging::eydaVensl(string col, int id)
+{
+    string sql = "DELETE FROM venslfolkvelar WHERE " + col + " = " + to_string(id);
+    udiSkipun(sql);
 }
 // End of private functions

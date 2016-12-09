@@ -38,8 +38,6 @@ public:
     int saekjaSize(string flokkur) const; //Skilar fjölda véla eða fólks (flokkur == "folk" eda "velar")
     // Functions for relations
     void buaTilVensl(int folkID, int velID);
-    void eydaVenslFolk(int id);
-    void eydaVenslVel(int id);
     void eydaStakiVensl(int folkID, int velID);
 
     vector<tolvufolk> lesaFolkVenslad(int velarID) const; //Sækir fólk venslað við ákveðið vélar ID
@@ -50,6 +48,7 @@ private:
     vector<tolvufolk> selectFolk(string sql) const;
     vector<velar> selectVelar(string sql) const;
     void udiSkipun(string sql); //UPDATE, DELETE, INSERT fólk
+    void eydaVensl(string col, int id);
 };
 
 #endif // SQLTENGING_H
