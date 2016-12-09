@@ -79,6 +79,11 @@ void tolvufolkService::venslaVidVel(int folk_id, int vel_id)
     _dataaccess.buaTilVensl(folk_id, vel_id);
 }
 
+void tolvufolkService::eydaStakiVensl(int folk_id, int vel_id)
+{
+    _dataaccess.eydaStakiVensl(folk_id, vel_id);
+}
+
 //Föll sem skila umbreyttum gögnum
 vector<tolvufolk> tolvufolkService::leitaStreng(string flokkur, string leitarord, char pos)
 {

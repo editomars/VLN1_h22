@@ -54,6 +54,11 @@ void velarService::eydaStakiVel(int id)
     _dataaccess.eydaVel(id);
 }
 
+void velarService::eydaStakiVensl(int folkID, int velID)
+{
+    _dataaccess.eydaStakiVensl(folkID, velID);
+}
+
 void velarService::tortimaTolvuVelar()
 {
     _dataaccess.tortimaVelum();

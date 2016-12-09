@@ -26,6 +26,7 @@ public:
     void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
     void uppfaeraStakTolvufolk(int id, string nafn, char kyn, int fAr, int dAr);
     void venslaVidVel(int folk_id, int vel_id); //Venslar folk_id við vel_id
+    void eydaStakiVensl(int folk_id, int vel_id); //Eyðir einu vensl tilviki;
 
     //Föll sem skila umbreyttum gögnum
     vector<tolvufolk> rada(string flokkur, string rod); //Skilar vector sem er raðaður eftir flokk og rod á að vera "asc" eða "desc" fyrir ascending og descending
