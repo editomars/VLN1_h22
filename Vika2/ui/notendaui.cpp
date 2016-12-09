@@ -136,6 +136,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         else if (skipun == "link" || skipun == "li")
         {
             GeraEdaEydaLink();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "sort" || skipun == "so")
@@ -228,6 +229,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
         else if (skipun == "link" || skipun == "li")
         {
             GeraEdaEydaLink();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "sort" || skipun == "so")
@@ -1525,9 +1527,7 @@ void NotendaUI::eydaVenslFolk()
     _service.eydaStakiVensl(folkID, velID);
 
 
-    cout << folktarget.getNafn() << " is no longer linked with " << veltarget.getVelaNafn() << endl;
-    cin >> persNR;
-
+    cout << folktarget.getNafn() << " is no longer linked with " << veltarget.getVelaNafn() << endl << endl;
 }
 
 void NotendaUI::prentaFolkVensl()
