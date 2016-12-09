@@ -87,11 +87,15 @@ ostream& operator <<(ostream& out, const velar& data)
     //out << "Was it built?: " << data.getByggd() << endl;
 
     out << "|" << data.getVelaNafn();
-    if(data.getVelaNafn().size() < 5)
+    if(data.getVelaNafn().size() <= 6)
+    {
+        out << "\t\t";
+    }
+    else if(data.getVelaNafn().size() > 6 && data.getVelaNafn().size() < 13)
     {
         out << "\t";
     }
-    out << " \t\t |" << data.getByggingarAr() <<  " \t\t   |" << data.getTegund();
+    out << " \t |" << data.getByggingarAr() <<  " \t\t   |" << data.getTegund();
     if (data.getTegund().size() < 3)
     {
         out << "\t";

@@ -27,7 +27,7 @@ void NotendaUI::prentaListaTolvuFolk(const vector<tolvufolk>& gogn)
         cout << "|" << i+1 << " \t\t ";
         cout << gogn[i];
     }
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------------------------------" << endl;
 
 }
 
@@ -48,7 +48,7 @@ void NotendaUI::prentaPersonu(const tolvufolk kall, int i)
 {
     hausUITolvuFolk();
     cout << "|" << i+1 << " \t\t " << kall;
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------------------------------" << endl;
 
 }
 
@@ -514,8 +514,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+                cout << "|No person with those parameters exists in the database.                                                         |" << endl;
+                cout << "------------------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
                 prentaListaTolvuFolk(gogn);
@@ -542,8 +542,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+                cout << "|No person with those parameters exists in the database.                                                         |" << endl;
+                cout << "------------------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
                 prentaListaTolvuFolk(gogn);
@@ -570,8 +570,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+                cout << "|No person with those parameters exists in the database.                                                         |" << endl;
+                cout << "------------------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
                 prentaListaTolvuFolk(gogn);
@@ -598,8 +598,8 @@ void NotendaUI::leitaGreinTolvuFolk() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUITolvuFolk();
-                cout << "|No person with those parameters exists in the database.                                                 |" << endl;
-                cout << "----------------------------------------------------------------------------------------------------------" << endl;
+                cout << "|No person with those parameters exists in the database.                                                         |" << endl;
+                cout << "------------------------------------------------------------------------------------------------------------------" << endl;
             }
             else
             {
@@ -1056,7 +1056,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUI();
-                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
+                cout << "|No machine with those parameters exists in the database.                                                |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
@@ -1084,7 +1084,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUI();
-                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
+                cout << "|No machine with those parameters exists in the database.                                                |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }else
             {
@@ -1106,7 +1106,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUI();
-                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
+                cout << "|No machine with those parameters exists in the database.                                                |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }
             else
@@ -1149,7 +1149,7 @@ void NotendaUI::leitaGreinVelar() //Search / Filter UI grein
             if (gogn.size() == 0)
             {
                 hausUI();
-                cout << "|No machine with those parameters exists in the database.                                                 |" << endl;
+                cout << "|No machine with those parameters exists in the database.                                                |" << endl;
                 cout << "----------------------------------------------------------------------------------------------------------" << endl;
             }
             else
@@ -1480,8 +1480,14 @@ void NotendaUI::prentaFolkVensl()
 
     system("cls");
     prentaListaTolvuVelar(_vService.getVelarVensl(ID));
-
-    cout << "These are the Machines linked to " << target.getNafn() << endl << endl;
+    if ((_vService.getVelarVensl(ID)).size() == 0)
+    {
+        cout << "There are no Machines linked to: " << target.getNafn() << endl;
+    }
+    else
+    {
+        cout << "These are the Machines linked to: " << target.getNafn() << endl << endl;
+    }
 
 }
 
@@ -1517,7 +1523,15 @@ void NotendaUI::prentaVelarvensl()
 
 
     prentaListaTolvuFolk(_service.getTolvufolkVensl(id));
-    cout << "These are the people linked to: " << target.getVelaNafn() << endl;
+    if ((_service.getTolvufolkVensl(id)).size() == 0)
+    {
+        cout << "There are no People linked to: " << target.getVelaNafn() << endl;
+    }
+    else
+    {
+        cout << "These are the People linked to: " << target.getVelaNafn() << endl;
+    }
+
 }
 
 
@@ -1778,14 +1792,14 @@ void NotendaUI::radaUIByggd()
 void NotendaUI::hausUI()
 {
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t\t |" << endl;
+    cout << "|Machine ID \t |Name of Machine \t |Year of Creation |Type of Machine \t  |Was it built? \t |" << endl;
     cout << "----------------------------------------------------------------------------------------------------------" << endl;
 }
 
 void NotendaUI::hausUITolvuFolk()
 {
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
-    cout << "|Scientist ID \t |Name \t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
-    cout << "----------------------------------------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------------------------------" << endl;
+    cout << "|Scientist ID \t |Name \t\t\t\t\t |Gender \t |Year of Birth  |Year of death  |Age \t |" << endl;
+    cout << "------------------------------------------------------------------------------------------------------------------" << endl;
 }
 //------------------------------- Svæðu fyrir cout blokkir endar -------------------------------

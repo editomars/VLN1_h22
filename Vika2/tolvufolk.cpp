@@ -68,6 +68,38 @@ ostream& operator <<(ostream& out, const tolvufolk& data)
     {
         if (data.getDanarar() == -1)
         {
+            if (data.getNafn().length() == 0)
+            {
+                out << "|" << data.getNafn() << " \t\t\t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |Still alive \t |";
+
+            }
+            else
+            {
+                out << "|" << data.getNafn() << " \t\t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |Still alive \t |";
+
+            }
+            out << 2016- data.getFaedingarar() << " \t |" << endl;
+        }
+
+        else
+        {
+            if (data.getNafn().length() == 0)
+            {
+                out << "|" << data.getNafn() << " \t\t\t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |";
+            }
+            else
+            {
+                out << "|" << data.getNafn() << " \t\t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |";
+
+            }
+            out << data.getDanarar() <<  " \t\t |" << data.getDanarar() - data.getFaedingarar() << " \t |" << endl;
+        }
+    }
+
+    else if (data.getNafn().length() < 21 && data.getNafn().length() >= 12)
+    {
+        if (data.getDanarar() == -1)
+        {
             out << "|" << data.getNafn() << " \t\t\t |" << data.getKyn() <<  " \t\t |" << data.getFaedingarar() <<  " \t\t |Still alive \t |";
             out << 2016- data.getFaedingarar() << " \t |" << endl;
         }
@@ -79,7 +111,7 @@ ostream& operator <<(ostream& out, const tolvufolk& data)
         }
     }
 
-    else if (data.getNafn().length() < 21 && data.getNafn().length() >= 12)
+    else if (data.getNafn().length() >= 21 && data.getNafn().length() < 29)
     {
         if (data.getDanarar() == -1)
         {
