@@ -1,10 +1,10 @@
 #ifndef NOTENDAUI_H
 #define NOTENDAUI_H
 
-#include "tolvufolk.h"
-#include "tolvufolkservice.h"
-#include "velar.h"
-#include "velarservice.h"
+#include "models/tolvufolk.h"
+#include "services/tolvufolkservice.h"
+#include "models/velar.h"
+#include "services/velarservice.h"
 #include <string>
 #include <vector>
 

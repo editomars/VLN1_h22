@@ -2,6 +2,11 @@ QT += core
 QT -= gui
 QT += sql
 
+INCLUDEPATH += /models
+INCLUDEPATH += /services
+INCLUDEPATH += /sql
+INCLUDEPATH += /ui
+
 CONFIG += c++11
 
 TARGET = TolvuFolk
@@ -11,17 +16,17 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    notendaui.cpp \
-    tolvufolk.cpp \
-    tolvufolkservice.cpp \
-    sqltenging.cpp \
-    velar.cpp \
-    velarservice.cpp
+    ui/notendaui.cpp \
+    models/tolvufolk.cpp \
+    services/tolvufolkservice.cpp \
+    sql/sqltenging.cpp \
+    models/velar.cpp \
+    services/velarservice.cpp
 
 HEADERS += \
-    notendaui.h \
-    tolvufolk.h \
-    tolvufolkservice.h \
-    sqltenging.h \
-    velar.h \
-    velarservice.h
+    ui/notendaui.h \
+    models/tolvufolk.h \
+    services/tolvufolkservice.h \
+    sql/sqltenging.h \
+    models/velar.h \
+    services/velarservice.h

@@ -1,4 +1,4 @@
-#include "notendaui.h"
+#include "ui/notendaui.h"
 
 int main()
 {

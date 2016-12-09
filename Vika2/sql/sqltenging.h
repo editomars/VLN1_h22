@@ -4,8 +4,8 @@
 #include <QtSql>
 #include <vector>
 #include <string>
-#include "tolvufolk.h"
-#include "velar.h"
+#include "models/tolvufolk.h"
+#include "models/velar.h"
 
 class sqltenging
 {

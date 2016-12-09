@@ -1,8 +1,8 @@
 #ifndef TOLVUFOLKSERVICE_H
 #define TOLVUFOLKSERVICE_H
 
-#include "sqltenging.h"
-#include "tolvufolk.h"
+#include "sql/sqltenging.h"
+#include "models/tolvufolk.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>

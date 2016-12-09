@@ -1,8 +1,8 @@
 #ifndef VELARSERVICE_H
 #define VELARSERVICE_H
 
-#include "sqltenging.h"
-#include "velar.h"
+#include "sql/sqltenging.h"
+#include "models/velar.h"
 #include <vector>
 #include <iostream>
 
