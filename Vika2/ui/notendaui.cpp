@@ -135,7 +135,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
 
         else if (skipun == "link" || skipun == "li")
         {
-            tengjaFolkiVel();
+            GeraEdaEydaLink();
         }
 
         else if (skipun == "sort" || skipun == "so")
@@ -227,7 +227,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
         else if (skipun == "link" || skipun == "li")
         {
-            tengjaFolkiVel();
+            GeraEdaEydaLink();
         }
 
         else if (skipun == "sort" || skipun == "so")
@@ -1448,6 +1448,87 @@ void NotendaUI::tengjaFolkiVel()  //vennsla fólk og vél
 
 }
 
+void NotendaUI::eydaVenslFolk()
+{
+    int persNR;
+    int machNR;
+    tolvufolk folktarget;
+    velar veltarget;
+    vector<tolvufolk> gogn = _service.getTolvufolk();
+    vector<velar> velargogn;
+    prentaListaTolvuFolk(gogn);
+
+    cout << "Enter number of scientist to delete a created link with a machine (-1 to cancel): ";
+    cin >> persNR;
+
+    if (persNR == -1)
+    {
+        return;
+    }
+    while (persNR > _service.getSize() || persNR <= 0)
+    {
+        if (persNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> persNR;
+    }
+
+    persNR--;
+    folktarget = _service.getStaktTolvufolk(gogn[persNR].getID());
+    int folkID = gogn[persNR].getID();
+
+    velargogn = _vService.getVelarVensl(folkID);
+
+  //  system("cls");
+
+    prentaListaTolvuVelar(velargogn);
+    if (velargogn.size() == 0)
+    {
+        cout << "There are no Machines linked to: " << folktarget.getNafn() << endl;
+        return;
+    }
+    else
+    {
+        cout << "These are the Machines linked to: " << folktarget.getNafn() << endl << endl;
+    }
+
+ //   prentaListaTolvuVelar(velargogn);
+
+    cout << "Enter number of machine to delete link with " << folktarget.getNafn() << ": ";
+    cin >> machNR;
+
+    if (machNR == -1)
+    {
+        return;
+    }
+    while (machNR > velargogn.size() || machNR <= 0)
+    {
+        if (machNR == -1)
+        {
+            break;
+        }
+        cerr << "Input not valid, try again: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> machNR;
+    }
+
+    machNR--;
+
+    int velID = velargogn[machNR].getID();
+    veltarget = _vService.getStaktVelar(velID);
+
+    _service.eydaStakiVensl(folkID, velID);
+
+
+    cout << folktarget.getNafn() << " is no longer linked with " << veltarget.getVelaNafn() << endl;
+    cin >> persNR;
+
+}
 
 void NotendaUI::prentaFolkVensl()
 {
@@ -1530,6 +1611,23 @@ void NotendaUI::prentaVelarvensl()
     else
     {
         cout << "These are the People linked to: " << target.getVelaNafn() << endl;
+    }
+
+}
+
+void NotendaUI::GeraEdaEydaLink()
+{
+    string skipun;
+    cout << "Do you want to make a new link or delete a link? (M/D)";
+    cin >> skipun;
+
+    if (skipun == "M" || skipun == "m" || skipun == "make")
+    {
+        tengjaFolkiVel();
+    }
+    else if (skipun == "D" || skipun == "d" || skipun == "delete")
+    {
+        eydaVenslFolk();
     }
 
 }

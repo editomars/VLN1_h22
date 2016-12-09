@@ -36,6 +36,8 @@ private:
     void tortimaListaTolvuFolk(); //Purge UI grein
     void baetaVidVelar(); //Add velar UI grein
     void tengjaFolkiVel(); //Venlsar persónu með vél
+    void eydaVenslFolk(); //Eydir stökum venslum
+    void GeraEdaEydaLink(); //Spyr til um hvort notandi vilji bua til eda eyda vensl
 
     void eydaVel(); //Eyda vel UI grei
     void uppfaeraVelar(); //Update Machine UI grein

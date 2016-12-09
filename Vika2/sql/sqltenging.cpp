@@ -220,7 +220,7 @@ void sqltenging::buaTilVensl(int folkID, int velID)
 
 void sqltenging::eydaStakiVensl(int folkID, int velID)
 {
-    string sql = "DELETE FROM venslfolkvelar"
+    string sql = "DELETE FROM venslfolkvelar "
                  "WHERE folk_id = " + to_string(folkID) + " "
                  "AND vel_id = " + to_string(velID);
     udiSkipun(sql);
