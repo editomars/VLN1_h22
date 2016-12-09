@@ -165,6 +165,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         {
             satt = false;
             uppfaeraVelar();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "search" || skipun == "se")
@@ -259,6 +260,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
             satt = false;
             uppfaeraPersonu();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "search" || skipun == "se")
@@ -966,7 +968,8 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
     cout << "To hold section as is, enter 0." << endl << endl;
 
     cout << "Enter updated machine name: ";
-    cin >> vNafn;
+    cin.ignore();
+    getline(cin,vNafn);
 
      if (vNafn == "0")
     {
