@@ -868,7 +868,8 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         }
 
         cout << "Enter type: ";
-        cin >> tegund;
+        cin.ignore();
+        getline(cin, tegund);
 
         do
         {
