@@ -46,27 +46,6 @@ bool velar::getByggd() const
     return _byggd;
 }
 
-//Set föll
-void velar::uppfVelaNafn(string nyttvNafn)
-{
-    _vNafn = nyttvNafn;
-}
-
-void velar::uppfByggingarAr(int nyttbAr)
-{
-    _bAr = nyttbAr;
-}
-
-void velar::uppfTegund(int nyttTegund)
-{
-    _tegund = nyttTegund;
-}
-
-void velar::uppfByggd(bool nyttByggd)
-{
-    _byggd = nyttByggd;
-}
-
 //ops
 ostream& operator <<(ostream& out, const velar& data)
 {

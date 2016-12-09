@@ -478,7 +478,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     }while(nyttD < nyttF && nyttD != -1);
 
 
-    _service.uppfaeraStakTolvufolk(target.getID(), nafn, nyttKyn, nyttF, nyttD);
+    _service.uppfaeraStakTolvuFolk(target.getID(), nafn, nyttKyn, nyttF, nyttD);
 
     system("cls");
     cout << "Updated information:" << endl << endl;
@@ -1635,8 +1635,8 @@ void NotendaUI::GeraEdaEydaLink()
 
 }
 
-
 //------------------------------- Svæði fyrir UI greinar endar ---------------------------------
+
 
 //------------------------------- Svæði fyrir bool flögg byrjar --------------------------------
 bool NotendaUI::aframhaldandiUIAdal()

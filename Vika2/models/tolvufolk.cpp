@@ -17,10 +17,13 @@ tolvufolk::tolvufolk(int id, string nafn, char kyn, int faedingarar, int danarar
 }
 
 //Get föll
-
 int tolvufolk::getID() const
 {
     return _id;
+}
+string tolvufolk::getNafn() const
+{
+       return _nafn;
 }
 char tolvufolk::getKyn() const
 {
@@ -34,18 +37,12 @@ int tolvufolk::getDanarar() const
 {
     return _danarar;
 }
-
 int tolvufolk::getAldur() const
 {
     return (_danarar == -1 ? 2016 - _faedingarar : _danarar - _faedingarar);
 }
 
-string tolvufolk::getNafn() const
-{
-       return _nafn;
-}
-
-//ops
+//operators
 ostream& operator <<(ostream& out, const tolvufolk& data)
 {
     /*
