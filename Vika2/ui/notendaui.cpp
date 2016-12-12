@@ -166,6 +166,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
         {
             satt = false;
             uppfaeraVelar();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "search" || skipun == "se")
@@ -261,6 +262,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
 
             satt = false;
             uppfaeraPersonu();
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "search" || skipun == "se")
@@ -478,7 +480,7 @@ void NotendaUI::uppfaeraPersonu() //Update UI grein
     }while(nyttD < nyttF && nyttD != -1);
 
 
-    _service.uppfaeraStakTolvufolk(target.getID(), nafn, nyttKyn, nyttF, nyttD);
+    _service.uppfaeraStakTolvuFolk(target.getID(), nafn, nyttKyn, nyttF, nyttD);
 
     system("cls");
     cout << "Updated information:" << endl << endl;
@@ -868,7 +870,8 @@ void NotendaUI::baetaVidVelar() //UI grein til að bæta við vel.
         }
 
         cout << "Enter type: ";
-        cin >> tegund;
+        cin.ignore();
+        getline(cin, tegund);
 
         do
         {
@@ -968,7 +971,8 @@ void NotendaUI::uppfaeraVelar() //Update UI grein
     cout << "To hold section as is, enter 0." << endl << endl;
 
     cout << "Enter updated machine name: ";
-    cin >> vNafn;
+    cin.ignore();
+    getline(cin,vNafn);
 
      if (vNafn == "0")
     {
@@ -1634,8 +1638,8 @@ void NotendaUI::GeraEdaEydaLink()
 
 }
 
-
 //------------------------------- Svæði fyrir UI greinar endar ---------------------------------
+
 
 //------------------------------- Svæði fyrir bool flögg byrjar --------------------------------
 bool NotendaUI::aframhaldandiUIAdal()
