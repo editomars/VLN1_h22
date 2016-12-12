@@ -69,7 +69,7 @@ void tolvufolkService::eydaStakiTolvufolk(int id)
     _dataaccess.eydaFolk(id);
 }
 
-void tolvufolkService::uppfaeraStakTolvufolk(int id, string nafn, char kyn, int fAr, int dAr)
+void tolvufolkService::uppfaeraStakTolvuFolk(int id, string nafn, char kyn, int fAr, int dAr)
 {
     _dataaccess.uppfaeraFolk(id,nafn,kyn,fAr,dAr);
 }

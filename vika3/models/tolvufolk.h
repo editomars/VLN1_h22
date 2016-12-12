@@ -10,9 +10,10 @@ using namespace std;
 class tolvufolk
 {
 public:
+    //Smiðir
     tolvufolk();
-
     tolvufolk(int id, string nafn, char kyn, int faedingarar, int danarar);
+
     //Get föll
     int getID() const;
     string getNafn() const;
@@ -21,7 +22,7 @@ public:
     int getDanarar() const;
     int getAldur() const;
 
-    //ops
+    //operators
     friend ostream& operator <<(ostream& out, const tolvufolk& gogn);
 private:
     int _id;

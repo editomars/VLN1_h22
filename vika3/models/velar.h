@@ -10,6 +10,7 @@ using namespace std;
 class velar
 {
 public:
+    //Smiðir
     velar();
     velar(int id, string vNafn, int bAr, string tegund, bool byggd);
 
@@ -19,11 +20,7 @@ public:
     int getByggingarAr() const;
     string getTegund() const;
     bool getByggd() const;
-    //Set föll
-    void uppfVelaNafn(string nyttvNafn);
-    void uppfByggingarAr(int nyttbAr);
-    void uppfTegund(int nyttTegund);
-    void uppfByggd(bool nyttByggd);
+
     //ops
     friend ostream& operator <<(ostream& out, const velar& gogn);
 private:

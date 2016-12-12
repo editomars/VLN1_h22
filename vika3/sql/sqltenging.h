@@ -33,13 +33,11 @@ public:
     void eydaFolk(int id);
     void uppfaeraFolk(int id, string nafn, char kyn, int fAr, int dAr);
     void tortimaFolki();
-
-
     int saekjaSize(string flokkur) const; //Skilar fjölda véla eða fólks (flokkur == "folk" eda "velar")
+
     // Functions for relations
     void buaTilVensl(int folkID, int velID);
     void eydaStakiVensl(int folkID, int velID);
-
     vector<tolvufolk> lesaFolkVenslad(int velarID) const; //Sækir fólk venslað við ákveðið vélar ID
     vector<velar> lesaVelarVenslad(int folkID) const; //Sækir velar venslað við ákveðið fólk ID
 
