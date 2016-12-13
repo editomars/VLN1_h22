@@ -34,6 +34,8 @@ public:
     vector<velar> leitaStreng(string flokkur, string leitarord, char pos); //Skilar vector sem er flokkaður(filteraður) ef flokka á strengjaflokk (nafn eða kyn)
     vector<velar> leitaHeiltolu(string flokkur, char type, int leitarord); //Skilar vector sem er flokkar(filteraður) ef flokka á integer flokk (faedingarar, danarar eða aldur), type er < > = til að fá stærra, minna eða jafnt og
     vector<velar> leitaHeiltolubil(string flokkur, int laegraBil, int haerraBil); //Skilar vector sem er filteraður á heiltölubili
+    vector<velar> leitaBool(string flokkur, int erSatt); //Skilar öllum sönnu eða ósönnu úrtökonum
+
 private:
     sqltenging _dataaccess;
 };

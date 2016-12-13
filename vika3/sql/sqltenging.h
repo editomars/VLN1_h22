@@ -18,6 +18,7 @@ public:
     vector<velar> leitaVelar(string flokkur, string leitarord, char pos); //Leitar að leitarord í töfluflokk, pos = 'b' til að leita í byrjun orðs, 'e' í enda, annars hvar sem er í orði
     vector<velar> leitaVelar(string flokkur, char type, int leitarord); //type = '<' til að leita að heilölu minni en leitarord, '>' fyrir stærri en, '=' fyrir jafnt og
     vector<velar> leitaVelar(string flokkur, int laegraBil, int haerraBil); //skilar flokk á ákeðnu heiltölubili
+    vector<velar> leitaVelar(string flokkur, int erSatt); //skilar annað hvort öllum true eða false gildum
     void baetaVidVel(string nafn, int bAr, bool byggd, string tegund);
     void eydaVel(int id);
     void uppfaeraVel(int id, string nafn, int bAr, bool byggd, string tegund);

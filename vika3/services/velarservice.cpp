@@ -84,3 +84,8 @@ vector<velar> velarService::leitaHeiltolubil(string flokkur, int laegraBil, int 
 {
     return _dataaccess.leitaVelar(flokkur, laegraBil, haerraBil);
 }
+
+vector<velar> velarService::leitaBool(string flokkur, int erSatt)
+{
+    return _dataaccess.leitaVelar(flokkur, erSatt);
+}
