@@ -9,7 +9,6 @@ adalgluggi::adalgluggi(QWidget *parent) :
     ui->setupUi(this);
     ui->velar;
     ui->folk;
-    ui->
 }
 
 adalgluggi::~adalgluggi()
@@ -33,10 +32,10 @@ void adalgluggi::on_velar_clicked()
 
 void adalgluggi::on_folk_clicked()
 {
-
+    qDebug () << ui->folk;
 }
 
-void adalgluggi::on_haetta_clicked()
+/*void adalgluggi::on_haetta_clicked()
 {
 
-}
+}*/
