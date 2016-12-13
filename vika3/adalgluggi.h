@@ -19,10 +19,13 @@ public:
 
 private slots:
 
+    void on_tabsList_currentChanged(int index);
+
 private:
     Ui::adalgluggi *ui;
 
-    void synaFolk(vector<tolvufolk> folk);
+    void synaFolk(const vector<tolvufolk>& folk);
+    void synaVelar(const vector<velar>& velar);
 
     tolvufolkService _fService;
     velarService _vService;
