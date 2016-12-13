@@ -18,17 +18,16 @@ public:
     ~adalgluggi();
 
 private slots:
-    void on_velar_clicked();
-
-    void on_folk_clicked();
-
-    void on_haetta_clicked();
 
 private:
     Ui::adalgluggi *ui;
 
+    void synaFolk(vector<tolvufolk> folk);
+
     tolvufolkService _fService;
     velarService _vService;
+    vector<tolvufolk> _folkCurrent;
+    vector<velar> _velarCurrent;
 };
 
 #endif // ADALGLUGGI_H

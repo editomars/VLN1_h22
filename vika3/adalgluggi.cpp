@@ -7,6 +7,10 @@ adalgluggi::adalgluggi(QWidget *parent) :
     ui(new Ui::adalgluggi)
 {
     ui->setupUi(this);
+    //init stillingar
+    _folkCurrent = _fService.getTolvufolk();
+    _velarCurrent = _vService.getVelar();
+    synaFolk(_folkCurrent);
 }
 
 adalgluggi::~adalgluggi()
@@ -14,18 +18,17 @@ adalgluggi::~adalgluggi()
     delete ui;
 }
 
-void adalgluggi::on_velar_clicked()
+void adalgluggi::synaFolk(vector<tolvufolk> folk)
 {
-    qDebug () << "Vélar hnappur clicked";
-}
+    ui->folkTable->clearContents();
 
-void adalgluggi::on_folk_clicked()
-{
-    qDebug () << "Folk hnappur clicked";
-}
+    ui->folkTable->setRowCount(folk.size());
 
-void adalgluggi::on_haetta_clicked()
-{
-    vector<tolvufolk> folk = _fService.getTolvufolk();
-    qDebug () << folk.size();
+    for (size_t row = 0; row < folk.size(); ++row)
+    {
+        QString stak = QString::fromStdString(folk[row].getNafn());
+        ui->folkTable->setItem(row, 0, new QTableWidgetItem(stak));
+    }
+
+    _folkCurrent = folk;
 }

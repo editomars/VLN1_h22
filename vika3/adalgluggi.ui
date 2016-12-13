@@ -6,59 +6,61 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>558</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>adalgluggi</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QTabWidget" name="tabsList">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>80</y>
-      <width>160</width>
-      <height>91</height>
+      <x>0</x>
+      <y>0</y>
+      <width>551</width>
+      <height>181</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="folk">
-       <property name="text">
-        <string>People</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="velar">
-       <property name="text">
-        <string>Machines</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="haetta">
-       <property name="text">
-        <string>Quit</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>50</y>
-      <width>161</width>
-      <height>21</height>
-     </rect>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
-    <property name="text">
-     <string>What do you want to do?</string>
-    </property>
+    <widget class="QWidget" name="folkTab">
+     <attribute name="title">
+      <string>Scientists</string>
+     </attribute>
+     <widget class="QTableWidget" name="folkTable">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>541</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Nafn</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="velTab">
+     <attribute name="title">
+      <string>Computers</string>
+     </attribute>
+     <widget class="QTableWidget" name="velTable">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>541</width>
+        <height>151</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -75,8 +77,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>21</height>
+     <width>558</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain_Menu">
