@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabsList">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="folkTab">
        <attribute name="title">
@@ -36,6 +36,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="button_delete">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Delete</string>
             </property>
@@ -43,6 +46,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="button_update">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Update</string>
             </property>
