@@ -60,7 +60,11 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLineEdit" name="folkFilterText"/>
+           <widget class="QLineEdit" name="folkFilterText">
+            <property name="placeholderText">
+             <string>Filter scientists</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QComboBox" name="folkFilterBox">
@@ -153,7 +157,11 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QLineEdit" name="velFilterText"/>
+           <widget class="QLineEdit" name="velFilterText">
+            <property name="placeholderText">
+             <string>Filter machines</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QComboBox" name="velFilterBox">
