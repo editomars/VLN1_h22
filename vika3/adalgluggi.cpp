@@ -26,5 +26,6 @@ void adalgluggi::on_folk_clicked()
 
 void adalgluggi::on_haetta_clicked()
 {
-
+    vector<tolvufolk> folk = _fService.getTolvufolk();
+    qDebug () << folk.size();
 }
