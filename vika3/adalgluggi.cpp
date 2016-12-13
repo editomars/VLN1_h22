@@ -87,7 +87,33 @@ void adalgluggi::on_tabsList_currentChanged(int index)
 void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->folkFilterBox->currentText().toStdString();
-    if (flokkur == "Name")
+
+    if (arg1.toStdString() == "")
+        synaFolk(_fService.getTolvufolk());
+
+    else if (flokkur == "Name")
         synaFolk(_fService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
 
+    else if (flokkur == "Gender")
+        synaFolk(_fService.leitaStreng("Kyn", arg1.toStdString(), 'a'));
+
+    else if (flokkur == "Age")
+        synaFolk(_fService.leitaHeiltolu("aldur", '=', arg1.toInt()));
+
+    else if (flokkur == "Birth")
+        synaFolk(_fService.leitaHeiltolu("faedingarar", '=', arg1.toInt()));
+
+    else if (flokkur == "Death")
+    {
+        string aLifi = arg1.toStdString();
+        for (size_t i = 0; i < aLifi.length(); ++i)
+        {
+            aLifi[i] = tolower(aLifi[i]);
+        }
+        if (aLifi == "still alive")
+            synaFolk(_fService.leitaHeiltolu("danarar", '=', -1));
+        else
+            synaFolk(_fService.leitaHeiltolu("danarar", '=', arg1.toInt()));
+
+    }
 }
