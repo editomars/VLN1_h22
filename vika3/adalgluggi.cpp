@@ -89,6 +89,8 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->folkFilterBox->currentText().toStdString();
 
+
+
     if (arg1.toStdString() == "")
         synaFolk(_fService.getTolvufolk());
 
@@ -96,7 +98,20 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
         synaFolk(_fService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
 
     else if (flokkur == "Gender")
-        synaFolk(_fService.leitaStreng("Kyn", arg1.toStdString(), 'a'));
+    {
+        string kynid = arg1.toStdString();
+        for (size_t i = 0; i < kynid.length(); ++i)
+        {
+            kynid[i] = tolower(kynid[i]);
+        }
+
+        if (kynid == "male")
+            synaFolk(_fService.leitaStreng("Kyn", "m", 'a'));
+        else if (kynid == "female")
+            synaFolk(_fService.leitaStreng("Kyn", "f", 'a'));
+        else
+            synaFolk(_fService.leitaStreng("Kyn", arg1.toStdString(), 'a'));
+    }
 
     else if (flokkur == "Age")
         synaFolk(_fService.leitaHeiltolu("aldur", '=', arg1.toInt()));
