@@ -18,8 +18,6 @@ public:
     ~adalgluggi();
 
 private slots:
-    void on_pushButton_clicked();
-
     void on_velar_clicked();
 
     void on_folk_clicked();
