@@ -20,6 +20,12 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_velar_clicked();
+
+    void on_folk_clicked();
+
+    void on_haetta_clicked();
+
 private:
     Ui::adalgluggi *ui;
 

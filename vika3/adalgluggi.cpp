@@ -1,11 +1,15 @@
 #include "adalgluggi.h"
 #include "ui_adalgluggi.h"
 
+#include <QDebug>
 adalgluggi::adalgluggi(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::adalgluggi)
 {
     ui->setupUi(this);
+    ui->velar;
+    ui->folk;
+    ui->
 }
 
 adalgluggi::~adalgluggi()
@@ -20,4 +24,19 @@ void adalgluggi::on_pushButton_clicked()
     {
         qDebug() << QString(folk[i].getNafn().c_str());
     }
+}
+
+void adalgluggi::on_velar_clicked()
+{
+    qDebug () << ui->velar;
+}
+
+void adalgluggi::on_folk_clicked()
+{
+
+}
+
+void adalgluggi::on_haetta_clicked()
+{
+
 }
