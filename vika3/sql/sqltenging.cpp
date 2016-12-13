@@ -63,6 +63,21 @@ vector<velar> sqltenging::leitaVelar(string flokkur, int laegraBil, int haerraBi
     return selectVelar(sql);
 }
 
+vector<velar> sqltenging::leitaVelar(string flokkur, int erSatt)
+{
+    char temp = 49;
+
+    if (erSatt == 0)
+    {
+        temp = 48;
+    }
+
+    string sql = "SELECT * FROM TolvuVelar "
+            "WHERE " + flokkur + " = " + temp;
+
+    return selectVelar(sql);
+}
+
 void sqltenging::baetaVidVel(string nafn, int bAr, bool byggd, string tegund)
 {
     string sql = "INSERT INTO TolvuVelar(Nafn, Byggingarar, Byggd, Tegund)"

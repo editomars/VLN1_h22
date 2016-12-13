@@ -122,6 +122,23 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
 void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->velFilterBox->currentText().toStdString();
-    if (flokkur == "Name")
+
+    if (arg1.toStdString() == "")
+        synaVelar(_vService.getVelar());
+
+    else if (flokkur == "Name")
         synaVelar(_vService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
+
+    else if (flokkur == "Year built")
+        synaVelar(_vService.leitaHeiltolu("ByggingarAr", '=', arg1.toInt() ));
+
+    else if (flokkur == "Type")
+        synaVelar(_vService.leitaStreng("Tegund", arg1.toStdString(), 'a'));
+
+    else if (flokkur == "Built?")
+    {
+        synaVelar(_vService.leitaBool("Byggd", arg1.toInt() ));
+    }
+
+
 }
