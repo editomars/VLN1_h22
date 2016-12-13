@@ -21,6 +21,8 @@ private slots:
 
     void on_tabsList_currentChanged(int index);
 
+    void on_folkFilterText_textChanged(const QString &arg1);
+
 private:
     Ui::adalgluggi *ui;
 
