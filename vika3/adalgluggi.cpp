@@ -83,3 +83,11 @@ void adalgluggi::on_tabsList_currentChanged(int index)
             break;
     }
 }
+
+void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
+{
+    string flokkur = ui->folkFilterBox->currentText().toStdString();
+    if (flokkur == "Name")
+        synaFolk(_fService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
+
+}

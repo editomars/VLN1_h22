@@ -26,6 +26,48 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLineEdit" name="folkFilterText"/>
+          </item>
+          <item>
+           <widget class="QComboBox" name="folkFilterBox">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gender</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Age</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Birth</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Death</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QTableWidget" name="folkTable">
           <property name="sortingEnabled">
            <bool>false</bool>
@@ -67,6 +109,9 @@
         <string>Computers</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QComboBox" name="velCombo"/>
+        </item>
         <item>
          <widget class="QTableWidget" name="velTable">
           <property name="alternatingRowColors">
