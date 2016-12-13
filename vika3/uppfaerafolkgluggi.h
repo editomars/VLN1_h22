@@ -14,6 +14,9 @@ class uppfaeraFolkGluggi : public QDialog
 
 public:
     explicit uppfaeraFolkGluggi(QWidget *parent = 0);
+
+    void setFolk(tolvufolk folk);
+
     ~uppfaeraFolkGluggi();
 
 private slots:
@@ -23,6 +26,7 @@ private:
     Ui::uppfaeraFolkGluggi *ui;
 
     tolvufolkService _fService;
+    tolvufolk _target;
 };
 
 #endif // UPPFAERAFOLKGLUGGI_H

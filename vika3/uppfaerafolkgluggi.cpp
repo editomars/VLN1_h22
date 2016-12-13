@@ -8,6 +8,11 @@ uppfaeraFolkGluggi::uppfaeraFolkGluggi(QWidget *parent) :
     ui->setupUi(this);
 }
 
+void uppfaeraFolkGluggi::setFolk(tolvufolk folk)
+{
+    _target = folk;
+}
+
 uppfaeraFolkGluggi::~uppfaeraFolkGluggi()
 {
     delete ui;
