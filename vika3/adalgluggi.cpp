@@ -181,6 +181,10 @@ void adalgluggi::on_button_delete_clicked()
 
 void adalgluggi::on_button_update_clicked()
 {
+    //Hér er folkCurrent gæjinn sem er highlited þegar þú clickar á update, eftir að finna ut hvernig unnið er með það
+    int folkCurrentIndex = ui->folkTable->currentIndex().row();
+    tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
+
     uppfaeraFolkGluggi uppFolkGluggi;
     uppFolkGluggi.exec();
 }
