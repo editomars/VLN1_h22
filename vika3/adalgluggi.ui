@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabsList">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="folkTab">
        <attribute name="title">
@@ -72,8 +72,17 @@
           <property name="sortingEnabled">
            <bool>false</bool>
           </property>
+          <property name="cornerButtonEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
           </attribute>
           <column>
            <property name="text">
