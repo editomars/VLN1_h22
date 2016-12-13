@@ -153,6 +153,7 @@ void NotendaUI::adalvalmyndUITolvuVelar() //Greinin fyrir tölvur, branchar út 
             cout << "-----Adding computer machines-----" << endl;
             baetaVidVelar();
             prentaListaTolvuVelar(_vService.getVelar());
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "delete" || skipun == "d")
@@ -247,6 +248,7 @@ void NotendaUI::adalvalmyndUITolvuFolk() //Greinin fyrir tölvufolk, branchar ú
             cout << "-----Adding computer scientist-----" << endl;
             baetaVidPersonu();
             prentaListaTolvuFolk(_service.getTolvufolk());
+            aframhaldandiUIAlmennt();
         }
 
         else if (skipun == "delete" || skipun == "d")
