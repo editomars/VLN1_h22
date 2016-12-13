@@ -140,3 +140,23 @@ void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
     if (flokkur == "Name")
         synaVelar(_vService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
 }
+
+void adalgluggi::on_button_add_clicked()
+{
+
+}
+
+void adalgluggi::on_button_delete_clicked()
+{
+
+}
+
+void adalgluggi::on_button_update_clicked()
+{
+
+}
+
+void adalgluggi::on_button_purge_clicked()
+{
+
+}

@@ -23,13 +23,16 @@ SOURCES += main.cpp\
     models/velar.cpp \
     services/tolvufolkservice.cpp \
     services/velarservice.cpp \
-    sql/sqltenging.cpp
+    sql/sqltenging.cpp \
+    addscientist.cpp
 
 HEADERS  += adalgluggi.h \
     models/tolvufolk.h \
     models/velar.h \
     services/tolvufolkservice.h \
     services/velarservice.h \
-    sql/sqltenging.h
+    sql/sqltenging.h \
+    addscientist.h
 
-FORMS    += adalgluggi.ui
+FORMS    += adalgluggi.ui \
+    addscientist.ui

@@ -25,6 +25,14 @@ private slots:
 
     void on_velFilterText_textChanged(const QString &arg1);
 
+    void on_button_add_clicked();
+
+    void on_button_delete_clicked();
+
+    void on_button_update_clicked();
+
+    void on_button_purge_clicked();
+
 private:
     Ui::adalgluggi *ui;
 
