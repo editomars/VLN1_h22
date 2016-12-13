@@ -1,5 +1,6 @@
 #include "adalgluggi.h"
 #include "ui_adalgluggi.h"
+#include "uppfaerafolkgluggi.h"
 
 #include <QDebug>
 adalgluggi::adalgluggi(QWidget *parent) :
@@ -170,7 +171,8 @@ void adalgluggi::on_button_delete_clicked()
 
 void adalgluggi::on_button_update_clicked()
 {
-
+    uppfaeraFolkGluggi uppFolkGluggi;
+    uppFolkGluggi.exec();
 }
 
 void adalgluggi::on_button_purge_clicked()

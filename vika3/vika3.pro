@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     services/tolvufolkservice.cpp \
     services/velarservice.cpp \
     sql/sqltenging.cpp \
-    addscientist.cpp
+    addscientist.cpp \
+    uppfaerafolkgluggi.cpp
 
 HEADERS  += adalgluggi.h \
     models/tolvufolk.h \
@@ -32,7 +33,9 @@ HEADERS  += adalgluggi.h \
     services/tolvufolkservice.h \
     services/velarservice.h \
     sql/sqltenging.h \
-    addscientist.h
+    addscientist.h \
+    uppfaerafolkgluggi.h
 
 FORMS    += adalgluggi.ui \
-    addscientist.ui
+    addscientist.ui \
+    uppfaerafolkgluggi.ui

@@ -62,7 +62,7 @@
           <item>
            <widget class="QLineEdit" name="folkFilterText">
             <property name="placeholderText">
-             <string>Filter scientists</string>
+             <string>Filter scientists by...</string>
             </property>
            </widget>
           </item>
@@ -105,6 +105,15 @@
         </item>
         <item>
          <widget class="QTableWidget" name="folkTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>false</bool>
           </property>
@@ -159,7 +168,7 @@
           <item>
            <widget class="QLineEdit" name="velFilterText">
             <property name="placeholderText">
-             <string>Filter machines</string>
+             <string>Filter machines by...</string>
             </property>
            </widget>
           </item>
@@ -197,8 +206,17 @@
         </item>
         <item>
          <widget class="QTableWidget" name="velTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="alternatingRowColors">
            <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <attribute name="horizontalHeaderCascadingSectionResizes">
            <bool>false</bool>
