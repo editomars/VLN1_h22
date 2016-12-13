@@ -11,6 +11,7 @@ adalgluggi::adalgluggi(QWidget *parent) :
     _folkCurrent = _fService.getTolvufolk();
     _velarCurrent = _vService.getVelar();
     synaFolk(_folkCurrent);
+    synaVelar(_velarCurrent);
 }
 
 adalgluggi::~adalgluggi()
@@ -131,4 +132,11 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
             synaFolk(_fService.leitaHeiltolu("danarar", '=', arg1.toInt()));
 
     }
+}
+
+void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
+{
+    string flokkur = ui->velFilterBox->currentText().toStdString();
+    if (flokkur == "Name")
+        synaVelar(_vService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
 }

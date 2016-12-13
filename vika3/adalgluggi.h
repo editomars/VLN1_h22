@@ -23,6 +23,8 @@ private slots:
 
     void on_folkFilterText_textChanged(const QString &arg1);
 
+    void on_velFilterText_textChanged(const QString &arg1);
+
 private:
     Ui::adalgluggi *ui;
 
