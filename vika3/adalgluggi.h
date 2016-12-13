@@ -18,13 +18,19 @@ public:
     ~adalgluggi();
 
 private slots:
-    void on_pushButton_clicked();
+
+    void on_tabsList_currentChanged(int index);
 
 private:
     Ui::adalgluggi *ui;
 
+    void synaFolk(const vector<tolvufolk>& folk);
+    void synaVelar(const vector<velar>& velar);
+
     tolvufolkService _fService;
     velarService _vService;
+    vector<tolvufolk> _folkCurrent;
+    vector<velar> _velarCurrent;
 };
 
 #endif // ADALGLUGGI_H
