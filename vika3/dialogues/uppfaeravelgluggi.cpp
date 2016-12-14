@@ -56,6 +56,8 @@ void uppfaeravelgluggi::on_UppfaeraVelTakki_clicked()
 
     _vService.uppfaeraVelar(id, vNafn, bAr, byggd, tegund);
 
+    this->done(0);
+
 }
 
 void uppfaeravelgluggi::on_UppfHaettaTakki_clicked()
