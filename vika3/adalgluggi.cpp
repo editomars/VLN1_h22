@@ -88,9 +88,18 @@ void adalgluggi::on_tabsList_currentChanged(int index)
     switch (index)
     {
         case 0:
+
+            ui->vButton_delete->setEnabled(false);
+            ui->vButton_update->setEnabled(false);
+
             synaFolk(_folkCurrent);
+
             break;
         case 1:
+
+            ui->button_update->setEnabled(false);
+            ui->button_delete->setEnabled(false);
+
             synaVelar(_velarCurrent);
             break;
     }
@@ -187,6 +196,7 @@ void adalgluggi::on_button_delete_clicked()
     ui->folkFilterText->setText("");
     synaFolk(_fService.getTolvufolk());
     ui->button_delete->setEnabled(false);
+    ui->button_update->setEnabled(false);
 
 }
 
@@ -232,6 +242,8 @@ void adalgluggi::on_vButton_delete_clicked()
     ui->velFilterText->setText("");
     synaVelar(_vService.getVelar());
     ui->vButton_delete->setEnabled(false);
+    ui->vButton_update->setEnabled(false);
+
 
 }
 
@@ -249,4 +261,10 @@ void adalgluggi::on_vButton_update_clicked()
 void adalgluggi::on_vButton_purge_clicked()
 {
 
+}
+
+void adalgluggi::on_velTable_clicked(const QModelIndex &index)
+{
+    ui->vButton_delete->setEnabled(true);
+    ui->vButton_update->setEnabled(true);
 }
