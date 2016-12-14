@@ -4,6 +4,7 @@
 #include "services/velarservice.h"
 
 #include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class addmachine;
@@ -21,12 +22,6 @@ private slots:
     void on_vButton_add_clicked();
 
     void on_vButton_cancel_clicked();
-
-    void on_vRadio_built_clicked();
-
-    void on_vRadio_notBuilt_clicked();
-
-
 private:
     Ui::addmachine *ui;
     velarService _vService;
