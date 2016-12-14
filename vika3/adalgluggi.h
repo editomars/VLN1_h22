@@ -35,6 +35,14 @@ private slots:
 
     void on_folkTable_clicked(const QModelIndex &index);
 
+    void on_vButton_add_clicked();
+
+    void on_vButton_delete_clicked();
+
+    void on_vButton_update_clicked();
+
+    void on_vButton_purge_clicked();
+
 private:
     Ui::adalgluggi *ui;
 

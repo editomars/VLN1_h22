@@ -1,6 +1,7 @@
 #include "adalgluggi.h"
 #include "ui_adalgluggi.h"
 #include "dialogues/uppfaerafolkgluggi.h"
+#include "dialogues/uppfaeravelgluggi.h"
 #include "dialogues/addscientist.h"
 
 #include <string>
@@ -97,8 +98,6 @@ void adalgluggi::on_tabsList_currentChanged(int index)
 void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->folkFilterBox->currentText().toStdString();
-
-
 
     if (arg1.toStdString() == "")
         synaFolk(_fService.getTolvufolk());
@@ -210,4 +209,40 @@ void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
 {
     ui->button_update->setEnabled(true);
     ui->button_delete->setEnabled(true);
+}
+
+void adalgluggi::on_vButton_add_clicked()
+{
+
+}
+
+void adalgluggi::on_vButton_delete_clicked()
+{
+    int velarCurrentIndex = ui->velTable->currentIndex().row();
+
+    velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
+
+    _vService.eydaStakiVel(velarCurrent.getID());
+
+    //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
+    ui->velFilterText->setText("");
+    synaVelar(_vService.getVelar());
+    ui->vButton_delete->setEnabled(false);
+
+}
+
+void adalgluggi::on_vButton_update_clicked()
+{
+    //Highlited gæji verður target
+    int velarCurrentIndex = ui->velTable->currentIndex().row();
+    velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
+
+    uppfaeravelgluggi uppVelGluggi;
+    uppVelGluggi.setVel(velarCurrent);
+    uppVelGluggi.exec();
+}
+
+void adalgluggi::on_vButton_purge_clicked()
+{
+
 }

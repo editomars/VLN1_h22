@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     services/velarservice.cpp \
     sql/sqltenging.cpp \
     dialogues/addscientist.cpp \
-    dialogues/uppfaerafolkgluggi.cpp
+    dialogues/uppfaerafolkgluggi.cpp \
+    dialogues/uppfaeravelgluggi.cpp \
+    dialogues/addmachine.cpp
 
 HEADERS  += adalgluggi.h \
     models/tolvufolk.h \
@@ -35,9 +37,13 @@ HEADERS  += adalgluggi.h \
     sql/sqltenging.h \
     dialogues/addscientist.h \
     dialogues/uppfaerafolkgluggi.h \
+    dialogues/uppfaeravelgluggi.h \
+    dialogues/addmachine.h
     utils/enums.h \
     utils/constants.h
 
 FORMS    += adalgluggi.ui \
     dialogues/addscientist.ui \
-    dialogues/uppfaerafolkgluggi.ui
+    dialogues/uppfaerafolkgluggi.ui \
+    dialogues/uppfaeravelgluggi.ui \
+    dialogues/addmachine.ui
