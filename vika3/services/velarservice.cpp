@@ -39,14 +39,20 @@ void velarService::venslaVidVel(int folkID, int velID)
 
 //Föll sem breyta gagnagrunni
 
-void velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund)
+enum velValidation velarService::baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund)
 {
-    _dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
+    velValidation valid = validate(bAr);
+    if (valid == vSuccess)
+       _dataaccess.baetaVidVel(vNafn, bAr, byggd, tegund);
+    return valid;
 }
 
-void velarService::uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund)
+enum velValidation velarService::uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund)
 {
-    _dataaccess.uppfaeraVel(id,nafn,bAr,byggd,tegund);
+    velValidation valid = validate(bAr);
+    if (valid == vSuccess)
+        _dataaccess.uppfaeraVel(id,nafn,bAr,byggd,tegund);
+    return valid;
 }
 
 void velarService::eydaStakiVel(int id)
@@ -88,4 +94,13 @@ vector<velar> velarService::leitaHeiltolubil(string flokkur, int laegraBil, int 
 vector<velar> velarService::leitaBool(string flokkur, int erSatt)
 {
     return _dataaccess.leitaVelar(flokkur, erSatt);
+}
+
+enum velValidation velarService::validate(int bAr)
+{
+    if (bAr > constants::CURRENT_YEAR)
+        return builtYearAfterCurrentYear;
+    if (bAr == -1)
+        return builtYearMissing;
+    return vSuccess;
 }

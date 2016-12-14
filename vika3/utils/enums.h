@@ -17,7 +17,8 @@ enum velValidation
 {
     vSuccess = 1,
     builtFieldMissing = 2,
-    builtYearAfterCurrentYear = 3
+    builtYearAfterCurrentYear = 3,
+    builtYearMissing
 };
 
 #endif // ENUMS_H
