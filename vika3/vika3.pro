@@ -15,7 +15,7 @@ TEMPLATE = app
 INCLUDEPATH += /models
 INCLUDEPATH += /services
 INCLUDEPATH += /sql
-INCLUDEPATH += /ui
+INCLUDEPATH += /dialogues
 
 SOURCES += main.cpp\
         adalgluggi.cpp \
@@ -24,8 +24,8 @@ SOURCES += main.cpp\
     services/tolvufolkservice.cpp \
     services/velarservice.cpp \
     sql/sqltenging.cpp \
-    addscientist.cpp \
-    uppfaerafolkgluggi.cpp
+    dialogues/addscientist.cpp \
+    dialogues/uppfaerafolkgluggi.cpp
 
 HEADERS  += adalgluggi.h \
     models/tolvufolk.h \
@@ -33,9 +33,9 @@ HEADERS  += adalgluggi.h \
     services/tolvufolkservice.h \
     services/velarservice.h \
     sql/sqltenging.h \
-    addscientist.h \
-    uppfaerafolkgluggi.h
+    dialogues/addscientist.h \
+    dialogues/uppfaerafolkgluggi.h
 
 FORMS    += adalgluggi.ui \
-    addscientist.ui \
-    uppfaerafolkgluggi.ui
+    dialogues/addscientist.ui \
+    dialogues/uppfaerafolkgluggi.ui
