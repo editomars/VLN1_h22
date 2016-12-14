@@ -269,7 +269,11 @@ void adalgluggi::on_vButton_update_clicked()
 
 void adalgluggi::on_vButton_purge_clicked()
 {
-
+    tortimavel torTimaVel;
+    if (torTimaVel.exec() == 0)
+    {
+        synaVelar(_vService.getVelar());
+    }
 }
 
 void adalgluggi::on_velTable_clicked(const QModelIndex &index)
