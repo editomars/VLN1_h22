@@ -1,8 +1,16 @@
 #include "adalgluggi.h"
 #include "ui_adalgluggi.h"
 #include "uppfaerafolkgluggi.h"
+#include "addscientist.h"
 
+#include <string>
+#include <QFileDialog>
 #include <QDebug>
+#include <QString>
+#include <istream>
+#include <Qpixmap>
+#include <QMenu>
+
 adalgluggi::adalgluggi(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::adalgluggi)
@@ -161,6 +169,9 @@ void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
 
 void adalgluggi::on_button_add_clicked()
 {
+    AddScientist gluggiBaeta;
+
+    gluggiBaeta.exec();
 
 }
 

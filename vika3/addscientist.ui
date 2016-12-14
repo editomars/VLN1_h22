@@ -114,14 +114,14 @@
     </layout>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="button_add">
      <property name="text">
       <string>Add</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="button_cancel">
      <property name="text">
       <string>Cancel</string>
      </property>
