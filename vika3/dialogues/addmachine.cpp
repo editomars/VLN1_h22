@@ -17,7 +17,7 @@ void addmachine::on_vButton_add_clicked()
 {
     QMessageBox box;
     string vNafn = ui->input_vName->text().toStdString();
-    int bAr = (ui->input_builtYear->text().length() > 0 ? ui->input_builtYear->text().toInt() : -1);
+    int bAr = (ui->input_builtYear->text().length() > 0 && ui->input_builtYear->text().toInt() > 0 ? ui->input_builtYear->text().toInt() : -1);
     bool byggd = ui->vRadio_built->isChecked();
     string tegund = ui->input_type->text().toStdString();
 
