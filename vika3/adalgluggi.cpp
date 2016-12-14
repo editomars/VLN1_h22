@@ -98,8 +98,6 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->folkFilterBox->currentText().toStdString();
 
-
-
     if (arg1.toStdString() == "")
         synaFolk(_fService.getTolvufolk());
 

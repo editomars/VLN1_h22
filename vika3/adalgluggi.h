@@ -35,6 +35,8 @@ private slots:
 
     void on_folkTable_clicked(const QModelIndex &index);
 
+    void on_button_cancel_clicked();
+
 private:
     Ui::adalgluggi *ui;
 
