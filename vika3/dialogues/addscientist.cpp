@@ -59,6 +59,9 @@ void AddScientist::on_button_add_clicked()
             //What to do if birth is after current year
             box.setText("Birth after current year!");
             break;
+        default:
+            box.setText("Unknown error"); //What to do if unknown error
+            break;
     }
     box.exec();
 

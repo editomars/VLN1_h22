@@ -393,5 +393,5 @@ void adalgluggi::on_vButton_AddLink_clicked()
 
 void adalgluggi::on_button_showVLinks_clicked()
 {
-
+    this->close();
 }
