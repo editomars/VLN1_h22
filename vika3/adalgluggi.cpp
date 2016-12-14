@@ -14,6 +14,7 @@
 #include <istream>
 #include <Qpixmap>
 #include <QMenu>
+#include <QKeyEvent>
 
 adalgluggi::adalgluggi(QWidget *parent) :
     QMainWindow(parent),
@@ -35,6 +36,7 @@ adalgluggi::~adalgluggi()
 
 void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
 {
+    ui->folkTable->setColumnHidden(0,true);
     ui->folkTable->clearContents();
     ui->folkTable->setSortingEnabled(false);
 
@@ -42,6 +44,7 @@ void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
 
     for (size_t row = 0; row < folk.size(); ++row)
     {
+        QString ID = QString::number(folk[row].getID());
         QString nafn = QString::fromStdString(folk[row].getNafn());
         QString gender = QString((folk[row].getKyn() == 'm' ? "Male" : "Female"));
         QString fAr = QString::number(folk[row].getFaedingarar());
@@ -52,11 +55,12 @@ void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
             dAr = QString::number(folk[row].getDanarar());
         }
         QString aldur = QString::number(folk[row].getAldur());
-        ui->folkTable->setItem(row, 0, new QTableWidgetItem(nafn));
-        ui->folkTable->setItem(row, 1, new QTableWidgetItem(gender));
-        ui->folkTable->setItem(row, 2, new QTableWidgetItem(aldur));
-        ui->folkTable->setItem(row, 3, new QTableWidgetItem(fAr));
-        ui->folkTable->setItem(row, 4, new QTableWidgetItem(dAr));
+        ui->folkTable->setItem(row, 0, new QTableWidgetItem(ID));
+        ui->folkTable->setItem(row, 1, new QTableWidgetItem(nafn));
+        ui->folkTable->setItem(row, 2, new QTableWidgetItem(gender));
+        ui->folkTable->setItem(row, 3, new QTableWidgetItem(aldur));
+        ui->folkTable->setItem(row, 4, new QTableWidgetItem(fAr));
+        ui->folkTable->setItem(row, 5, new QTableWidgetItem(dAr));
     }
 
     _folkCurrent = folk;
@@ -245,11 +249,10 @@ void adalgluggi::on_button_add_clicked()
 
 void adalgluggi::on_button_delete_clicked()
 {
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
+    int row = ui->folkTable->currentRow();
+    int folkCurrentIndex = ui->folkTable->item(row,0)->text().toInt();
 
-    tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
-
-    _fService.eydaStakiTolvufolk(folkCurrent.getID());
+    _fService.eydaStakiTolvufolk(folkCurrentIndex);
 
     //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
     ui->folkFilterText->setText("");
@@ -395,3 +398,48 @@ void adalgluggi::on_button_showVLinks_clicked()
 {
 
 }
+
+void adalgluggi::keyReleaseEvent(QKeyEvent* event)
+{
+    switch (event->key())
+    {
+        case constants::DELETE_KEY_NUMBER:
+            deleteKeyPressed();
+            break;
+        case constants::ESCAPE_KEY_NUMBER:
+            escapeKeyPressed();
+            break;
+    }
+
+
+}
+
+void adalgluggi::deleteKeyPressed()
+{
+    QMessageBox* box = new QMessageBox;
+    box->setWindowTitle(QString("Delete scientist"));
+    box->setInformativeText(QString("Do you want to remove this scientist from the database? "));
+    box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
+    if(box->exec() == QMessageBox::Yes)
+        on_button_delete_clicked();
+    else
+        return;
+    delete box;
+}
+
+void adalgluggi::escapeKeyPressed()
+{
+    QMessageBox* box = new QMessageBox;
+    box->setWindowTitle(QString("Quit program"));
+    box->setInformativeText(QString("Do you want to quit? "));
+    box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
+    if(box->exec() == QMessageBox::Yes)
+        this->close();
+    else
+        return;
+    delete box;
+}
+
+

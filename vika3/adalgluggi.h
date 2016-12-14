@@ -51,6 +51,11 @@ private slots:
 
     void on_button_showVLinks_clicked();
 
+    void escapeKeyPressed();
+    void deleteKeyPressed();
+    void keyReleaseEvent(QKeyEvent* event);
+
+
 private:
     Ui::adalgluggi *ui;
 
