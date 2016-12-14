@@ -180,7 +180,10 @@ void adalgluggi::on_button_add_clicked()
 {
     AddScientist gluggiBaeta;
 
-    gluggiBaeta.exec();
+    if (gluggiBaeta.exec() == 0)
+    {
+        synaFolk(_fService.getTolvufolk());
+    }
 
 }
 
