@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabsList">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="folkTab">
        <attribute name="title">
@@ -176,6 +176,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="button_showLinks">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Show links</string>
             </property>
@@ -330,7 +333,10 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="button_showVLinks">
+           <widget class="QPushButton" name="vButton_showLinks">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Show links</string>
             </property>

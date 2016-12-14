@@ -21,6 +21,7 @@ adalgluggi::adalgluggi(QWidget *parent) :
     ui(new Ui::adalgluggi)
 {
     ui->setupUi(this);
+    ui->folkTable->horizontalHeader()->setVisible(true);
     //init stillingar
     _folkCurrent = _fService.getTolvufolk();
     _velarCurrent = _vService.getVelar();
@@ -126,6 +127,7 @@ void adalgluggi::defaultVButtons()
     ui->vButton_update->setEnabled(false);
     ui->vButton_purge->setEnabled(true);
     ui->vButton_AddLink->setEnabled(false);
+    //ui->vb
 }
 
 void adalgluggi::on_tabsList_currentChanged(int index)
@@ -378,8 +380,6 @@ void adalgluggi::on_button_AddLink_clicked()
     _linking = true;
     disableVButtons();
 
-
-
 }
 
 void adalgluggi::on_vButton_AddLink_clicked()
@@ -394,9 +394,16 @@ void adalgluggi::on_vButton_AddLink_clicked()
 
 }
 
-void adalgluggi::on_button_showVLinks_clicked()
+void adalgluggi::on_button_showLinks_clicked()
 {
+    int folkCurrentIndex = ui->folkTable->currentIndex().row();
+    _fSelect = _folkCurrent.at(folkCurrentIndex);
+}
 
+void adalgluggi::on_vButton_showLinks_clicked()
+{
+    int velarCurrentIndex = ui->velTable->currentIndex().row();
+    _vSelect = _velarCurrent.at(velarCurrentIndex);
 }
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
@@ -410,7 +417,6 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
             escapeKeyPressed();
             break;
     }
-
 
 }
 

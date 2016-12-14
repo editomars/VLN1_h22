@@ -23,6 +23,8 @@ public:
 private slots:
     void on_UppfHaettaTakki_clicked();
 
+
+
     void on_UppfaeraVelTakki_clicked();
 
 private:
