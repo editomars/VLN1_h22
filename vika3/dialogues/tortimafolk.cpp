@@ -17,7 +17,7 @@ tortimafolk::~tortimafolk()
 
 void tortimafolk::on_button_cancel_clicked()
 {
-    this->done(0);
+    this->done(1);
 }
 
 void tortimafolk::on_button_confirm_clicked()
