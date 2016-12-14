@@ -25,6 +25,7 @@ adalgluggi::adalgluggi(QWidget *parent) :
     _velarCurrent = _vService.getVelar();
     synaFolk(_folkCurrent);
     synaVelar(_velarCurrent);
+    _linking = false;
 }
 
 adalgluggi::~adalgluggi()
@@ -85,6 +86,38 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
     ui->velTable->setSortingEnabled(true);
 }
 
+void adalgluggi::enableVButtons()
+{
+
+}
+
+void adalgluggi::disableVButtons()
+{
+    ui->vButton_add->setEnabled(false);
+    ui->vButton_delete->setEnabled(false);
+    ui->vButton_update->setEnabled(false);
+    ui->vButton_purge->setEnabled(false);
+    ui->vButton_AddLink->setEnabled(false);
+}
+
+void adalgluggi::disableFButtons()
+{
+    ui->button_add->setEnabled(false);
+    ui->button_delete->setEnabled(false);
+    ui->button_update->setEnabled(false);
+    ui->button_purge->setEnabled(false);
+    ui->button_AddLink->setEnabled(false);
+}
+
+void adalgluggi::defaultFButtons()
+{
+    ui->button_add->setEnabled(true);
+    ui->button_delete->setEnabled(false);
+    ui->button_update->setEnabled(false);
+    ui->button_AddLink->setEnabled(false);
+    ui->button_purge->setEnabled(true);
+}
+
 void adalgluggi::on_tabsList_currentChanged(int index)
 {
     switch (index)
@@ -93,6 +126,7 @@ void adalgluggi::on_tabsList_currentChanged(int index)
 
             ui->vButton_delete->setEnabled(false);
             ui->vButton_update->setEnabled(false);
+            ui->vButton_AddLink->setEnabled(false);
 
             synaFolk(_folkCurrent);
 
@@ -101,6 +135,7 @@ void adalgluggi::on_tabsList_currentChanged(int index)
 
             ui->button_update->setEnabled(false);
             ui->button_delete->setEnabled(false);
+            ui->button_AddLink->setEnabled(false);
 
             synaVelar(_velarCurrent);
             break;
@@ -227,8 +262,23 @@ void adalgluggi::on_button_purge_clicked()
 
 void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
 {
-    ui->button_update->setEnabled(true);
-    ui->button_delete->setEnabled(true);
+    if (!_linking)
+    {
+        ui->button_update->setEnabled(true);
+        ui->button_delete->setEnabled(true);
+        ui->button_AddLink->setEnabled(true);
+    }
+    else
+    {
+        int folkCurrentIndex = ui->folkTable->currentIndex().row();
+        tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
+
+        _vService.venslaVidVel(folkCurrent.getID(),_vSelect.getID());
+
+        _linking = false;
+
+        ui->tabsList->setCurrentIndex(1);
+    }
 }
 
 void adalgluggi::on_vButton_add_clicked()
@@ -269,11 +319,61 @@ void adalgluggi::on_vButton_update_clicked()
 
 void adalgluggi::on_vButton_purge_clicked()
 {
-
+    tortimavel torTimaVel;
+    if (torTimaVel.exec() == 0)
+    {
+        synaVelar(_vService.getVelar());
+    }
 }
 
 void adalgluggi::on_velTable_clicked(const QModelIndex &index)
 {
-    ui->vButton_delete->setEnabled(true);
-    ui->vButton_update->setEnabled(true);
+    if (!_linking)
+    {
+        ui->vButton_delete->setEnabled(true);
+        ui->vButton_update->setEnabled(true);
+        ui->vButton_AddLink->setEnabled(true);
+    }
+    else
+    {
+        int velarCurrentIndex = ui->velTable->currentIndex().row();
+        velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
+
+        _fService.venslaVidVel(_fSelect.getID(),velarCurrent.getID());
+
+        _linking = false;
+
+        ui->tabsList->setCurrentIndex(0);
+    }
+}
+
+void adalgluggi::on_button_AddLink_clicked()
+{
+    int folkCurrentIndex = ui->folkTable->currentIndex().row();
+    _fSelect = _folkCurrent.at(folkCurrentIndex);
+
+    ui->tabsList->setCurrentIndex(1);
+    _linking = true;
+    disableVButtons();
+
+
+
+}
+
+void adalgluggi::on_vButton_AddLink_clicked()
+{
+    int velarCurrentIndex = ui->velTable->currentIndex().row();
+    _vSelect = _velarCurrent.at(velarCurrentIndex);
+
+    ui->tabsList->setCurrentIndex(0);
+    _linking = true;
+    disableFButtons();
+
+
+
+}
+
+void adalgluggi::on_button_showVLinks_clicked()
+{
+
 }

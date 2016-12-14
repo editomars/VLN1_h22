@@ -123,7 +123,7 @@
    <item>
     <widget class="QPushButton" name="vButton_cancel">
      <property name="text">
-      <string>Cancel</string>
+      <string>Close</string>
      </property>
     </widget>
    </item>

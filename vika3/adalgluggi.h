@@ -45,16 +45,31 @@ private slots:
 
     void on_velTable_clicked(const QModelIndex &index);
 
+    void on_button_AddLink_clicked();
+
+    void on_vButton_AddLink_clicked();
+
+    void on_button_showVLinks_clicked();
+
 private:
     Ui::adalgluggi *ui;
 
     void synaFolk(const vector<tolvufolk>& folk);
     void synaVelar(const vector<velar>& velar);
+    void enableVButtons();
+    void disableVButtons();
+    void enableFButtons();
+    void disableFButtons();
+
+    void defaultFButtons();
 
     tolvufolkService _fService;
     velarService _vService;
     vector<tolvufolk> _folkCurrent;
+    tolvufolk _fSelect;
     vector<velar> _velarCurrent;
+    velar _vSelect;
+    bool _linking;
 };
 
 #endif // ADALGLUGGI_H
