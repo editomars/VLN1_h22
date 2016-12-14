@@ -17,8 +17,8 @@ void AddScientist::on_button_add_clicked()
 {
     QMessageBox box;
     string nafn = ui->input_name->text().toStdString();
-    int fAr = (ui->input_birth->text().length() > 0 ? ui->input_birth->text().toInt() : -1);
-    int dAr = (ui->input_death->text().length() > 0 ? ui->input_death->text().toInt() : -1);
+    int fAr = (ui->input_birth->text().length() > 0 && ui->input_birth->text().toInt() > 0 ? ui->input_birth->text().toInt() : -1);
+    int dAr = (ui->input_death->text().length() > 0 && ui->input_birth->text().toInt() > 0 ? ui->input_death->text().toInt() : -1);
     char kyn = (ui->radio_male->isChecked() ? 'm' : 'f');
 
     folkValidation f = _service.baetaVidTolvufolk(nafn, kyn, fAr, dAr);
@@ -27,6 +27,9 @@ void AddScientist::on_button_add_clicked()
         case fSuccess:
             //What to do when succeess
             box.setText("Success!");
+            ui->input_name->setText("");
+            ui->input_birth->setText("");
+            ui->input_death->setText("");
             break;
         case nameEmpty:
             //What to do when name is empty
@@ -49,7 +52,7 @@ void AddScientist::on_button_add_clicked()
             box.setText("Gender not valid!");
             break;
         case ageTooHigh:
-            //What to do if gender is too high
+            //What to do if age is too high
             box.setText("Age is too high!!");
             break;
         case birthAfterCurrentYear:
