@@ -44,7 +44,6 @@ private slots:
     void on_vButton_purge_clicked();
 
     void on_velTable_clicked(const QModelIndex &index);
-
 private:
     Ui::adalgluggi *ui;
 
