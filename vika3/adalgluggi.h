@@ -48,6 +48,7 @@ private slots:
     void on_button_AddLink_clicked();
 
     void on_vButton_AddLink_clicked();
+
     void on_button_showVLinks_clicked();
 
 private:

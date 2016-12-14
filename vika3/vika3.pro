@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     dialogues/addscientist.cpp \
     dialogues/uppfaerafolkgluggi.cpp \
     dialogues/uppfaeravelgluggi.cpp \
-    dialogues/addmachine.cpp
+    dialogues/addmachine.cpp \
+    dialogues/tortimafolk.cpp \
+    dialogues/tortimavel.cpp
 
 HEADERS  += adalgluggi.h \
     models/tolvufolk.h \
@@ -40,10 +42,14 @@ HEADERS  += adalgluggi.h \
     dialogues/uppfaeravelgluggi.h \
     dialogues/addmachine.h \
     utils/enums.h \
-    utils/constants.h
+    utils/constants.h \
+    dialogues/tortimafolk.h \
+    dialogues/tortimavel.h
 
 FORMS    += adalgluggi.ui \
     dialogues/addscientist.ui \
     dialogues/uppfaerafolkgluggi.ui \
     dialogues/uppfaeravelgluggi.ui \
-    dialogues/addmachine.ui
+    dialogues/addmachine.ui \
+    dialogues/tortimafolk.ui \
+    dialogues/tortimavel.ui
