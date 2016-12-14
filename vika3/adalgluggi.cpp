@@ -1,7 +1,7 @@
 #include "adalgluggi.h"
 #include "ui_adalgluggi.h"
-#include "uppfaerafolkgluggi.h"
-#include "addscientist.h"
+#include "dialogues/uppfaerafolkgluggi.h"
+#include "dialogues/addscientist.h"
 
 #include <string>
 #include <QFileDialog>
