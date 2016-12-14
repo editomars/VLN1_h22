@@ -24,8 +24,8 @@ public:
 
 
     //Föll sem breyta Gagnagrunn
-    void baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)
-    void uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund);
+    enum velValidation baetaVidVelar(string vNafn, int bAr, bool byggd, string tegund); //Bætir við einu tilviki af velar í vectorinn (ekki í gagnagrunn)
+    enum velValidation uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund);
     void eydaStakiVel(int id);
     void tortimaTolvuVelar();
     void venslaVidVel(int folkID, int velID); // venslar folk_id vid vel_id
@@ -40,6 +40,7 @@ public:
 
 private:
     sqltenging _dataaccess;
+    enum velValidation validate(int bAr);
 };
 
 #endif // VELARSERVICE_H
