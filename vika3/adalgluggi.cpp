@@ -4,6 +4,8 @@
 #include "dialogues/uppfaeravelgluggi.h"
 #include "dialogues/addscientist.h"
 #include "dialogues/addmachine.h"
+#include "dialogues/tortimafolk.h"
+#include "dialogues/tortimavel.h"
 
 #include <string>
 #include <QFileDialog>
@@ -180,7 +182,10 @@ void adalgluggi::on_button_add_clicked()
 {
     AddScientist gluggiBaeta;
 
-    gluggiBaeta.exec();
+    if (gluggiBaeta.exec() == 0)
+    {
+        synaFolk(_fService.getTolvufolk());
+    }
 
 }
 
@@ -213,7 +218,11 @@ void adalgluggi::on_button_update_clicked()
 
 void adalgluggi::on_button_purge_clicked()
 {
-
+    tortimafolk torTimaFolk;
+    if (torTimaFolk.exec() == 0)
+    {
+        synaFolk(_fService.getTolvufolk());
+    }
 }
 
 void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
