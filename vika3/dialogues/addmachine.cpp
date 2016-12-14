@@ -41,7 +41,6 @@ void addmachine::on_vButton_add_clicked()
             box.setText("No built year");
             break;
     }
-
     box.exec();
 
     //this->done(0);

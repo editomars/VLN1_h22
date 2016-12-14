@@ -16,11 +16,14 @@ public:
     explicit uppfaeravelgluggi(QWidget *parent = 0);
 
     void setVel(velar vel);
+    void getVel();
 
     ~uppfaeravelgluggi();
 
 private slots:
     void on_UppfHaettaTakki_clicked();
+
+    void on_UppfaeraVelTakki_clicked();
 
 private:
     Ui::uppfaeravelgluggi *ui;
