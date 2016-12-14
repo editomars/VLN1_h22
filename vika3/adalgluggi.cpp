@@ -1,5 +1,6 @@
 #include "adalgluggi.h"
 #include "ui_adalgluggi.h"
+#include "uppfaerafolkgluggi.h"
 
 #include <QDebug>
 adalgluggi::adalgluggi(QWidget *parent) :
@@ -165,15 +166,37 @@ void adalgluggi::on_button_add_clicked()
 
 void adalgluggi::on_button_delete_clicked()
 {
+    int folkCurrentIndex = ui->folkTable->currentIndex().row();
+
+    tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
+
+    _fService.eydaStakiTolvufolk(folkCurrent.getID());
+
+    //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
+    ui->folkFilterText->setText("");
+    synaFolk(_fService.getTolvufolk());
+    ui->button_delete->setEnabled(false);
 
 }
 
 void adalgluggi::on_button_update_clicked()
 {
+    //Highlited gæji verður target
+    int folkCurrentIndex = ui->folkTable->currentIndex().row();
+    tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
 
+    uppfaeraFolkGluggi uppFolkGluggi;
+    uppFolkGluggi.setFolk(folkCurrent);
+    uppFolkGluggi.exec();
 }
 
 void adalgluggi::on_button_purge_clicked()
 {
 
+}
+
+void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
+{
+    ui->button_update->setEnabled(true);
+    ui->button_delete->setEnabled(true);
 }

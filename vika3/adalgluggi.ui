@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>adalgluggi</string>
+   <string>Database of computer science stuff</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -36,6 +36,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="button_delete">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Delete</string>
             </property>
@@ -43,6 +46,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="button_update">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Update</string>
             </property>
@@ -60,7 +66,11 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLineEdit" name="folkFilterText"/>
+           <widget class="QLineEdit" name="folkFilterText">
+            <property name="placeholderText">
+             <string>Filter scientists by...</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QComboBox" name="folkFilterBox">
@@ -101,6 +111,15 @@
         </item>
         <item>
          <widget class="QTableWidget" name="folkTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>false</bool>
           </property>
@@ -153,7 +172,11 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QLineEdit" name="velFilterText"/>
+           <widget class="QLineEdit" name="velFilterText">
+            <property name="placeholderText">
+             <string>Filter machines by...</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QComboBox" name="velFilterBox">
@@ -189,8 +212,17 @@
         </item>
         <item>
          <widget class="QTableWidget" name="velTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="alternatingRowColors">
            <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <attribute name="horizontalHeaderCascadingSectionResizes">
            <bool>false</bool>
