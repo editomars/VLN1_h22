@@ -88,7 +88,7 @@ void uppfaeraFolkGluggi::on_UppfaeraFolkTakki_clicked()
     }
     box.exec();*/
 
-    //this->done(0); //Should dialogue exit after adding?
+    this->done(0); //Should dialogue exit after adding?
 }
 
 void uppfaeraFolkGluggi::on_UppfHaettaTakki_clicked()

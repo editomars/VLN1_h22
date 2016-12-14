@@ -49,7 +49,9 @@ private slots:
 
     void on_vButton_AddLink_clicked();
 
-    void on_button_showVLinks_clicked();
+    void on_button_showLinks_clicked();
+
+    void on_vButton_showLinks_clicked();
 
 private:
     Ui::adalgluggi *ui;
