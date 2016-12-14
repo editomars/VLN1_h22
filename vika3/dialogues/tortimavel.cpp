@@ -37,8 +37,6 @@ void tortimavel::on_button_confirm_clicked()
     }
     else
         this->done(1);
-
-    this->done(1);
 }
 
 
