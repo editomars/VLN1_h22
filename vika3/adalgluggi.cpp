@@ -86,10 +86,7 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
     ui->velTable->setSortingEnabled(true);
 }
 
-void adalgluggi::enableVButtons()
-{
 
-}
 
 void adalgluggi::disableVButtons()
 {
@@ -114,8 +111,17 @@ void adalgluggi::defaultFButtons()
     ui->button_add->setEnabled(true);
     ui->button_delete->setEnabled(false);
     ui->button_update->setEnabled(false);
-    ui->button_AddLink->setEnabled(false);
     ui->button_purge->setEnabled(true);
+    ui->button_AddLink->setEnabled(false);
+}
+
+void adalgluggi::defaultVButtons()
+{
+    ui->vButton_add->setEnabled(true);
+    ui->vButton_delete->setEnabled(false);
+    ui->vButton_update->setEnabled(false);
+    ui->vButton_purge->setEnabled(true);
+    ui->vButton_AddLink->setEnabled(false);
 }
 
 void adalgluggi::on_tabsList_currentChanged(int index)
@@ -130,6 +136,12 @@ void adalgluggi::on_tabsList_currentChanged(int index)
 
             synaFolk(_folkCurrent);
 
+            if (_linking)
+            {
+                _linking = false;
+                defaultVButtons();
+                defaultFButtons();
+            }
             break;
         case 1:
 
@@ -138,6 +150,13 @@ void adalgluggi::on_tabsList_currentChanged(int index)
             ui->button_AddLink->setEnabled(false);
 
             synaVelar(_velarCurrent);
+
+            if (_linking)
+            {
+                _linking = false;
+                defaultFButtons();
+                defaultVButtons();
+            }
             break;
     }
 }
@@ -368,7 +387,6 @@ void adalgluggi::on_vButton_AddLink_clicked()
     ui->tabsList->setCurrentIndex(0);
     _linking = true;
     disableFButtons();
-
 
 
 }

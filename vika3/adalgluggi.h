@@ -56,12 +56,11 @@ private:
 
     void synaFolk(const vector<tolvufolk>& folk);
     void synaVelar(const vector<velar>& velar);
-    void enableVButtons();
     void disableVButtons();
-    void enableFButtons();
     void disableFButtons();
 
     void defaultFButtons();
+    void defaultVButtons();
 
     tolvufolkService _fService;
     velarService _vService;
