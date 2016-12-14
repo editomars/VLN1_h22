@@ -3,6 +3,7 @@
 
 #include "sql/sqltenging.h"
 #include "models/tolvufolk.h"
+#include "utils/enums.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -21,10 +22,10 @@ public:
     int getSize() const; //Skilar stærð af vector gögnum
 
     //Föll sem bæta við Gagnagrunn
-    void baetaVidTolvufolk(string nafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
+    enum folkValidation baetaVidTolvufolk(string nafn, char kyn, int fAr, int dAr); //Bætir við tolvufolk staki
     void tortimaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
-    void uppfaeraStakTolvuFolk(int id, string nafn, char kyn, int fAr, int dAr);
+    enum folkValidation uppfaeraStakTolvuFolk(int id, string nafn, char kyn, int fAr, int dAr);
     void venslaVidVel(int folk_id, int vel_id); //Venslar folk_id við vel_id
     void eydaStakiVensl(int folk_id, int vel_id); //Eyðir einu vensl tilviki;
 
@@ -43,6 +44,8 @@ private:
     //Filter föll
     vector<tolvufolk> leitaAldur(char type, int leitarord);
     vector<tolvufolk> leitaAldur(int laegraBil, int haerraBil);
+    //Validation föll
+    enum folkValidation validate(string nafn, char kyn, int fAr, int dAr);
 };
 
 #endif // TOLVUFOLKSERVICE_H

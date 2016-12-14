@@ -11,9 +11,7 @@ struct aldurHaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
-        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
-        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
-        return ((sidastaAri-i.getFaedingarar()) < (sidastaArj-j.getFaedingarar()));
+        return (i.getAldur() < j.getAldur());
     }
 };
 
@@ -21,9 +19,7 @@ struct aldurLaekkandi
 {
     bool operator () (tolvufolk i, tolvufolk j)
     {
-        int sidastaAri = (i.getDanarar() == -1 ? 2016 : i.getDanarar());
-        int sidastaArj = (j.getDanarar() == -1 ? 2016 : j.getDanarar());
-        return ((sidastaAri-i.getFaedingarar()) > (sidastaArj-j.getFaedingarar()));
+        return (i.getAldur() > j.getAldur());
     }
 };
 //----------------------- Svæði fyir sorting struct endar ---------------------
@@ -54,9 +50,13 @@ int tolvufolkService::getSize() const
 
 //Föll sem breyta gagnagrunn
 
-void tolvufolkService::baetaVidTolvufolk(string nafn, char kyn, int fAr, int dAr)
+enum folkValidation tolvufolkService::baetaVidTolvufolk(string nafn, char kyn, int fAr, int dAr)
 {
-    _dataaccess.baetaVidFolk(nafn, kyn, fAr, dAr);
+
+    folkValidation valid = validate(nafn, kyn, fAr, dAr);
+    if (valid == fSuccess)
+        _dataaccess.baetaVidFolk(nafn, kyn, fAr, dAr);
+    return valid;
 }
 
 void tolvufolkService::tortimaTolvufolk()
@@ -69,9 +69,12 @@ void tolvufolkService::eydaStakiTolvufolk(int id)
     _dataaccess.eydaFolk(id);
 }
 
-void tolvufolkService::uppfaeraStakTolvuFolk(int id, string nafn, char kyn, int fAr, int dAr)
+enum folkValidation tolvufolkService::uppfaeraStakTolvuFolk(int id, string nafn, char kyn, int fAr, int dAr)
 {
-    _dataaccess.uppfaeraFolk(id,nafn,kyn,fAr,dAr);
+    folkValidation valid = validate(nafn, kyn, fAr, dAr);
+    if (valid == fSuccess)
+        _dataaccess.uppfaeraFolk(id,nafn,kyn,fAr,dAr);
+    return valid;
 }
 
 void tolvufolkService::venslaVidVel(int folk_id, int vel_id)
@@ -176,4 +179,24 @@ vector<tolvufolk> tolvufolkService::leitaAldur(int laegraBil, int haerraBil)
     }
 
     return filtered;
+}
+
+enum folkValidation tolvufolkService::validate(string nafn, char kyn, int fAr, int dAr)
+{
+    int aldur = (dAr == -1 ? constants::CURRENT_YEAR - fAr : dAr - fAr);
+    if (nafn == "")
+        return nameEmpty;
+    if (kyn != 'm' && kyn != 'f')
+        return genderNotValid;
+    if (dAr != -1 && dAr < fAr)
+        return deathBeforeBirth;
+    if (dAr != -1 && dAr > constants::CURRENT_YEAR)
+        return deathAfterCurrentYear;
+    if (fAr == -1)
+        return noBirthYear;
+    if (aldur > constants::MAXIMUM_AGE)
+        return ageTooHigh;
+    if (fAr > constants::CURRENT_YEAR)
+        return birthAfterCurrentYear;
+    return fSuccess;
 }

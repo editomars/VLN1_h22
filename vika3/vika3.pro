@@ -34,7 +34,9 @@ HEADERS  += adalgluggi.h \
     services/velarservice.h \
     sql/sqltenging.h \
     dialogues/addscientist.h \
-    dialogues/uppfaerafolkgluggi.h
+    dialogues/uppfaerafolkgluggi.h \
+    utils/enums.h \
+    utils/constants.h
 
 FORMS    += adalgluggi.ui \
     dialogues/addscientist.ui \
