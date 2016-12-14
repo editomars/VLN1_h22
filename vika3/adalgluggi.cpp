@@ -3,6 +3,7 @@
 #include "dialogues/uppfaerafolkgluggi.h"
 #include "dialogues/uppfaeravelgluggi.h"
 #include "dialogues/addscientist.h"
+#include "dialogues/addmachine.h"
 
 #include <string>
 #include <QFileDialog>
@@ -213,6 +214,9 @@ void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
 
 void adalgluggi::on_vButton_add_clicked()
 {
+    addmachine gluggiBaetaV;
+
+    gluggiBaetaV.exec();
 
 }
 
