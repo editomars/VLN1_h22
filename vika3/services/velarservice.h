@@ -3,6 +3,8 @@
 
 #include "sql/sqltenging.h"
 #include "models/velar.h"
+#include "utils/enums.h"
+#include "utils/constants.h"
 #include <vector>
 #include <iostream>
 

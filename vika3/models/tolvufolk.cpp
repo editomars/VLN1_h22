@@ -39,7 +39,7 @@ int tolvufolk::getDanarar() const
 }
 int tolvufolk::getAldur() const
 {
-    return (_danarar == -1 ? 2016 - _faedingarar : _danarar - _faedingarar);
+    return (_danarar == -1 ? constants::CURRENT_YEAR - _faedingarar : _danarar - _faedingarar);
 }
 
 //operators

@@ -39,6 +39,8 @@ HEADERS  += adalgluggi.h \
     dialogues/uppfaerafolkgluggi.h \
     dialogues/uppfaeravelgluggi.h \
     dialogues/addmachine.h
+    utils/enums.h \
+    utils/constants.h
 
 FORMS    += adalgluggi.ui \
     dialogues/addscientist.ui \
