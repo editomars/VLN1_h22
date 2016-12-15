@@ -469,7 +469,7 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 void adalgluggi::deleteKeyPressed(const char* flokkur)
 {
 
-    if(ui->folkTable->currentRow() != -1)
+    if(ui->folkTable->currentRow() != -1 && ui->tabsList->currentIndex() == 0)
     {
         if(!(ui->radiobutton_delete_confirmation->isChecked()))
         {
@@ -486,6 +486,27 @@ void adalgluggi::deleteKeyPressed(const char* flokkur)
             _fService.eydaStakiTolvufolk(getFolkID());
             ui->folkFilterText->setText("");
             synaAlltFolk();
+            ui->button_delete->setEnabled(false);
+            ui->button_update->setEnabled(false);
+        }
+    }
+    else if(ui->velTable->currentRow() != -1 && ui->tabsList->currentIndex() == 1)
+    {
+        if(!(ui->radiobutton_delete_confirmation->isChecked()))
+        {
+            if(deleteConfirmation(flokkur))
+            _vService.eydaStakiVel(getVelarID());
+            ui->velFilterText->setText("");
+            synaAllarVelar();
+            ui->button_delete->setEnabled(false);
+            ui->button_update->setEnabled(false);
+
+        }
+        else
+        {
+            _vService.eydaStakiVel(getVelarID());
+            ui->velFilterText->setText("");
+            synaAllarVelar();
             ui->button_delete->setEnabled(false);
             ui->button_update->setEnabled(false);
         }
