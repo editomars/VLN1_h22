@@ -15,6 +15,8 @@
 #include <Qpixmap>
 #include <QMenu>
 #include <QKeyEvent>
+#include <QDesktopServices>
+#include <QUrl>
 
 adalgluggi::adalgluggi(QWidget *parent) :
     QMainWindow(parent),
@@ -554,4 +556,9 @@ void adalgluggi::on_tabsList_tabBarClicked(int index)
         else if (index == 1)
             synaAllarVelar();
     }
+}
+
+void adalgluggi::on_button_warning_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://www.youtube.com/watch?v=3WSe9ugpXIw", QUrl::TolerantMode));
 }
