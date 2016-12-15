@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabsList">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="folkTab">
        <attribute name="title">
@@ -208,6 +208,9 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>40</width>
@@ -215,6 +218,13 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="button_back">
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="button_warning">
@@ -401,6 +411,33 @@
           </item>
          </layout>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="vButton_back">
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -449,7 +486,7 @@
      <x>0</x>
      <y>0</y>
      <width>711</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain_Menu">
