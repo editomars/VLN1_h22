@@ -527,8 +527,6 @@ bool adalgluggi::eventFilter(QObject * obj, QEvent * event)
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 {
-    qDebug () << "keyReleaseEvent ";
-    qDebug () << event->key();
 
     switch (event->key())
     {
@@ -549,7 +547,6 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 
 void adalgluggi::LkeyPressed()
 {
-    qDebug() << "her";
     if(ui->folkTable->currentRow() != -1 && ui->tabsList->currentIndex() == 0)
         on_button_AddLink_clicked();
 
@@ -578,7 +575,6 @@ void adalgluggi::RkeyPressed()
 
 void adalgluggi::F5keyPressed()
 {
-    qDebug () << "lol";
     if(ui->tabsList->currentIndex() == 0 && !_unlinking)
     {
         synaAlltFolk();
