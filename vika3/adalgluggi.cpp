@@ -33,6 +33,7 @@ adalgluggi::adalgluggi(QWidget *parent) :
     _unlinking = false;
     ui->folkTable->setColumnHidden(0,true); //Hide ID columns in table widgets
     ui->velTable->setColumnHidden(0,true);
+    ui->button_warning->setStyleSheet("background-color: red");
     ui->button_back->setVisible(false);
     ui->vButton_back->setVisible(false);
 }
