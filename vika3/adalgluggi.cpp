@@ -527,6 +527,7 @@ bool adalgluggi::eventFilter(QObject * obj, QEvent * event)
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 {
+    qDebug () << event->key();
 
     switch (event->key())
     {
@@ -542,6 +543,19 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
         case constants::F5_KEY_NUMBER:
             F5keyPressed();
             break;
+        case constants::LEFT_ARROW:
+            if(ui->tabsList->currentIndex() == 1)
+            ui->tabsList->setCurrentIndex(0);
+            else if(ui->tabsList->currentIndex() == 0)
+            ui->tabsList->setCurrentIndex(1);
+            break;
+        case constants::RIGHT_ARROW:
+            if(ui->tabsList->currentIndex() == 1)
+            ui->tabsList->setCurrentIndex(0);
+            else if(ui->tabsList->currentIndex() == 0)
+            ui->tabsList->setCurrentIndex(1);
+            break;
+
     }
 }
 
