@@ -17,6 +17,7 @@
 #include <QKeyEvent>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QWidget>
 
 adalgluggi::adalgluggi(QWidget *parent) :
     QMainWindow(parent),
@@ -32,6 +33,9 @@ adalgluggi::adalgluggi(QWidget *parent) :
     _unlinking = false;
     ui->folkTable->setColumnHidden(0,true); //Hide ID columns in table widgets
     ui->velTable->setColumnHidden(0,true);
+    ui->button_warning->setStyleSheet("background-color: red");
+    ui->button_back->setVisible(false);
+    ui->vButton_back->setVisible(false);
 }
 
 adalgluggi::~adalgluggi()
@@ -354,6 +358,7 @@ void adalgluggi::on_button_AddLink_clicked()
     _fSelect = _fService.getStaktTolvufolk(getFolkID());
 
     ui->tabsList->setCurrentIndex(1);
+    ui->vButton_back->setVisible(true);
     _linking = true;
     _unlinking = false;
     toggleVButtons(false);
@@ -364,6 +369,7 @@ void adalgluggi::on_vButton_AddLink_clicked()
     _vSelect = _vService.getStaktVelar(getVelarID());
 
     ui->tabsList->setCurrentIndex(0);
+    ui->button_back->setVisible(true);
     _linking = true;
     _unlinking = false;
     toggleFButtons(false);
@@ -373,6 +379,7 @@ void adalgluggi::on_button_showLinks_clicked()
 {
     _fSelect = _fService.getStaktTolvufolk(getFolkID());
 
+    ui->vButton_back->setVisible(true);
     ui->tabsList->setCurrentIndex(1);
     synaVelar(_vService.getVelarVensl(_fSelect.getID()));
 }
@@ -381,6 +388,7 @@ void adalgluggi::on_vButton_showLinks_clicked()
 {
     _vSelect = _vService.getStaktVelar(getVelarID());
 
+    ui->button_back->setVisible(true);
     ui->tabsList->setCurrentIndex(0);
     synaFolk(_fService.getTolvufolkVensl(_vSelect.getID()));
 }
@@ -562,6 +570,7 @@ void adalgluggi::on_button_removeLink_clicked()
 {
     _fSelect = _fService.getStaktTolvufolk(getFolkID());
 
+    ui->vButton_back->setVisible(true);
     ui->tabsList->setCurrentIndex(1);
     synaVelar(_vService.getVelarVensl(_fSelect.getID()));
     _linking = _unlinking = true;
@@ -573,6 +582,7 @@ void adalgluggi::on_vButton_removeLink_clicked()
     _vSelect = _vService.getStaktVelar(getVelarID());
 
     ui->tabsList->setCurrentIndex(0);
+    ui->button_back->setVisible(true);
     synaFolk(_fService.getTolvufolkVensl(_vSelect.getID()));
     _linking = _unlinking = true;
     toggleFButtons(false);
@@ -593,4 +603,17 @@ void adalgluggi::on_tabsList_tabBarClicked(int index)
 void adalgluggi::on_button_warning_clicked()
 {
     QDesktopServices::openUrl(QUrl("https://www.youtube.com/watch?v=3WSe9ugpXIw", QUrl::TolerantMode));
+}
+
+void adalgluggi::on_button_back_clicked()
+{
+        ui->tabsList->setCurrentIndex(1);
+        ui->button_back->setVisible(false);
+
+}
+
+void adalgluggi::on_vButton_back_clicked()
+{
+        ui->tabsList->setCurrentIndex(0);
+        ui->vButton_back->setVisible(false);
 }

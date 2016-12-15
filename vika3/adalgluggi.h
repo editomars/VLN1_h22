@@ -64,6 +64,10 @@ private slots:
 
     void on_button_warning_clicked();
 
+    void on_button_back_clicked();
+
+    void on_vButton_back_clicked();
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
