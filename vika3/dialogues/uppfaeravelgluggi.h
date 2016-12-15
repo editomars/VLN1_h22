@@ -1,8 +1,10 @@
 #ifndef UPPFAERAVELGLUGGI_H
 #define UPPFAERAVELGLUGGI_H
 
-#include <QDialog>
 #include "services/velarservice.h"
+
+#include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class uppfaeravelgluggi;

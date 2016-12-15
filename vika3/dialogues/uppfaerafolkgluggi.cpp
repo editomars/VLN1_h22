@@ -40,16 +40,14 @@ void uppfaeraFolkGluggi::getFolk()
 
 void uppfaeraFolkGluggi::on_UppfaeraFolkTakki_clicked()
 {
-    //QMessageBox box;
+    QMessageBox box;
     string nafn = ui->input_name->text().toStdString();
     int id = _target.getID();
     int fAr = (ui->input_birth->text().length() > 0 && ui->input_birth->text().toInt() > 0 ? ui->input_birth->text().toInt() : -1);
     int dAr = (ui->input_death->text().length() > 0 && ui->input_birth->text().toInt() > 0 ? ui->input_death->text().toInt() : -1);
     char kyn = (ui->radio_male->isChecked() ? 'm' : 'f');
 
-    _fService.uppfaeraStakTolvuFolk(id, nafn, kyn, fAr, dAr);
-    /*
-    folkValidation f = _fService.baetaVidTolvufolk(nafn, kyn, fAr, dAr);
+    folkValidation f = _fService.uppfaeraStakTolvuFolk(id, nafn, kyn, fAr, dAr);
     switch(f)
     {
         case fSuccess:
@@ -86,9 +84,9 @@ void uppfaeraFolkGluggi::on_UppfaeraFolkTakki_clicked()
             box.setText("Birth after current year!");
             break;
     }
-    box.exec();*/
+    box.exec();
 
-    this->done(0); //Should dialogue exit after adding?
+    //this->done(0); //Should dialogue exit after adding?
 }
 
 void uppfaeraFolkGluggi::on_UppfHaettaTakki_clicked()
