@@ -552,9 +552,15 @@ void adalgluggi::on_tabsList_tabBarClicked(int index)
     if (index == ui->tabsList->currentIndex())
     {
         if (index == 0)
+        {
             synaAlltFolk();
+            ui->folkFilterText->setText("");
+        }
         else if (index == 1)
+        {
             synaAllarVelar();
+            ui->velFilterText->setText("");
+        }
     }
 }
 
