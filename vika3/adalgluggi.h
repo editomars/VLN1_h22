@@ -56,7 +56,6 @@ private slots:
     void on_vButton_showLinks_clicked();
 
     void on_radiobutton_delete_confirmation_clicked();
-
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
@@ -69,16 +68,14 @@ private:
 
     void synaFolk(const vector<tolvufolk>& folk);
     void synaVelar(const vector<velar>& velar);
-    void toggleVButtons(bool enabled);
-    void toggleFButtons(bool enabled);
-    void disableVButtons();
-    void disableFButtons();
-
-    void defaultFButtons();
-    void defaultVButtons();
-
-    void escapeKeyPressed();
-    void deleteKeyPressed();
+    int getFolkID() const; //Sækir ID úr hidden column í folk table ef eitthver röð er valin
+    int getVelarID() const; //sama og folk, nema fyrir velar
+    void toggleVButtons(bool enabled); //setur alla UI takka í computers tab enabled = true eða false
+    void toggleFButtons(bool enabled); //sama og VButtons nema fyrir scientist tab
+    void defaultFButtons(); //Setur alla hnappa í scientist tab í default enabled state
+    void defaultVButtons(); //sama og scientist nema fyrir vélar
+    void escapeKeyPressed(); //Escape key release handler
+    void deleteKeyPressed(); //Delete key release handler
 };
 
 #endif // ADALGLUGGI_H

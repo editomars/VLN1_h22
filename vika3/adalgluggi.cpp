@@ -95,6 +95,23 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
     ui->velTable->setSortingEnabled(true);
 }
 
+int adalgluggi::getFolkID() const
+{
+    //Ef row != -1, þá er eitthver röð valin, sækir ID úr hidden column í folktable
+    int row = ui->folkTable->currentRow();
+    if (row != -1)
+        return ui->folkTable->item(row,0)->text().toInt();
+    return -1;
+}
+
+int adalgluggi::getVelarID() const
+{
+    int row = ui->velTable->currentRow();
+    if (row != -1)
+        return ui->velTable->item(row,0)->text().toInt();
+    return -1;
+}
+
 
 
 void adalgluggi::defaultFButtons()
@@ -228,10 +245,7 @@ void adalgluggi::on_button_add_clicked()
 
 void adalgluggi::on_button_delete_clicked()
 {
-    int row = ui->folkTable->currentRow();
-    int folkCurrentIndex = ui->folkTable->item(row,0)->text().toInt();
-
-    _fService.eydaStakiTolvufolk(folkCurrentIndex);
+    _fService.eydaStakiTolvufolk(getFolkID());
 
     ui->folkFilterText->setText("");
     synaFolk(_fService.getTolvufolk());
@@ -290,11 +304,7 @@ void adalgluggi::on_vButton_add_clicked()
 
 void adalgluggi::on_vButton_delete_clicked()
 {
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-
-    velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
-
-    _vService.eydaStakiVel(velarCurrent.getID());
+   _vService.eydaStakiVel(getVelarID());
 
     ui->velFilterText->setText("");
     synaVelar(_vService.getVelar());
