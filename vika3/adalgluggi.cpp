@@ -446,19 +446,20 @@ void adalgluggi::toggleFButtons(bool enabled)
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 {
+    qDebug () << event->key();
+
     switch (event->key())
     {
-        case constants::DELETE_KEY_NUMBER:
+        case constants::DELETE_KEY_NUMBER_MAC:
+        case constants::DELETE_KEY_NUMBER_PC:
             deleteKeyPressed();
             break;
         case constants::ESCAPE_KEY_NUMBER:
             escapeKeyPressed();
             break;
+
     }
 
-    QMessageBox* box = new QMessageBox;
-    box->setWindowTitle(QString("Quit program"));
-    box->setInformativeText(QString::number(event->key()));
 }
 
 void adalgluggi::deleteKeyPressed()
@@ -484,6 +485,7 @@ void adalgluggi::deleteKeyPressed()
     else
         return;
 }
+
 
 bool adalgluggi::deleteConfirmation(const char* flokkur)
 {
