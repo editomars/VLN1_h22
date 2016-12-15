@@ -78,6 +78,8 @@ private:
     void defaultVButtons(); //sama og scientist nema fyrir vélar
     void escapeKeyPressed(); //Escape key release handler
     void deleteKeyPressed(); //Delete key release handler
+
+    bool deleteConfirmation(const char* flokkur);
 };
 
 #endif // ADALGLUGGI_H
