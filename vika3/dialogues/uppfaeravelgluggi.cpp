@@ -64,6 +64,7 @@ void uppfaeravelgluggi::on_UppfaeraVelTakki_clicked()
             //What to do when success
             box.setText("Success!");
             _updated = true;
+            this->done(0);
             break;
         case builtFieldMissing:
             //What to do if built field is missing

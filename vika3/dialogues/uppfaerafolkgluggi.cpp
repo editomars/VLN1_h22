@@ -57,6 +57,7 @@ void uppfaeraFolkGluggi::on_UppfaeraFolkTakki_clicked()
             _target = _fService.getStaktTolvufolk(_target.getID());
             getFolk();
             _updated = true;
+            this->done(0);
             break;
         case nameEmpty:
             //What to do when name is empty
