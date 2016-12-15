@@ -57,6 +57,8 @@ private slots:
 
     void on_vButton_showLinks_clicked();
 
+    void on_radiobutton_delete_confirmation_clicked();
+
 private:
     Ui::adalgluggi *ui;
 

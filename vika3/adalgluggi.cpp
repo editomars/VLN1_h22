@@ -418,20 +418,34 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
             break;
     }
 
+    QMessageBox* box = new QMessageBox;
+    box->setWindowTitle(QString("Quit program"));
+    box->setInformativeText(QString::number(event->key()));
+
 }
 
 void adalgluggi::deleteKeyPressed()
 {
-    QMessageBox* box = new QMessageBox;
-    box->setWindowTitle(QString("Delete scientist"));
-    box->setInformativeText(QString("Do you want to remove this scientist from the database? "));
-    box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    if(ui->folkTable->currentRow() != -1)
+    {
+        if(ui->radiobutton_delete_confirmation->isChecked())
+        {
+            on_button_delete_clicked();
+            return;
+        }
+        QMessageBox* box = new QMessageBox;
+        box->setWindowTitle(QString("Delete scientist"));
+        box->setInformativeText(QString("Do you want to remove this scientist from the database? "));
+        box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
 
-    if(box->exec() == QMessageBox::Yes)
-        on_button_delete_clicked();
+        if(box->exec() == QMessageBox::Yes)
+            on_button_delete_clicked();
+        else
+            return;
+        delete box;
+    }
     else
         return;
-    delete box;
 }
 
 void adalgluggi::escapeKeyPressed()
@@ -449,3 +463,4 @@ void adalgluggi::escapeKeyPressed()
 }
 
 
+void adalgluggi::on_radiobutton_delete_confirmation_clicked(){}
