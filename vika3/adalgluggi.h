@@ -56,6 +56,12 @@ private slots:
     void on_vButton_showLinks_clicked();
 
     void on_radiobutton_delete_confirmation_clicked();
+    void on_button_removeLink_clicked();
+
+    void on_vButton_removeLink_clicked();
+
+    void on_tabsList_tabBarClicked(int index);
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
@@ -65,6 +71,7 @@ private:
     vector<velar> _velarCurrent;
     velar _vSelect;
     bool _linking;
+    bool _unlinking;
 
     void synaAlltFolk();
     void synaAllarVelar();

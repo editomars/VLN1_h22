@@ -27,6 +27,7 @@ adalgluggi::adalgluggi(QWidget *parent) :
     synaAlltFolk();
     synaAllarVelar();
     _linking = false;
+    _unlinking = false;
     ui->folkTable->setColumnHidden(0,true); //Hide ID columns in table widgets
     ui->velTable->setColumnHidden(0,true);
 }
@@ -129,7 +130,9 @@ void adalgluggi::on_tabsList_currentChanged(int index)
             break;
     }
     if (_linking)
-        _linking = false;
+    {
+        _linking = _unlinking = false;
+    }
     defaultVButtons();
     defaultFButtons();
 }
@@ -251,22 +254,28 @@ void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
 {
     if (!_linking)
     {
-        ui->button_update->setEnabled(true);
-        ui->button_delete->setEnabled(true);
-        ui->button_AddLink->setEnabled(true);
+        toggleFButtons(true);
     }
     else
     {
-        if (_vService.venslaVidVel(getFolkID(), _vSelect.getID()))
+        if (!_unlinking)
         {
-            qDebug() << "Success!";
+            if (_vService.venslaVidVel(getFolkID(), _vSelect.getID()))
+            {
+                qDebug() << "Success!";
+            }
+            else
+            {
+                qDebug() << "Failed, relations already exist";
+            }
         }
         else
         {
-            qDebug() << "Failed, relations already exist";
+            _vService.eydaStakiVensl(getFolkID(), _vSelect.getID());
+            _unlinking = false;
         }
-        _linking = false;
 
+        _linking = false;
         ui->tabsList->setCurrentIndex(1);
     }
 }
@@ -313,19 +322,25 @@ void adalgluggi::on_velTable_clicked(const QModelIndex &index)
 {
     if (!_linking)
     {
-        ui->vButton_delete->setEnabled(true);
-        ui->vButton_update->setEnabled(true);
-        ui->vButton_AddLink->setEnabled(true);
+        toggleVButtons(true);
     }
     else
     {
-        if (_fService.venslaVidVel(_fSelect.getID(),getVelarID()))
+        if (!_unlinking)
         {
-            qDebug() << "Success!";
+            if (_fService.venslaVidVel(_fSelect.getID(),getVelarID()))
+            {
+                qDebug() << "Success!";
+            }
+            else
+            {
+                qDebug() << "Failure, relations already exist";
+            }
         }
         else
         {
-            qDebug() << "Failure, relations already exist";
+            _fService.eydaStakiVensl(_fSelect.getID(), getVelarID());
+            _unlinking = false;
         }
         _linking = false;
         ui->tabsList->setCurrentIndex(0);
@@ -338,6 +353,7 @@ void adalgluggi::on_button_AddLink_clicked()
 
     ui->tabsList->setCurrentIndex(1);
     _linking = true;
+    _unlinking = false;
     toggleVButtons(false);
 }
 
@@ -347,17 +363,24 @@ void adalgluggi::on_vButton_AddLink_clicked()
 
     ui->tabsList->setCurrentIndex(0);
     _linking = true;
+    _unlinking = false;
     toggleFButtons(false);
 }
 
 void adalgluggi::on_button_showLinks_clicked()
 {
     _fSelect = _fService.getStaktTolvufolk(getFolkID());
+
+    ui->tabsList->setCurrentIndex(1);
+    synaVelar(_vService.getVelarVensl(_fSelect.getID()));
 }
 
 void adalgluggi::on_vButton_showLinks_clicked()
 {
     _vSelect = _vService.getStaktVelar(getVelarID());
+
+    ui->tabsList->setCurrentIndex(0);
+    synaFolk(_fService.getTolvufolkVensl(_vSelect.getID()));
 }
 
 int adalgluggi::getFolkID() const
@@ -384,6 +407,8 @@ void adalgluggi::defaultFButtons()
     ui->button_update->setEnabled(false);
     ui->button_purge->setEnabled(true);
     ui->button_AddLink->setEnabled(false);
+    ui->button_showLinks->setEnabled(false);
+    ui->button_removeLink->setEnabled(false);
 }
 
 void adalgluggi::defaultVButtons()
@@ -393,6 +418,8 @@ void adalgluggi::defaultVButtons()
     ui->vButton_update->setEnabled(false);
     ui->vButton_purge->setEnabled(true);
     ui->vButton_AddLink->setEnabled(false);
+    ui->vButton_showLinks->setEnabled(false);
+    ui->vButton_removeLink->setEnabled(false);
 }
 
 void adalgluggi::toggleVButtons(bool enabled)
@@ -402,6 +429,8 @@ void adalgluggi::toggleVButtons(bool enabled)
     ui->vButton_update->setEnabled(enabled);
     ui->vButton_purge->setEnabled(enabled);
     ui->vButton_AddLink->setEnabled(enabled);
+    ui->vButton_showLinks->setEnabled(enabled);
+    ui->vButton_removeLink->setEnabled(enabled);
 }
 
 void adalgluggi::toggleFButtons(bool enabled)
@@ -411,6 +440,8 @@ void adalgluggi::toggleFButtons(bool enabled)
     ui->button_update->setEnabled(enabled);
     ui->button_purge->setEnabled(enabled);
     ui->button_AddLink->setEnabled(enabled);
+    ui->button_showLinks->setEnabled(enabled);
+    ui->button_removeLink->setEnabled(enabled);
 }
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
@@ -486,3 +517,35 @@ void adalgluggi::escapeKeyPressed()
 void adalgluggi::on_radiobutton_delete_confirmation_clicked(){}
 
 
+
+void adalgluggi::on_button_removeLink_clicked()
+{
+    _fSelect = _fService.getStaktTolvufolk(getFolkID());
+
+    ui->tabsList->setCurrentIndex(1);
+    synaVelar(_vService.getVelarVensl(_fSelect.getID()));
+    _linking = _unlinking = true;
+    toggleVButtons(false);
+}
+
+void adalgluggi::on_vButton_removeLink_clicked()
+{
+    _vSelect = _vService.getStaktVelar(getVelarID());
+
+    ui->tabsList->setCurrentIndex(0);
+    synaFolk(_fService.getTolvufolkVensl(_vSelect.getID()));
+    _linking = _unlinking = true;
+    toggleFButtons(false);
+}
+
+void adalgluggi::on_tabsList_tabBarClicked(int index)
+{
+    //Smella á current tab þá refreshast allur listinn
+    if (index == ui->tabsList->currentIndex())
+    {
+        if (index == 0)
+            synaAlltFolk();
+        else if (index == 1)
+            synaAllarVelar();
+    }
+}

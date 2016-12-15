@@ -189,6 +189,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="button_removeLink">
+            <property name="text">
+             <string>Remove a link</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -356,6 +363,13 @@
             </property>
             <property name="text">
              <string>Show links</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="vButton_removeLink">
+            <property name="text">
+             <string>Remove a link</string>
             </property>
            </widget>
           </item>
