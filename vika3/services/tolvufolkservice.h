@@ -26,7 +26,7 @@ public:
     void tortimaTolvufolk(); //Eyðir öllum gögnum
     void eydaStakiTolvufolk(int id); //Eyðir stykki af tölvufólk, notar ID
     enum folkValidation uppfaeraStakTolvuFolk(int id, string nafn, char kyn, int fAr, int dAr);
-    void venslaVidVel(int folk_id, int vel_id); //Venslar folk_id við vel_id
+    bool venslaVidVel(int folk_id, int vel_id); //Venslar folk_id við vel_id
     void eydaStakiVensl(int folk_id, int vel_id); //Eyðir einu vensl tilviki;
 
     //Föll sem skila umbreyttum gögnum

@@ -21,13 +21,14 @@ adalgluggi::adalgluggi(QWidget *parent) :
     ui(new Ui::adalgluggi)
 {
     ui->setupUi(this);
-    ui->folkTable->horizontalHeader()->setVisible(true);
     //init stillingar
-    _folkCurrent = _fService.getTolvufolk();
-    _velarCurrent = _vService.getVelar();
-    synaFolk(_folkCurrent);
-    synaVelar(_velarCurrent);
+    ui->tabsList->setCurrentIndex(0); //Force program to start in scientist tab
+    ui->folkTable->horizontalHeader()->setVisible(true); //Fix missing headers
+    synaAlltFolk();
+    synaAllarVelar();
     _linking = false;
+    ui->folkTable->setColumnHidden(0,true); //Hide ID columns in table widgets
+    ui->velTable->setColumnHidden(0,true);
 }
 
 adalgluggi::~adalgluggi()
@@ -35,9 +36,20 @@ adalgluggi::~adalgluggi()
     delete ui;
 }
 
+void adalgluggi::synaAlltFolk()
+{
+    _folkCurrent = _fService.getTolvufolk();
+    synaFolk(_folkCurrent);
+}
+
+void adalgluggi::synaAllarVelar()
+{
+    _velarCurrent = _vService.getVelar();
+    synaVelar(_velarCurrent);
+}
+
 void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
 {
-    ui->folkTable->setColumnHidden(0,true);
     ui->folkTable->clearContents();
     ui->folkTable->setSortingEnabled(false);
 
@@ -77,94 +89,49 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
 
     for (size_t row = 0; row < velar.size(); ++row)
     {
+        QString ID = QString::number(velar[row].getID());
         QString nafn = QString::fromStdString(velar[row].getVelaNafn());
         QString bAr = QString::number(velar[row].getByggingarAr());
         QString byggd = QString(velar[row].getByggd() ? "Yes" : "No");
         QString tegund = QString::fromStdString(velar[row].getTegund());
-        ui->velTable->setItem(row, 0, new QTableWidgetItem(nafn));
-        ui->velTable->setItem(row, 1, new QTableWidgetItem(bAr));
-        ui->velTable->setItem(row, 2, new QTableWidgetItem(byggd));
-        ui->velTable->setItem(row, 3, new QTableWidgetItem(tegund));
+        ui->velTable->setItem(row, 0, new QTableWidgetItem(ID));
+        ui->velTable->setItem(row, 1, new QTableWidgetItem(nafn));
+        ui->velTable->setItem(row, 2, new QTableWidgetItem(bAr));
+        ui->velTable->setItem(row, 3, new QTableWidgetItem(byggd));
+        ui->velTable->setItem(row, 4, new QTableWidgetItem(tegund));
     }
 
     _velarCurrent = velar;
     ui->velTable->setSortingEnabled(true);
 }
 
-
-
-void adalgluggi::disableVButtons()
-{
-    ui->vButton_add->setEnabled(false);
-    ui->vButton_delete->setEnabled(false);
-    ui->vButton_update->setEnabled(false);
-    ui->vButton_purge->setEnabled(false);
-    ui->vButton_AddLink->setEnabled(false);
-}
-
-void adalgluggi::disableFButtons()
-{
-    ui->button_add->setEnabled(false);
-    ui->button_delete->setEnabled(false);
-    ui->button_update->setEnabled(false);
-    ui->button_purge->setEnabled(false);
-    ui->button_AddLink->setEnabled(false);
-}
-
-void adalgluggi::defaultFButtons()
-{
-    ui->button_add->setEnabled(true);
-    ui->button_delete->setEnabled(false);
-    ui->button_update->setEnabled(false);
-    ui->button_purge->setEnabled(true);
-    ui->button_AddLink->setEnabled(false);
-}
-
-void adalgluggi::defaultVButtons()
-{
-    ui->vButton_add->setEnabled(true);
-    ui->vButton_delete->setEnabled(false);
-    ui->vButton_update->setEnabled(false);
-    ui->vButton_purge->setEnabled(true);
-    ui->vButton_AddLink->setEnabled(false);
-    //ui->vb
-}
-
 void adalgluggi::on_tabsList_currentChanged(int index)
 {
     switch (index)
     {
-        case 0:
+        case 0: //Scientist tab
 
             ui->vButton_delete->setEnabled(false);
             ui->vButton_update->setEnabled(false);
             ui->vButton_AddLink->setEnabled(false);
 
             synaFolk(_folkCurrent);
-
-            if (_linking)
-            {
-                _linking = false;
-                defaultVButtons();
-                defaultFButtons();
-            }
             break;
-        case 1:
+        case 1: //Computer tab
 
             ui->button_update->setEnabled(false);
             ui->button_delete->setEnabled(false);
             ui->button_AddLink->setEnabled(false);
 
             synaVelar(_velarCurrent);
-
-            if (_linking)
-            {
-                _linking = false;
-                defaultFButtons();
-                defaultVButtons();
-            }
+            break;
+        default:
             break;
     }
+    if (_linking)
+        _linking = false;
+    defaultVButtons();
+    defaultFButtons();
 }
 
 void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
@@ -172,7 +139,7 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
     string flokkur = ui->folkFilterBox->currentText().toStdString();
 
     if (arg1.toStdString() == "")
-        synaFolk(_fService.getTolvufolk());
+        synaAlltFolk();
 
     else if (flokkur == "Name")
         synaFolk(_fService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
@@ -219,7 +186,7 @@ void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
     string flokkur = ui->velFilterBox->currentText().toStdString();
 
     if (arg1.toStdString() == "")
-        synaVelar(_vService.getVelar());
+        synaAllarVelar();
 
     else if (flokkur == "Name")
         synaVelar(_vService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
@@ -244,44 +211,40 @@ void adalgluggi::on_button_add_clicked()
 
     if (gluggiBaeta.exec() == 0)
     {
-        synaFolk(_fService.getTolvufolk());
+        synaAlltFolk();
     }
 
 }
 
 void adalgluggi::on_button_delete_clicked()
 {
-    int row = ui->folkTable->currentRow();
-    int folkCurrentIndex = ui->folkTable->item(row,0)->text().toInt();
+    if(deleteConfirmation("scientist"))
+        _fService.eydaStakiTolvufolk(getFolkID());
+    else
+        return;
 
-    _fService.eydaStakiTolvufolk(folkCurrentIndex);
-
-    //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
     ui->folkFilterText->setText("");
-    synaFolk(_fService.getTolvufolk());
+    synaAlltFolk();
     ui->button_delete->setEnabled(false);
     ui->button_update->setEnabled(false);
-
 }
 
 void adalgluggi::on_button_update_clicked()
 {
     //Highlited gæji verður target
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
-    tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
+    tolvufolk folkCurrent = _fService.getStaktTolvufolk(getFolkID());
 
     uppfaeraFolkGluggi uppFolkGluggi;
     uppFolkGluggi.setFolk(folkCurrent);
-    uppFolkGluggi.exec();
+    if (uppFolkGluggi.exec() == 0)
+        synaAlltFolk();
 }
 
 void adalgluggi::on_button_purge_clicked()
 {
     tortimafolk torTimaFolk;
     if (torTimaFolk.exec() == 0)
-    {
-        synaFolk(_fService.getTolvufolk());
-    }
+        synaAlltFolk();
 }
 
 void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
@@ -294,11 +257,14 @@ void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
     }
     else
     {
-        int folkCurrentIndex = ui->folkTable->currentIndex().row();
-        tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
-
-        _vService.venslaVidVel(folkCurrent.getID(),_vSelect.getID());
-
+        if (_vService.venslaVidVel(getFolkID(), _vSelect.getID()))
+        {
+            qDebug() << "Success!";
+        }
+        else
+        {
+            qDebug() << "Failed, relations already exist";
+        }
         _linking = false;
 
         ui->tabsList->setCurrentIndex(1);
@@ -309,45 +275,38 @@ void adalgluggi::on_vButton_add_clicked()
 {
     addmachine gluggiBaetaV;
 
-    gluggiBaetaV.exec();
-
+    if(gluggiBaetaV.exec() == 0)
+        synaAllarVelar();
 }
 
 void adalgluggi::on_vButton_delete_clicked()
 {
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-
-    velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
-
-    _vService.eydaStakiVel(velarCurrent.getID());
-
-    //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
+    if(deleteConfirmation("machine"))
+        _vService.eydaStakiVel(getVelarID());
+    else
+        return;
     ui->velFilterText->setText("");
-    synaVelar(_vService.getVelar());
+    synaAllarVelar();
     ui->vButton_delete->setEnabled(false);
     ui->vButton_update->setEnabled(false);
-
-
 }
 
 void adalgluggi::on_vButton_update_clicked()
 {
-    //Highlited gæji verður target
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-    velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
+    velar velarCurrent = _vService.getStaktVelar(getVelarID());
 
     uppfaeravelgluggi uppVelGluggi;
     uppVelGluggi.setVel(velarCurrent);
-    uppVelGluggi.exec();
+
+    if (uppVelGluggi.exec())
+        synaAllarVelar();
 }
 
 void adalgluggi::on_vButton_purge_clicked()
 {
     tortimavel torTimaVel;
     if (torTimaVel.exec() == 0)
-    {
-        synaVelar(_vService.getVelar());
-    }
+        synaAllarVelar();
 }
 
 void adalgluggi::on_velTable_clicked(const QModelIndex &index)
@@ -360,50 +319,98 @@ void adalgluggi::on_velTable_clicked(const QModelIndex &index)
     }
     else
     {
-        int velarCurrentIndex = ui->velTable->currentIndex().row();
-        velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
-
-        _fService.venslaVidVel(_fSelect.getID(),velarCurrent.getID());
-
+        if (_fService.venslaVidVel(_fSelect.getID(),getVelarID()))
+        {
+            qDebug() << "Success!";
+        }
+        else
+        {
+            qDebug() << "Failure, relations already exist";
+        }
         _linking = false;
-
         ui->tabsList->setCurrentIndex(0);
     }
 }
 
 void adalgluggi::on_button_AddLink_clicked()
 {
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
-    _fSelect = _folkCurrent.at(folkCurrentIndex);
+    _fSelect = _fService.getStaktTolvufolk(getFolkID());
 
     ui->tabsList->setCurrentIndex(1);
     _linking = true;
-    disableVButtons();
-
+    toggleVButtons(false);
 }
 
 void adalgluggi::on_vButton_AddLink_clicked()
 {
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-    _vSelect = _velarCurrent.at(velarCurrentIndex);
+    _vSelect = _vService.getStaktVelar(getVelarID());
 
     ui->tabsList->setCurrentIndex(0);
     _linking = true;
-    disableFButtons();
-
-
+    toggleFButtons(false);
 }
 
 void adalgluggi::on_button_showLinks_clicked()
 {
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
-    _fSelect = _folkCurrent.at(folkCurrentIndex);
+    _fSelect = _fService.getStaktTolvufolk(getFolkID());
 }
 
 void adalgluggi::on_vButton_showLinks_clicked()
 {
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-    _vSelect = _velarCurrent.at(velarCurrentIndex);
+    _vSelect = _vService.getStaktVelar(getVelarID());
+}
+
+int adalgluggi::getFolkID() const
+{
+    //Ef row != -1, þá er eitthver röð valin, sækir ID úr hidden column í folktable
+    int row = ui->folkTable->currentRow();
+    if (row != -1)
+        return ui->folkTable->item(row,0)->text().toInt();
+    return -1;
+}
+
+int adalgluggi::getVelarID() const
+{
+    int row = ui->velTable->currentRow();
+    if (row != -1)
+        return ui->velTable->item(row,0)->text().toInt();
+    return -1;
+}
+
+void adalgluggi::defaultFButtons()
+{
+    ui->button_add->setEnabled(true);
+    ui->button_delete->setEnabled(false);
+    ui->button_update->setEnabled(false);
+    ui->button_purge->setEnabled(true);
+    ui->button_AddLink->setEnabled(false);
+}
+
+void adalgluggi::defaultVButtons()
+{
+    ui->vButton_add->setEnabled(true);
+    ui->vButton_delete->setEnabled(false);
+    ui->vButton_update->setEnabled(false);
+    ui->vButton_purge->setEnabled(true);
+    ui->vButton_AddLink->setEnabled(false);
+}
+
+void adalgluggi::toggleVButtons(bool enabled)
+{
+    ui->vButton_add->setEnabled(enabled);
+    ui->vButton_delete->setEnabled(enabled);
+    ui->vButton_update->setEnabled(enabled);
+    ui->vButton_purge->setEnabled(enabled);
+    ui->vButton_AddLink->setEnabled(enabled);
+}
+
+void adalgluggi::toggleFButtons(bool enabled)
+{
+    ui->button_add->setEnabled(enabled);
+    ui->button_delete->setEnabled(enabled);
+    ui->button_update->setEnabled(enabled);
+    ui->button_purge->setEnabled(enabled);
+    ui->button_AddLink->setEnabled(enabled);
 }
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
@@ -449,6 +456,20 @@ void adalgluggi::deleteKeyPressed()
 }
 
 
+bool adalgluggi::deleteConfirmation(const char* flokkur)
+{
+    QMessageBox* box = new QMessageBox;
+    box->setWindowTitle(QString("Delete ") + QString(flokkur));
+    box->setAttribute(Qt::WA_DeleteOnClose, true);
+    box->setInformativeText(QString("Do you want to remove this ") +QString(flokkur)+ QString(" from the database? "));
+    box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
+    if(box->exec() == QMessageBox::Yes)
+        return true;
+    else
+        return false;
+}
+
 void adalgluggi::escapeKeyPressed()
 {
     QMessageBox* box = new QMessageBox;
@@ -465,3 +486,5 @@ void adalgluggi::escapeKeyPressed()
 
 
 void adalgluggi::on_radiobutton_delete_confirmation_clicked(){}
+
+

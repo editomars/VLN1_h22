@@ -6,6 +6,7 @@ addmachine::addmachine(QWidget *parent) :
     ui(new Ui::addmachine)
 {
     ui->setupUi(this);
+    _added = false;
 }
 
 addmachine::~addmachine()
@@ -27,6 +28,7 @@ void addmachine::on_vButton_add_clicked()
         case vSuccess:
             //What to do when success
             box.setText("Success!");
+            _added = true;
             break;
         case builtFieldMissing:
             //What to do if built field is missing
@@ -48,5 +50,8 @@ void addmachine::on_vButton_add_clicked()
 
 void addmachine::on_vButton_cancel_clicked()
 {
-    this->done(0);
+    if (_added)
+        this->done(0);
+    else
+        this->done(1);
 }

@@ -28,7 +28,7 @@ public:
     enum velValidation uppfaeraVelar(int id, string nafn, int bAr, bool byggd, string tegund);
     void eydaStakiVel(int id);
     void tortimaTolvuVelar();
-    void venslaVidVel(int folkID, int velID); // venslar folk_id vid vel_id
+    bool venslaVidVel(int folkID, int velID); // venslar folk_id vid vel_id
     void eydaStakiVensl(int folkID, int velID); //Eyðir staki af venslum
 
     //Föll sem skila umbreyttum gögnum

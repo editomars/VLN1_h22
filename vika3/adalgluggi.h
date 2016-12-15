@@ -49,8 +49,6 @@ private slots:
 
     void on_vButton_AddLink_clicked();
 
-    void escapeKeyPressed();
-    void deleteKeyPressed();
     void keyReleaseEvent(QKeyEvent* event);
 
     void on_button_showLinks_clicked();
@@ -58,18 +56,8 @@ private slots:
     void on_vButton_showLinks_clicked();
 
     void on_radiobutton_delete_confirmation_clicked();
-
 private:
     Ui::adalgluggi *ui;
-
-    void synaFolk(const vector<tolvufolk>& folk);
-    void synaVelar(const vector<velar>& velar);
-    void disableVButtons();
-    void disableFButtons();
-
-    void defaultFButtons();
-    void defaultVButtons();
-
     tolvufolkService _fService;
     velarService _vService;
     vector<tolvufolk> _folkCurrent;
@@ -77,6 +65,21 @@ private:
     vector<velar> _velarCurrent;
     velar _vSelect;
     bool _linking;
+
+    void synaAlltFolk();
+    void synaAllarVelar();
+    void synaFolk(const vector<tolvufolk>& folk);
+    void synaVelar(const vector<velar>& velar);
+    int getFolkID() const; //Sækir ID úr hidden column í folk table ef eitthver röð er valin
+    int getVelarID() const; //sama og folk, nema fyrir velar
+    void toggleVButtons(bool enabled); //setur alla UI takka í computers tab enabled = true eða false
+    void toggleFButtons(bool enabled); //sama og VButtons nema fyrir scientist tab
+    void defaultFButtons(); //Setur alla hnappa í scientist tab í default enabled state
+    void defaultVButtons(); //sama og scientist nema fyrir vélar
+    void escapeKeyPressed(); //Escape key release handler
+    void deleteKeyPressed(); //Delete key release handler
+
+    bool deleteConfirmation(const char* flokkur);
 };
 
 #endif // ADALGLUGGI_H

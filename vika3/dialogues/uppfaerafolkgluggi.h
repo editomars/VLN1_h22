@@ -32,6 +32,7 @@ private:
 
     tolvufolkService _fService;
     tolvufolk _target;
+    bool _updated;
 };
 
 #endif // UPPFAERAFOLKGLUGGI_H
