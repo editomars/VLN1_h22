@@ -220,13 +220,15 @@ void adalgluggi::on_button_add_clicked()
 
 void adalgluggi::on_button_delete_clicked()
 {
-    _fService.eydaStakiTolvufolk(getFolkID());
+    if(deleteConfirmation("scientist"))
+        _fService.eydaStakiTolvufolk(getFolkID());
+    else
+        return;
 
     ui->folkFilterText->setText("");
     synaAlltFolk();
     ui->button_delete->setEnabled(false);
     ui->button_update->setEnabled(false);
-
 }
 
 void adalgluggi::on_button_update_clicked()
@@ -277,8 +279,10 @@ void adalgluggi::on_vButton_add_clicked()
 
 void adalgluggi::on_vButton_delete_clicked()
 {
-   _vService.eydaStakiVel(getVelarID());
-
+    if(deleteConfirmation("machine"))
+        _vService.eydaStakiVel(getVelarID());
+    else
+        return;
     ui->velFilterText->setText("");
     synaAllarVelar();
     ui->vButton_delete->setEnabled(false);
@@ -446,6 +450,20 @@ void adalgluggi::deleteKeyPressed()
     }
     else
         return;
+}
+
+bool adalgluggi::deleteConfirmation(const char* flokkur)
+{
+    QMessageBox* box = new QMessageBox;
+    box->setWindowTitle(QString("Delete ") + QString(flokkur));
+    box->setAttribute(Qt::WA_DeleteOnClose, true);
+    box->setInformativeText(QString("Do you want to remove this ") +QString(flokkur)+ QString(" from the database? "));
+    box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+
+    if(box->exec() == QMessageBox::Yes)
+        return true;
+    else
+        return false;
 }
 
 void adalgluggi::escapeKeyPressed()
