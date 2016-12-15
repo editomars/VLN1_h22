@@ -6,6 +6,7 @@ AddScientist::AddScientist(QWidget *parent) :
     ui(new Ui::AddScientist)
 {
     ui->setupUi(this);
+    _added = false;
 }
 
 AddScientist::~AddScientist()
@@ -30,6 +31,7 @@ void AddScientist::on_button_add_clicked()
             ui->input_name->setText("");
             ui->input_birth->setText("");
             ui->input_death->setText("");
+            _added = true;
             break;
         case nameEmpty:
             //What to do when name is empty
@@ -70,5 +72,8 @@ void AddScientist::on_button_add_clicked()
 
 void AddScientist::on_button_cancel_clicked()
 {
-    this->done(0);
+    if (_added)
+        this->done(0);
+    else
+        this->done(1);
 }

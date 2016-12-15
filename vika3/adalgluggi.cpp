@@ -105,8 +105,6 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
     ui->velTable->setSortingEnabled(true);
 }
 
-
-
 void adalgluggi::on_tabsList_currentChanged(int index)
 {
     switch (index)
@@ -257,11 +255,14 @@ void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
     }
     else
     {
-        int folkCurrentIndex = ui->folkTable->currentIndex().row();
-        tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
-
-        _vService.venslaVidVel(folkCurrent.getID(),_vSelect.getID());
-
+        if (_vService.venslaVidVel(getFolkID(), _vSelect.getID()))
+        {
+            qDebug() << "Success!";
+        }
+        else
+        {
+            qDebug() << "Failed, relations already exist";
+        }
         _linking = false;
 
         ui->tabsList->setCurrentIndex(1);
@@ -272,7 +273,8 @@ void adalgluggi::on_vButton_add_clicked()
 {
     addmachine gluggiBaetaV;
 
-    gluggiBaetaV.exec();
+    if(gluggiBaetaV.exec() == 0)
+        synaAllarVelar();
 }
 
 void adalgluggi::on_vButton_delete_clicked()
@@ -287,13 +289,13 @@ void adalgluggi::on_vButton_delete_clicked()
 
 void adalgluggi::on_vButton_update_clicked()
 {
-    //Highlited gæji verður target
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-    velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
+    velar velarCurrent = _vService.getStaktVelar(getVelarID());
 
     uppfaeravelgluggi uppVelGluggi;
     uppVelGluggi.setVel(velarCurrent);
-    uppVelGluggi.exec();
+
+    if (uppVelGluggi.exec())
+        synaAllarVelar();
 }
 
 void adalgluggi::on_vButton_purge_clicked()
@@ -313,10 +315,14 @@ void adalgluggi::on_velTable_clicked(const QModelIndex &index)
     }
     else
     {
-        int velarCurrentIndex = ui->velTable->currentIndex().row();
-        velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
-
-        _fService.venslaVidVel(_fSelect.getID(),velarCurrent.getID());
+        if (_fService.venslaVidVel(_fSelect.getID(),getVelarID()))
+        {
+            qDebug() << "Success!";
+        }
+        else
+        {
+            qDebug() << "Failure, relations already exist";
+        }
         _linking = false;
         ui->tabsList->setCurrentIndex(0);
     }
@@ -324,8 +330,7 @@ void adalgluggi::on_velTable_clicked(const QModelIndex &index)
 
 void adalgluggi::on_button_AddLink_clicked()
 {
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
-    _fSelect = _folkCurrent.at(folkCurrentIndex);
+    _fSelect = _fService.getStaktTolvufolk(getFolkID());
 
     ui->tabsList->setCurrentIndex(1);
     _linking = true;
@@ -334,8 +339,7 @@ void adalgluggi::on_button_AddLink_clicked()
 
 void adalgluggi::on_vButton_AddLink_clicked()
 {
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-    _vSelect = _velarCurrent.at(velarCurrentIndex);
+    _vSelect = _vService.getStaktVelar(getVelarID());
 
     ui->tabsList->setCurrentIndex(0);
     _linking = true;
@@ -344,14 +348,12 @@ void adalgluggi::on_vButton_AddLink_clicked()
 
 void adalgluggi::on_button_showLinks_clicked()
 {
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
-    _fSelect = _folkCurrent.at(folkCurrentIndex);
+    _fSelect = _fService.getStaktTolvufolk(getFolkID());
 }
 
 void adalgluggi::on_vButton_showLinks_clicked()
 {
-    int velarCurrentIndex = ui->velTable->currentIndex().row();
-    _vSelect = _velarCurrent.at(velarCurrentIndex);
+    _vSelect = _vService.getStaktVelar(getVelarID());
 }
 
 int adalgluggi::getFolkID() const

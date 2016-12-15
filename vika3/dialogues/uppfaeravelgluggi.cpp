@@ -6,6 +6,7 @@ uppfaeravelgluggi::uppfaeravelgluggi(QWidget *parent) :
     ui(new Ui::uppfaeravelgluggi)
 {
     ui->setupUi(this);
+    _updated = false;
 }
 
 uppfaeravelgluggi::~uppfaeravelgluggi()
@@ -62,6 +63,7 @@ void uppfaeravelgluggi::on_UppfaeraVelTakki_clicked()
         case vSuccess:
             //What to do when success
             box.setText("Success!");
+            _updated = true;
             break;
         case builtFieldMissing:
             //What to do if built field is missing
@@ -84,5 +86,8 @@ void uppfaeravelgluggi::on_UppfaeraVelTakki_clicked()
 
 void uppfaeravelgluggi::on_UppfHaettaTakki_clicked()
 {
-    this->done(0);
+    if (_updated)
+        this->done(0);
+    else
+        this->done(1);
 }

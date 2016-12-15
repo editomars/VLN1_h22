@@ -25,6 +25,7 @@ private slots:
 private:
     Ui::AddScientist *ui;
     tolvufolkService _service;
+    bool _added;
 };
 
 #endif // ADDSCIENTIST_H

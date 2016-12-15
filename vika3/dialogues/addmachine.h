@@ -25,6 +25,7 @@ private slots:
 private:
     Ui::addmachine *ui;
     velarService _vService;
+    bool _added;
 };
 
 #endif // ADDMACHINE_H

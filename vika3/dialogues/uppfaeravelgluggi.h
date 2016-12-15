@@ -34,6 +34,7 @@ private:
 
     velarService _vService;
     velar _target;
+    bool _updated;
 };
 
 #endif // UPPFAERAVELGLUGGI_H
