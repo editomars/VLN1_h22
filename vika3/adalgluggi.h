@@ -62,6 +62,8 @@ private slots:
 
     void on_tabsList_tabBarClicked(int index);
 
+    void on_button_warning_clicked();
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
@@ -84,8 +86,7 @@ private:
     void defaultFButtons(); //Setur alla hnappa í scientist tab í default enabled state
     void defaultVButtons(); //sama og scientist nema fyrir vélar
     void escapeKeyPressed(); //Escape key release handler
-    void deleteKeyPressed(); //Delete key release handler
-
+    void deleteKeyPressed(const char* flokkur); //Delete key release handler
     bool deleteConfirmation(const char* flokkur);
 };
 
