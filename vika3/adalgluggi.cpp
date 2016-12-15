@@ -24,10 +24,8 @@ adalgluggi::adalgluggi(QWidget *parent) :
     //init stillingar
     ui->tabsList->setCurrentIndex(0); //Force program to start in scientist tab
     ui->folkTable->horizontalHeader()->setVisible(true); //Fix missing headers
-    _folkCurrent = _fService.getTolvufolk();
-    _velarCurrent = _vService.getVelar();
-    synaFolk(_folkCurrent);
-    synaVelar(_velarCurrent);
+    synaAlltFolk();
+    synaAllarVelar();
     _linking = false;
     ui->folkTable->setColumnHidden(0,true); //Hide ID columns in table widgets
     ui->velTable->setColumnHidden(0,true);
@@ -36,6 +34,18 @@ adalgluggi::adalgluggi(QWidget *parent) :
 adalgluggi::~adalgluggi()
 {
     delete ui;
+}
+
+void adalgluggi::synaAlltFolk()
+{
+    _folkCurrent = _fService.getTolvufolk();
+    synaFolk(_folkCurrent);
+}
+
+void adalgluggi::synaAllarVelar()
+{
+    _velarCurrent = _vService.getVelar();
+    synaVelar(_velarCurrent);
 }
 
 void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
@@ -95,42 +105,7 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
     ui->velTable->setSortingEnabled(true);
 }
 
-int adalgluggi::getFolkID() const
-{
-    //Ef row != -1, þá er eitthver röð valin, sækir ID úr hidden column í folktable
-    int row = ui->folkTable->currentRow();
-    if (row != -1)
-        return ui->folkTable->item(row,0)->text().toInt();
-    return -1;
-}
 
-int adalgluggi::getVelarID() const
-{
-    int row = ui->velTable->currentRow();
-    if (row != -1)
-        return ui->velTable->item(row,0)->text().toInt();
-    return -1;
-}
-
-
-
-void adalgluggi::defaultFButtons()
-{
-    ui->button_add->setEnabled(true);
-    ui->button_delete->setEnabled(false);
-    ui->button_update->setEnabled(false);
-    ui->button_purge->setEnabled(true);
-    ui->button_AddLink->setEnabled(false);
-}
-
-void adalgluggi::defaultVButtons()
-{
-    ui->vButton_add->setEnabled(true);
-    ui->vButton_delete->setEnabled(false);
-    ui->vButton_update->setEnabled(false);
-    ui->vButton_purge->setEnabled(true);
-    ui->vButton_AddLink->setEnabled(false);
-}
 
 void adalgluggi::on_tabsList_currentChanged(int index)
 {
@@ -166,7 +141,7 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
     string flokkur = ui->folkFilterBox->currentText().toStdString();
 
     if (arg1.toStdString() == "")
-        synaFolk(_fService.getTolvufolk());
+        synaAlltFolk();
 
     else if (flokkur == "Name")
         synaFolk(_fService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
@@ -213,7 +188,7 @@ void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
     string flokkur = ui->velFilterBox->currentText().toStdString();
 
     if (arg1.toStdString() == "")
-        synaVelar(_vService.getVelar());
+        synaAllarVelar();
 
     else if (flokkur == "Name")
         synaVelar(_vService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
@@ -238,7 +213,7 @@ void adalgluggi::on_button_add_clicked()
 
     if (gluggiBaeta.exec() == 0)
     {
-        synaFolk(_fService.getTolvufolk());
+        synaAlltFolk();
     }
 
 }
@@ -248,7 +223,7 @@ void adalgluggi::on_button_delete_clicked()
     _fService.eydaStakiTolvufolk(getFolkID());
 
     ui->folkFilterText->setText("");
-    synaFolk(_fService.getTolvufolk());
+    synaAlltFolk();
     ui->button_delete->setEnabled(false);
     ui->button_update->setEnabled(false);
 
@@ -257,21 +232,19 @@ void adalgluggi::on_button_delete_clicked()
 void adalgluggi::on_button_update_clicked()
 {
     //Highlited gæji verður target
-    int folkCurrentIndex = ui->folkTable->currentIndex().row();
-    tolvufolk folkCurrent = _folkCurrent.at(folkCurrentIndex);
+    tolvufolk folkCurrent = _fService.getStaktTolvufolk(getFolkID());
 
     uppfaeraFolkGluggi uppFolkGluggi;
     uppFolkGluggi.setFolk(folkCurrent);
-    uppFolkGluggi.exec();
+    if (uppFolkGluggi.exec() == 0)
+        synaAlltFolk();
 }
 
 void adalgluggi::on_button_purge_clicked()
 {
     tortimafolk torTimaFolk;
     if (torTimaFolk.exec() == 0)
-    {
         synaFolk(_fService.getTolvufolk());
-    }
 }
 
 void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
@@ -383,6 +356,41 @@ void adalgluggi::on_vButton_showLinks_clicked()
     _vSelect = _velarCurrent.at(velarCurrentIndex);
 }
 
+int adalgluggi::getFolkID() const
+{
+    //Ef row != -1, þá er eitthver röð valin, sækir ID úr hidden column í folktable
+    int row = ui->folkTable->currentRow();
+    if (row != -1)
+        return ui->folkTable->item(row,0)->text().toInt();
+    return -1;
+}
+
+int adalgluggi::getVelarID() const
+{
+    int row = ui->velTable->currentRow();
+    if (row != -1)
+        return ui->velTable->item(row,0)->text().toInt();
+    return -1;
+}
+
+void adalgluggi::defaultFButtons()
+{
+    ui->button_add->setEnabled(true);
+    ui->button_delete->setEnabled(false);
+    ui->button_update->setEnabled(false);
+    ui->button_purge->setEnabled(true);
+    ui->button_AddLink->setEnabled(false);
+}
+
+void adalgluggi::defaultVButtons()
+{
+    ui->vButton_add->setEnabled(true);
+    ui->vButton_delete->setEnabled(false);
+    ui->vButton_update->setEnabled(false);
+    ui->vButton_purge->setEnabled(true);
+    ui->vButton_AddLink->setEnabled(false);
+}
+
 void adalgluggi::toggleVButtons(bool enabled)
 {
     ui->vButton_add->setEnabled(enabled);
@@ -458,3 +466,5 @@ void adalgluggi::escapeKeyPressed()
 
 
 void adalgluggi::on_radiobutton_delete_confirmation_clicked(){}
+
+

@@ -66,6 +66,8 @@ private:
     velar _vSelect;
     bool _linking;
 
+    void synaAlltFolk();
+    void synaAllarVelar();
     void synaFolk(const vector<tolvufolk>& folk);
     void synaVelar(const vector<velar>& velar);
     int getFolkID() const; //Sækir ID úr hidden column í folk table ef eitthver röð er valin

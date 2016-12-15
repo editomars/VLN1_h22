@@ -6,6 +6,7 @@ uppfaeraFolkGluggi::uppfaeraFolkGluggi(QWidget *parent) :
     ui(new Ui::uppfaeraFolkGluggi)
 {
     ui->setupUi(this);
+    _updated = false;
 }
 
 uppfaeraFolkGluggi::~uppfaeraFolkGluggi()
@@ -53,7 +54,9 @@ void uppfaeraFolkGluggi::on_UppfaeraFolkTakki_clicked()
         case fSuccess:
             //What to do when succeess
             box.setText("Success!");
+            _target = _fService.getStaktTolvufolk(_target.getID());
             getFolk();
+            _updated = true;
             break;
         case nameEmpty:
             //What to do when name is empty
@@ -85,11 +88,12 @@ void uppfaeraFolkGluggi::on_UppfaeraFolkTakki_clicked()
             break;
     }
     box.exec();
-
-    //this->done(0); //Should dialogue exit after adding?
 }
 
 void uppfaeraFolkGluggi::on_UppfHaettaTakki_clicked()
 {
-    this->done(0);
+    if (_updated)
+        this->done(0);
+    else
+        this->done(1);
 }
