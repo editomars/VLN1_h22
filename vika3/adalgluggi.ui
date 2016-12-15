@@ -232,7 +232,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>WARNING!!! DO NO PRESS THIS BUTTON!!!</string>
+             <string>WARNING!!! DO NOT PRESS THIS BUTTON!!!</string>
             </property>
            </widget>
           </item>
