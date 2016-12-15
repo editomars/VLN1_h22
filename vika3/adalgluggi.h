@@ -68,6 +68,10 @@ private slots:
 
     void on_vButton_back_clicked();
 
+    void on_velFilterBox_currentIndexChanged(const QString &arg1);
+
+    void on_folkFilterBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;

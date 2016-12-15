@@ -47,12 +47,14 @@ void adalgluggi::synaAlltFolk()
 {
     _folkCurrent = _fService.getTolvufolk();
     synaFolk(_folkCurrent);
+    ui->folkDisplayLabel->setText("<h3>Displaying all scientists</h3>");
 }
 
 void adalgluggi::synaAllarVelar()
 {
     _velarCurrent = _vService.getVelar();
     synaVelar(_velarCurrent);
+    ui->velDisplayLabel->setText("<h3>Displaying all machines</h3>");
 }
 
 void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
@@ -137,6 +139,17 @@ void adalgluggi::on_tabsList_currentChanged(int index)
     }
     if (_linking)
     {
+        if (_unlinking)
+        {
+            if (index == 0)
+            {
+                ui->velDisplayLabel->setText(ui->velDisplayLabel->text() + "f5 to refresh");
+            }
+            else if (index == 1)
+            {
+                ui->folkDisplayLabel->setText(ui->folkDisplayLabel->text() + "f5 to refresh");
+            }
+        }
         _linking = _unlinking = false;
     }
     defaultVButtons();
@@ -147,8 +160,10 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->folkFilterBox->currentText().toStdString();
 
-    if (arg1.toStdString() == "")
+    if (arg1.toStdString() == ""){
         synaAlltFolk();
+        return;
+    }
 
     else if (flokkur == "Name")
         synaFolk(_fService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
@@ -188,14 +203,18 @@ void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
             synaFolk(_fService.leitaHeiltolu("danarar", '=', arg1.toInt()));
 
     }
+
+    ui->folkDisplayLabel->setText("<h4>Displaying scientists filtered by " + QString(flokkur.c_str()) + " '" + arg1 + "'</h4>f5 to refresh");
 }
 
 void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
 {
     string flokkur = ui->velFilterBox->currentText().toStdString();
 
-    if (arg1.toStdString() == "")
+    if (arg1.toStdString() == ""){
         synaAllarVelar();
+        return;
+    }
 
     else if (flokkur == "Name")
         synaVelar(_vService.leitaStreng("Nafn", arg1.toStdString(), 'a'));
@@ -211,7 +230,7 @@ void adalgluggi::on_velFilterText_textChanged(const QString &arg1)
         synaVelar(_vService.leitaBool("Byggd", arg1.toInt() ));
     }
 
-
+    ui->velDisplayLabel->setText("<h4>Displaying machines filtered by " + QString(flokkur.c_str()) + " '" + arg1 + "'</h4>f5 to refresh");
 }
 
 void adalgluggi::on_button_add_clicked()
@@ -397,6 +416,7 @@ void adalgluggi::on_button_showLinks_clicked()
     ui->vButton_back->setVisible(true);
     ui->tabsList->setCurrentIndex(1);
     synaVelar(_vService.getVelarVensl(_fSelect.getID()));
+    ui->velDisplayLabel->setText("<h4>Displaying machines linked to " + QString(_fSelect.getNafn().c_str()) + "</h4>f5 to refresh");
 }
 
 void adalgluggi::on_vButton_showLinks_clicked()
@@ -406,6 +426,7 @@ void adalgluggi::on_vButton_showLinks_clicked()
     ui->button_back->setVisible(true);
     ui->tabsList->setCurrentIndex(0);
     synaFolk(_fService.getTolvufolkVensl(_vSelect.getID()));
+    ui->folkDisplayLabel->setText("<h4>Displaying scientists linked to " + QString(_vSelect.getVelaNafn().c_str()) + "</h4>f5 to refresh");
 }
 
 int adalgluggi::getFolkID() const
@@ -579,6 +600,7 @@ void adalgluggi::on_button_removeLink_clicked()
     synaVelar(_vService.getVelarVensl(_fSelect.getID()));
     _linking = _unlinking = true;
     toggleVButtons(false);
+    ui->velDisplayLabel->setText("<h3>Displaying machines linked to " + QString(_fSelect.getNafn().c_str()) + "</h3>");
 }
 
 void adalgluggi::on_vButton_removeLink_clicked()
@@ -590,6 +612,7 @@ void adalgluggi::on_vButton_removeLink_clicked()
     synaFolk(_fService.getTolvufolkVensl(_vSelect.getID()));
     _linking = _unlinking = true;
     toggleFButtons(false);
+    ui->folkDisplayLabel->setText("<h3>Displaying scientists linked to " + QString(_vSelect.getVelaNafn().c_str()) + "</h3>");
 }
 
 void adalgluggi::on_tabsList_tabBarClicked(int index)
@@ -626,4 +649,14 @@ void adalgluggi::on_vButton_back_clicked()
 {
         ui->tabsList->setCurrentIndex(0);
         ui->vButton_back->setVisible(false);
+}
+
+void adalgluggi::on_velFilterBox_currentIndexChanged(const QString &arg1)
+{
+    on_velFilterText_textChanged(ui->velFilterText->text());
+}
+
+void adalgluggi::on_folkFilterBox_currentIndexChanged(const QString &arg1)
+{
+    on_folkFilterText_textChanged(ui->folkFilterText->text());
 }
