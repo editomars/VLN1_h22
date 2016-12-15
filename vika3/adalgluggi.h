@@ -104,6 +104,9 @@ private:
     void SkeyPressed();//S key release handler
     void RkeyPressed();//R key release handler
     void F5keyPressed();// F5 key release handler
+    void tabToLeft();// Left arrow key release handler
+    void tabToRight();// Right arrow key release handler
+
 
 
 };

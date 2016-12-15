@@ -544,18 +544,32 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
             F5keyPressed();
             break;
         case constants::LEFT_ARROW:
-            if(ui->tabsList->currentIndex() == 1)
-            ui->tabsList->setCurrentIndex(0);
-            else if(ui->tabsList->currentIndex() == 0)
-            ui->tabsList->setCurrentIndex(1);
+            tabToLeft();
             break;
         case constants::RIGHT_ARROW:
-            if(ui->tabsList->currentIndex() == 1)
-            ui->tabsList->setCurrentIndex(0);
-            else if(ui->tabsList->currentIndex() == 0)
-            ui->tabsList->setCurrentIndex(1);
+            tabToRight();
             break;
 
+    }
+}
+
+void adalgluggi::tabToLeft()
+{
+    int index = ui->tabsList->currentIndex();
+    if(index != 0)
+    {
+        index--;
+        ui->tabsList->setCurrentIndex(index);
+    }
+}
+
+void adalgluggi::tabToRight()
+{
+    int index = ui->tabsList->currentIndex();
+    if(index != ui->tabsList->count()-1)
+    {
+        index++;
+        ui->tabsList->setCurrentIndex(index);
     }
 }
 
