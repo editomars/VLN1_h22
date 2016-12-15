@@ -220,6 +220,21 @@ int sqltenging::saekjaSize(string flokkur) const
     return size;
 }
 
+bool sqltenging::venslThegarTil(int folkID, int velID)
+{
+    bool count = 0;
+    string sql = "SELECT COUNT(*) as C from VenslFolkVelar "
+                 "WHERE folk_id = " + to_string(folkID)
+                +"AND vel_id = " + to_string(velID);
+
+    QSqlQuery query(_db);
+    query.exec(sql.c_str());
+    if (query.next()){
+        count = query.value("C").toUInt();
+    }
+    return count;
+}
+
 
 
 //Vensl

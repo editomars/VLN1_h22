@@ -77,9 +77,12 @@ enum folkValidation tolvufolkService::uppfaeraStakTolvuFolk(int id, string nafn,
     return valid;
 }
 
-void tolvufolkService::venslaVidVel(int folk_id, int vel_id)
+bool tolvufolkService::venslaVidVel(int folk_id, int vel_id)
 {
+    if (_dataaccess.venslThegarTil(folk_id, vel_id))
+        return false;
     _dataaccess.buaTilVensl(folk_id, vel_id);
+    return true;
 }
 
 void tolvufolkService::eydaStakiVensl(int folk_id, int vel_id)

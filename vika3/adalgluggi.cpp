@@ -244,7 +244,7 @@ void adalgluggi::on_button_purge_clicked()
 {
     tortimafolk torTimaFolk;
     if (torTimaFolk.exec() == 0)
-        synaFolk(_fService.getTolvufolk());
+        synaAlltFolk();
 }
 
 void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
@@ -280,7 +280,7 @@ void adalgluggi::on_vButton_delete_clicked()
    _vService.eydaStakiVel(getVelarID());
 
     ui->velFilterText->setText("");
-    synaVelar(_vService.getVelar());
+    synaAllarVelar();
     ui->vButton_delete->setEnabled(false);
     ui->vButton_update->setEnabled(false);
 }
@@ -300,9 +300,7 @@ void adalgluggi::on_vButton_purge_clicked()
 {
     tortimavel torTimaVel;
     if (torTimaVel.exec() == 0)
-    {
-        synaVelar(_vService.getVelar());
-    }
+        synaAllarVelar();
 }
 
 void adalgluggi::on_velTable_clicked(const QModelIndex &index)

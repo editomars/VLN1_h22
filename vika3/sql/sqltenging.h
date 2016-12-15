@@ -37,6 +37,7 @@ public:
     int saekjaSize(string flokkur) const; //Skilar fjölda véla eða fólks (flokkur == "folk" eda "velar")
 
     // Functions for relations
+    bool venslThegarTil(int folkID, int VelID);
     void buaTilVensl(int folkID, int velID);
     void eydaStakiVensl(int folkID, int velID);
     vector<tolvufolk> lesaFolkVenslad(int velarID) const; //Sækir fólk venslað við ákveðið vélar ID
