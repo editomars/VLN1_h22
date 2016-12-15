@@ -51,6 +51,9 @@ private slots:
 
     void keyReleaseEvent(QKeyEvent* event);
 
+    bool eventFilter(QObject * obj, QEvent * event);
+
+
     void on_button_showLinks_clicked();
 
     void on_vButton_showLinks_clicked();
@@ -62,6 +65,15 @@ private slots:
 
     void on_tabsList_tabBarClicked(int index);
 
+    void on_button_warning_clicked();
+
+    void on_button_back_clicked();
+
+    void on_vButton_back_clicked();
+
+    void on_velFilterBox_currentIndexChanged(const QString &arg1);
+
+    void on_folkFilterBox_currentIndexChanged(const QString &arg1);
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
@@ -72,6 +84,8 @@ private:
     velar _vSelect;
     bool _linking;
     bool _unlinking;
+    QSet<int> pressedKeys;
+
 
     void synaAlltFolk();
     void synaAllarVelar();
@@ -84,9 +98,14 @@ private:
     void defaultFButtons(); //Setur alla hnappa í scientist tab í default enabled state
     void defaultVButtons(); //sama og scientist nema fyrir vélar
     void escapeKeyPressed(); //Escape key release handler
-    void deleteKeyPressed(); //Delete key release handler
-
+    void deleteKeyPressed(const char* flokkur); //Delete key release handler
     bool deleteConfirmation(const char* flokkur);
+    void LkeyPressed();//A key release handler
+    void SkeyPressed();//S key release handler
+    void RkeyPressed();//R key release handler
+    void F5keyPressed();// F5 key release handler
+
+
 };
 
 #endif // ADALGLUGGI_H

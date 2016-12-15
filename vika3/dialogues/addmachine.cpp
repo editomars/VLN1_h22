@@ -44,8 +44,6 @@ void addmachine::on_vButton_add_clicked()
             break;
     }
     box.exec();
-
-    //this->done(0);
 }
 
 void addmachine::on_vButton_cancel_clicked()
