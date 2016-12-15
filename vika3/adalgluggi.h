@@ -51,6 +51,9 @@ private slots:
 
     void keyReleaseEvent(QKeyEvent* event);
 
+    bool eventFilter(QObject * obj, QEvent * event);
+
+
     void on_button_showLinks_clicked();
 
     void on_vButton_showLinks_clicked();
@@ -68,6 +71,8 @@ private slots:
 
     void on_vButton_back_clicked();
 
+
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
@@ -78,6 +83,8 @@ private:
     velar _vSelect;
     bool _linking;
     bool _unlinking;
+    QSet<int> pressedKeys;
+
 
     void synaAlltFolk();
     void synaAllarVelar();
@@ -92,7 +99,11 @@ private:
     void escapeKeyPressed(); //Escape key release handler
     void deleteKeyPressed(const char* flokkur); //Delete key release handler
     bool deleteConfirmation(const char* flokkur);
-    void AkeyPressed();
+    void LkeyPressed();//A key release handler
+    void SkeyPressed();//S key release handler
+    void RkeyPressed();//R key release handler
+    void F5keyPressed();// F5 key release handler
+
 
 };
 

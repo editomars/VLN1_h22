@@ -18,6 +18,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QWidget>
+#include <Qset>
 
 adalgluggi::adalgluggi(QWidget *parent) :
     QMainWindow(parent),
@@ -36,6 +37,8 @@ adalgluggi::adalgluggi(QWidget *parent) :
     ui->button_warning->setStyleSheet("background-color: red");
     ui->button_back->setVisible(false);
     ui->vButton_back->setVisible(false);
+    this->installEventFilter(this);
+
 }
 
 adalgluggi::~adalgluggi()
@@ -454,8 +457,41 @@ void adalgluggi::toggleFButtons(bool enabled)
     ui->button_removeLink->setEnabled(enabled);
 }
 
+
+bool adalgluggi::eventFilter(QObject * obj, QEvent * event)
+{
+    if(event->type()==QEvent::KeyPress) {
+
+        pressedKeys += ((QKeyEvent*)event)->key();
+
+        if(pressedKeys.contains(constants::CONTROL_KEY_NUMBER) && pressedKeys.contains(constants::L_KEY_NUMBER) )
+        {
+            LkeyPressed();
+            //cmd and A are pressed
+        }
+        if(pressedKeys.contains(constants::CONTROL_KEY_NUMBER) && pressedKeys.contains(constants::S_KEY_NUMBER) )
+        {
+            SkeyPressed();
+            //cmd and A are pressed
+        }
+        if(pressedKeys.contains(constants::CONTROL_KEY_NUMBER) && pressedKeys.contains(constants::R_KEY_NUMBER) )
+        {
+            RkeyPressed();
+            //cmd and A are pressed
+        }
+
+    }
+    else if(event->type()==QEvent::KeyRelease)
+    {
+        pressedKeys -= ((QKeyEvent*)event)->key();
+    }
+
+    return false;
+}
+
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 {
+    qDebug () << "keyReleaseEvent ";
     qDebug () << event->key();
 
     switch (event->key())
@@ -469,20 +505,56 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
         case constants::ESCAPE_KEY_NUMBER:
             escapeKeyPressed();
             break;
-        case constants::A_KEY_NUMBER:
-            AkeyPressed();
-
-
+        case constants::F5_KEY_NUMBER:
+            F5keyPressed();
+            break;
     }
 }
 
-void adalgluggi::AkeyPressed()
+void adalgluggi::LkeyPressed()
 {
+    qDebug() << "her";
     if(ui->folkTable->currentRow() != -1 && ui->tabsList->currentIndex() == 0)
         on_button_AddLink_clicked();
 
     if(ui->velTable->currentRow() != -1 && ui->tabsList->currentIndex() == 1)
         on_vButton_AddLink_clicked();
+}
+
+void adalgluggi::SkeyPressed()
+{
+    if(ui->folkTable->currentRow() != -1 && ui->tabsList->currentIndex() == 0)
+        on_button_showLinks_clicked();
+
+    if(ui->velTable->currentRow() != -1 && ui->tabsList->currentIndex() == 1)
+        on_button_showLinks_clicked();
+}
+
+void adalgluggi::RkeyPressed()
+{
+    if(ui->folkTable->currentRow() != -1 && ui->tabsList->currentIndex() == 0)
+        on_button_removeLink_clicked();
+
+    if(ui->velTable->currentRow() != -1 && ui->tabsList->currentIndex() == 1)
+        on_button_removeLink_clicked();
+}
+
+
+void adalgluggi::F5keyPressed()
+{
+    qDebug () << "lol";
+    if(ui->tabsList->currentIndex() == 0 && !_unlinking)
+    {
+        synaAlltFolk();
+        ui->folkFilterText->setText("");
+    }
+
+    else if(ui->tabsList->currentIndex() == 1 && !_unlinking)
+    {
+        synaAllarVelar();
+        ui->velFilterText->setText("");
+
+    }
 }
 
 void adalgluggi::deleteKeyPressed(const char* flokkur)
