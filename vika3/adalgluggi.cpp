@@ -217,17 +217,19 @@ void adalgluggi::on_button_add_clicked()
     if (gluggiBaeta.exec() == 0)
     {
         synaAlltFolk();
+        ui->statusBar->showMessage("Scientist(s) added", 1500);
     }
 
 }
 
 void adalgluggi::on_button_delete_clicked()
 {
-    if(deleteConfirmation("scientist"))
+    if(deleteConfirmation("scientist")){
         _fService.eydaStakiTolvufolk(getFolkID());
+        ui->statusBar->showMessage("Scientist deleted", 1500);
+    }
     else
         return;
-
     ui->folkFilterText->setText("");
     synaAlltFolk();
     ui->button_delete->setEnabled(false);
@@ -241,15 +243,19 @@ void adalgluggi::on_button_update_clicked()
 
     uppfaeraFolkGluggi uppFolkGluggi;
     uppFolkGluggi.setFolk(folkCurrent);
-    if (uppFolkGluggi.exec() == 0)
+    if (uppFolkGluggi.exec() == 0){
         synaAlltFolk();
+        ui->statusBar->showMessage("Scientist updated", 1500);
+    }
 }
 
 void adalgluggi::on_button_purge_clicked()
 {
     tortimafolk torTimaFolk;
-    if (torTimaFolk.exec() == 0)
+    if (torTimaFolk.exec() == 0){
         synaAlltFolk();
+        ui->statusBar->showMessage("Scientists purged", 1500);
+    }
 }
 
 void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
@@ -264,19 +270,19 @@ void adalgluggi::on_folkTable_clicked(const QModelIndex &index)
         {
             if (_vService.venslaVidVel(getFolkID(), _vSelect.getID()))
             {
-                qDebug() << "Success!";
+                ui->statusBar->showMessage("Linking successful", 1500);
             }
             else
             {
-                qDebug() << "Failed, relations already exist";
+                ui->statusBar->showMessage("Linking failed, duplicate links", 1500);
             }
         }
         else
         {
             _vService.eydaStakiVensl(getFolkID(), _vSelect.getID());
+            ui->statusBar->showMessage("link deleted", 1500);
             _unlinking = false;
         }
-
         _linking = false;
         ui->tabsList->setCurrentIndex(1);
     }
@@ -286,14 +292,18 @@ void adalgluggi::on_vButton_add_clicked()
 {
     addmachine gluggiBaetaV;
 
-    if(gluggiBaetaV.exec() == 0)
+    if(gluggiBaetaV.exec() == 0){
         synaAllarVelar();
+        ui->statusBar->showMessage("Machine(s) added", 1500);
+    }
 }
 
 void adalgluggi::on_vButton_delete_clicked()
 {
-    if(deleteConfirmation("machine"))
+    if(deleteConfirmation("machine")){
         _vService.eydaStakiVel(getVelarID());
+        ui->statusBar->showMessage("Machine deleted", 1500);
+    }
     else
         return;
     ui->velFilterText->setText("");
@@ -309,15 +319,19 @@ void adalgluggi::on_vButton_update_clicked()
     uppfaeravelgluggi uppVelGluggi;
     uppVelGluggi.setVel(velarCurrent);
 
-    if (uppVelGluggi.exec())
+    if (uppVelGluggi.exec()){
         synaAllarVelar();
+        ui->statusBar->showMessage("Machine updated", 1500);
+    }
 }
 
 void adalgluggi::on_vButton_purge_clicked()
 {
     tortimavel torTimaVel;
-    if (torTimaVel.exec() == 0)
+    if (torTimaVel.exec() == 0){
         synaAllarVelar();
+        ui->statusBar->showMessage("Machines purged", 1500);
+    }
 }
 
 void adalgluggi::on_velTable_clicked(const QModelIndex &index)
@@ -332,16 +346,17 @@ void adalgluggi::on_velTable_clicked(const QModelIndex &index)
         {
             if (_fService.venslaVidVel(_fSelect.getID(),getVelarID()))
             {
-                qDebug() << "Success!";
+                ui->statusBar->showMessage("Linking successful", 1500);
             }
             else
             {
-                qDebug() << "Failure, relations already exist";
+                ui->statusBar->showMessage("Linking failed, duplicate links", 1500);
             }
         }
         else
         {
             _fService.eydaStakiVensl(_fSelect.getID(), getVelarID());
+            ui->statusBar->showMessage("Link deleted", 1500);
             _unlinking = false;
         }
         _linking = false;
@@ -570,7 +585,7 @@ void adalgluggi::on_vButton_removeLink_clicked()
 void adalgluggi::on_tabsList_tabBarClicked(int index)
 {
     //Smella á current tab þá refreshast allur listinn
-    if (index == ui->tabsList->currentIndex())
+    if (index == ui->tabsList->currentIndex() && !_unlinking)
     {
         if (index == 0)
         {
