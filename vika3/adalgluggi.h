@@ -62,6 +62,8 @@ private slots:
 
     void on_tabsList_tabBarClicked(int index);
 
+    void on_button_warning_clicked();
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
