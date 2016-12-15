@@ -13,12 +13,16 @@
   <property name="windowTitle">
    <string>Database of computer science stuff</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources/resources.qrc">
+    <normaloff>:/Icons/home.png</normaloff>:/Icons/home.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTabWidget" name="tabsList">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="folkTab">
        <attribute name="title">
@@ -511,6 +515,8 @@
   <tabstop>velFilterBox</tabstop>
   <tabstop>velTable</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
