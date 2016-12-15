@@ -49,8 +49,6 @@ private slots:
 
     void on_vButton_AddLink_clicked();
 
-    void escapeKeyPressed();
-    void deleteKeyPressed();
     void keyReleaseEvent(QKeyEvent* event);
 
     void on_button_showLinks_clicked();
@@ -61,15 +59,6 @@ private slots:
 
 private:
     Ui::adalgluggi *ui;
-
-    void synaFolk(const vector<tolvufolk>& folk);
-    void synaVelar(const vector<velar>& velar);
-    void disableVButtons();
-    void disableFButtons();
-
-    void defaultFButtons();
-    void defaultVButtons();
-
     tolvufolkService _fService;
     velarService _vService;
     vector<tolvufolk> _folkCurrent;
@@ -77,6 +66,19 @@ private:
     vector<velar> _velarCurrent;
     velar _vSelect;
     bool _linking;
+
+    void synaFolk(const vector<tolvufolk>& folk);
+    void synaVelar(const vector<velar>& velar);
+    void toggleVButtons(bool enabled);
+    void toggleFButtons(bool enabled);
+    void disableVButtons();
+    void disableFButtons();
+
+    void defaultFButtons();
+    void defaultVButtons();
+
+    void escapeKeyPressed();
+    void deleteKeyPressed();
 };
 
 #endif // ADALGLUGGI_H

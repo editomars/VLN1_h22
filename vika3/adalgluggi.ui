@@ -307,6 +307,11 @@
           </attribute>
           <column>
            <property name="text">
+            <string>ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Name</string>
            </property>
           </column>
@@ -372,7 +377,7 @@
      <x>0</x>
      <y>0</y>
      <width>711</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain_Menu">

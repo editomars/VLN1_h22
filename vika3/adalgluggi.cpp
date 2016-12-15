@@ -21,13 +21,16 @@ adalgluggi::adalgluggi(QWidget *parent) :
     ui(new Ui::adalgluggi)
 {
     ui->setupUi(this);
-    ui->folkTable->horizontalHeader()->setVisible(true);
     //init stillingar
+    ui->tabsList->setCurrentIndex(0); //Force program to start in scientist tab
+    ui->folkTable->horizontalHeader()->setVisible(true); //Fix missing headers
     _folkCurrent = _fService.getTolvufolk();
     _velarCurrent = _vService.getVelar();
     synaFolk(_folkCurrent);
     synaVelar(_velarCurrent);
     _linking = false;
+    ui->folkTable->setColumnHidden(0,true); //Hide ID columns in table widgets
+    ui->velTable->setColumnHidden(0,true);
 }
 
 adalgluggi::~adalgluggi()
@@ -37,7 +40,6 @@ adalgluggi::~adalgluggi()
 
 void adalgluggi::synaFolk(const vector<tolvufolk>& folk)
 {
-    ui->folkTable->setColumnHidden(0,true);
     ui->folkTable->clearContents();
     ui->folkTable->setSortingEnabled(false);
 
@@ -77,14 +79,16 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
 
     for (size_t row = 0; row < velar.size(); ++row)
     {
+        QString ID = QString::number(velar[row].getID());
         QString nafn = QString::fromStdString(velar[row].getVelaNafn());
         QString bAr = QString::number(velar[row].getByggingarAr());
         QString byggd = QString(velar[row].getByggd() ? "Yes" : "No");
         QString tegund = QString::fromStdString(velar[row].getTegund());
-        ui->velTable->setItem(row, 0, new QTableWidgetItem(nafn));
-        ui->velTable->setItem(row, 1, new QTableWidgetItem(bAr));
-        ui->velTable->setItem(row, 2, new QTableWidgetItem(byggd));
-        ui->velTable->setItem(row, 3, new QTableWidgetItem(tegund));
+        ui->velTable->setItem(row, 0, new QTableWidgetItem(ID));
+        ui->velTable->setItem(row, 1, new QTableWidgetItem(nafn));
+        ui->velTable->setItem(row, 2, new QTableWidgetItem(bAr));
+        ui->velTable->setItem(row, 3, new QTableWidgetItem(byggd));
+        ui->velTable->setItem(row, 4, new QTableWidgetItem(tegund));
     }
 
     _velarCurrent = velar;
@@ -92,24 +96,6 @@ void adalgluggi::synaVelar(const vector<velar>& velar)
 }
 
 
-
-void adalgluggi::disableVButtons()
-{
-    ui->vButton_add->setEnabled(false);
-    ui->vButton_delete->setEnabled(false);
-    ui->vButton_update->setEnabled(false);
-    ui->vButton_purge->setEnabled(false);
-    ui->vButton_AddLink->setEnabled(false);
-}
-
-void adalgluggi::disableFButtons()
-{
-    ui->button_add->setEnabled(false);
-    ui->button_delete->setEnabled(false);
-    ui->button_update->setEnabled(false);
-    ui->button_purge->setEnabled(false);
-    ui->button_AddLink->setEnabled(false);
-}
 
 void adalgluggi::defaultFButtons()
 {
@@ -127,44 +113,35 @@ void adalgluggi::defaultVButtons()
     ui->vButton_update->setEnabled(false);
     ui->vButton_purge->setEnabled(true);
     ui->vButton_AddLink->setEnabled(false);
-    //ui->vb
 }
 
 void adalgluggi::on_tabsList_currentChanged(int index)
 {
     switch (index)
     {
-        case 0:
+        case 0: //Scientist tab
 
             ui->vButton_delete->setEnabled(false);
             ui->vButton_update->setEnabled(false);
             ui->vButton_AddLink->setEnabled(false);
 
             synaFolk(_folkCurrent);
-
-            if (_linking)
-            {
-                _linking = false;
-                defaultVButtons();
-                defaultFButtons();
-            }
             break;
-        case 1:
+        case 1: //Computer tab
 
             ui->button_update->setEnabled(false);
             ui->button_delete->setEnabled(false);
             ui->button_AddLink->setEnabled(false);
 
             synaVelar(_velarCurrent);
-
-            if (_linking)
-            {
-                _linking = false;
-                defaultFButtons();
-                defaultVButtons();
-            }
+            break;
+        default:
             break;
     }
+    if (_linking)
+        _linking = false;
+    defaultVButtons();
+    defaultFButtons();
 }
 
 void adalgluggi::on_folkFilterText_textChanged(const QString &arg1)
@@ -256,7 +233,6 @@ void adalgluggi::on_button_delete_clicked()
 
     _fService.eydaStakiTolvufolk(folkCurrentIndex);
 
-    //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
     ui->folkFilterText->setText("");
     synaFolk(_fService.getTolvufolk());
     ui->button_delete->setEnabled(false);
@@ -310,7 +286,6 @@ void adalgluggi::on_vButton_add_clicked()
     addmachine gluggiBaetaV;
 
     gluggiBaetaV.exec();
-
 }
 
 void adalgluggi::on_vButton_delete_clicked()
@@ -321,13 +296,10 @@ void adalgluggi::on_vButton_delete_clicked()
 
     _vService.eydaStakiVel(velarCurrent.getID());
 
-    //vantar að gera að ef þetta virkaði þá fer í þetta annars error message
     ui->velFilterText->setText("");
     synaVelar(_vService.getVelar());
     ui->vButton_delete->setEnabled(false);
     ui->vButton_update->setEnabled(false);
-
-
 }
 
 void adalgluggi::on_vButton_update_clicked()
@@ -364,9 +336,7 @@ void adalgluggi::on_velTable_clicked(const QModelIndex &index)
         velar velarCurrent = _velarCurrent.at(velarCurrentIndex);
 
         _fService.venslaVidVel(_fSelect.getID(),velarCurrent.getID());
-
         _linking = false;
-
         ui->tabsList->setCurrentIndex(0);
     }
 }
@@ -378,8 +348,7 @@ void adalgluggi::on_button_AddLink_clicked()
 
     ui->tabsList->setCurrentIndex(1);
     _linking = true;
-    disableVButtons();
-
+    toggleVButtons(false);
 }
 
 void adalgluggi::on_vButton_AddLink_clicked()
@@ -389,9 +358,7 @@ void adalgluggi::on_vButton_AddLink_clicked()
 
     ui->tabsList->setCurrentIndex(0);
     _linking = true;
-    disableFButtons();
-
-
+    toggleFButtons(false);
 }
 
 void adalgluggi::on_button_showLinks_clicked()
@@ -404,6 +371,24 @@ void adalgluggi::on_vButton_showLinks_clicked()
 {
     int velarCurrentIndex = ui->velTable->currentIndex().row();
     _vSelect = _velarCurrent.at(velarCurrentIndex);
+}
+
+void adalgluggi::toggleVButtons(bool enabled)
+{
+    ui->vButton_add->setEnabled(enabled);
+    ui->vButton_delete->setEnabled(enabled);
+    ui->vButton_update->setEnabled(enabled);
+    ui->vButton_purge->setEnabled(enabled);
+    ui->vButton_AddLink->setEnabled(enabled);
+}
+
+void adalgluggi::toggleFButtons(bool enabled)
+{
+    ui->button_add->setEnabled(enabled);
+    ui->button_delete->setEnabled(enabled);
+    ui->button_update->setEnabled(enabled);
+    ui->button_purge->setEnabled(enabled);
+    ui->button_AddLink->setEnabled(enabled);
 }
 
 void adalgluggi::keyReleaseEvent(QKeyEvent* event)
@@ -421,7 +406,6 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
     QMessageBox* box = new QMessageBox;
     box->setWindowTitle(QString("Quit program"));
     box->setInformativeText(QString::number(event->key()));
-
 }
 
 void adalgluggi::deleteKeyPressed()
