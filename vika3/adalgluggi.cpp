@@ -450,9 +450,11 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 
     switch (event->key())
     {
-        case constants::DELETE_KEY_NUMBER_MAC:
-        case constants::DELETE_KEY_NUMBER_PC:
-            deleteKeyPressed();
+        case constants::DELETE_KEY_NUMBER:
+            if(ui->tabsList->currentIndex() == 0)
+            deleteKeyPressed("scientist");
+            if(ui->tabsList->currentIndex() == 1)
+            deleteKeyPressed("machine");
             break;
         case constants::ESCAPE_KEY_NUMBER:
             escapeKeyPressed();
@@ -462,28 +464,30 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
 
 }
 
-void adalgluggi::deleteKeyPressed()
+void adalgluggi::deleteKeyPressed(const char* flokkur)
 {
+
     if(ui->folkTable->currentRow() != -1)
     {
-        if(ui->radiobutton_delete_confirmation->isChecked())
+        if(!(ui->radiobutton_delete_confirmation->isChecked()))
         {
-            on_button_delete_clicked();
-            return;
-        }
-        QMessageBox* box = new QMessageBox;
-        box->setWindowTitle(QString("Delete scientist"));
-        box->setInformativeText(QString("Do you want to remove this scientist from the database? "));
-        box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+            if(deleteConfirmation(flokkur))
+            _fService.eydaStakiTolvufolk(getFolkID());
+            ui->folkFilterText->setText("");
+            synaAlltFolk();
+            ui->button_delete->setEnabled(false);
+            ui->button_update->setEnabled(false);
 
-        if(box->exec() == QMessageBox::Yes)
-            on_button_delete_clicked();
+        }
         else
-            return;
-        delete box;
+        {
+            _fService.eydaStakiTolvufolk(getFolkID());
+            ui->folkFilterText->setText("");
+            synaAlltFolk();
+            ui->button_delete->setEnabled(false);
+            ui->button_update->setEnabled(false);
+        }
     }
-    else
-        return;
 }
 
 
