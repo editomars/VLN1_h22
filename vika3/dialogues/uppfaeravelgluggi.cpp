@@ -39,11 +39,12 @@ void uppfaeravelgluggi::getVel()
 
 void uppfaeravelgluggi::on_UppfaeraVelTakki_clicked()
 {
+    QMessageBox box;
     string vNafn = ui->input_vName->text().toStdString();
+    int id = _target.getID();
     int bAr = (ui->input_builtYear->text().length() > 0 && ui->input_builtYear->text().toInt() > 0 ? ui->input_builtYear->text().toInt() : -1);
     bool byggd;
     string tegund = ui->input_type->text().toStdString();
-    int id = _target.getID();
 
     if (ui->vRadio_built->isChecked())
     {
@@ -54,9 +55,30 @@ void uppfaeravelgluggi::on_UppfaeraVelTakki_clicked()
         byggd = 0;
     }
 
-    _vService.uppfaeraVelar(id, vNafn, bAr, byggd, tegund);
 
-    this->done(0);
+    velValidation v = _vService.uppfaeraVelar(id, vNafn, bAr, byggd, tegund);
+    switch (v)
+    {
+        case vSuccess:
+            //What to do when success
+            box.setText("Success!");
+            break;
+        case builtFieldMissing:
+            //What to do if built field is missing
+            box.setText("Build field missing");
+            break;
+        case builtYearAfterCurrentYear:
+            //What to do if built year is after current year
+            box.setText("Built after current year");
+            break;
+        case builtYearMissing:
+            //What to do if built year is missing
+            box.setText("No built year");
+            break;
+    }
+    box.exec();
+
+    //this->done(0);
 
 }
 
