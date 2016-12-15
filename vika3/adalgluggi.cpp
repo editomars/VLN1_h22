@@ -565,6 +565,7 @@ bool adalgluggi::deleteConfirmation(const char* flokkur)
     box->setAttribute(Qt::WA_DeleteOnClose, true);
     box->setInformativeText(QString("Do you want to remove this ") +QString(flokkur)+ QString(" from the database? "));
     box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    box->setWindowIcon(QIcon(":/Icons/delete.png"));
 
     if(box->exec() == QMessageBox::Yes)
         return true;

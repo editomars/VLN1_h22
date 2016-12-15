@@ -53,3 +53,6 @@ FORMS    += adalgluggi.ui \
     dialogues/addmachine.ui \
     dialogues/tortimafolk.ui \
     dialogues/tortimavel.ui
+
+RESOURCES += \
+    resources/resources.qrc
