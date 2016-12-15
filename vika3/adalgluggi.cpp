@@ -461,9 +461,20 @@ void adalgluggi::keyReleaseEvent(QKeyEvent* event)
         case constants::ESCAPE_KEY_NUMBER:
             escapeKeyPressed();
             break;
+        case constants::A_KEY_NUMBER:
+            AkeyPressed();
+
 
     }
+}
 
+void adalgluggi::AkeyPressed()
+{
+    if(ui->folkTable->currentRow() != -1 && ui->tabsList->currentIndex() == 0)
+        on_button_AddLink_clicked();
+
+    if(ui->velTable->currentRow() != -1 && ui->tabsList->currentIndex() == 1)
+        on_vButton_AddLink_clicked();
 }
 
 void adalgluggi::deleteKeyPressed(const char* flokkur)

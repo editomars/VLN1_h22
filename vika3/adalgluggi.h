@@ -88,6 +88,8 @@ private:
     void escapeKeyPressed(); //Escape key release handler
     void deleteKeyPressed(const char* flokkur); //Delete key release handler
     bool deleteConfirmation(const char* flokkur);
+    void AkeyPressed();
+
 };
 
 #endif // ADALGLUGGI_H

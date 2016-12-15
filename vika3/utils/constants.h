@@ -12,9 +12,10 @@ namespace constants
     const int DELETE_KEY_NUMBER = 16777223;
 #endif
     const int ESCAPE_KEY_NUMBER = 16777216;
-    const int CONTROL_KEY_NUMBER = 16777250;
-    const int ALT_KEY_NUMBER = 16777251;
-    const int COMMAND_KEY_NUMBER = 16777249;
+    const int A_KEY_NUMBER = 65;
+    const int S_KEY_NUMBER = 83;
+    const int R_KEY_NUMBER = 82;
+    const int F5_KEY_NUMBER = 16777268;
 
 }
 
