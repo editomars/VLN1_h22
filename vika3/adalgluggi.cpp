@@ -668,8 +668,8 @@ void adalgluggi::deleteKeyPressed(const char* flokkur)
 bool adalgluggi::deleteConfirmation(const char* flokkur)
 {
     QMessageBox* box = new QMessageBox;
-    box->setWindowTitle(QString("Delete ") + QString(flokkur));
     box->setAttribute(Qt::WA_DeleteOnClose, true);
+    box->setWindowTitle(QString("Delete ") + QString(flokkur));
     box->setInformativeText(QString("Do you want to remove this ") +QString(flokkur)+ QString(" from the database? "));
     box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
     box->setWindowIcon(QIcon(":/Icons/delete.png"));
@@ -683,6 +683,7 @@ bool adalgluggi::deleteConfirmation(const char* flokkur)
 void adalgluggi::escapeKeyPressed()
 {
     QMessageBox* box = new QMessageBox;
+    box->setAttribute(Qt::WA_DeleteOnClose, true);
     box->setWindowTitle(QString("Quit program"));
     box->setInformativeText(QString("Do you want to quit? "));
     box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
