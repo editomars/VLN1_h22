@@ -43,6 +43,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="radio_male">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Male</string>
        </property>
@@ -53,6 +56,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="radio_female">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Female</string>
        </property>
@@ -122,6 +128,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="button_add">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Add</string>
      </property>
@@ -129,6 +138,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="button_cancel">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Cancel</string>
      </property>

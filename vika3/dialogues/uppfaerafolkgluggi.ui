@@ -43,6 +43,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="radio_male">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Male</string>
        </property>
@@ -50,6 +53,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="radio_female">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Female</string>
        </property>
@@ -116,6 +122,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="UppfaeraFolkTakki">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Update</string>
      </property>
@@ -123,6 +132,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="UppfHaettaTakki">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Cancel</string>
      </property>
