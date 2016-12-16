@@ -6,6 +6,7 @@
 #include "dialogues/addmachine.h"
 #include "dialogues/tortimafolk.h"
 #include "dialogues/tortimavel.h"
+#include "dialogues/help.h"
 
 #include <string>
 #include <QFileDialog>
@@ -767,4 +768,10 @@ void adalgluggi::on_velFilterBox_currentIndexChanged(const QString &arg1)
 void adalgluggi::on_folkFilterBox_currentIndexChanged(const QString &arg1)
 {
     on_folkFilterText_textChanged(ui->folkFilterText->text());
+}
+
+void adalgluggi::on_actionHelp_triggered()
+{
+    hhelp = new help(this);
+    hhelp->show();
 }

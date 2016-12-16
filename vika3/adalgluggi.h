@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "services/tolvufolkservice.h"
 #include "services/velarservice.h"
+#include "dialogues/help.h"
 
 namespace Ui {
 class adalgluggi;
@@ -74,6 +75,8 @@ private slots:
     void on_velFilterBox_currentIndexChanged(const QString &arg1);
 
     void on_folkFilterBox_currentIndexChanged(const QString &arg1);
+    void on_actionHelp_triggered();
+
 private:
     Ui::adalgluggi *ui;
     tolvufolkService _fService;
@@ -106,7 +109,7 @@ private:
     void F5keyPressed();// F5 key release handler
     void tabToLeft();// Left arrow key release handler
     void tabToRight();// Right arrow key release handler
-
+    help *hhelp;
 
 
 };
