@@ -6,6 +6,7 @@
 #include "dialogues/addmachine.h"
 #include "dialogues/tortimafolk.h"
 #include "dialogues/tortimavel.h"
+#include "dialogues/help.h"
 
 #include <string>
 #include <QFileDialog>
@@ -668,8 +669,8 @@ void adalgluggi::deleteKeyPressed(const char* flokkur)
 bool adalgluggi::deleteConfirmation(const char* flokkur)
 {
     QMessageBox* box = new QMessageBox;
-    box->setWindowTitle(QString("Delete ") + QString(flokkur));
     box->setAttribute(Qt::WA_DeleteOnClose, true);
+    box->setWindowTitle(QString("Delete ") + QString(flokkur));
     box->setInformativeText(QString("Do you want to remove this ") +QString(flokkur)+ QString(" from the database? "));
     box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
     box->setWindowIcon(QIcon(":/Icons/delete.png"));
@@ -683,6 +684,7 @@ bool adalgluggi::deleteConfirmation(const char* flokkur)
 void adalgluggi::escapeKeyPressed()
 {
     QMessageBox* box = new QMessageBox;
+    box->setAttribute(Qt::WA_DeleteOnClose, true);
     box->setWindowTitle(QString("Quit program"));
     box->setInformativeText(QString("Do you want to quit? "));
     box->setStandardButtons(QMessageBox::No | QMessageBox::Yes);
@@ -767,4 +769,10 @@ void adalgluggi::on_velFilterBox_currentIndexChanged(const QString &arg1)
 void adalgluggi::on_folkFilterBox_currentIndexChanged(const QString &arg1)
 {
     on_folkFilterText_textChanged(ui->folkFilterText->text());
+}
+
+void adalgluggi::on_actionHelp_triggered()
+{
+    hhelp = new help(this);
+    hhelp->show();
 }
